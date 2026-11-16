@@ -654,6 +654,362 @@
     "publie"
    ],
    "note": "journaliste pour un site d'information local"
+  },
+  {
+   "id": "nono",
+   "prenom": "Nordine",
+   "surnom": "Nono",
+   "groupe": "quartier",
+   "age_2021": 19,
+   "traits": [
+    "débrouillard",
+    "rigolo"
+   ],
+   "objectif": "s'acheter un vrai scooter",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 60,
+    "proximite": 50,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "livre_tard",
+    "connait_toutes_les_rues"
+   ],
+   "note": "livreur à scooter, connaît la ville par cœur"
+  },
+  {
+   "id": "ines",
+   "prenom": "Inès",
+   "nom": "Haddad",
+   "groupe": "quartier",
+   "age_2021": 16,
+   "traits": [
+    "sérieuse",
+    "franche"
+   ],
+   "objectif": "passer le concours de gardienne de la paix",
+   "limites": [
+    "ne fréquente pas le hall"
+   ],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 35,
+    "tension": 5
+   },
+   "liens": {},
+   "autonome": [
+    "juge_tes_choix"
+   ],
+   "note": "capitaine de l'équipe de hand du lycée"
+  },
+  {
+   "id": "chouchou",
+   "prenom": "Steven",
+   "surnom": "Chouchou",
+   "groupe": "quartier",
+   "age_2021": 17,
+   "traits": [
+    "rêveur",
+    "bavard"
+   ],
+   "objectif": "sortir un son qui tourne dans tout Marseille",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 60,
+    "proximite": 55,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "enregistre",
+    "parle_trop"
+   ],
+   "note": "rappe dans sa chambre, micro scotché sur une lampe"
+  },
+  {
+   "id": "rose_marie",
+   "prenom": "Rose-Marie",
+   "nom": "Lopes",
+   "groupe": "quartier",
+   "age_2021": 62,
+   "traits": [
+    "organisée",
+    "têtue"
+   ],
+   "objectif": "faire réparer l'ascenseur",
+   "limites": [
+    "refuse la peur"
+   ],
+   "relation_depart": {
+    "confiance": 55,
+    "proximite": 30,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "petition",
+    "appelle_la_mairie"
+   ],
+   "note": "présidente de l'amicale des locataires"
+  },
+  {
+   "id": "farid",
+   "prenom": "Farid",
+   "nom": "Haddad",
+   "surnom": "Monsieur Farid",
+   "groupe": "quartier",
+   "age_2021": 47,
+   "traits": [
+    "discret",
+    "observateur"
+   ],
+   "objectif": "garder son poste jusqu'à la retraite",
+   "limites": [
+    "ne veut pas d'histoires dans ses cages d'escalier"
+   ],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 35,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "voit_tout",
+    "previent_le_bailleur"
+   ],
+   "note": "gardien d'immeuble, père d'Inès"
+  },
+  {
+   "id": "madame_lan",
+   "prenom": "Thi Lan",
+   "nom": "Nguyen",
+   "surnom": "Madame Lan",
+   "groupe": "quartier",
+   "age_2021": 55,
+   "traits": [
+    "patiente",
+    "maligne"
+   ],
+   "objectif": "payer les études de son fils",
+   "limites": [
+    "fait crédit, pas de cadeaux"
+   ],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 40,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "ferme_tard",
+    "entend_les_rumeurs"
+   ],
+   "note": "épicerie de nuit au pied du bâtiment"
+  },
+  {
+   "id": "pastis",
+   "prenom": "Jean-Claude",
+   "nom": "Pellegrin",
+   "surnom": "Pastis",
+   "groupe": "quartier",
+   "age_2021": 68,
+   "traits": [
+    "râleur",
+    "fidèle"
+   ],
+   "objectif": "qu'on se souvienne du port d'avant",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 55,
+    "proximite": 30,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "belote_avec_babou",
+    "raconte_les_dockers"
+   ],
+   "note": "ancien docker, joue à la belote avec Babou"
+  },
+  {
+   "id": "mika",
+   "prenom": "Mickaël",
+   "nom": "Santoni",
+   "surnom": "Mika",
+   "groupe": "organisation",
+   "age_2021": 28,
+   "traits": [
+    "calme",
+    "ponctuel"
+   ],
+   "objectif": "rembourser son garage fermé",
+   "limites": [
+    "refuse la violence"
+   ],
+   "relation_depart": {
+    "confiance": 40,
+    "proximite": 20,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "conduit",
+    "peut_lacher"
+   ],
+   "note": "ex-mécanicien, chauffeur"
+  },
+  {
+   "id": "zizou",
+   "prenom": "Yacine",
+   "surnom": "Zizou",
+   "groupe": "organisation",
+   "age_2021": 20,
+   "traits": [
+    "technique",
+    "impatient"
+   ],
+   "objectif": "prendre la place de Rascasse",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 45,
+    "proximite": 35,
+    "tension": 15
+   },
+   "liens": {},
+   "autonome": [
+    "vend",
+    "pousse_vers_la_guerre"
+   ],
+   "note": "frère de Nono ; le surnom date de ses années de foot"
+  },
+  {
+   "id": "bebe",
+   "prenom": "Rudy",
+   "surnom": "Bébé",
+   "groupe": "organisation",
+   "age_2021": 17,
+   "traits": [
+    "nerveux",
+    "attachant"
+   ],
+   "objectif": "impressionner Zépek",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 45,
+    "tension": 5
+   },
+   "liens": {},
+   "autonome": [
+    "guette",
+    "vend",
+    "peut_etre_arrete"
+   ],
+   "note": "le plus jeune vendeur du plan"
+  },
+  {
+   "id": "sab",
+   "prenom": "Sabrina",
+   "surnom": "Sab",
+   "groupe": "organisation",
+   "age_2021": 26,
+   "traits": [
+    "précise",
+    "froide"
+   ],
+   "objectif": "ouvrir son propre cabinet",
+   "limites": [
+    "ne touche jamais l'argent liquide"
+   ],
+   "relation_depart": {
+    "confiance": 35,
+    "proximite": 15,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "tient_les_comptes",
+    "peut_partir"
+   ],
+   "note": "comptable, apparaît quand il y a des façades"
+  },
+  {
+   "id": "belkacem",
+   "prenom": "Karim",
+   "nom": "Belkacem",
+   "groupe": "institution",
+   "age_2021": 38,
+   "traits": [
+    "méthodique",
+    "humain"
+   ],
+   "objectif": "comprendre avant d'arrêter",
+   "limites": [
+    "ne frappe pas"
+   ],
+   "relation_depart": {
+    "confiance": 0,
+    "proximite": 0,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "enquete",
+    "propose_de_parler"
+   ],
+   "note": "lieutenant de la police judiciaire, a grandi dans les quartiers nord"
+  },
+  {
+   "id": "cpe",
+   "prenom": "Sylvie",
+   "nom": "Bonnet",
+   "groupe": "institution",
+   "age_2021": 44,
+   "traits": [
+    "énergique",
+    "franche"
+   ],
+   "objectif": "qu'aucun élève ne disparaisse des listes",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 45,
+    "proximite": 25,
+    "tension": 5
+   },
+   "liens": {},
+   "autonome": [
+    "appelle_la_famille",
+    "propose_stage"
+   ],
+   "note": "conseillère principale d'éducation du lycée"
+  },
+  {
+   "id": "elu",
+   "prenom": "Denis",
+   "nom": "Martinez",
+   "groupe": "ville",
+   "age_2021": 57,
+   "traits": [
+    "affable",
+    "prudent"
+   ],
+   "objectif": "être réélu",
+   "limites": [
+    "évite les sujets qui fâchent"
+   ],
+   "relation_depart": {
+    "confiance": 25,
+    "proximite": 0,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "promet",
+    "inaugure"
+   ],
+   "note": "élu de secteur, personnage inventé"
   }
  ]
 }

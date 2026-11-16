@@ -334,6 +334,94 @@
      "memoire": "coach:essai_refuse"
     }
    ]
+  },
+  {
+   "id": "le_son_de_chouchou",
+   "titre": "Le son",
+   "declencheur": "tirage",
+   "poids": 1,
+   "delai_retour": 14,
+   "texte": "Chouchou te fait écouter son nouveau son sur l'enceinte de Madame Lan. Il a cité le nom du quartier, celui de Zépek aussi. « Ça va faire du bruit, frère. »",
+   "options": [
+    {
+     "t": "Lui dire d'enlever le nom de Zépek",
+     "effets": [
+      "relation:chouchou.confiance+3",
+      "relation:grand_hall.confiance+2",
+      "competence:communication+2"
+     ]
+    },
+    {
+     "t": "Le partager à tout le monde",
+     "effets": [
+      "relation:chouchou.proximite+5",
+      "zone:tension+3",
+      "police:enquete+1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l_ascenseur",
+   "titre": "L'ascenseur",
+   "declencheur": "tirage",
+   "poids": 1,
+   "delai_retour": 20,
+   "texte": "L'ascenseur est encore en panne. Rose-Marie fait signer une pétition dans le hall, juste à côté de ceux qui tiennent le mur. Monsieur Farid regarde ses chaussures.",
+   "options": [
+    {
+     "t": "Signer devant tout le monde",
+     "effets": [
+      "relation:rose_marie.confiance+5",
+      "relation:rascasse.tension+3",
+      "zone:humeur+2"
+     ]
+    },
+    {
+     "t": "Monter les courses de Mamie Jo à pied",
+     "effets": [
+      "relation:voisine.confiance+4",
+      "temps:energie-3"
+     ]
+    },
+    {
+     "t": "Ne rien faire",
+     "effets": []
+    }
+   ]
+  },
+  {
+   "id": "le_lieutenant",
+   "titre": "Une conversation",
+   "declencheur": "seuil",
+   "conditions": [
+    "police:enquete>=40"
+   ],
+   "once": true,
+   "texte": "Un homme en civil t'attend devant le lycée. Il te dit son nom, lieutenant Belkacem, et qu'il a grandi au Merlan. « Je veux juste parler. Pour l'instant. »",
+   "options": [
+    {
+     "t": "L'écouter sans rien dire",
+     "effets": [
+      "competence:sang_froid+3",
+      "relation:belkacem.confiance+3"
+     ]
+    },
+    {
+     "t": "Partir",
+     "effets": [
+      "relation:belkacem.tension+5"
+     ]
+    },
+    {
+     "t": "Lui demander ce qu'il sait",
+     "effets": [
+      "relation:belkacem.proximite+3",
+      "relation:grand_hall.tension+6"
+     ],
+     "memoire": "grand_hall:a_vu_avec_flic"
+    }
+   ]
   }
  ]
 }

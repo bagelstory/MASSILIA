@@ -167,15 +167,15 @@ de la famille tirée ; le protagoniste choisit son prénom et porte le nom de fa
 
 **Surnoms** : champ `surnom`, affiché à la place du prénom quand c'est l'usage du quartier.
 
-Le prologue compte **22 personnages** :
+Le prologue compte **36 personnages**, d'origines mélangées comme la ville :
 
 | Groupe | Personnages |
 |---|---|
 | Famille | la mère, le petit frère, la grande sœur (selon la famille tirée), tante Nadège (infirmière à l'Hôpital Nord) |
-| Quartier | Kevin « Totti » (ami d'enfance, footballeur), Manon (camarade, vise médecine), Ibrahima « Pitchoun » (1,90 m, bagarreur), Gérard « Babou » (vingt ans de prison derrière lui), Patrice « Coach Pat » (club amateur), Christelle (éducatrice), Hassen (snack), Josiane « Mamie Jo » (voisine) |
-| Organisation | Anthony « Zépek » (le grand du hall), Dylan « Souris » (guetteur de 14 ans), Grégory « Rascasse » (gérant du plan), Martine « Tata » (nourrice contrainte, endettée) |
-| Institutions | Hélène Roux (prof), commandante Agnès Vidal, brigadier Julien Mercier « Robocop », Maître Laure Castelli (avocate), Florence Arnaud (juge des enfants) |
-| Ville | Clara Mouret (journaliste locale) |
+| Quartier | Nordine « Nono » (livreur à scooter), Inès Haddad (veut entrer dans la police), Steven « Chouchou » (rappeur), Rose-Marie Lopes (amicale des locataires), Farid Haddad « Monsieur Farid » (gardien, père d'Inès), Thi Lan Nguyen « Madame Lan » (épicerie de nuit), Jean-Claude Pellegrin « Pastis » (ancien docker), Kevin « Totti » (ami d'enfance, footballeur), Manon (camarade, vise médecine), Ibrahima « Pitchoun » (1,90 m, bagarreur), Gérard « Babou » (vingt ans de prison derrière lui), Patrice « Coach Pat » (club amateur), Christelle (éducatrice), Hassen (snack), Josiane « Mamie Jo » (voisine) |
+| Organisation | Anthony « Zépek » (le grand du hall), Dylan « Souris » (guetteur de 14 ans), Grégory « Rascasse » (gérant du plan), Martine « Tata » (nourrice contrainte, endettée), Mickaël Santoni « Mika » (chauffeur), Yacine « Zizou » (vendeur, frère de Nono), Rudy « Bébé » (17 ans), Sabrina « Sab » (comptable) |
+| Institutions | Hélène Roux (prof), commandante Agnès Vidal, brigadier Julien Mercier « Robocop », Maître Laure Castelli (avocate), Florence Arnaud (juge des enfants), lieutenant Karim Belkacem (PJ, a grandi au Merlan), Sylvie Bonnet (CPE) |
+| Ville | Clara Mouret (journaliste locale), Denis Martinez (élu de secteur, inventé) |
 
 ## 6. Compétences et responsabilités
 
