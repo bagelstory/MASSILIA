@@ -57,7 +57,14 @@ namespace Marseille.Core
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            if (config == null) Debug.LogError("GameManager : aucun GameConfig assigné.");
+            if (config == null) config = Resources.Load<GameConfig>("GameConfig");
+            if (config == null)
+            {
+                // Sans asset, les valeurs par défaut du code s'appliquent (identiques à un asset neuf).
+                Debug.LogWarning("GameManager : aucun GameConfig assigné ni dans Resources ; valeurs par défaut.");
+                config = ScriptableObject.CreateInstance<GameConfig>();
+            }
+            Application.targetFrameRate = config.targetFrameRate;
             cycleManager.Clear();
             RegisterSystems(cycleManager);
         }

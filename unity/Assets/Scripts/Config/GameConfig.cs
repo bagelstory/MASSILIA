@@ -1,7 +1,19 @@
 // MARSEILLE — Config/GameConfig.cs
 // Tous les paramètres de gameplay, dans un ScriptableObject (Assets > Create > Marseille > Game Config).
-// Classe partielle : chaque étape ajoute sa section dans son propre fichier (GameConfig.Economy.cs, etc.),
-// pour que le projet compile à chaque étape. L'étape 9 complète et vérifie l'ensemble.
+// Classe partielle, une section par fichier (chacun reste sous 200 lignes) :
+//   GameConfig.cs            sauvegarde, départ de partie, version de la configuration
+//   GameConfig.World.cs      zones, factions, charbons générés, réseau de départ
+//   GameConfig.Operators.cs  types d'opérateurs, tâches, fatigue, trajets
+//   GameConfig.Territory.cs  contrôle, abandon, charbons (ouverture, prise, saisie)
+//   GameConfig.Economy.cs    revenus, dette, faillite, investissement
+//   GameConfig.Factions.cs   IA des factions, trêves, fragmentation
+//   GameConfig.Flux.cs       offres et risques des flux internationaux
+//   GameConfig.Indicators.cs pression, exposition, stabilité, capacité
+//   GameConfig.Events.cs     calendrier, saisons, opérations, arrestations
+//   GameConfig.End.cs        fin de partie, note, objectifs et ouverture des zones
+//   GameConfig.Map.cs        carte (grille, zoom, couleurs)
+//   GameConfig.UI.cs         interface (tailles, couleurs)
+//   GameConfig.Validation.cs contrôle de cohérence dans l'éditeur (OnValidate)
 // Ce fichier porte le nom de la classe : Unity l'exige pour un ScriptableObject.
 
 using UnityEngine;
@@ -12,6 +24,13 @@ namespace Marseille.Config
     [CreateAssetMenu(fileName = "GameConfig", menuName = "Marseille/Game Config")]
     public partial class GameConfig : ScriptableObject
     {
+        /// <summary>Version de la configuration, écrite dans les journaux de vérification.</summary>
+        public const int ConfigVersion = 1;
+
+        [Header("Performance")]
+        [Tooltip("Images par seconde visées (mobile : 60).")]
+        [Min(15)] public int targetFrameRate = 60;
+
         [Header("Sauvegarde")]
         [Tooltip("Nom du fichier dans Application.persistentDataPath.")]
         public string saveFileName = "marseille_save.json";
