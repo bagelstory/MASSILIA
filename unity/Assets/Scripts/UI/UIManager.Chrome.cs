@@ -86,12 +86,16 @@ namespace Marseille.UI
             if (GetComponent<GraphicRaycaster>() == null) gameObject.AddComponent<GraphicRaycaster>();
         }
 
-        /// <summary>Crée les écrans par défaut (complétés aux étapes 7 et 8).</summary>
+        /// <summary>Crée les écrans par défaut, dans l'ordre des onglets.</summary>
         /// <param name="config">Configuration.</param>
         private void CreateDefaultPanels(GameConfig config)
         {
             panels.Add(CreatePanel<MapPanel>("MapPanel"));
             panels.Add(CreatePanel<DashboardPanel>("DashboardPanel"));
+            panels.Add(CreatePanel<OperatorsPanel>("OperatorsPanel"));
+            panels.Add(CreatePanel<FluxPanel>("FluxPanel"));
+            panels.Add(CreatePanel<FactionsPanel>("FactionsPanel"));
+            panels.Add(CreatePanel<JournalPanel>("JournalPanel"));
         }
 
         /// <summary>Crée un écran vide étiré sur la zone centrale.</summary>
