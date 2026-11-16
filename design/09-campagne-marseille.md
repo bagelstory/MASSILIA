@@ -49,7 +49,7 @@
   - **Tu le lâches** : les quartiers qu'il connaissait deviennent visibles pour les autres, et la pression reste plus haute pour toujours.
 
 ### Année 3 : « L'été où tout brûle »
-- **Où :** les quartiers sud s'ouvrent (Castellane, Prado, Pointe-Rouge).
+- **Où :** les quartiers sud s'ouvrent (place Castellane, Prado, Pointe-Rouge).
 - **Moments de l'année :**
   - les **calanques fermées** pour risque d'incendie, et un feu sur les collines : une zone devient inaccessible pendant plusieurs semaines ;
   - les **soirs de match** au stade : la ville se remplit, puis se vide d'un coup.
