@@ -1,0 +1,245 @@
+{
+ "_doc": "Personnages importants du prologue, tous inventés. Les liens familiaux s'adaptent à la zone de départ.",
+ "liste": [
+  {
+   "id": "mere",
+   "prenom": "Samia",
+   "groupe": "famille",
+   "age_2021": 44,
+   "traits": [
+    "travailleuse",
+    "fière",
+    "inquiète"
+   ],
+   "objectif": "que ses enfants s'en sortent",
+   "limites": [
+    "ne veut pas d'argent sale chez elle"
+   ],
+   "relation_depart": {
+    "confiance": 75,
+    "proximite": 80,
+    "tension": 10
+   },
+   "liens": {
+    "petit_frere": "fils",
+    "grande_soeur": "fille"
+   },
+   "autonome": [
+    "travaille_de_nuit",
+    "appelle_si_absent_2_semaines"
+   ]
+  },
+  {
+   "id": "petit_frere",
+   "prenom": "Ilyes",
+   "groupe": "famille",
+   "age_2021": 11,
+   "traits": [
+    "admiratif",
+    "curieux"
+   ],
+   "objectif": "te ressembler",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 85,
+    "proximite": 75,
+    "tension": 0
+   },
+   "liens": {
+    "mere": "mère"
+   },
+   "autonome": [
+    "imite_le_protagoniste"
+   ]
+  },
+  {
+   "id": "grande_soeur",
+   "prenom": "Leïla",
+   "groupe": "famille",
+   "age_2021": 20,
+   "traits": [
+    "lucide",
+    "directe"
+   ],
+   "objectif": "finir son BTS et partir",
+   "limites": [
+    "refuse de mentir à la mère"
+   ],
+   "relation_depart": {
+    "confiance": 60,
+    "proximite": 55,
+    "tension": 20
+   },
+   "liens": {
+    "mere": "mère"
+   },
+   "autonome": [
+    "peut_quitter_marseille"
+   ]
+  },
+  {
+   "id": "ami_enfance",
+   "prenom": "Yanis",
+   "groupe": "quartier",
+   "age_2021": 16,
+   "traits": [
+    "drôle",
+    "loyal",
+    "prudent"
+   ],
+   "objectif": "entrer dans le foot amateur ou à l'apprentissage",
+   "limites": [
+    "ne touche pas au trafic"
+   ],
+   "relation_depart": {
+    "confiance": 80,
+    "proximite": 85,
+    "tension": 5
+   },
+   "liens": {},
+   "autonome": [
+    "s_eloigne_si_crainte_haute"
+   ]
+  },
+  {
+   "id": "grand_hall",
+   "prenom": "Toufik",
+   "surnom": "Tof",
+   "groupe": "organisation",
+   "age_2021": 24,
+   "traits": [
+    "charismatique",
+    "calculateur"
+   ],
+   "objectif": "monter dans la Compagnie",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 40,
+    "proximite": 30,
+    "tension": 10
+   },
+   "liens": {},
+   "autonome": [
+    "propose_service",
+    "peut_etre_arrete"
+   ]
+  },
+  {
+   "id": "educatrice",
+   "prenom": "Christelle",
+   "groupe": "quartier",
+   "age_2021": 38,
+   "traits": [
+    "tenace",
+    "fatiguée"
+   ],
+   "objectif": "garder le centre social ouvert",
+   "limites": [
+    "ne couvre personne"
+   ],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 40,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "propose_stage",
+    "organise_marche_blanche"
+   ]
+  },
+  {
+   "id": "snack",
+   "prenom": "Hassen",
+   "groupe": "quartier",
+   "age_2021": 52,
+   "traits": [
+    "généreux",
+    "méfiant"
+   ],
+   "objectif": "garder son snack hors des histoires",
+   "limites": [
+    "refuse de servir de façade"
+   ],
+   "relation_depart": {
+    "confiance": 55,
+    "proximite": 45,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "peut_fermer"
+   ]
+  },
+  {
+   "id": "voisine",
+   "prenom": "Josiane",
+   "nom": "Giordano",
+   "groupe": "quartier",
+   "age_2021": 71,
+   "traits": [
+    "bavarde",
+    "courageuse"
+   ],
+   "objectif": "pouvoir rentrer chez elle sans peur",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 60,
+    "proximite": 50,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "temoigne",
+    "demenage_si_peur"
+   ]
+  },
+  {
+   "id": "prof",
+   "prenom": "Hélène",
+   "nom": "Roux",
+   "groupe": "institution",
+   "age_2021": 46,
+   "traits": [
+    "exigeante",
+    "juste"
+   ],
+   "objectif": "que tu passes ton bac",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 45,
+    "proximite": 30,
+    "tension": 10
+   },
+   "liens": {},
+   "autonome": [
+    "convoque_la_mere"
+   ]
+  },
+  {
+   "id": "commandante",
+   "prenom": "Agnès",
+   "nom": "Vidal",
+   "groupe": "institution",
+   "age_2021": 49,
+   "traits": [
+    "patiente",
+    "obstinée"
+   ],
+   "objectif": "faire tomber la Compagnie",
+   "limites": [
+    "ne négocie pas"
+   ],
+   "relation_depart": {
+    "confiance": 0,
+    "proximite": 0,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "ouvre_enquete",
+    "propose_de_parler"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "liste": [
+  {
+   "id": "guetteur",
+   "nom": "Guetteur",
+   "chapitre_min": "la_confiance",
+   "salaire_semaine": 250,
+   "effet": {
+    "police_alerte": 0.25
+   },
+   "risque": 1,
+   "cout_humain": "Souvent un gamin du bâtiment. Il rate l'école, il a froid, il a peur."
+  },
+  {
+   "id": "vendeur",
+   "nom": "Vendeur",
+   "chapitre_min": "la_confiance",
+   "salaire_semaine": 500,
+   "effet": {
+    "plans_capacite": 1
+   },
+   "risque": 3,
+   "cout_humain": "Il est le premier arrêté et le premier visé."
+  },
+  {
+   "id": "nourrice",
+   "nom": "Nourrice",
+   "chapitre_min": "les_responsabilites",
+   "salaire_semaine": 300,
+   "effet": {
+    "coffre_max": 1
+   },
+   "risque": 2,
+   "cout_humain": "Souvent une famille endettée ou contrainte. Elle ne dort plus."
+  },
+  {
+   "id": "chauffeur",
+   "nom": "Chauffeur",
+   "chapitre_min": "les_responsabilites",
+   "salaire_semaine": 400,
+   "effet": {
+    "zones_reliees": 1
+   },
+   "risque": 2,
+   "cout_humain": "Toujours sur la route, toujours exposé."
+  },
+  {
+   "id": "bras_droit",
+   "nom": "Bras droit",
+   "chapitre_min": "les_responsabilites",
+   "salaire_semaine": 1200,
+   "effet": {
+    "delegation": 1
+   },
+   "risque": 3,
+   "cout_humain": "Il sait tout. Ça le rend précieux et dangereux."
+  },
+  {
+   "id": "avocat",
+   "nom": "Avocat",
+   "chapitre_min": "les_responsabilites",
+   "salaire_semaine": 900,
+   "effet": {
+    "peine_mult": 0.8,
+    "indices": 1
+   },
+   "risque": 0,
+   "cout_humain": "Il défend, il ne protège pas."
+  },
+  {
+   "id": "comptable",
+   "nom": "Comptable",
+   "chapitre_min": "l_intermediaire",
+   "salaire_semaine": 800,
+   "effet": {
+    "facade_taux_bonus": 0.1
+   },
+   "risque": 1,
+   "cout_humain": "Il a une famille et un vrai métier à perdre."
+  }
+ ]
+}

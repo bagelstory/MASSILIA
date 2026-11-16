@@ -1,0 +1,94 @@
+{
+ "_doc": "Gestion abstraite (GDD V6 §10-11). Aucun produit nommé, aucune méthode.",
+ "marchandises": [
+  {
+   "id": "petite",
+   "nom": "Petite marchandise",
+   "marge": 1.0,
+   "bruit": 1,
+   "peine": 1,
+   "chapitre_min": "la_confiance"
+  },
+  {
+   "id": "moyenne",
+   "nom": "Marchandise moyenne",
+   "marge": 1.8,
+   "bruit": 2,
+   "peine": 2,
+   "chapitre_min": "les_responsabilites"
+  },
+  {
+   "id": "lourde",
+   "nom": "Marchandise lourde",
+   "marge": 3.0,
+   "bruit": 4,
+   "peine": 4,
+   "chapitre_min": "l_intermediaire"
+  }
+ ],
+ "facades": [
+  {
+   "id": "snack",
+   "nom": "Snack",
+   "cout": 15000,
+   "chantier_h": 4,
+   "niveau_max": 3,
+   "enquete_fin": 1
+  },
+  {
+   "id": "boxe",
+   "nom": "Salle de boxe",
+   "cout": 30000,
+   "chantier_h": 8,
+   "niveau_max": 3,
+   "enquete_fin": 1,
+   "note": "peut aussi accueillir les gamins du quartier"
+  },
+  {
+   "id": "resto",
+   "nom": "Restaurant",
+   "cout": 60000,
+   "chantier_h": 12,
+   "niveau_max": 3,
+   "enquete_fin": 2
+  },
+  {
+   "id": "appartements",
+   "nom": "Appartements",
+   "cout": 120000,
+   "chantier_h": 24,
+   "niveau_max": 3,
+   "enquete_fin": 3
+  }
+ ],
+ "reseaux": {
+  "origines": [
+   {
+    "id": "maroc",
+    "nom": "Maroc",
+    "fiabilite": 60,
+    "instabilite": 30
+   },
+   {
+    "id": "pays_bas",
+    "nom": "Pays-Bas",
+    "fiabilite": 55,
+    "instabilite": 35
+   }
+  ],
+  "risques": [
+   "judiciaire",
+   "financier",
+   "humain",
+   "relationnel",
+   "organisationnel"
+  ],
+  "chapitre_min": "l_intermediaire"
+ },
+ "formules": {
+  "revenu_semaine": "zone.revenu * plans * marge * (0.5 + humeur/humeur_div) * (1 - police/police_div) * equipe_eff",
+  "liquidite": "argent.propre + argent.sale_ramasse",
+  "richesse": "liquidite + valeur(facades)",
+  "solidite": "liquidite / charges_mensuelles"
+ }
+}

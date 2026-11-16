@@ -1,0 +1,112 @@
+{
+ "_doc": "Toutes les valeurs réglables. Sources des formules : design/02-modele-donnees.md (§2, §8, §9).",
+ "temps": {
+  "energie_max": 20,
+  "energie_regen_min": 6,
+  "sangfroid_max": 10,
+  "sangfroid_regen_min": 15,
+  "semaine_depart": {
+   "annee": 2021,
+   "semaine": 37
+  },
+  "semaine_fin": {
+   "annee": 2026,
+   "semaine": 52
+  },
+  "bilan_mensuel_toutes": 4,
+  "absence_resume_min": 30
+ },
+ "protagoniste": {
+  "naissance_annee": 2005,
+  "naissance_semaines": [
+   1,
+   36
+  ],
+  "argent_propre_depart": [
+   40,
+   200
+  ],
+  "competences_depart": {
+   "communication": 20,
+   "organisation": 15,
+   "sang_froid": 10,
+   "leadership": 5,
+   "autonomie": 15
+  },
+  "etat_depart": {
+   "stabilite": 70,
+   "pression": 20,
+   "sante": 90,
+   "stress": 20
+  }
+ },
+ "competences": {
+  "seuils": [
+   0,
+   25,
+   50,
+   75
+  ],
+  "gain_max_par_evenement": 5,
+  "rendement_palier4": 0.4,
+  "plafond": 100
+ },
+ "stress": {
+  "par_semaine_base": 1,
+  "par_enquete_connue": 3,
+  "par_violence_subie": 12,
+  "repos_semaine": -6,
+  "seuil_sante": 70,
+  "perte_sante_si_seuil": 2
+ },
+ "economie": {
+  "coffre_max_base": 3000,
+  "coffre_max_par_nourrice": 6000,
+  "risque_coffre_par_semaine": 0.06,
+  "humeur_div": 200,
+  "police_div": 200,
+  "facade_taux": 0.25,
+  "facade_plafond_par_niveau": 1500,
+  "salaire_semaine_mult": 1.0,
+  "argent_unite": "EUR entier"
+ },
+ "police": {
+  "enquete_par_bruit": 0.8,
+  "enquete_baisse_semaine": 1.5,
+  "seuil_indice": 40,
+  "seuil_convocation": 60,
+  "seuil_gav": 75,
+  "seuil_perquisition": 85,
+  "seuil_operation_ville": 70,
+  "duree_operation_semaines": [
+   6,
+   12
+  ],
+  "operation_mult_police": 1.6,
+  "gav_heures": [
+   24,
+   96
+  ],
+  "proba_detention_provisoire": 0.35
+ },
+ "rivaux": {
+  "coups_par_semaine": 1,
+  "proba_frapper_si_guerre": 0.15,
+  "proba_negocier": 0.25
+ },
+ "zones": {
+  "humeur_derive_vers": 50,
+  "humeur_derive": 0.5,
+  "tension_derive": -1,
+  "tension_par_violence": 15,
+  "pression_ville_par_violence": 4
+ },
+ "relations": {
+  "derive_proximite_sans_contact": -1,
+  "semaines_sans_contact_avant_derive": 4,
+  "bornes": [
+   0,
+   100
+  ]
+ }
+}

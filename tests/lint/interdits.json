@@ -1,0 +1,15 @@
+{
+ "_doc": "Noms réels du dossier de recherche : interdits dans data/ et src/. Correspondance de mot entier, sensible à la casse.",
+ "noms": [
+  "Bingui",
+  "Laribi",
+  "Amine K",
+  "DZ Mafia",
+  "Yoda",
+  "Le Chat",
+  "Tir",
+  "Berrebouh",
+  "Remadnia",
+  "Place Nette"
+ ]
+}

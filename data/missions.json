@@ -1,0 +1,71 @@
+{
+ "liste": [
+  {
+   "id": "livrer_snack",
+   "zone": "*",
+   "nom": "Livrer pour le snack",
+   "chapitre_min": "le_debut",
+   "cout": {
+    "energie": 3
+   },
+   "gains": {
+    "propre": 25,
+    "competence:organisation": 1,
+    "relation:snack.confiance": 2
+   },
+   "risques": {},
+   "voix": "Hassen : « T'es le seul qui revient avec la monnaie juste. »"
+  },
+  {
+   "id": "reviser",
+   "zone": "*",
+   "nom": "Réviser au centre social",
+   "chapitre_min": "le_debut",
+   "cout": {
+    "energie": 4
+   },
+   "gains": {
+    "scolarite.assiduite": 4,
+    "relation:educatrice.confiance": 2
+   },
+   "risques": {},
+   "voix": "Christelle : « Le centre ferme à 19 h. Reste jusqu'à la fin, au moins. »"
+  },
+  {
+   "id": "garder_frere",
+   "zone": "*",
+   "nom": "Garder Ilyes",
+   "chapitre_min": "le_debut",
+   "cout": {
+    "energie": 3
+   },
+   "gains": {
+    "relation:petit_frere.proximite": 3,
+    "relation:mere.confiance": 2
+   },
+   "risques": {},
+   "voix": "Ilyes : « Tu m'apprends le coup franc ? »"
+  },
+  {
+   "id": "service_tof",
+   "zone": "*",
+   "nom": "Rendre un service à Tof",
+   "chapitre_min": "le_debut",
+   "cout": {
+    "energie": 2,
+    "sangfroid": 1
+   },
+   "gains": {
+    "propre": 50,
+    "relation:grand_hall.confiance": 4,
+    "positionnement:respect": 2
+   },
+   "risques": {
+    "enquete": 1,
+    "relation:mere.confiance": -2
+   },
+   "fait": "premier_service",
+   "voix": "Madame Giordano, à sa fenêtre : « Toi aussi, maintenant ? »"
+  }
+ ]
+}

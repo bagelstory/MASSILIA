@@ -1,0 +1,94 @@
+{
+ "_doc": "Équipes et chefs 100 % inventés.",
+ "liste": [
+  {
+   "id": "compagnie",
+   "nom": "La Compagnie",
+   "style": "expansion",
+   "force": 85,
+   "argent": 90,
+   "origine": "nord_ouest",
+   "zones": [
+    "centre_hist",
+    "nord_est",
+    "nord_ouest"
+   ],
+   "chef": {
+    "surnom": "Le Notaire",
+    "prenom": "Kenzo",
+    "age_2021": 34,
+    "note": "pilote de loin, ne vient plus dans les quartiers"
+   }
+  },
+  {
+   "id": "gabians",
+   "nom": "Les Gabians",
+   "style": "violence",
+   "force": 55,
+   "argent": 45,
+   "origine": "centre_nord",
+   "zones": [
+    "centre_nord",
+    "littoral_nord"
+   ],
+   "chef": {
+    "surnom": "Grand-Mère",
+    "prenom": "Wassim",
+    "age_2021": 27,
+    "note": "tient ses hommes par la peur"
+   }
+  },
+  {
+   "id": "ruisseau",
+   "nom": "Le Ruisseau",
+   "style": "defense",
+   "force": 45,
+   "argent": 40,
+   "origine": "nord_central",
+   "zones": [
+    "nord_central",
+    "est"
+   ],
+   "chef": {
+    "surnom": "Tonton",
+    "prenom": "Fabrice",
+    "age_2021": 45,
+    "note": "l'ancien, connu de tout le quartier, veut durer"
+   }
+  },
+  {
+   "id": "tramontane",
+   "nom": "Tramontane",
+   "style": "negociation",
+   "force": 35,
+   "argent": 60,
+   "origine": "plaine",
+   "zones": [
+    "plaine"
+   ],
+   "chef": {
+    "surnom": "La Prof",
+    "prenom": "Océane",
+    "age_2021": 31,
+    "note": "clientèle de nuit, aime les arrangements"
+   }
+  },
+  {
+   "id": "calanquais",
+   "nom": "Les Calanquais",
+   "style": "expansion",
+   "force": 25,
+   "argent": 30,
+   "origine": "sud",
+   "zones": [
+    "sud"
+   ],
+   "chef": {
+    "surnom": "Petit Prince",
+    "prenom": "Lorenzo",
+    "age_2021": 22,
+    "note": "jeune, pressé, sans règles"
+   }
+  }
+ ]
+}

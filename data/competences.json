@@ -1,0 +1,114 @@
+{
+ "liste": [
+  {
+   "id": "communication",
+   "nom": "Communication",
+   "paliers": [
+    [
+     "Débutant",
+     "Tu as du mal à dire ce que tu veux vraiment."
+    ],
+    [
+     "À l'aise",
+     "Tu écoutes mieux, on te parle plus facilement."
+    ],
+    [
+     "Confirmé",
+     "Tu sais tenir un désaccord sans casser la relation."
+    ],
+    [
+     "Maîtrisé",
+     "Tu lis les gens. Ça n'oblige personne à être d'accord."
+    ]
+   ]
+  },
+  {
+   "id": "organisation",
+   "nom": "Organisation",
+   "paliers": [
+    [
+     "Débutant",
+     "Tu vis au jour le jour."
+    ],
+    [
+     "Structuré",
+     "Tu suis tes engagements, à peu près."
+    ],
+    [
+     "Organisé",
+     "Tu tiens plusieurs choses à la fois."
+    ],
+    [
+     "Maîtrisé",
+     "Tu vois venir les échéances avant les autres."
+    ]
+   ]
+  },
+  {
+   "id": "sang_froid",
+   "nom": "Sang-froid",
+   "paliers": [
+    [
+     "Réactif",
+     "Sous la pression, tu réagis avant de réfléchir."
+    ],
+    [
+     "Plus posé",
+     "Tu sais attendre avant de répondre."
+    ],
+    [
+     "Résistant",
+     "Tu encaisses plusieurs tensions à la fois."
+    ],
+    [
+     "Maîtrisé",
+     "Tu prends du recul même quand tout brûle."
+    ]
+   ]
+  },
+  {
+   "id": "leadership",
+   "nom": "Leadership",
+   "paliers": [
+    [
+     "Individuel",
+     "Tu suis, tu ne portes pas les autres."
+    ],
+    [
+     "Initiateur",
+     "Tu proposes une direction."
+    ],
+    [
+     "Coordinateur",
+     "Tu fais travailler des gens ensemble."
+    ],
+    [
+     "Responsable",
+     "Tu assumes des décisions qui pèsent sur d'autres vies."
+    ]
+   ]
+  },
+  {
+   "id": "autonomie",
+   "nom": "Autonomie",
+   "paliers": [
+    [
+     "Dépendant",
+     "Ta vie dépend beaucoup des autres."
+    ],
+    [
+     "Progressif",
+     "Tu prends tes premières décisions seul."
+    ],
+    [
+     "Indépendant",
+     "Tu gères ta vie."
+    ],
+    [
+     "Très autonome",
+     "Tu peux construire une autre vie si tu le décides."
+    ]
+   ]
+  }
+ ]
+}

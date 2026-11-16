@@ -1,0 +1,256 @@
+{
+ "_doc": "Format : design/02-modele-donnees.md §12. Les {pnj} sont remplis au tirage.",
+ "liste": [
+  {
+   "id": "le_quotidien",
+   "titre": "Le quotidien",
+   "declencheur": "calendrier",
+   "quand": {
+    "annee": 2021,
+    "semaine": 37
+   },
+   "once": true,
+   "texte": "Rentrée. Samia part au travail avant le jour, Ilyes ne trouve pas son cartable, et en bas, le hall est déjà occupé.",
+   "options": [
+    {
+     "t": "Accompagner Ilyes à l'école",
+     "effets": [
+      "relation:petit_frere.proximite+5",
+      "relation:mere.confiance+3",
+      "temps:energie-3"
+     ]
+    },
+    {
+     "t": "Traîner en bas avec Yanis",
+     "effets": [
+      "relation:ami_enfance.proximite+4",
+      "relation:grand_hall.proximite+2"
+     ]
+    },
+    {
+     "t": "Aller au lycée à l'heure",
+     "effets": [
+      "scolarite.assiduite+5",
+      "relation:prof.confiance+3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "les_visages",
+   "titre": "Les visages",
+   "declencheur": "programme",
+   "once": true,
+   "texte": "Tof t'appelle par ton prénom. Tu ne savais pas qu'il le connaissait. « Passe me voir, j'ai un truc simple. »",
+   "options": [
+    {
+     "t": "Y aller",
+     "effets": [
+      "relation:grand_hall.confiance+5"
+     ],
+     "memoire": "grand_hall:est_venu"
+    },
+    {
+     "t": "Dire que tu as entraînement",
+     "effets": [
+      "relation:ami_enfance.confiance+3"
+     ],
+     "memoire": "grand_hall:a_refuse"
+    }
+   ]
+  },
+  {
+   "id": "la_promesse",
+   "titre": "La promesse",
+   "declencheur": "programme",
+   "once": true,
+   "texte": "Samia te demande d'être là samedi pour le rendez-vous avec la prof. Le même samedi, Tof a besoin de toi.",
+   "options": [
+    {
+     "t": "Promettre à ta mère",
+     "effets": [
+      "engagement:mere:rdv_prof:2"
+     ],
+     "memoire": "mere:a_promis_rdv"
+    },
+    {
+     "t": "Promettre à Tof",
+     "effets": [
+      "engagement:grand_hall:samedi:2",
+      "relation:grand_hall.confiance+4"
+     ],
+     "memoire": "grand_hall:a_promis"
+    }
+   ]
+  },
+  {
+   "id": "promesse_oubliee",
+   "titre": "Une promesse oubliée",
+   "declencheur": "programme",
+   "conditions": [
+    "engagement_rompu:{pnj}",
+    "relation:{pnj}.etat!=rompu"
+   ],
+   "delai_retour": 12,
+   "texte": "{pnj.prenom} t'attend en bas du bâtiment. « Tu m'avais dit que tu viendrais. »",
+   "options": [
+    {
+     "t": "Reconnaître ton erreur",
+     "effets": [
+      "relation:{pnj}.confiance+8",
+      "competence:communication+3"
+     ],
+     "memoire": "{pnj}:a_reconnu"
+    },
+    {
+     "t": "Expliquer les circonstances",
+     "effets": [
+      "relation:{pnj}.confiance+2"
+     ],
+     "condition": "competence:communication>=25"
+    },
+    {
+     "t": "Proposer de réparer",
+     "effets": [
+      "relation:{pnj}.confiance+5",
+      "temps:energie-4"
+     ]
+    },
+    {
+     "t": "Éviter la conversation",
+     "effets": [
+      "relation:{pnj}.confiance-12",
+      "relation:{pnj}.tension+10"
+     ],
+     "programme": [
+      {
+       "id": "rancune",
+       "dans": 8
+      }
+     ],
+     "memoire": "{pnj}:a_fui"
+    }
+   ]
+  },
+  {
+   "id": "rancune",
+   "titre": "Ça ne passe pas",
+   "declencheur": "programme",
+   "texte": "{pnj.prenom} ne te dit plus bonjour. Les autres l'ont remarqué.",
+   "options": [
+    {
+     "t": "Aller lui parler",
+     "effets": [
+      "relation:{pnj}.tension-6"
+     ]
+    },
+    {
+     "t": "Laisser couler",
+     "effets": [
+      "relation:{pnj}.proximite-8"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "soir_de_match",
+   "titre": "Soir de match",
+   "declencheur": "calendrier",
+   "ville": "match_om",
+   "poids": 2,
+   "delai_retour": 6,
+   "texte": "L'OM joue au Vélodrome. Tout le quartier est devant les écrans du snack, Hassen a sorti les chaises.",
+   "options": [
+    {
+     "t": "Regarder avec tout le monde",
+     "effets": [
+      "etat:stress-6",
+      "zone:humeur+2"
+     ]
+    },
+    {
+     "t": "Profiter des rues vides pour un service",
+     "effets": [
+      "argent:propre+60",
+      "relation:grand_hall.confiance+3",
+      "police:enquete+1"
+     ],
+     "condition": "fait:premier_service"
+    }
+   ]
+  },
+  {
+   "id": "mistral",
+   "titre": "Coup de mistral",
+   "declencheur": "calendrier",
+   "ville": "mistral",
+   "delai_retour": 4,
+   "texte": "Le mistral souffle depuis trois jours. Les volets claquent, personne ne reste dehors.",
+   "options": [
+    {
+     "t": "Rester à la maison",
+     "effets": [
+      "relation:mere.proximite+2",
+      "etat:stress-3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "la_descente",
+   "titre": "La descente",
+   "declencheur": "seuil",
+   "conditions": [
+    "zone:police>=70",
+    "fait:premier_service"
+   ],
+   "delai_retour": 10,
+   "texte": "Six heures du matin. Des portières, des pas dans l'escalier. Ce n'est pas chez vous, c'est chez le voisin du dessous. Ilyes s'est réveillé.",
+   "options": [
+    {
+     "t": "Rassurer Ilyes",
+     "effets": [
+      "relation:petit_frere.confiance+4",
+      "etat:stress+4"
+     ]
+    },
+    {
+     "t": "Prévenir Tof",
+     "effets": [
+      "relation:grand_hall.confiance+6",
+      "police:enquete+3"
+     ],
+     "memoire": "commandante:a_vu_le_tel"
+    }
+   ]
+  },
+  {
+   "id": "les_absents",
+   "titre": "Les absents",
+   "declencheur": "seuil",
+   "conditions": [
+    "zone:tension>=75"
+   ],
+   "once": true,
+   "irreversible": true,
+   "texte": "Un garçon du quartier d'à côté n'est pas rentré. Sa mère colle des photos sur les arrêts de bus. Christelle organise une marche blanche dimanche.",
+   "options": [
+    {
+     "t": "Marcher avec les familles",
+     "effets": [
+      "zone:humeur+4",
+      "relation:educatrice.confiance+6",
+      "positionnement:respect+2"
+     ]
+    },
+    {
+     "t": "Rester à l'écart",
+     "effets": [
+      "relation:educatrice.confiance-4"
+     ]
+    }
+   ],
+   "memoire": "*:marche_blanche"
+  }
+ ]
+}

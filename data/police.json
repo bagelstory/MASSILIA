@@ -1,0 +1,55 @@
+{
+ "_doc": "Procédures représentées sans détail opérationnel. Noms d'opérations inventés.",
+ "etapes": [
+  "controle",
+  "convocation",
+  "garde_a_vue",
+  "mise_en_examen",
+  "detention_provisoire_ou_controle_judiciaire",
+  "proces",
+  "peine"
+ ],
+ "peines_semaines": {
+  "1": [
+   0,
+   26
+  ],
+  "2": [
+   26,
+   104
+  ],
+  "3": [
+   52,
+   208
+  ],
+  "4": [
+   156,
+   520
+  ]
+ },
+ "mineur": {
+  "avant_age": 18,
+  "mesures": [
+   "avertissement",
+   "mesure_educative",
+   "placement",
+   "detention_mineurs"
+  ],
+  "peine_mult": 0.5
+ },
+ "operations": [
+  {
+   "id": "operation_ciel_clair",
+   "nom": "Opération Ciel clair"
+  },
+  {
+   "id": "operation_grand_large",
+   "nom": "Opération Grand Large"
+  }
+ ],
+ "corruption": {
+  "reduction_enquete": 25,
+  "enquete_interne_par_semaine": 1.2,
+  "dependance": true
+ }
+}

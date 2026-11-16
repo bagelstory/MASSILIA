@@ -1,0 +1,251 @@
+{
+ "chapitres": [
+  {
+   "id": "le_debut",
+   "nom": "Le début",
+   "annees": [
+    2021
+   ],
+   "age_repere": 16,
+   "identite": "découvrir et choisir",
+   "ouvre": [
+    "missions_vie",
+    "relations",
+    "emploi_du_temps",
+    "engagements"
+   ],
+   "limites": [
+    "peu_autonomie",
+    "argent_limite",
+    "decisions_des_adultes"
+   ],
+   "passage": {
+    "date": {
+     "annee": 2022,
+     "semaine": 1
+    }
+   }
+  },
+  {
+   "id": "la_confiance",
+   "nom": "La confiance",
+   "annees": [
+    2022
+   ],
+   "age_repere": 17,
+   "identite": "s'engager et assumer",
+   "ouvre": [
+    "decisions_collectives_limitees",
+    "reputation_visible"
+   ],
+   "passage": {
+    "date": {
+     "annee": 2023,
+     "semaine": 1
+    }
+   }
+  },
+  {
+   "id": "les_responsabilites",
+   "nom": "Les responsabilités",
+   "annees": [
+    2023
+   ],
+   "age_repere": 18,
+   "identite": "devenir autonome",
+   "ouvre": [
+    "budget_complet",
+    "organisation",
+    "projet_personnel"
+   ],
+   "passage": {
+    "date": {
+     "annee": 2024,
+     "semaine": 1
+    }
+   }
+  },
+  {
+   "id": "l_intermediaire",
+   "nom": "L'intermédiaire",
+   "annees": [
+    2024,
+    2025
+   ],
+   "age_repere": 19,
+   "identite": "coordonner et déléguer",
+   "ouvre": [
+    "delegation",
+    "plusieurs_zones",
+    "reseaux_internationaux"
+   ],
+   "passage": {
+    "date": {
+     "annee": 2026,
+     "semaine": 1
+    }
+   }
+  },
+  {
+   "id": "la_direction",
+   "nom": "La direction",
+   "annees": [
+    2026
+   ],
+   "age_repere": 21,
+   "identite": "assumer son héritage",
+   "ouvre": [
+    "grandes_decisions",
+    "sortie_preparee"
+   ],
+   "passage": {
+    "date": {
+     "annee": 2027,
+     "semaine": 1
+    }
+   }
+  },
+  {
+   "id": "l_apres",
+   "nom": "L'après",
+   "annees": [
+    2027
+   ],
+   "age_repere": 22,
+   "identite": "faire face à ce qu'on a construit",
+   "ouvre": [
+    "bilan",
+    "epilogue"
+   ],
+   "passage": null
+  }
+ ],
+ "responsabilites": [
+  {
+   "id": "budget_perso",
+   "categorie": "personnelle",
+   "chapitre_min": "le_debut",
+   "conditions_narratives": [
+    "fait:le_quotidien"
+   ],
+   "conditions_systemiques": [
+    "competence:organisation>=10"
+   ],
+   "alternative": "relation:grande_soeur.confiance>=60"
+  },
+  {
+   "id": "tenir_un_poste",
+   "categorie": "collective",
+   "chapitre_min": "la_confiance",
+   "conditions_narratives": [
+    "fait:premier_service"
+   ],
+   "conditions_systemiques": [
+    "relation:grand_hall.confiance>=55"
+   ],
+   "alternative": "relation:ami_enfance.confiance>=60"
+  },
+  {
+   "id": "coordination_collective",
+   "categorie": "collective",
+   "chapitre_min": "les_responsabilites",
+   "conditions_narratives": [
+    "fait:crise_du_plan"
+   ],
+   "conditions_systemiques": [
+    "competence:leadership>=25|competence:organisation>=35"
+   ],
+   "alternative": "relation:grand_hall.confiance>=70"
+  },
+  {
+   "id": "gerer_une_zone",
+   "categorie": "organisationnelle",
+   "chapitre_min": "l_intermediaire",
+   "conditions_narratives": [
+    "fait:proposition_zone"
+   ],
+   "conditions_systemiques": [
+    "competence:organisation>=40",
+    "positionnement:respect>=40"
+   ],
+   "alternative": "membre:bras_droit.loyaute>=70"
+  }
+ ],
+ "ville": [
+  {
+   "id": "rentree",
+   "semaines": [
+    36
+   ],
+   "effet": "scolarite"
+  },
+  {
+   "id": "match_om",
+   "frequence": "tous_les_15_jours_aout_mai",
+   "effet": "affluence"
+  },
+  {
+   "id": "mistral",
+   "proba_semaine": 0.12,
+   "effet": "rues_vides"
+  },
+  {
+   "id": "ete",
+   "semaines": [
+    27,
+    34
+   ],
+   "effet": "tourisme_chaleur"
+  },
+  {
+   "id": "ramadan",
+   "note": "dates variables, à saisir par année",
+   "effet": "rythme_quartier"
+  },
+  {
+   "id": "fete_musique",
+   "semaines": [
+    25
+   ],
+   "effet": "nuit"
+  },
+  {
+   "id": "noel",
+   "semaines": [
+    51,
+    52
+   ],
+   "effet": "famille"
+  }
+ ],
+ "chronologie_ville": {
+  "_doc": "Types de situations publiques par année (inspiration). Aucun nom réel, aucune affaire identifiable.",
+  "2021": [
+   "equipes_en_concurrence",
+   "saisies_regulieres"
+  ],
+  "2022": [
+   "montee_des_violences",
+   "jeunes_recrutes_de_loin"
+  ],
+  "2023": [
+   "guerre_ouverte",
+   "victimes_collaterales",
+   "peur_dans_les_quartiers"
+  ],
+  "2024": [
+   "operations_massives",
+   "chefs_arretes_a_l_etranger",
+   "vide_de_pouvoir"
+  ],
+  "2025": [
+   "hegemonie",
+   "racket_commerces",
+   "baisse_des_morts"
+  ],
+  "2026": [
+   "violence_qui_mute",
+   "exportation_villes_moyennes"
+  ]
+ }
+}

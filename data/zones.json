@@ -1,0 +1,411 @@
+{
+ "_doc": "Lieux et quartiers réels (à vérifier avant publication). Valeurs = départ 2021.",
+ "liste": [
+  {
+   "id": "centre_hist",
+   "nom": "Centre historique",
+   "arrondissements": [
+    "1er",
+    "2e"
+   ],
+   "quartiers": [
+    "Belsunce",
+    "Noailles",
+    "Opéra",
+    "Thiers",
+    "Les Grands Carmes",
+    "Hôtel de Ville",
+    "La Joliette",
+    "Arenc"
+   ],
+   "lieux": [
+    "Vieux-Port",
+    "Le Panier",
+    "Cours Belsunce",
+    "Marché des Capucins",
+    "Gare Saint-Charles",
+    "Ombrière du Vieux-Port",
+    "La Major"
+   ],
+   "transports": [
+    "métro M1 Vieux-Port",
+    "métro M2 Noailles",
+    "tram T2/T3",
+    "bus",
+    "ferry-boat du Vieux-Port"
+   ],
+   "revenu": 1800,
+   "population": 5,
+   "tension": 45,
+   "police": 75,
+   "humeur": 45,
+   "controle": "compagnie",
+   "depart": true,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "centre_nord",
+   "nom": "Centre nord",
+   "arrondissements": [
+    "3e"
+   ],
+   "quartiers": [
+    "Belle de Mai",
+    "Saint-Lazare",
+    "Saint-Mauront",
+    "La Villette"
+   ],
+   "lieux": [
+    "Friche la Belle de Mai",
+    "boulevard National",
+    "rue Loubon"
+   ],
+   "transports": [
+    "métro M2 National",
+    "bus"
+   ],
+   "revenu": 1500,
+   "population": 4,
+   "tension": 60,
+   "police": 55,
+   "humeur": 40,
+   "controle": "gabians",
+   "depart": true,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "plaine",
+   "nom": "La Plaine / Cours Julien",
+   "arrondissements": [
+    "5e",
+    "6e"
+   ],
+   "quartiers": [
+    "Notre-Dame-du-Mont",
+    "Lodi",
+    "Le Camas",
+    "Baille"
+   ],
+   "lieux": [
+    "place Jean-Jaurès",
+    "Cours Julien",
+    "rue de la Bibliothèque"
+   ],
+   "transports": [
+    "métro M2 Notre-Dame-du-Mont",
+    "bus"
+   ],
+   "revenu": 1600,
+   "population": 3,
+   "tension": 35,
+   "police": 60,
+   "humeur": 55,
+   "controle": "tramontane",
+   "depart": false,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "prado",
+   "nom": "Prado / Castellane",
+   "arrondissements": [
+    "6e",
+    "7e",
+    "8e"
+   ],
+   "quartiers": [
+    "Castellane",
+    "Préfecture",
+    "Vauban",
+    "Endoume",
+    "Saint-Victor",
+    "Roucas-Blanc",
+    "Périer",
+    "Saint-Giniez",
+    "Le Rouet"
+   ],
+   "lieux": [
+    "place Castellane",
+    "Notre-Dame de la Garde",
+    "Corniche Kennedy",
+    "Vallon des Auffes",
+    "stade Vélodrome",
+    "avenue du Prado"
+   ],
+   "transports": [
+    "métro M1/M2 Castellane",
+    "métro M2 Rond-point du Prado",
+    "bus 83"
+   ],
+   "revenu": 2000,
+   "population": 4,
+   "tension": 20,
+   "police": 70,
+   "humeur": 35,
+   "controle": null,
+   "depart": false,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "nord_est",
+   "nom": "Nord-est",
+   "arrondissements": [
+    "13e"
+   ],
+   "quartiers": [
+    "Malpassé",
+    "Frais-Vallon",
+    "Saint-Jérôme",
+    "Saint-Just",
+    "La Rose",
+    "Les Olives",
+    "Château-Gombert"
+   ],
+   "lieux": [
+    "technopôle de Château-Gombert",
+    "campus de Saint-Jérôme"
+   ],
+   "transports": [
+    "métro M1 La Rose",
+    "métro M1 Frais-Vallon",
+    "métro M1 Malpassé",
+    "bus"
+   ],
+   "revenu": 1700,
+   "population": 5,
+   "tension": 65,
+   "police": 50,
+   "humeur": 45,
+   "controle": "compagnie",
+   "depart": true,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "nord_central",
+   "nom": "Nord central",
+   "arrondissements": [
+    "14e"
+   ],
+   "quartiers": [
+    "Saint-Barthélemy",
+    "Le Canet",
+    "Sainte-Marthe",
+    "Saint-Joseph",
+    "Le Merlan",
+    "Les Arnavaux",
+    "Bon-Secours"
+   ],
+   "lieux": [
+    "centre commercial du Merlan",
+    "marché aux puces"
+   ],
+   "transports": [
+    "métro M2 Gèze",
+    "bus"
+   ],
+   "revenu": 1600,
+   "population": 5,
+   "tension": 60,
+   "police": 50,
+   "humeur": 45,
+   "controle": "ruisseau",
+   "depart": true,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "nord_ouest",
+   "nom": "Nord-ouest",
+   "arrondissements": [
+    "15e",
+    "16e"
+   ],
+   "quartiers": [
+    "La Viste",
+    "Saint-Antoine",
+    "Verduron",
+    "Notre-Dame-Limite",
+    "Les Aygalades",
+    "Saint-Louis",
+    "La Cabucelle",
+    "Les Crottes"
+   ],
+   "lieux": [
+    "Grand Littoral",
+    "Hôpital Nord",
+    "cité de La Castellane (15e-16e, à vérifier)"
+   ],
+   "transports": [
+    "métro M2 Bougainville",
+    "bus"
+   ],
+   "revenu": 1900,
+   "population": 5,
+   "tension": 70,
+   "police": 55,
+   "humeur": 40,
+   "controle": "compagnie",
+   "depart": true,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "littoral_nord",
+   "nom": "Littoral nord",
+   "arrondissements": [
+    "16e"
+   ],
+   "quartiers": [
+    "L'Estaque",
+    "Saint-Henri",
+    "Saint-André",
+    "Les Riaux"
+   ],
+   "lieux": [
+    "port de l'Estaque",
+    "plage de Corbières",
+    "gare de L'Estaque"
+   ],
+   "transports": [
+    "bus",
+    "TER"
+   ],
+   "revenu": 1200,
+   "population": 3,
+   "tension": 50,
+   "police": 40,
+   "humeur": 55,
+   "controle": "gabians",
+   "depart": true,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "est",
+   "nom": "Est",
+   "arrondissements": [
+    "11e",
+    "12e"
+   ],
+   "quartiers": [
+    "La Valentine",
+    "Saint-Marcel",
+    "La Pomme",
+    "Les Caillols",
+    "Saint-Barnabé",
+    "Montolivet",
+    "Les Accates",
+    "La Treille"
+   ],
+   "lieux": [
+    "centre commercial de La Valentine",
+    "village de Saint-Barnabé"
+   ],
+   "transports": [
+    "métro M1 La Fourragère",
+    "bus"
+   ],
+   "revenu": 1300,
+   "population": 4,
+   "tension": 40,
+   "police": 45,
+   "humeur": 50,
+   "controle": "ruisseau",
+   "depart": false,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  },
+  {
+   "id": "sud",
+   "nom": "Sud",
+   "arrondissements": [
+    "8e",
+    "9e"
+   ],
+   "quartiers": [
+    "Bonneveine",
+    "Pointe-Rouge",
+    "Montredon",
+    "Mazargues",
+    "Sainte-Marguerite",
+    "Le Redon",
+    "La Cayolle",
+    "La Soude"
+   ],
+   "lieux": [
+    "plages du Prado",
+    "parc Borély",
+    "Calanques",
+    "centre pénitentiaire des Baumettes",
+    "Sormiou"
+   ],
+   "transports": [
+    "métro M2 Sainte-Marguerite Dromel",
+    "bus 19"
+   ],
+   "revenu": 1400,
+   "population": 3,
+   "tension": 30,
+   "police": 55,
+   "humeur": 45,
+   "controle": "calanquais",
+   "depart": false,
+   "services": [
+    "commerçants",
+    "associations",
+    "mères de famille",
+    "jeunes",
+    "anciens"
+   ]
+  }
+ ]
+}

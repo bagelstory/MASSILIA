@@ -5,6 +5,11 @@ Jeu de gestion noir, 18+, à Marseille (dépôt MASSILIA). Une vie de 16 ans à 
 (énergie, revenus qui tombent en temps réel, minuteurs, missions, raids).
 Ce document répond à deux questions : qu'est-ce qu'on prend dans KICK, et que contient la V1.
 
+> **Mise à jour du 16 novembre (après les GDD V6 et V7)** : période **2021 → 2026 puis « L'après »**
+> (16 ans en 2021), rythme **mélange** (énergie en temps réel + semaine clôturée par le joueur),
+> **10 zones** (les 8 du GDD + La Plaine / Cours Julien + Prado / Castellane). Ces décisions priment
+> sur les §3 bis, §3 ter et l'annexe ci-dessous. Détail : `design/02-modele-donnees.md`.
+
 ---
 
 ## 1. Ce que j'ai lu dans KICK (branche `v62-sprites`, commit f652505)
@@ -190,22 +195,7 @@ la pression policière et la famille.
 
 ---
 
-## Annexe — les 14 zones de la V1
+## Annexe — les 10 zones (remplace la liste de 14)
 
-| Zone | Arr. | Caractère en jeu |
-|---|---|---|
-| Le Panier | 2e | vieux quartier, touristes, petites marges, peu d'espace |
-| Belsunce / Noailles | 1er | marché, commerces, densité, beaucoup de passage |
-| Joliette / Arenc | 2e | Euroméditerranée, bureaux, port : blanchiment, logistique |
-| Belle de Mai / Saint-Mauront | 3e | quartier populaire du centre, tension forte |
-| La Plaine / Cours Julien | 6e | nuit, bars, clientèle étudiante et festive |
-| Vieux-Port / Opéra | 1er | nuit, restaurants, police très présente |
-| Endoume / Corniche | 7e | quartier calme et aisé, clientèle discrète, risque élevé |
-| Prado / Castellane (secteur sud) | 6e–8e | quartiers aisés, Vélodrome, livraisons |
-| L'Estaque | 16e | port, village, collines |
-| Nord 13e | 13e | grands ensembles, collines, beaucoup de jeunes |
-| Nord 14e | 14e | grands ensembles, centres commerciaux |
-| Nord 15e | 15e | grands ensembles, ports et voies rapides |
-| Nord 16e | 16e | grands ensembles en bord de mer et de colline |
-| Sud / Calanques (9e) | 9e | Mazargues, Baumettes (la prison), Calanques |
-
+Centre historique · Centre nord · La Plaine / Cours Julien · Prado / Castellane · Nord-est · Nord central ·
+Nord-ouest · Littoral nord · Est · Sud. Quartiers, lieux et valeurs : `data/zones.json`.
