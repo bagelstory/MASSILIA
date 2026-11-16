@@ -1,3 +1,5 @@
+> **REMPLACÉ** par `design/04-prompts-3d.md` (16 novembre) : ne plus utiliser ce document.
+
 # CHOUF — prompts Gemini pour TOUTES les illustrations (rendu 3D)
 
 Document de commande, même méthode que KICK (`design/v62/prompts-*.txt`) : une planche = un prompt =
