@@ -22,6 +22,13 @@ var EXPL = {
   stress: [[25, "Tu dors bien."], [50, "Ça tourne un peu dans ta tête le soir."], [75, "Tu sursautes au moindre bruit d'escalier."], [101, "Tu ne dors plus."]],
   confiance: [[25, "Ne te croit plus."], [50, "Se méfie."], [75, "Te fait plutôt confiance."], [101, "Compte sur toi."]]
 };
+/** Petite icône d'interface (série I) ou, à défaut, un caractère. */
+function ico(k, repli) { var u = ASSET.u("icone_" + k); return u ? '<img class="ico" src="' + u + '" alt="">' : repli; }
+/** Portrait du protagoniste selon sa famille et son âge. */
+function clePortraitJoueur() {
+  var a = age(), k = "joueur_" + G.famille + "_" + (a >= 35 ? "ancien" : a >= 19 ? "adulte" : "jeune");
+  return ASSET.u(k) ? k : "joueur_" + G.famille + "_jeune";
+}
 function expl(k, v) { var t = EXPL[k]; for (var i = 0; i < t.length; i++) if (v < t[i][0]) return t[i][1]; return ""; }
 function jauge(v, cls) { return '<div class="jauge ' + (cls || "") + '"><i style="width:' + clamp(v, 0, 100) + '%"></i></div>'; }
 function euros(n) { return Math.round(n).toLocaleString("fr-FR") + " €"; }
@@ -58,6 +65,7 @@ function vAccueil() {
     var f = IDX.familles[c.G.famille], z = IDX.zones[c.G.protagoniste.zone_origine];
     return '<div class="accueil"><h1 class="titre">CHOUF</h1>' +
       '<div class="carte-bloc"><p class="petit">Rentrée 2021. Tu as 16 ans.</p>' +
+      '<div class="duo">' + ASSET.img("joueur_" + c.G.famille + "_jeune", "med grand") + ASSET.img("medaillon_mere_" + c.G.famille, "med grand") + "</div>" +
       "<h2>" + esc(c.G.protagoniste.prenom + " " + f.nom) + "</h2>" +
       "<p>Tu grandis à <b>" + esc(z.nom) + "</b> (" + esc(z.quartiers.slice(0, 3).join(", ")) + "…).</p>" +
       "<p>" + esc(f.note.charAt(0).toUpperCase() + f.note.slice(1)) + ". Ta mère, " + esc(f.mere.prenom) + ", est " + esc(f.mere.metier) +
@@ -65,7 +73,7 @@ function vAccueil() {
       '<button class="btn" data-a="commencer">Commencer cette vie</button>' +
       '<button class="btn sec" data-a="retirer">Tirer une autre vie</button></div>';
   }
-  return '<div class="accueil"><h1 class="titre">CHOUF</h1><p class="sous">Marseille, 2021 → 2026</p>' +
+  return '<div class="accueil">' + (ASSET.u("vue_centre") ? '<img class="hero" src="' + ASSET.u("vue_centre") + '" alt="">' : "") + '<h1 class="titre">CHOUF</h1><p class="sous">Marseille, 2021 → 2026</p>' +
     '<p class="avert">Jeu de fiction pour adultes. Lieux réels, personnages et équipes inventés. Le jeu montre la prison, le deuil, la peur et les proches abîmés.</p>' +
     (hasSave() ? '<button class="btn" data-a="continuer">Continuer</button>' : "") +
     '<label class="champ">Ton prénom<input id="prenom" maxlength="18" autocomplete="off" placeholder="Ton prénom"></label>' +
@@ -78,9 +86,9 @@ function vEntete() {
   var t = G.temps, T = B.temps, ch = IDX.chapitres[G.chapitre];
   var pp = prochainPoint();
   return '<header class="entete"><div class="l1"><b>Sem. ' + G.cal.semaine + " · " + G.cal.annee + "</b><span>" + age() + " ans · " + esc(ch.nom) + "</span></div>" +
-    '<div class="l2"><span class="res e" title="Énergie">⚡ ' + t.energie + "/" + T.energie_max + (pp ? ' <small>+1 dans ' + pp + " min</small>" : "") + "</span>" +
-    '<span class="res s" title="Sang-froid">❄ ' + t.sangfroid + "/" + T.sangfroid_max + "</span>" +
-    '<span class="res a">' + euros(G.argent.propre) + "</span></div></header>";
+    '<div class="l2"><span class="res e" title="Énergie">' + ico("energie", "⚡") + " " + t.energie + "/" + T.energie_max + (pp ? ' <small>+1 dans ' + pp + " min</small>" : "") + "</span>" +
+    '<span class="res s" title="Sang-froid">' + ico("sangfroid", "❄") + " " + t.sangfroid + "/" + T.sangfroid_max + "</span>" +
+    '<span class="res a">' + ico("propre", "") + " " + euros(G.argent.propre) + "</span></div></header>";
 }
 function vOnglets() {
   var o = [["carte", "Carte"], ["quartier", "Quartier"], ["gens", "Gens"], ["journal", "Journal"], ["moi", "Moi"]];
@@ -209,7 +217,7 @@ function vJournal() {
 }
 function vMoi() {
   var p = G.protagoniste, f = IDX.familles[G.famille];
-  return '<h2 class="h">' + esc(p.prenom + " " + f.nom) + '</h2><p class="petit">' + age() + " ans · " + esc(IDX.zones[p.zone_origine].nom) + " · " +
+  return '<div class="fiche">' + ASSET.img(clePortraitJoueur(), "med grand") + '</div><h2 class="h" style="text-align:center">' + esc(p.prenom + " " + f.nom) + '</h2><p class="petit" style="text-align:center">' + age() + " ans · " + esc(IDX.zones[p.zone_origine].nom) + " · " +
     (p.scolarite.statut === "lycee" ? "au lycée" : esc(p.scolarite.statut)) + "</p>" +
     '<h3 class="h3">Compétences</h3>' + D.competences.liste.map(function (c) {
       var v = p.competences[c.id], pl = palier(v), t = c.paliers[pl - 1];

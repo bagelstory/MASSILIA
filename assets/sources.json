@@ -1,0 +1,35 @@
+{
+ "_doc": "Correspondance image envoyée → clé du jeu. type : banniere (16:9), portrait (médaillon rond), scene (16:9), vue (16:9), icones (grille de ronds sur noir). grille : [colonnes, lignes] pour les planches ; cases : clés dans l'ordre de lecture (null = case ignorée).",
+ "images": [
+  {"fichier": "CHOUF/1. Bannière ville (Centre Historique).jpg", "type": "banniere", "cle": "banniere_centre_hist"},
+  {"fichier": "CHOUF/BANNIERE BVILLE1.jpg", "type": "banniere", "cle": "banniere_centre_nord"},
+  {"fichier": "CHOUF/Bannières ville.jpg", "type": "banniere", "cle": "banniere_plaine"},
+  {"fichier": "CHOUF/Bannières ville2.jpg", "type": "banniere", "cle": "banniere_prado"},
+  {"fichier": "CHOUF/banniere_nord_est.jfif", "type": "banniere", "cle": "banniere_nord_est"},
+  {"fichier": "CHOUF/banniere_nord.jfif", "type": "banniere", "cle": "banniere_nord_central"},
+  {"fichier": "CHOUF/banniere_nord_ouest.jfif", "type": "banniere", "cle": "banniere_nord_ouest"},
+  {"fichier": "CHOUF/litoral.jfif", "type": "banniere", "cle": "banniere_littoral_nord"},
+  {"fichier": "CHOUF/banniere_est.jfif", "type": "banniere", "cle": "banniere_est"},
+  {"fichier": "CHOUF/banniere_sud.jfif", "type": "banniere", "cle": "banniere_sud"},
+  {"fichier": "CHOUF/banniere_baumettes.jfif", "type": "banniere", "cle": "banniere_baumettes"},
+  {"fichier": "CHOUF/Gemini_Generated_Image_gf4dvegf4dvegf4d (3).jfif", "type": "vue", "cle": "vue_centre"},
+  {"fichier": "CHOUF/Gemini_Generated_Image_gf4dvegf4dvegf4d (2).jfif", "type": "vue", "cle": "vue_est_sud"},
+  {"fichier": "CHOUF/2. Médaillon Mère Ferrara.jpg", "type": "portrait", "cle": "medaillon_mere_ferrara"},
+  {"fichier": "CHOUF/3. Protagoniste Ferrara 16 ans.jpg", "type": "portrait", "cle": "joueur_ferrara_jeune"},
+  {"fichier": "CHOUF/Gemini_Generated_Image_kv9qq6kv9qq6kv9q.jfif", "type": "portrait", "grille": [3, 2],
+   "cases": ["medaillon_mere_benali", "medaillon_petit_frere_benali", "medaillon_grande_soeur_benali",
+             "medaillon_mere_sarkissian", "medaillon_petit_frere_sarkissian", "medaillon_grande_soeur_sarkissian"]},
+  {"fichier": "CHOUF/Gemini_Generated_Image_jm762djm762djm76.jfif", "type": "portrait", "grille": [3, 2],
+   "cases": ["medaillon_mere_diallo", "medaillon_petit_frere_diallo", "medaillon_grande_soeur_diallo",
+             "medaillon_mere_garcia", "medaillon_petit_frere_garcia", "medaillon_grande_soeur_garcia"]},
+  {"fichier": "CHOUF/2.jpg", "type": "scene", "cle": "scene_le_quotidien"},
+  {"fichier": "CHOUF/image.jpg", "type": "icones", "grille": [3, 3],
+   "cases": ["icone_energie", "icone_sangfroid", "icone_propre", "icone_sale", "icone_police", "icone_tension", "icone_humeur", "icone_respect", "icone_influence"]}
+ ],
+ "non_classees": {
+  "CHOUF/Gemini_Generated_Image_2p7jeq2p7jeq2p7j.jfif": "8 jeunes hommes sur magenta : à qui correspondent-ils ?",
+  "CHOUF/Gemini_Generated_Image_8rgiyv8rgiyv8rgi*.jfif, gozf1n, gf4dve (1)": "anciennes planches réalistes jour/nuit (document 03) : gardées en réserve",
+  "CHOUF/Marseille en six *.png, Marseille méditerranéenne*.png": "style dessiné (ancien) : non utilisées",
+  "CHOUF/Gemini_Generated_Image_gf4dvegf4dvegf4d (1).jfif": "planche réaliste : non utilisée"
+ }
+}

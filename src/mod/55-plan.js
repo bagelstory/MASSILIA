@@ -167,7 +167,17 @@ function glyphe(g, type, x, y, r) {
     case "brouillard": g.font = "bold " + Math.round(r * 1.1) + "px system-ui"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("?", x, y + 1); break;
   }
 }
+/** Images des badges (série I) quand elles existent ; sinon le badge est dessiné. */
+var BADGE_IMG = { police: "icone_police", tension: "icone_tension" }, BADGE_CACHE = {};
+function badgeImage(type) {
+  var k = BADGE_IMG[type], u = k && ASSET.u(k);
+  if (!u) return null;
+  if (!BADGE_CACHE[k]) { var im = new Image(); im.onload = function () { planDessin(); }; im.src = u; BADGE_CACHE[k] = im; }
+  return BADGE_CACHE[k].complete && BADGE_CACHE[k].naturalWidth ? BADGE_CACHE[k] : null;
+}
 function badge(g, x, y, r, anneau, type, fond) {
+  var im = badgeImage(type);
+  if (im) { g.drawImage(im, x - r * 1.15, y - r * 1.15, r * 2.3, r * 2.3); return; }
   g.beginPath(); g.arc(x, y + 1.5, r + 2, 0, Math.PI * 2); g.fillStyle = "rgba(0,0,0,.45)"; g.fill();
   g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fillStyle = fond || "#1b1c1f"; g.fill();
   g.lineWidth = r * 0.2; g.strokeStyle = anneau; g.stroke();
