@@ -1,5 +1,5 @@
 {
- "_doc": "Équipes et chefs 100 % inventés.",
+ "_doc": "Factions rivales inventées (IA). Agressivité 1-5, budget, effectif abstrait.",
  "liste": [
   {
    "id": "compagnie",
@@ -20,7 +20,10 @@
     "note": "pilote de loin, ne vient plus dans les quartiers"
    },
    "couleur": "#c8352e",
-   "embleme": "tour"
+   "embleme": "tour",
+   "agressivite": 4,
+   "budget": 28000,
+   "effectif": 14
   },
   {
    "id": "gabians",
@@ -40,7 +43,10 @@
     "note": "tient ses hommes par la peur"
    },
    "couleur": "#3d7fd9",
-   "embleme": "oiseau"
+   "embleme": "oiseau",
+   "agressivite": 5,
+   "budget": 12000,
+   "effectif": 8
   },
   {
    "id": "ruisseau",
@@ -60,7 +66,10 @@
     "note": "l'ancien, connu de tout le quartier, veut durer"
    },
    "couleur": "#d08b2c",
-   "embleme": "vague"
+   "embleme": "vague",
+   "agressivite": 2,
+   "budget": 9000,
+   "effectif": 7
   },
   {
    "id": "tramontane",
@@ -79,7 +88,10 @@
     "note": "clientèle de nuit, aime les arrangements"
    },
    "couleur": "#8a5cd6",
-   "embleme": "vent"
+   "embleme": "vent",
+   "agressivite": 3,
+   "budget": 11000,
+   "effectif": 5
   },
   {
    "id": "calanquais",
@@ -98,7 +110,10 @@
     "note": "jeune, pressé, sans règles"
    },
    "couleur": "#5fc4c4",
-   "embleme": "falaise"
+   "embleme": "falaise",
+   "agressivite": 4,
+   "budget": 6000,
+   "effectif": 4
   }
  ]
 }

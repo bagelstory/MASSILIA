@@ -1,214 +1,327 @@
 {
- "_doc": "Toutes les valeurs réglables. Sources des formules : design/02-modele-donnees.md (§2, §8, §9).",
- "temps": {
-  "energie_max": 20,
-  "energie_regen_min": 6,
-  "sangfroid_max": 10,
-  "sangfroid_regen_min": 15,
-  "semaine_depart": {
-   "annee": 2021,
-   "semaine": 37
-  },
-  "semaine_fin": {
-   "annee": 2026,
-   "semaine": 52
-  },
-  "bilan_mensuel_toutes": 4,
-  "absence_resume_min": 30,
-  "energie_depart": 20,
-  "energie_par_semaine": 10,
-  "sangfroid_par_semaine": 4
+ "_doc": "Toutes les valeurs de CHOUF v2 (gestion pure). Règles : design/05-gestion-pure.md. Un cycle = une semaine.",
+ "depart": {
+  "tresorerie": 6000,
+  "capacite": 3,
+  "operateurs": [
+   "force",
+   "pression",
+   "reperage"
+  ],
+  "competence": [
+   2,
+   3
+  ],
+  "controle_base": 60,
+  "presence_base_adverse": 25,
+  "connaissance_zone": 1,
+  "connaissance_base": 3,
+  "semaine": 37,
+  "annee": 2021
  },
- "protagoniste": {
-  "naissance_annee": 2005,
-  "naissance_semaines": [
-   1,
-   36
-  ],
-  "argent_propre_depart": [
-   40,
-   200
-  ],
-  "competences_depart": {
-   "communication": 20,
-   "organisation": 15,
-   "sang_froid": 10,
-   "leadership": 5,
-   "autonomie": 15
+ "operateurs": {
+  "types": {
+   "reperage": {
+    "nom": "Repérage",
+    "tache": "reperer",
+    "recrutement": 900,
+    "entretien": 220,
+    "couleur": "#8fc6ff",
+    "lettre": "R"
+   },
+   "pression": {
+    "nom": "Pression",
+    "tache": "presser",
+    "recrutement": 1200,
+    "entretien": 300,
+    "couleur": "#e8b64c",
+    "lettre": "P"
+   },
+   "logistique": {
+    "nom": "Logistique",
+    "tache": "flux",
+    "recrutement": 1400,
+    "entretien": 320,
+    "couleur": "#5fc4c4",
+    "lettre": "L"
+   },
+   "finances": {
+    "nom": "Finances",
+    "tache": "optimiser",
+    "recrutement": 1600,
+    "entretien": 380,
+    "couleur": "#6ccf4f",
+    "lettre": "€"
+   },
+   "intelligence": {
+    "nom": "Intelligence",
+    "tache": "surveiller",
+    "recrutement": 1500,
+    "entretien": 350,
+    "couleur": "#b48cff",
+    "lettre": "I"
+   },
+   "force": {
+    "nom": "Force",
+    "tache": "securiser",
+    "recrutement": 1300,
+    "entretien": 340,
+    "couleur": "#e5484d",
+    "lettre": "F"
+   }
   },
-  "etat_depart": {
-   "stabilite": 70,
-   "pression": 20,
-   "sante": 90,
-   "stress": 20
+  "competence_recrue": [
+   1,
+   3
+  ],
+  "hors_specialite": 0.5,
+  "competence_ref": 3,
+  "fatigue_repos": 10,
+  "fatigue_seuil_baisse": 70,
+  "fatigue_effet": 0.7,
+  "indispo_cycles": 1,
+  "fatigue_apres_indispo": 60,
+  "transit_adjacent": 1,
+  "transit_loin": 2,
+  "progression_competence": 0.08,
+  "visages": [
+   "grand_hall",
+   "rascasse",
+   "mika",
+   "zizou",
+   "sab",
+   "nono"
+  ]
+ },
+ "taches": {
+  "securiser": {
+   "nom": "Sécuriser",
+   "type": "force",
+   "fatigue": 25,
+   "baisse_adverse": 14,
+   "gain_controle": 3,
+   "pression": 1.5,
+   "exposition": 1.5
+  },
+  "presser": {
+   "nom": "Presser",
+   "type": "pression",
+   "fatigue": 20,
+   "gain_controle": 9,
+   "pression": 1.0,
+   "exposition": 0.6
+  },
+  "reperer": {
+   "nom": "Repérer",
+   "type": "reperage",
+   "fatigue": 10,
+   "connaissance": 1,
+   "voisins": true
+  },
+  "surveiller": {
+   "nom": "Surveiller",
+   "type": "intelligence",
+   "fatigue": 12,
+   "reduction_attaque": 0.35,
+   "revele_voisins": true
+  },
+  "flux": {
+   "nom": "Gérer les flux",
+   "type": "logistique",
+   "fatigue": 15,
+   "baisse_maintien": 0.25,
+   "fiabilite_flux": 6
+  },
+  "optimiser": {
+   "nom": "Optimiser",
+   "type": "finances",
+   "fatigue": 10,
+   "baisse_maintien": 0.4,
+   "baisse_entretien": 0.03
+  },
+  "repos": {
+   "nom": "Repos",
+   "type": null,
+   "fatigue": 0
   }
  },
- "competences": {
-  "seuils": [
-   0,
-   25,
-   50,
-   75
+ "controle": {
+  "securise_controle": 80,
+  "securise_adverse": 20,
+  "acces_voisin": 50,
+  "abandon_cycles": 2,
+  "abandon_baisse": 5,
+  "degradation_sans_argent": 3,
+  "force_reduit_attaque": 0.5
+ },
+ "quartiers": {
+  "flux_variation": [
+   0.7,
+   1.3
   ],
-  "gain_max_par_evenement": 5,
-  "rendement_palier4": 0.4,
-  "plafond": 100
+  "maintien_ratio": 0.35,
+  "investir_cout_ratio": 2.5,
+  "investir_gain": 0.2,
+  "investir_maintien": 0.15,
+  "points_interet": [
+   "épicerie de nuit",
+   "snack",
+   "garage",
+   "entrepôt",
+   "bar",
+   "parking",
+   "laverie",
+   "salle de sport",
+   "station de lavage",
+   "local commercial"
+  ],
+  "presence_faction": [
+   45,
+   80
+  ],
+  "presence_voisine": [
+   0,
+   15
+  ],
+  "presence_neutre": [
+   0,
+   12
+  ]
  },
- "stress": {
-  "par_semaine_base": 1,
-  "par_enquete_connue": 3,
-  "par_violence_subie": 12,
-  "repos_semaine": -6,
-  "seuil_sante": 70,
-  "perte_sante_si_seuil": 2
- },
- "economie": {
-  "coffre_max_base": 3000,
-  "coffre_max_par_nourrice": 6000,
-  "risque_coffre_par_semaine": 0.06,
-  "humeur_div": 200,
-  "police_div": 200,
-  "facade_taux": 0.25,
-  "facade_plafond_par_niveau": 1500,
-  "salaire_semaine_mult": 1.0,
-  "argent_unite": "EUR entier"
- },
- "police": {
-  "enquete_par_bruit": 0.8,
-  "enquete_baisse_semaine": 1.5,
-  "seuil_indice": 40,
-  "seuil_convocation": 60,
-  "seuil_gav": 75,
-  "seuil_perquisition": 85,
-  "seuil_operation_ville": 70,
-  "duree_operation_semaines": [
+ "factions": {
+  "revenu_ratio": 0.5,
+  "cout_effectif": 120,
+  "recrutement_seuil": 3000,
+  "recrutement_cout": 1500,
+  "budget_max": 40000,
+  "retraite_budget": 0.3,
+  "attaque_detecte": 50,
+  "force_action": [
+   6,
+   2,
+   0.35
+  ],
+  "actions_par_effectif": 5,
+  "alliance_proba": 0.04,
+  "alliance_duree": [
    6,
    12
   ],
-  "operation_mult_police": 1.6,
-  "gav_heures": [
-   24,
-   96
-  ],
-  "proba_detention_provisoire": 0.35
+  "fragmentation_ratio": 0.4,
+  "fragmentation_min": 4
  },
- "rivaux": {
-  "coups_par_semaine": 1,
-  "proba_frapper_si_guerre": 0.15,
-  "proba_negocier": 0.25
+ "economie": {
+  "revenu_sans_pression": 0.5,
+  "dette_interet": 0.05,
+  "faillite_cycles": 3
  },
- "zones": {
-  "humeur_derive_vers": 50,
-  "humeur_derive": 0.5,
-  "tension_derive": -1,
-  "tension_par_violence": 15,
-  "pression_ville_par_violence": 4,
-  "connu_depart_zone_origine": 3,
-  "connu_depart_voisines": 1,
-  "connu_depart_autres": 0,
-  "voisines": {
-   "centre_hist": [
-    "centre_nord",
-    "plaine",
-    "prado"
-   ],
-   "centre_nord": [
-    "centre_hist",
-    "nord_ouest",
-    "nord_central",
-    "plaine"
-   ],
-   "plaine": [
-    "centre_hist",
-    "centre_nord",
-    "prado",
-    "est"
-   ],
-   "prado": [
-    "centre_hist",
-    "plaine",
-    "sud",
-    "est"
-   ],
-   "nord_est": [
-    "nord_central",
-    "est"
-   ],
-   "nord_central": [
-    "nord_est",
-    "nord_ouest",
-    "centre_nord"
-   ],
-   "nord_ouest": [
-    "littoral_nord",
-    "nord_central",
-    "centre_nord"
-   ],
-   "littoral_nord": [
-    "nord_ouest"
-   ],
-   "est": [
-    "nord_est",
-    "plaine",
-    "prado",
-    "sud"
-   ],
-   "sud": [
-    "prado",
-    "est"
-   ]
-  }
- },
- "relations": {
-  "derive_proximite_sans_contact": -1,
-  "semaines_sans_contact_avant_derive": 4,
-  "bornes": [
-   0,
-   100
-  ],
-  "connus_depart": [
-   "mere",
-   "petit_frere",
-   "grande_soeur",
-   "tante",
-   "ami_enfance",
-   "camarade",
-   "grand_hall",
-   "souris",
-   "pitchoun",
-   "babou",
-   "coach",
-   "educatrice",
-   "snack",
-   "voisine",
-   "prof",
-   "nono",
-   "ines",
-   "chouchou",
-   "rose_marie",
-   "farid",
-   "madame_lan",
-   "pastis"
+ "capacite": {
+  "tous_les": 12,
+  "seuils_territoire": [
+   15,
+   30,
+   45,
+   60
   ]
  },
- "evenements": {
-  "proba_tirage_semaine": 0.6,
-  "cartes_max_par_semaine": 2,
-  "prologue": [
+ "indicateurs": {
+  "pression_baisse": 3,
+  "pression_par_quartier_gagne": 2,
+  "pression_alerte": 80,
+  "pression_chute": 100,
+  "exposition_baisse": 2,
+  "exposition_alerte": 80,
+  "exposition_vers_pression": 4,
+  "stabilite_vers": 50,
+  "stabilite_derive": 0.1,
+  "stabilite_recrue": 3,
+  "stabilite_perte": 10,
+  "stabilite_fatigue": 1,
+  "stabilite_flux_sup": 3,
+  "stabilite_quartier_tenu": 0.5,
+  "stabilite_basse": 20,
+  "stabilite_basse_fatigue": 1.3,
+  "stabilite_basse_degradation": 2
+ },
+ "flux": {
+  "offres": [
    {
-    "id": "les_visages",
-    "dans": 1
+    "id": "route_sud",
+    "nom": "Partenaire Sud",
+    "volume": 2,
+    "engagement": 8000,
+    "activation": 2500,
+    "fiabilite": 65,
+    "exposition": 0,
+    "instabilite": 20,
+    "revenu": 2600,
+    "cout": 700
    },
    {
-    "id": "la_promesse",
-    "dans": 2
+    "id": "route_nord",
+    "nom": "Partenaire Nord",
+    "volume": 3,
+    "engagement": 15000,
+    "activation": 4000,
+    "fiabilite": 55,
+    "exposition": 0,
+    "instabilite": 30,
+    "revenu": 4800,
+    "cout": 1200
    }
   ],
-  "mineur_age": 18
+  "exposition_par_volume": 3,
+  "instabilite_par_cycle": 2,
+  "rupture_div": 250,
+  "fiabilite_partenaire_perdu": 30,
+  "trop_de_flux": 2
  },
- "engagements": {
-  "cout_tenir_energie": 3,
-  "proba_rappel": 1.0
+ "evenements": {
+  "arrestation": 0.1,
+  "elimination_contestee": 0.04,
+  "operation_exterieure": 0.3,
+  "operation_pression": 12,
+  "saisons": [
+   {
+    "id": "ete",
+    "nom": "Été",
+    "semaines": [
+     27,
+     34
+    ],
+    "zones": [
+     "centre_hist",
+     "sud",
+     "prado",
+     "plaine"
+    ],
+    "flux_mult": 1.3
+   },
+   {
+    "id": "match",
+    "nom": "Soir de match",
+    "pair_semaines": true,
+    "hors_semaines": [
+     22,
+     31
+    ],
+    "zones": [
+     "prado"
+    ],
+    "flux_mult": 1.15
+   },
+   {
+    "id": "mistral",
+    "nom": "Mistral",
+    "proba": 0.1,
+    "zones": "*",
+    "flux_mult": 0.9
+   }
+  ]
+ },
+ "fin": {
+  "victoire_territoire": 70,
+  "cycles_max": 260
  },
  "carte": {
   "couleur_joueur": "#6ccf4f",

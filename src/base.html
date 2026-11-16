@@ -69,6 +69,32 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .hero{display:block;width:calc(100% + 40px);margin:-40px -20px 0;height:220px;object-fit:cover;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
 .duo{display:flex;gap:10px;justify-content:center}.duo .med.grand{width:110px;height:110px;margin:0}
 .banniere{filter:saturate(.9)}
+.bandeau{position:sticky;top:0;z-index:5;background:var(--nuit);padding:6px 8px 6px;box-shadow:0 4px 8px var(--nuit)}
+.cyc{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 4px}.cyc span{color:var(--gris);font-size:12px}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.chip{display:flex;gap:5px;align-items:center;background:var(--nuit2);border:1px solid var(--nuit3);border-radius:10px;padding:4px 6px;text-align:left;min-width:0}
+.chip .ico{width:22px;height:22px;flex:none}.chip span{min-width:0;display:block;line-height:1.15}.chip small{display:block;font-size:10px;color:var(--gris)}
+.chip b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.chip em{font-style:normal;font-size:10px}.chip em.up{color:#6ccf4f}.chip em.dn{color:#e5484d}
+.chip.al{border-color:#e5484d;background:#2a1517}
+.corps.carte{padding:0}.corps{padding-bottom:140px}
+.vue-ville{height:calc(100vh - 230px);min-height:380px;margin:0}
+.pied{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:6;background:var(--nuit2);border-top:1px solid var(--nuit3)}
+.pied .valider{margin:6px 8px;width:calc(100% - 16px);padding:12px;letter-spacing:.04em;text-transform:uppercase}
+.pied .onglets{position:static;transform:none;border:0}.pied .onglets button{padding:9px 0 calc(9px + env(safe-area-inset-bottom));font-size:12px}
+.hud-bas{bottom:8px}.fiche-q{padding-top:0;overflow:hidden}.fq-ban{display:block;width:calc(100% + 24px);margin:0 -12px 6px;height:64px;object-fit:cover;opacity:.85}
+.barre-ctl{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#3a3d42;margin:4px 0}.barre-ctl i{display:block;height:100%}.barre-ctl i.moi{background:#6ccf4f}
+.ligne-action.spe{border:1px solid var(--sodium)}
+.op{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--nuit2);border-radius:var(--r);padding:10px 12px;margin:6px 0}
+.op>span{flex:1;min-width:0}.op small{display:block;color:var(--gris);font-size:12px}.med.lettre{display:flex;align-items:center;justify-content:center;border:3px solid;font-weight:800;font-size:18px;background:#1b1c1f}
+.jauge.fat i{background:#e5484d}.pt{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0}
+.carte-bloc .ligne{display:flex;justify-content:space-between;align-items:center;gap:8px}.carte-bloc .ligne b{flex:1}
+.grille{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 12px;margin:8px 0}.grille small{display:block;font-size:11px;color:var(--gris)}.grille b{font-size:14px}
+.faction{border-left:4px solid}.faction.morte{opacity:.45}.faction .med{width:40px;height:40px}
+.ok{color:#6ccf4f;font-style:normal}.ligne-chiffre{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--nuit3);font-size:14px}
+.ligne-chiffre b.neg{color:#e5484d}.ligne-chiffre.tot{font-weight:700;border-bottom:0}.alertes{padding-left:18px;color:#f0b4b4;font-size:14px}
+.rapport{list-style:none;padding:0;margin:8px 0;font-size:14px}.rapport li{padding:5px 0;border-bottom:1px solid var(--nuit3)}
+.rapport .attaque,.rapport .perte,.rapport .perteop,.rapport .rupture,.rapport .operation{color:#f0a0a0}.rapport .gain,.rapport .capacite,.rapport .recrue{color:#9fe08a}
+.note{font-size:28px;color:var(--sodium);margin:0 0 14px}.h small{font-size:14px;color:var(--gris)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>

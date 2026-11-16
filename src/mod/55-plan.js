@@ -19,31 +19,24 @@ function deproj(P, ox, oy) {
   var rx = ox / P.R + P.minX, ry = (oy / P.R + P.minY) / P.k;
   return [rx * P.c + ry * P.s + 180, -rx * P.s + ry * P.c + 200];
 }
-function dansPoly(pt, poly) {
-  var x = pt[0], y = pt[1], ins = false;
-  for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
-    if (((yi > y) !== (yj > y)) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins;
-  }
-  return ins;
-}
-/** Hasard du décor, indépendant de G.seed (le décor ne doit pas changer la partie). */
-function rngDecor(txt) {
-  var h = 2166136261;
-  for (var i = 0; i < txt.length; i++) h = Math.imul(h ^ txt.charCodeAt(i), 16777619);
-  return function () { h = (h + 0x6D2B79F5) | 0; var t = Math.imul(h ^ (h >>> 15), h | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-}
 function hex(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; }
 function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
 function rgb(c, f) { f = f == null ? 1 : f; return "rgb(" + Math.round(c[0] * f) + "," + Math.round(c[1] * f) + "," + Math.round(c[2] * f) + ")"; }
 
-/** Couleur de l'équipe qui tient une zone (ou neutre / joueur). */
-function couleurZone(id) {
-  var c = G.zones[id].controle;
-  if (c === "joueur") return B.carte.couleur_joueur;
-  return c && IDX.equipes[c] ? IDX.equipes[c].couleur : B.carte.couleur_neutre;
+/** Couleur d'un quartier selon son statut (§12.2 : vert joueur, couleur de faction, gris libre, orange contesté). */
+var COUL = { joueur: "#6ccf4f", securise: "#4fd06a", conteste: "#e8862c", libre: "#8d9096" };
+function couleurQuartier(id) {
+  var st = statut(id), s = G.q[id];
+  if (s.conn === 0 && s.ctl <= 0) return null;                  // inconnu : brouillard
+  if (st === "faction") { var f = factionDominante(s); return f ? IDX.equipes[f].couleur : COUL.libre; }
+  return COUL[st];
 }
-
+function forceTeinte(id) {
+  var s = G.q[id], st = statut(id);
+  if (st === "faction") return 0.25 + Math.min(0.4, advTotal(s) / 200);
+  if (st === "libre") return 0;
+  return 0.3 + Math.min(0.35, s.ctl / 250);
+}
 /** Génère les immeubles d'une zone (déterministe). */
 function immeubles(z) {
   var r = rngDecor(z.id), b = z.bati, s = b.pas, out = [];
@@ -65,7 +58,7 @@ function immeubles(z) {
 
 /** Dessine toute la ville dans une image hors écran. Refait seulement si le contrôle des zones change. */
 function planCache() {
-  var sig = D.zones.liste.map(function (z) { return z.id + G.zones[z.id].controle + G.zones[z.id].connu; }).join("|");
+  var sig = VILLE.ordre.map(function (id) { var s = G.q[id]; return statut(id) + (factionDominante(s) || "") + (s.conn > 0 ? 1 : 0) + Math.floor(s.ctl / 20); }).join("|");
   if (PLAN.cache && PLAN.sig === sig) return PLAN.cache;
   var P = planProj(), R = D.zones.repere;
   // bornes
@@ -90,22 +83,40 @@ function planCache() {
   g.fillStyle = gr; g.fillRect(0, 0, W, H);
   // terre et sol des zones
   poly(R.terre, 0, "#2f3134");
-  D.zones.liste.forEach(function (z) {
-    var gz = G.zones[z.id], col = hex(couleurZone(z.id));
-    var base = gz.connu === 0 ? [44, 46, 49] : mix([70, 72, 76], col, gz.controle ? 0.38 : 0);
-    poly(z.plan, 0, rgb(base), "#9a9ea5", 1.6 * P.R);
+  // sol : une case par point du découpage, teintée selon le quartier
+  var PAS = VILLE.PAS, couleurs = {};
+  VILLE.ordre.forEach(function (id) {
+    var c = couleurQuartier(id);
+    couleurs[id] = c ? rgb(mix([70, 72, 76], hex(c), forceTeinte(id))) : "rgb(44,46,49)";
+  });
+  Object.keys(VILLE.cell).forEach(function (k) {
+    var p = k.split(",").map(Number);
+    poly([[p[0], p[1]], [p[0] + PAS, p[1]], [p[0] + PAS, p[1] + PAS], [p[0], p[1] + PAS]], 0, couleurs[VILLE.cell[k]], couleurs[VILLE.cell[k]], 0.6);
+  });
+  // limites : fines entre quartiers, épaisses entre zones
+  g.lineCap = "round";
+  Object.keys(VILLE.cell).forEach(function (k) {
+    var p = k.split(",").map(Number), a = VILLE.cell[k];
+    [[PAS, 0, [p[0] + PAS, p[1]], [p[0] + PAS, p[1] + PAS]], [0, PAS, [p[0], p[1] + PAS], [p[0] + PAS, p[1] + PAS]]].forEach(function (d) {
+      var b = VILLE.cell[(p[0] + d[0]) + "," + (p[1] + d[1])];
+      if (!b || b === a) return;
+      var zz = VILLE.q[a].zone !== VILLE.q[b].zone;
+      var q1 = proj(P, d[2][0], d[2][1], 0), q2 = proj(P, d[3][0], d[3][1], 0);
+      g.beginPath(); g.moveTo(q1[0], q1[1]); g.lineTo(q2[0], q2[1]);
+      g.strokeStyle = zz ? "#b9bdc4" : "rgba(160,165,172,.45)"; g.lineWidth = (zz ? 1.4 : 0.6) * P.R; g.stroke();
+    });
   });
   poly(R.vieux_port, 0, "#1c2a33", "#4a4e55", 1);
   // immeubles, triés de l'arrière vers l'avant
   var all = [];
   D.zones.liste.forEach(function (z) { all = all.concat(immeubles(z)); });
+  all.forEach(function (b) { b.q = quartierEn(b.cx, b.cy) || VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === b.z; })[0]; });
   all.forEach(function (b) { b.prof = (b.cx - 180) * P.s + (b.cy - 200) * P.c; });
   all.sort(function (a, b) { return a.prof - b.prof; });
   var lum = [0.62, 0.48];
   all.forEach(function (b) {
-    var gz = G.zones[b.z], col = hex(couleurZone(b.z));
-    var c = gz.connu === 0 ? [70, 72, 76] : mix([196, 198, 202], col, gz.controle ? 0.45 : 0);
-    if (gz.controle === "joueur") c = mix(c, col, 0.3);
+    var cq = couleurQuartier(b.q), inconnu = !cq;
+    var c = inconnu ? [70, 72, 76] : mix([196, 198, 202], hex(cq), forceTeinte(b.q) * 1.3);
     for (var i = 0; i < 4; i++) {
       var p1 = b.pts[i], p2 = b.pts[(i + 1) % 4];
       var nx = p2[1] - p1[1], ny = -(p2[0] - p1[0]);           // normale extérieure
@@ -117,7 +128,7 @@ function planCache() {
     }
     poly(b.pts, b.h, rgb(c, 0.92), rgb(c, 0.55), 0.6);
     // fenêtres allumées sur les hautes tours
-    if (b.h > 12 && gz.connu > 0) {
+    if (b.h > 12 && !inconnu) {
       var q = proj(P, b.pts[3][0], b.pts[3][1], 0), q2 = proj(P, b.pts[2][0], b.pts[2][1], 0);
       g.fillStyle = "rgba(255,190,110,.55)";
       for (var f = 3; f < b.h - 1; f += 3) for (var t = 0.25; t < 0.9; t += 0.3) {
@@ -183,15 +194,21 @@ function badge(g, x, y, r, anneau, type, fond) {
   g.lineWidth = r * 0.2; g.strokeStyle = anneau; g.stroke();
   glyphe(g, type, x, y, r);
 }
-/** Badges d'une zone : équipe qui la tient, chez toi, police forte, tension forte. */
-function badgesZone(id) {
-  var gz = G.zones[id], l = [];
-  if (gz.connu === 0) return [{ t: "brouillard", c: "#6b6e73" }];
-  if (id === G.protagoniste.zone_origine) l.push({ t: "maison", c: B.carte.couleur_joueur });
-  if (gz.controle && IDX.equipes[gz.controle]) l.push({ t: IDX.equipes[gz.controle].embleme, c: IDX.equipes[gz.controle].couleur, f: IDX.equipes[gz.controle].couleur });
-  if (gz.police >= 60) l.push({ t: "police", c: "#3d7fd9" });
-  if (gz.tension >= 60) l.push({ t: "tension", c: "#e5484d" });
-  return l;
+/* ---------- contours des quartiers (pour la sélection) ---------- */
+var BORDS = null;
+function bords(id) {
+  if (!BORDS) {
+    BORDS = {};
+    var PAS = VILLE.PAS;
+    Object.keys(VILLE.cell).forEach(function (k) {
+      var p = k.split(",").map(Number), a = VILLE.cell[k];
+      [[PAS, 0, p[0] + PAS, p[1], p[0] + PAS, p[1] + PAS], [-PAS, 0, p[0], p[1], p[0], p[1] + PAS],
+       [0, PAS, p[0], p[1] + PAS, p[0] + PAS, p[1] + PAS], [0, -PAS, p[0], p[1], p[0] + PAS, p[1]]].forEach(function (d) {
+        if (VILLE.cell[(p[0] + d[0]) + "," + (p[1] + d[1])] !== a) (BORDS[a] = BORDS[a] || []).push([d[2], d[3], d[4], d[5]]);
+      });
+    });
+  }
+  return BORDS[id] || [];
 }
 
 /* ---------- affichage et gestes ---------- */
@@ -201,62 +218,103 @@ function planMonter(el) {
   var W = el.clientWidth, H = el.clientHeight;
   el.width = W * dpr; el.height = H * dpr;
   if (!PLAN.cam) {
-    var z0 = D.zones.liste.filter(function (z) { return z.id === G.protagoniste.zone_origine; })[0];
-    var c = centrePlan(z0), q = proj(C.P, c[0], c[1], 0);
-    PLAN.cam = { x: q[0], y: q[1] + 40, z: Math.max(W / C.W * 2.3, 0.3) };
+    var b = VILLE.q[G.base], q = proj(C.P, b.cx, b.cy, 0);
+    PLAN.cam = { x: q[0], y: q[1] + 20, z: Math.max(W / C.W * 2.6, 0.32) };
   }
   if (!el.dataset.ok) {
     el.dataset.ok = "1";
     el.addEventListener("pointerdown", planDown);
     el.addEventListener("pointermove", planMove);
     el.addEventListener("pointerup", planUp);
-    el.addEventListener("pointercancel", planUp);
+    el.addEventListener("pointercancel", function (e) { delete PLAN.ptr[e.pointerId]; });
     el.addEventListener("wheel", function (e) { e.preventDefault(); zoomer(e.deltaY < 0 ? 1.12 : 1 / 1.12); }, { passive: false });
   }
   planDessin();
-}
-function centrePlan(z) {
-  var sx = 0, sy = 0;
-  z.plan.forEach(function (p) { sx += p[0]; sy += p[1]; });
-  return [sx / z.plan.length, sy / z.plan.length];
 }
 function versEcran(ox, oy) {
   var el = PLAN.el, cam = PLAN.cam;
   return [(ox - cam.x) * cam.z + el.clientWidth / 2, (oy - cam.y) * cam.z + el.clientHeight / 2];
 }
+function ecranQ(id, h) { var q = VILLE.q[id], p = proj(PLAN.cache.P, q.cx, q.cy, h || 0); return versEcran(p[0], p[1]); }
 function zoomer(f) {
   var C = PLAN.cache;
-  PLAN.cam.z = clamp(PLAN.cam.z * f, PLAN.el.clientWidth / C.W * 0.9, 1.6);
+  PLAN.cam.z = clamp(PLAN.cam.z * f, PLAN.el.clientWidth / C.W * 0.9, 2.2);
   planDessin();
+}
+function contour(g, id, couleur, largeur, glow) {
+  var P = PLAN.cache.P;
+  g.beginPath();
+  bords(id).forEach(function (s) {
+    var a = proj(P, s[0], s[1], 0), b = proj(P, s[2], s[3], 0), A = versEcran(a[0], a[1]), Bq = versEcran(b[0], b[1]);
+    g.moveTo(A[0], A[1]); g.lineTo(Bq[0], Bq[1]);
+  });
+  g.lineWidth = largeur; g.strokeStyle = couleur; g.lineCap = "round";
+  if (glow) { g.shadowColor = couleur; g.shadowBlur = glow; }
+  g.stroke(); g.shadowBlur = 0;
+}
+function pastille(g, x, y, r, anneau, lettre, fond, plein) {
+  g.beginPath(); g.arc(x, y + 1.5, r + 2, 0, Math.PI * 2); g.fillStyle = "rgba(0,0,0,.5)"; g.fill();
+  g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fillStyle = plein ? anneau : (fond || "#1b1c1f"); g.fill();
+  g.lineWidth = Math.max(2, r * 0.22); g.strokeStyle = plein ? "#fff" : anneau; g.stroke();
+  g.fillStyle = plein ? "#111" : "#fff"; g.font = "700 " + Math.round(r * 1.05) + "px system-ui"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillText(lettre, x, y + 0.5);
 }
 function planDessin() {
   var el = PLAN.el;
   if (!el || !el.isConnected) return;
   var g = el.getContext("2d"), dpr = window.devicePixelRatio || 1, C = PLAN.cache, cam = PLAN.cam;
   var W = el.clientWidth, H = el.clientHeight;
-  // bornes de la caméra
   cam.x = clamp(cam.x, 0, C.W); cam.y = clamp(cam.y, 0, C.H);
   g.setTransform(dpr, 0, 0, dpr, 0, 0);
   g.fillStyle = "#0d151b"; g.fillRect(0, 0, W, H);
-  g.imageSmoothingEnabled = true;
   g.drawImage(C.cv, W / 2 - cam.x * cam.z, H / 2 - cam.y * cam.z, C.W * cam.z, C.H * cam.z);
-  // zone choisie : contour lumineux
-  var sel = UI.sel ? IDX.zones[UI.sel] : null;
-  if (sel) {
-    g.beginPath();
-    sel.plan.forEach(function (p, i) { var q = proj(C.P, p[0], p[1], 0), s = versEcran(q[0], q[1]); i ? g.lineTo(s[0], s[1]) : g.moveTo(s[0], s[1]); });
-    g.closePath(); g.lineWidth = 3; g.strokeStyle = "#f2c94c"; g.shadowColor = "#f2c94c"; g.shadowBlur = 12; g.stroke(); g.shadowBlur = 0;
-  }
-  // badges et noms
+  var op = UI.selOp ? opParId(UI.selOp) : null;
+  // accès possibles pour l'opérateur choisi
+  if (op) VILLE.ordre.forEach(function (id) { if (accessible(id)) contour(g, id, "rgba(108,207,79,.55)", 1.4); });
+  if (UI.selQ) contour(g, UI.selQ, "#f2c94c", 3, 12);
   PLAN.hits = [];
-  var r = clamp(11 * Math.sqrt(cam.z / 0.5), 9, 16);
-  D.zones.liste.forEach(function (z) {
-    var c = centrePlan(z), q = proj(C.P, c[0], c[1], 0), s = versEcran(q[0], q[1]);
-    var l = badgesZone(z.id), w = l.length * (r * 2 + 4) - 4, x0 = s[0] - w / 2 + r, y = s[1] - r * 2.2;
-    l.forEach(function (b, i) { badge(g, x0 + i * (r * 2 + 4), y, r, b.c, b.t, b.f); PLAN.hits.push({ x: x0 + i * (r * 2 + 4), y: y, r: r + 4, z: z.id }); });
-    g.font = "600 " + Math.round(r * 1.05) + "px system-ui"; g.textAlign = "center"; g.textBaseline = "top";
-    g.lineWidth = 3; g.strokeStyle = "rgba(0,0,0,.8)"; g.strokeText(z.court, s[0], s[1] - r * 0.6);
-    g.fillStyle = G.zones[z.id].connu ? "#f4f1ea" : "#8d9096"; g.fillText(z.court, s[0], s[1] - r * 0.6);
+  var r = clamp(9 * Math.sqrt(cam.z / 0.5), 8, 15);
+  // noms : zones de loin, quartiers de près
+  g.textAlign = "center"; g.textBaseline = "middle"; g.lineWidth = 3; g.strokeStyle = "rgba(0,0,0,.8)";
+  if (cam.z < 0.62) {
+    D.zones.liste.forEach(function (z) {
+      var ids = VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === z.id; }), sx = 0, sy = 0;
+      ids.forEach(function (id) { sx += VILLE.q[id].cx; sy += VILLE.q[id].cy; });
+      var p = proj(C.P, sx / ids.length, sy / ids.length, 0), s = versEcran(p[0], p[1]);
+      g.font = "700 12px system-ui"; g.strokeText(z.court, s[0], s[1]); g.fillStyle = "#f4f1ea"; g.fillText(z.court, s[0], s[1]);
+    });
+  } else {
+    VILLE.ordre.forEach(function (id) {
+      var s = ecranQ(id), conn = G.q[id].conn > 0 || G.q[id].ctl > 0;
+      if (s[0] < -40 || s[0] > W + 40 || s[1] < -20 || s[1] > H + 20) return;
+      g.font = "600 " + Math.round(clamp(10 * cam.z, 9, 13)) + "px system-ui";
+      g.strokeText(VILLE.q[id].nom, s[0], s[1] + r * 1.6); g.fillStyle = conn ? "#f4f1ea" : "#8d9096"; g.fillText(VILLE.q[id].nom, s[0], s[1] + r * 1.6);
+    });
+  }
+  // alertes et intentions repérées
+  VILLE.ordre.forEach(function (id) {
+    var s = G.q[id], p = ecranQ(id);
+    if (G.alertes && G.alertes[id]) pastille(g, p[0] + r * 1.3, p[1] - r * 2.4, r * 0.75, "#e5484d", "!", null, true);
+    if (s.vu >= G.cycle) {
+      Object.keys(G.factions).forEach(function (fid) {
+        var f = G.factions[fid];
+        if (f.vivante && f.intention && f.intention.q === id && f.intention.objectif !== "maintenir")
+          pastille(g, p[0] - r * 1.3, p[1] - r * 2.4, r * 0.75, IDX.equipes[fid].couleur, "⚔", null, false);
+      });
+    }
+  });
+  // opérateurs, groupés par quartier
+  var parQ = {};
+  opsActifs().forEach(function (o) { var q = lieuOp(o); (parQ[q] = parQ[q] || []).push(o); });
+  Object.keys(parQ).forEach(function (id) {
+    var l = parQ[id], p = ecranQ(id), w = l.length * (r * 2 + 3) - 3, x0 = p[0] - w / 2 + r;
+    l.forEach(function (o, i) {
+      var t = TYPES()[o.type], x = x0 + i * (r * 2 + 3), y = p[1] - r * 0.4;
+      if (UI.selOp === o.id) { g.beginPath(); g.arc(x, y, r + 5, 0, Math.PI * 2); g.fillStyle = "rgba(242,201,76,.45)"; g.fill(); }
+      pastille(g, x, y, r, t.couleur, t.lettre, o.dispo === "indisponible" ? "#4a1c1c" : null, false);
+      if (o.dispo === "transit") { g.setLineDash([3, 3]); g.beginPath(); g.arc(x, y, r + 3, 0, Math.PI * 2); g.strokeStyle = "#fff"; g.lineWidth = 1.5; g.stroke(); g.setLineDash([]); }
+      PLAN.hits.push({ x: x, y: y, r: r + 4, op: o.id });
+    });
   });
 }
 function planDown(e) {
@@ -268,8 +326,7 @@ function planMove(e) {
   if (!p) return;
   var ids = Object.keys(PLAN.ptr);
   if (ids.length === 2) {
-    var a = PLAN.ptr[ids[0]], b = PLAN.ptr[ids[1]];
-    var d0 = Math.hypot(a.x - b.x, a.y - b.y);
+    var a = PLAN.ptr[ids[0]], b = PLAN.ptr[ids[1]], d0 = Math.hypot(a.x - b.x, a.y - b.y);
     p.x = e.clientX; p.y = e.clientY;
     var d1 = Math.hypot(a.x - b.x, a.y - b.y);
     if (d0 > 0) zoomer(d1 / d0);
@@ -282,23 +339,14 @@ function planMove(e) {
 function planUp(e) {
   var p = PLAN.ptr[e.pointerId];
   delete PLAN.ptr[e.pointerId];
-  if (!p || Math.hypot(e.clientX - p.x0, e.clientY - p.y0) > 8 || Date.now() - p.t > 450) return;
-  var rc = PLAN.el.getBoundingClientRect(), sx = e.clientX - rc.left, sy = e.clientY - rc.top;
-  var id = zoneSous(sx, sy);
-  UI.sel = id || null;
-  render();
+  if (!p || Math.hypot(e.clientX - p.x0, e.clientY - p.y0) > 8 || Date.now() - p.t > 500) return;
+  var rc = PLAN.el.getBoundingClientRect();
+  toucherPlan(e.clientX - rc.left, e.clientY - rc.top);
 }
-/** Zone sous un point de l'écran (badges d'abord, puis sol). */
-function zoneSous(sx, sy) {
-  for (var i = 0; i < (PLAN.hits || []).length; i++) { var h = PLAN.hits[i]; if (Math.hypot(sx - h.x, sy - h.y) <= h.r) return h.z; }
+/** Ce qui est sous le doigt : un opérateur (badge) ou un quartier (sol). */
+function sousDoigt(sx, sy) {
+  for (var i = 0; i < (PLAN.hits || []).length; i++) { var h = PLAN.hits[i]; if (Math.hypot(sx - h.x, sy - h.y) <= h.r) return { op: h.op }; }
   var cam = PLAN.cam, el = PLAN.el, ox = (sx - el.clientWidth / 2) / cam.z + cam.x, oy = (sy - el.clientHeight / 2) / cam.z + cam.y;
   var w = deproj(PLAN.cache.P, ox, oy);
-  var z = D.zones.liste.filter(function (z) { return dansPoly(w, z.plan); })[0];
-  return z ? z.id : null;
-}
-/** Part de la ville tenue par chaque équipe (pondérée par la population). */
-function partsVille() {
-  var t = {}, tot = 0;
-  D.zones.liste.forEach(function (z) { var c = G.zones[z.id].controle || "aucun"; t[c] = (t[c] || 0) + z.population; tot += z.population; });
-  return Object.keys(t).map(function (k) { return { id: k, p: t[k] / tot }; }).sort(function (a, b) { return b.p - a.p; });
+  return { q: quartierEn(w[0], w[1]) };
 }

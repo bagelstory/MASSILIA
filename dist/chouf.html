@@ -69,38 +69,54 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .hero{display:block;width:calc(100% + 40px);margin:-40px -20px 0;height:220px;object-fit:cover;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
 .duo{display:flex;gap:10px;justify-content:center}.duo .med.grand{width:110px;height:110px;margin:0}
 .banniere{filter:saturate(.9)}
+.bandeau{position:sticky;top:0;z-index:5;background:var(--nuit);padding:6px 8px 6px;box-shadow:0 4px 8px var(--nuit)}
+.cyc{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 4px}.cyc span{color:var(--gris);font-size:12px}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.chip{display:flex;gap:5px;align-items:center;background:var(--nuit2);border:1px solid var(--nuit3);border-radius:10px;padding:4px 6px;text-align:left;min-width:0}
+.chip .ico{width:22px;height:22px;flex:none}.chip span{min-width:0;display:block;line-height:1.15}.chip small{display:block;font-size:10px;color:var(--gris)}
+.chip b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.chip em{font-style:normal;font-size:10px}.chip em.up{color:#6ccf4f}.chip em.dn{color:#e5484d}
+.chip.al{border-color:#e5484d;background:#2a1517}
+.corps.carte{padding:0}.corps{padding-bottom:140px}
+.vue-ville{height:calc(100vh - 230px);min-height:380px;margin:0}
+.pied{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:6;background:var(--nuit2);border-top:1px solid var(--nuit3)}
+.pied .valider{margin:6px 8px;width:calc(100% - 16px);padding:12px;letter-spacing:.04em;text-transform:uppercase}
+.pied .onglets{position:static;transform:none;border:0}.pied .onglets button{padding:9px 0 calc(9px + env(safe-area-inset-bottom));font-size:12px}
+.hud-bas{bottom:8px}.fiche-q{padding-top:0;overflow:hidden}.fq-ban{display:block;width:calc(100% + 24px);margin:0 -12px 6px;height:64px;object-fit:cover;opacity:.85}
+.barre-ctl{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#3a3d42;margin:4px 0}.barre-ctl i{display:block;height:100%}.barre-ctl i.moi{background:#6ccf4f}
+.ligne-action.spe{border:1px solid var(--sodium)}
+.op{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--nuit2);border-radius:var(--r);padding:10px 12px;margin:6px 0}
+.op>span{flex:1;min-width:0}.op small{display:block;color:var(--gris);font-size:12px}.med.lettre{display:flex;align-items:center;justify-content:center;border:3px solid;font-weight:800;font-size:18px;background:#1b1c1f}
+.jauge.fat i{background:#e5484d}.pt{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0}
+.carte-bloc .ligne{display:flex;justify-content:space-between;align-items:center;gap:8px}.carte-bloc .ligne b{flex:1}
+.grille{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 12px;margin:8px 0}.grille small{display:block;font-size:11px;color:var(--gris)}.grille b{font-size:14px}
+.faction{border-left:4px solid}.faction.morte{opacity:.45}.faction .med{width:40px;height:40px}
+.ok{color:#6ccf4f;font-style:normal}.ligne-chiffre{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--nuit3);font-size:14px}
+.ligne-chiffre b.neg{color:#e5484d}.ligne-chiffre.tot{font-weight:700;border-bottom:0}.alertes{padding-left:18px;color:#f0b4b4;font-size:14px}
+.rapport{list-style:none;padding:0;margin:8px 0;font-size:14px}.rapport li{padding:5px 0;border-bottom:1px solid var(--nuit3)}
+.rapport .attaque,.rapport .perte,.rapport .perteop,.rapport .rupture,.rapport .operation{color:#f0a0a0}.rapport .gain,.rapport .capacite,.rapport .recrue{color:#9fe08a}
+.note{font-size:28px;color:var(--sodium);margin:0 0 14px}.h small{font-size:14px;color:var(--gris)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-window.DATA={"calendrier":{"chapitres":[{"id":"le_debut","nom":"Le début","annees":[2021],"age_repere":16,"identite":"découvrir et choisir","ouvre":["missions_vie","relations","emploi_du_temps","engagements"],"limites":["peu_autonomie","argent_limite","decisions_des_adultes"],"passage":{"date":{"annee":2022,"semaine":1}}},{"id":"la_confiance","nom":"La confiance","annees":[2022],"age_repere":17,"identite":"s'engager et assumer","ouvre":["decisions_collectives_limitees","reputation_visible"],"passage":{"date":{"annee":2023,"semaine":1}}},{"id":"les_responsabilites","nom":"Les responsabilités","annees":[2023],"age_repere":18,"identite":"devenir autonome","ouvre":["budget_complet","organisation","projet_personnel"],"passage":{"date":{"annee":2024,"semaine":1}}},{"id":"l_intermediaire","nom":"L'intermédiaire","annees":[2024,2025],"age_repere":19,"identite":"coordonner et déléguer","ouvre":["delegation","plusieurs_zones","reseaux_internationaux"],"passage":{"date":{"annee":2026,"semaine":1}}},{"id":"la_direction","nom":"La direction","annees":[2026],"age_repere":21,"identite":"assumer son héritage","ouvre":["grandes_decisions","sortie_preparee"],"passage":{"date":{"annee":2027,"semaine":1}}},{"id":"l_apres","nom":"L'après","annees":[2027],"age_repere":22,"identite":"faire face à ce qu'on a construit","ouvre":["bilan","epilogue"],"passage":null}],"responsabilites":[{"id":"budget_perso","categorie":"personnelle","chapitre_min":"le_debut","conditions_narratives":["fait:le_quotidien"],"conditions_systemiques":["competence:organisation>=10"],"alternative":"relation:grande_soeur.confiance>=60"},{"id":"tenir_un_poste","categorie":"collective","chapitre_min":"la_confiance","conditions_narratives":["fait:premier_service"],"conditions_systemiques":["relation:grand_hall.confiance>=55"],"alternative":"relation:ami_enfance.confiance>=60"},{"id":"coordination_collective","categorie":"collective","chapitre_min":"les_responsabilites","conditions_narratives":["fait:crise_du_plan"],"conditions_systemiques":["competence:leadership>=25|competence:organisation>=35"],"alternative":"relation:grand_hall.confiance>=70"},{"id":"gerer_une_zone","categorie":"organisationnelle","chapitre_min":"l_intermediaire","conditions_narratives":["fait:proposition_zone"],"conditions_systemiques":["competence:organisation>=40","positionnement:respect>=40"],"alternative":"membre:bras_droit.loyaute>=70"}],"ville":[{"id":"rentree","semaines":[36],"effet":"scolarite"},{"id":"match_om","frequence":"tous_les_15_jours_aout_mai","effet":"affluence"},{"id":"mistral","proba_semaine":0.12,"effet":"rues_vides"},{"id":"ete","semaines":[27,34],"effet":"tourisme_chaleur"},{"id":"ramadan","note":"dates variables, à saisir par année","effet":"rythme_quartier"},{"id":"fete_musique","semaines":[25],"effet":"nuit"},{"id":"noel","semaines":[51,52],"effet":"famille"}],"chronologie_ville":{"_doc":"Types de situations publiques par année (inspiration). Aucun nom réel, aucune affaire identifiable.","2021":["equipes_en_concurrence","saisies_regulieres"],"2022":["montee_des_violences","jeunes_recrutes_de_loin"],"2023":["guerre_ouverte","victimes_collaterales","peur_dans_les_quartiers"],"2024":["operations_massives","chefs_arretes_a_l_etranger","vide_de_pouvoir"],"2025":["hegemonie","racket_commerces","baisse_des_morts"],"2026":["violence_qui_mute","exportation_villes_moyennes"]}},"competences":{"liste":[{"id":"communication","nom":"Communication","paliers":[["Débutant","Tu as du mal à dire ce que tu veux vraiment."],["À l'aise","Tu écoutes mieux, on te parle plus facilement."],["Confirmé","Tu sais tenir un désaccord sans casser la relation."],["Maîtrisé","Tu lis les gens. Ça n'oblige personne à être d'accord."]]},{"id":"organisation","nom":"Organisation","paliers":[["Débutant","Tu vis au jour le jour."],["Structuré","Tu suis tes engagements, à peu près."],["Organisé","Tu tiens plusieurs choses à la fois."],["Maîtrisé","Tu vois venir les échéances avant les autres."]]},{"id":"sang_froid","nom":"Sang-froid","paliers":[["Réactif","Sous la pression, tu réagis avant de réfléchir."],["Plus posé","Tu sais attendre avant de répondre."],["Résistant","Tu encaisses plusieurs tensions à la fois."],["Maîtrisé","Tu prends du recul même quand tout brûle."]]},{"id":"leadership","nom":"Leadership","paliers":[["Individuel","Tu suis, tu ne portes pas les autres."],["Initiateur","Tu proposes une direction."],["Coordinateur","Tu fais travailler des gens ensemble."],["Responsable","Tu assumes des décisions qui pèsent sur d'autres vies."]]},{"id":"autonomie","nom":"Autonomie","paliers":[["Dépendant","Ta vie dépend beaucoup des autres."],["Progressif","Tu prends tes premières décisions seul."],["Indépendant","Tu gères ta vie."],["Très autonome","Tu peux construire une autre vie si tu le décides."]]}]},"economie":{"_doc":"Gestion abstraite (GDD V6 §10-11). Aucun produit nommé, aucune méthode.","marchandises":[{"id":"petite","nom":"Petite marchandise","marge":1.0,"bruit":1,"peine":1,"chapitre_min":"la_confiance"},{"id":"moyenne","nom":"Marchandise moyenne","marge":1.8,"bruit":2,"peine":2,"chapitre_min":"les_responsabilites"},{"id":"lourde","nom":"Marchandise lourde","marge":3.0,"bruit":4,"peine":4,"chapitre_min":"l_intermediaire"}],"facades":[{"id":"snack","nom":"Snack","cout":15000,"chantier_h":4,"niveau_max":3,"enquete_fin":1},{"id":"boxe","nom":"Salle de boxe","cout":30000,"chantier_h":8,"niveau_max":3,"enquete_fin":1,"note":"peut aussi accueillir les gamins du quartier"},{"id":"resto","nom":"Restaurant","cout":60000,"chantier_h":12,"niveau_max":3,"enquete_fin":2},{"id":"appartements","nom":"Appartements","cout":120000,"chantier_h":24,"niveau_max":3,"enquete_fin":3}],"reseaux":{"origines":[{"id":"maroc","nom":"Maroc","fiabilite":60,"instabilite":30},{"id":"pays_bas","nom":"Pays-Bas","fiabilite":55,"instabilite":35}],"risques":["judiciaire","financier","humain","relationnel","organisationnel"],"chapitre_min":"l_intermediaire"},"formules":{"revenu_semaine":"zone.revenu * plans * marge * (0.5 + humeur/humeur_div) * (1 - police/police_div) * equipe_eff","liquidite":"argent.propre + argent.sale_ramasse","richesse":"liquidite + valeur(facades)","solidite":"liquidite / charges_mensuelles"}},"equilibrage":{"_doc":"Toutes les valeurs réglables. Sources des formules : design/02-modele-donnees.md (§2, §8, §9).","temps":{"energie_max":20,"energie_regen_min":6,"sangfroid_max":10,"sangfroid_regen_min":15,"semaine_depart":{"annee":2021,"semaine":37},"semaine_fin":{"annee":2026,"semaine":52},"bilan_mensuel_toutes":4,"absence_resume_min":30,"energie_depart":20,"energie_par_semaine":10,"sangfroid_par_semaine":4},"protagoniste":{"naissance_annee":2005,"naissance_semaines":[1,36],"argent_propre_depart":[40,200],"competences_depart":{"communication":20,"organisation":15,"sang_froid":10,"leadership":5,"autonomie":15},"etat_depart":{"stabilite":70,"pression":20,"sante":90,"stress":20}},"competences":{"seuils":[0,25,50,75],"gain_max_par_evenement":5,"rendement_palier4":0.4,"plafond":100},"stress":{"par_semaine_base":1,"par_enquete_connue":3,"par_violence_subie":12,"repos_semaine":-6,"seuil_sante":70,"perte_sante_si_seuil":2},"economie":{"coffre_max_base":3000,"coffre_max_par_nourrice":6000,"risque_coffre_par_semaine":0.06,"humeur_div":200,"police_div":200,"facade_taux":0.25,"facade_plafond_par_niveau":1500,"salaire_semaine_mult":1.0,"argent_unite":"EUR entier"},"police":{"enquete_par_bruit":0.8,"enquete_baisse_semaine":1.5,"seuil_indice":40,"seuil_convocation":60,"seuil_gav":75,"seuil_perquisition":85,"seuil_operation_ville":70,"duree_operation_semaines":[6,12],"operation_mult_police":1.6,"gav_heures":[24,96],"proba_detention_provisoire":0.35},"rivaux":{"coups_par_semaine":1,"proba_frapper_si_guerre":0.15,"proba_negocier":0.25},"zones":{"humeur_derive_vers":50,"humeur_derive":0.5,"tension_derive":-1,"tension_par_violence":15,"pression_ville_par_violence":4,"connu_depart_zone_origine":3,"connu_depart_voisines":1,"connu_depart_autres":0,"voisines":{"centre_hist":["centre_nord","plaine","prado"],"centre_nord":["centre_hist","nord_ouest","nord_central","plaine"],"plaine":["centre_hist","centre_nord","prado","est"],"prado":["centre_hist","plaine","sud","est"],"nord_est":["nord_central","est"],"nord_central":["nord_est","nord_ouest","centre_nord"],"nord_ouest":["littoral_nord","nord_central","centre_nord"],"littoral_nord":["nord_ouest"],"est":["nord_est","plaine","prado","sud"],"sud":["prado","est"]}},"relations":{"derive_proximite_sans_contact":-1,"semaines_sans_contact_avant_derive":4,"bornes":[0,100],"connus_depart":["mere","petit_frere","grande_soeur","tante","ami_enfance","camarade","grand_hall","souris","pitchoun","babou","coach","educatrice","snack","voisine","prof","nono","ines","chouchou","rose_marie","farid","madame_lan","pastis"]},"evenements":{"proba_tirage_semaine":0.6,"cartes_max_par_semaine":2,"prologue":[{"id":"les_visages","dans":1},{"id":"la_promesse","dans":2}],"mineur_age":18},"engagements":{"cout_tenir_energie":3,"proba_rappel":1.0},"carte":{"couleur_joueur":"#6ccf4f","couleur_neutre":"#8d9096","rotation_deg":-28,"ecrasement":0.56,"hauteur":0.85,"resolution":3}},"equipes":{"_doc":"Équipes et chefs 100 % inventés.","liste":[{"id":"compagnie","nom":"La Compagnie","style":"expansion","force":85,"argent":90,"origine":"nord_ouest","zones":["centre_hist","nord_est","nord_ouest"],"chef":{"surnom":"Le Notaire","prenom":"Kenzo","age_2021":34,"note":"pilote de loin, ne vient plus dans les quartiers"},"couleur":"#c8352e","embleme":"tour"},{"id":"gabians","nom":"Les Gabians","style":"violence","force":55,"argent":45,"origine":"centre_nord","zones":["centre_nord","littoral_nord"],"chef":{"surnom":"Grand-Mère","prenom":"Jordan","age_2021":27,"note":"tient ses hommes par la peur"},"couleur":"#3d7fd9","embleme":"oiseau"},{"id":"ruisseau","nom":"Le Ruisseau","style":"defense","force":45,"argent":40,"origine":"nord_central","zones":["nord_central","est"],"chef":{"surnom":"Tonton","prenom":"Fabrice","age_2021":45,"note":"l'ancien, connu de tout le quartier, veut durer"},"couleur":"#d08b2c","embleme":"vague"},{"id":"tramontane","nom":"Tramontane","style":"negociation","force":35,"argent":60,"origine":"plaine","zones":["plaine"],"chef":{"surnom":"La Prof","prenom":"Océane","age_2021":31,"note":"clientèle de nuit, aime les arrangements"},"couleur":"#8a5cd6","embleme":"vent"},{"id":"calanquais","nom":"Les Calanquais","style":"expansion","force":25,"argent":30,"origine":"sud","zones":["sud"],"chef":{"surnom":"Petit Prince","prenom":"Lorenzo","age_2021":22,"note":"jeune, pressé, sans règles"},"couleur":"#5fc4c4","embleme":"falaise"}]},"evenements":{"_doc":"Format : design/02-modele-donnees.md §12. Les {pnj} sont remplis au tirage.","liste":[{"id":"le_quotidien","titre":"Le quotidien","declencheur":"calendrier","quand":{"annee":2021,"semaine":37},"once":true,"texte":"Rentrée. {mere} part au travail avant le jour, {petit_frere} ne trouve pas son cartable, et en bas, le hall est déjà occupé.","options":[{"t":"Accompagner {petit_frere} à l'école","effets":["relation:petit_frere.proximite+5","relation:mere.confiance+3","temps:energie-3"]},{"t":"Traîner en bas avec Totti","effets":["relation:ami_enfance.proximite+4","relation:grand_hall.proximite+2"]},{"t":"Aller au lycée à l'heure","effets":["scolarite.assiduite+5","relation:prof.confiance+3"]}]},{"id":"les_visages","titre":"Les visages","declencheur":"programme","once":true,"texte":"Zépek t'appelle par ton prénom. Tu ne savais pas qu'il le connaissait. « Passe me voir, j'ai un truc simple. »","options":[{"t":"Y aller","effets":["relation:grand_hall.confiance+5"],"memoire":"grand_hall:est_venu"},{"t":"Dire que tu as entraînement","effets":["relation:ami_enfance.confiance+3"],"memoire":"grand_hall:a_refuse"}]},{"id":"la_promesse","titre":"La promesse","declencheur":"programme","once":true,"texte":"{mere} te demande d'être là samedi pour le rendez-vous avec la prof. Le même samedi, Zépek a besoin de toi.","options":[{"t":"Promettre à ta mère","effets":["engagement:mere:rdv_prof:2"],"memoire":"mere:a_promis_rdv"},{"t":"Promettre à Zépek","effets":["engagement:grand_hall:samedi:2","relation:grand_hall.confiance+4"],"memoire":"grand_hall:a_promis"}]},{"id":"promesse_oubliee","titre":"Une promesse oubliée","declencheur":"programme","conditions":["engagement_rompu:{pnj}","relation:{pnj}.etat!=rompu"],"delai_retour":12,"texte":"{pnj.prenom} t'attend en bas du bâtiment. « Tu m'avais dit que tu viendrais. »","options":[{"t":"Reconnaître ton erreur","effets":["relation:{pnj}.confiance+8","competence:communication+3"],"memoire":"{pnj}:a_reconnu"},{"t":"Expliquer les circonstances","effets":["relation:{pnj}.confiance+2"],"condition":"competence:communication>=25"},{"t":"Proposer de réparer","effets":["relation:{pnj}.confiance+5","temps:energie-4"]},{"t":"Éviter la conversation","effets":["relation:{pnj}.confiance-12","relation:{pnj}.tension+10"],"programme":[{"id":"rancune","dans":8}],"memoire":"{pnj}:a_fui"}]},{"id":"rancune","titre":"Ça ne passe pas","declencheur":"programme","texte":"{pnj.prenom} ne te dit plus bonjour. Les autres l'ont remarqué.","options":[{"t":"Aller lui parler","effets":["relation:{pnj}.tension-6"]},{"t":"Laisser couler","effets":["relation:{pnj}.proximite-8"]}]},{"id":"soir_de_match","titre":"Soir de match","declencheur":"calendrier","ville":"match_om","poids":2,"delai_retour":6,"texte":"L'OM joue au Vélodrome. Tout le quartier est devant les écrans du snack, Hassen a sorti les chaises.","options":[{"t":"Regarder avec tout le monde","effets":["etat:stress-6","zone:humeur+2"]},{"t":"Profiter des rues vides pour un service","effets":["argent:propre+60","relation:grand_hall.confiance+3","police:enquete+1"],"condition":"fait:premier_service"}]},{"id":"mistral","titre":"Coup de mistral","declencheur":"calendrier","ville":"mistral","delai_retour":4,"texte":"Le mistral souffle depuis trois jours. Les volets claquent, personne ne reste dehors.","options":[{"t":"Rester à la maison","effets":["relation:mere.proximite+2","etat:stress-3"]}]},{"id":"la_descente","titre":"La descente","declencheur":"seuil","conditions":["zone:police>=70","fait:premier_service"],"delai_retour":10,"texte":"Six heures du matin. Des portières, des pas dans l'escalier. Ce n'est pas chez vous, c'est chez le voisin du dessous. {petit_frere} s'est réveillé.","options":[{"t":"Rassurer {petit_frere}","effets":["relation:petit_frere.confiance+4","etat:stress+4"]},{"t":"Prévenir Zépek","effets":["relation:grand_hall.confiance+6","police:enquete+3"],"memoire":"commandante:a_vu_le_tel"}]},{"id":"les_absents","titre":"Les absents","declencheur":"seuil","conditions":["zone:tension>=75"],"once":true,"irreversible":true,"texte":"Un garçon du quartier d'à côté n'est pas rentré. Sa mère colle des photos sur les arrêts de bus. Christelle organise une marche blanche dimanche.","options":[{"t":"Marcher avec les familles","effets":["zone:humeur+4","relation:educatrice.confiance+6","positionnement:respect+2"]},{"t":"Rester à l'écart","effets":["relation:educatrice.confiance-4"]}],"memoire":"*:marche_blanche"},{"id":"souris_dans_le_froid","titre":"Souris","declencheur":"tirage","conditions":["fait:premier_service"],"poids":1,"delai_retour":10,"texte":"Il est 23 h et Souris est encore assis sur le muret, capuche serrée. Il a quatorze ans. Il te demande l'heure trois fois en dix minutes.","options":[{"t":"Lui dire de rentrer, tu prends sa place","effets":["relation:souris.confiance+6","relation:rascasse.tension+5","police:enquete+1"]},{"t":"Lui ramener un sandwich de chez Hassen","effets":["relation:souris.proximite+4","argent:propre-5"]},{"t":"Passer sans t'arrêter","effets":["relation:souris.confiance-3"],"memoire":"souris:est_passe"}]},{"id":"babou_raconte","titre":"Les boules","declencheur":"tirage","poids":1,"delai_retour":16,"texte":"Babou pointe, rate, jure. « À ton âge j'avais une voiture que je savais pas conduire. Après j'ai eu vingt ans pour apprendre la patience. »","options":[{"t":"L'écouter jusqu'au bout","effets":["competence:sang_froid+2","relation:babou.confiance+4"]},{"t":"Rigoler et partir","effets":["relation:babou.proximite-3"]}]},{"id":"essai_au_club","titre":"L'essai","declencheur":"tirage","once":true,"texte":"Coach Pat a vu Totti jouer et il veut te voir aussi, samedi matin, au stade du quartier. « Je prends pas ceux qui traînent au hall. »","options":[{"t":"Y aller","effets":["relation:coach.confiance+6","relation:ami_enfance.proximite+4","etat:stress-4"],"memoire":"coach:essai_fait"},{"t":"Dire que t'as pas le temps","effets":["relation:ami_enfance.confiance-4"],"memoire":"coach:essai_refuse"}]},{"id":"le_son_de_chouchou","titre":"Le son","declencheur":"tirage","poids":1,"delai_retour":14,"texte":"Chouchou te fait écouter son nouveau son sur l'enceinte de Madame Lan. Il a cité le nom du quartier, celui de Zépek aussi. « Ça va faire du bruit, frère. »","options":[{"t":"Lui dire d'enlever le nom de Zépek","effets":["relation:chouchou.confiance+3","relation:grand_hall.confiance+2","competence:communication+2"]},{"t":"Le partager à tout le monde","effets":["relation:chouchou.proximite+5","zone:tension+3","police:enquete+1"]}]},{"id":"l_ascenseur","titre":"L'ascenseur","declencheur":"tirage","poids":1,"delai_retour":20,"texte":"L'ascenseur est encore en panne. Rose-Marie fait signer une pétition dans le hall, juste à côté de ceux qui tiennent le mur. Monsieur Farid regarde ses chaussures.","options":[{"t":"Signer devant tout le monde","effets":["relation:rose_marie.confiance+5","relation:rascasse.tension+3","zone:humeur+2"]},{"t":"Monter les courses de Mamie Jo à pied","effets":["relation:voisine.confiance+4","temps:energie-3"]},{"t":"Ne rien faire","effets":[]}]},{"id":"le_lieutenant","titre":"Une conversation","declencheur":"seuil","conditions":["police:enquete>=40"],"once":true,"texte":"Un homme en civil t'attend devant le lycée. Il te dit son nom, lieutenant Belkacem, et qu'il a grandi au Merlan. « Je veux juste parler. Pour l'instant. »","options":[{"t":"L'écouter sans rien dire","effets":["competence:sang_froid+3","relation:belkacem.confiance+3"]},{"t":"Partir","effets":["relation:belkacem.tension+5"]},{"t":"Lui demander ce qu'il sait","effets":["relation:belkacem.proximite+3","relation:grand_hall.tension+6"],"memoire":"grand_hall:a_vu_avec_flic"}]}]},"missions":{"liste":[{"id":"livrer_snack","zone":"*","nom":"Livrer pour le snack","chapitre_min":"le_debut","cout":{"energie":3},"gains":{"propre":25,"competence:organisation":1,"relation:snack.confiance":2},"risques":{},"voix":"Hassen : « T'es le seul qui revient avec la monnaie juste. »"},{"id":"reviser","zone":"*","nom":"Réviser au centre social","chapitre_min":"le_debut","cout":{"energie":4},"gains":{"scolarite.assiduite":4,"relation:educatrice.confiance":2},"risques":{},"voix":"Christelle : « Le centre ferme à 19 h. Reste jusqu'à la fin, au moins. »"},{"id":"garder_frere","zone":"*","nom":"Garder {petit_frere}","chapitre_min":"le_debut","cout":{"energie":3},"gains":{"relation:petit_frere.proximite":3,"relation:mere.confiance":2},"risques":{},"voix":"{petit_frere} : « Tu m'apprends le coup franc ? »"},{"id":"service_tof","zone":"*","nom":"Rendre un service à Zépek","chapitre_min":"le_debut","cout":{"energie":2,"sangfroid":1},"gains":{"propre":50,"relation:grand_hall.confiance":4,"positionnement:respect":2},"risques":{"enquete":1,"relation:mere.confiance":-2},"fait":"premier_service","voix":"Mamie Jo, à sa fenêtre : « Toi aussi, maintenant ? »"},{"id":"courses_tata","zone":"*","nom":"Monter les courses de Tata","chapitre_min":"le_debut","cout":{"energie":2},"gains":{"relation:tata.confiance":3,"relation:voisine.confiance":1},"risques":{},"voix":"Tata : « Tu poses le sac là, pas dans la chambre. Pas dans la chambre, j'ai dit. »"}]},"personnages":{"_doc":"Personnages 100 % inventés. La famille (mere, petit_frere, grande_soeur) est tirée parmi « familles » au début de la partie ; {famille} = prénom pris dans la famille tirée.","familles":[{"id":"ferrara","nom":"Ferrara","note":"famille italo-marseillaise, trois générations dans le même quartier","mere":{"prenom":"Sandrine","age_2021":43,"metier":"caissière"},"petit_frere":{"prenom":"Enzo","age_2021":11},"grande_soeur":{"prenom":"Jessica","age_2021":20}},{"id":"mmadi","nom":"Mmadi","note":"famille comorienne, une grande tante qui garde tout le monde","mere":{"prenom":"Zaïnaba","age_2021":42,"metier":"aide-soignante de nuit"},"petit_frere":{"prenom":"Kassim","age_2021":11},"grande_soeur":{"prenom":"Raïssa","age_2021":20}},{"id":"benali","nom":"Benali","note":"famille algérienne arrivée dans les années 80","mere":{"prenom":"Samia","age_2021":44,"metier":"agente d'entretien"},"petit_frere":{"prenom":"Ilyes","age_2021":11},"grande_soeur":{"prenom":"Leïla","age_2021":20}},{"id":"sarkissian","nom":"Sarkissian","note":"famille arménienne, le père a une petite carrosserie","mere":{"prenom":"Anahid","age_2021":45,"metier":"secrétaire médicale"},"petit_frere":{"prenom":"Tigran","age_2021":11},"grande_soeur":{"prenom":"Sona","age_2021":20}},{"id":"diallo","nom":"Diallo","note":"famille sénégalaise et marseillaise, le père est chauffeur de bus","mere":{"prenom":"Aminata","age_2021":41,"metier":"cantinière"},"petit_frere":{"prenom":"Moussa","age_2021":11},"grande_soeur":{"prenom":"Awa","age_2021":20}},{"id":"garcia","nom":"Garcia","note":"famille gitane sédentaire de longue date, très soudée","mere":{"prenom":"Carmen","age_2021":40,"metier":"vendeuse au marché"},"petit_frere":{"prenom":"Manolo","age_2021":11},"grande_soeur":{"prenom":"Esperanza","age_2021":20}}],"liste":[{"id":"mere","prenom":"{famille}","groupe":"famille","age_2021":null,"traits":["travailleuse","fière","inquiète"],"objectif":"que ses enfants s'en sortent","limites":["ne veut pas d'argent sale chez elle"],"relation_depart":{"confiance":75,"proximite":80,"tension":10},"liens":{"petit_frere":"fils","grande_soeur":"fille"},"autonome":["travaille_tard","appelle_si_absent_2_semaines"]},{"id":"petit_frere","prenom":"{famille}","groupe":"famille","age_2021":null,"traits":["admiratif","curieux"],"objectif":"te ressembler","limites":[],"relation_depart":{"confiance":85,"proximite":75,"tension":0},"liens":{"mere":"mère"},"autonome":["imite_le_protagoniste"]},{"id":"grande_soeur","prenom":"{famille}","groupe":"famille","age_2021":null,"traits":["lucide","directe"],"objectif":"finir son BTS et partir","limites":["refuse de mentir à la mère"],"relation_depart":{"confiance":60,"proximite":55,"tension":20},"liens":{"mere":"mère"},"autonome":["peut_quitter_marseille"]},{"id":"tante","prenom":"Nadège","groupe":"famille","age_2021":48,"traits":["drôle","franche"],"objectif":"garder la famille unie","limites":["dit tout à ta mère"],"relation_depart":{"confiance":65,"proximite":50,"tension":0},"liens":{"mere":"belle-sœur"},"autonome":["heberge_en_cas_de_crise"],"note":"infirmière à l'Hôpital Nord, tante par alliance"},{"id":"ami_enfance","prenom":"Kevin","nom":"Lombardi","surnom":"Totti","groupe":"quartier","age_2021":16,"traits":["drôle","loyal","prudent"],"objectif":"jouer en Régional avec son club","limites":["ne touche pas au trafic"],"relation_depart":{"confiance":80,"proximite":85,"tension":5},"liens":{},"autonome":["s_eloigne_si_crainte_haute"],"note":"ne quitte jamais son maillot, frappe les coups francs comme son idole"},{"id":"camarade","prenom":"Manon","nom":"Escoffier","groupe":"quartier","age_2021":16,"traits":["ambitieuse","moqueuse"],"objectif":"entrer en médecine","limites":["ne veut pas être vue avec le hall"],"relation_depart":{"confiance":45,"proximite":35,"tension":5},"liens":{},"autonome":["propose_reviser"]},{"id":"grand_hall","prenom":"Anthony","surnom":"Zépek","groupe":"organisation","age_2021":24,"traits":["charismatique","calculateur"],"objectif":"monter dans la Compagnie","limites":[],"relation_depart":{"confiance":40,"proximite":30,"tension":10},"liens":{},"autonome":["propose_service","peut_etre_arrete"],"note":"parle doucement, ne crie jamais"},{"id":"souris","prenom":"Dylan","surnom":"Souris","groupe":"organisation","age_2021":14,"traits":["vif","effrayé"],"objectif":"ramener de l'argent à sa grand-mère","limites":[],"relation_depart":{"confiance":50,"proximite":40,"tension":0},"liens":{},"autonome":["guette_pour_zepek","peut_etre_blesse"],"note":"le plus petit du bâtiment ; il guette déjà"},{"id":"pitchoun","prenom":"Ibrahima","surnom":"Pitchoun","groupe":"quartier","age_2021":15,"traits":["bagarreur","fidèle"],"objectif":"qu'on le respecte","limites":[],"relation_depart":{"confiance":55,"proximite":45,"tension":15},"liens":{},"autonome":["suit_le_plus_fort"],"note":"appelé Pitchoun depuis la maternelle, il fait maintenant 1,90 m"},{"id":"rascasse","prenom":"Grégory","surnom":"Rascasse","groupe":"organisation","age_2021":31,"traits":["nerveux","méfiant"],"objectif":"garder son plan","limites":["n'aime pas les nouveaux"],"relation_depart":{"confiance":20,"proximite":10,"tension":30},"liens":{},"autonome":["teste_les_nouveaux","peut_trahir"],"note":"gérant du plan du quartier pour la Compagnie"},{"id":"tata","prenom":"Martine","surnom":"Tata","groupe":"organisation","age_2021":58,"traits":["épuisée","gentille"],"objectif":"payer ses dettes de loyer","limites":["a honte"],"relation_depart":{"confiance":50,"proximite":30,"tension":0},"liens":{},"autonome":["garde_contre_loyer","peut_craquer"],"note":"nourrice contrainte, endettée ; tout le bâtiment le sait, personne ne dit rien"},{"id":"babou","prenom":"Gérard","surnom":"Babou","groupe":"quartier","age_2021":56,"traits":["calme","amer"],"objectif":"que les jeunes ne refassent pas ses erreurs","limites":[],"relation_depart":{"confiance":55,"proximite":30,"tension":0},"liens":{},"autonome":["raconte","previent"],"note":"vingt ans de prison derrière lui, joue aux boules devant le bâtiment"},{"id":"coach","prenom":"Patrice","surnom":"Coach Pat","groupe":"quartier","age_2021":50,"traits":["exigeant","chaleureux"],"objectif":"faire tenir son club amateur","limites":["exclut ceux qui trafiquent"],"relation_depart":{"confiance":60,"proximite":45,"tension":0},"liens":{},"autonome":["propose_essai","convoque"]},{"id":"educatrice","prenom":"Christelle","nom":"Ferrandi","groupe":"quartier","age_2021":38,"traits":["tenace","fatiguée"],"objectif":"garder le centre social ouvert","limites":["ne couvre personne"],"relation_depart":{"confiance":50,"proximite":40,"tension":0},"liens":{},"autonome":["propose_stage","organise_marche_blanche"]},{"id":"snack","prenom":"Hassen","groupe":"quartier","age_2021":52,"traits":["généreux","méfiant"],"objectif":"garder son snack hors des histoires","limites":["refuse de servir de façade"],"relation_depart":{"confiance":55,"proximite":45,"tension":0},"liens":{},"autonome":["peut_fermer"],"note":"son snack est le salon du quartier les soirs de match"},{"id":"voisine","prenom":"Josiane","nom":"Giordano","surnom":"Mamie Jo","groupe":"quartier","age_2021":71,"traits":["bavarde","courageuse"],"objectif":"pouvoir rentrer chez elle sans peur","limites":[],"relation_depart":{"confiance":60,"proximite":50,"tension":0},"liens":{},"autonome":["temoigne","demenage_si_peur"]},{"id":"prof","prenom":"Hélène","nom":"Roux","groupe":"institution","age_2021":46,"traits":["exigeante","juste"],"objectif":"que tu passes ton bac","limites":[],"relation_depart":{"confiance":45,"proximite":30,"tension":10},"liens":{},"autonome":["convoque_la_mere"]},{"id":"commandante","prenom":"Agnès","nom":"Vidal","groupe":"institution","age_2021":49,"traits":["patiente","obstinée"],"objectif":"faire tomber la Compagnie","limites":["ne négocie pas"],"relation_depart":{"confiance":0,"proximite":0,"tension":0},"liens":{},"autonome":["ouvre_enquete","propose_de_parler"]},{"id":"brigadier","prenom":"Julien","nom":"Mercier","surnom":"Robocop","groupe":"institution","age_2021":33,"traits":["brutal","fatigué"],"objectif":"tenir jusqu'à sa mutation","limites":[],"relation_depart":{"confiance":0,"proximite":0,"tension":20},"liens":{},"autonome":["controle","provoque"],"note":"surnommé ainsi par les jeunes du secteur"},{"id":"avocate","prenom":"Laure","nom":"Castelli","groupe":"institution","age_2021":40,"traits":["brillante","sans illusions"],"objectif":"gagner ses dossiers","limites":["ne ment pas au juge"],"relation_depart":{"confiance":30,"proximite":10,"tension":0},"liens":{},"autonome":["previent_si_payee"],"note":"« Maître Castelli », ça coûte cher"},{"id":"juge","prenom":"Florence","nom":"Arnaud","groupe":"institution","age_2021":52,"traits":["attentive","ferme"],"objectif":"éviter que les mineurs basculent","limites":[],"relation_depart":{"confiance":40,"proximite":0,"tension":0},"liens":{},"autonome":["mesure_educative"],"note":"juge des enfants"},{"id":"journaliste","prenom":"Clara","nom":"Mouret","groupe":"ville","age_2021":29,"traits":["obstinée","prudente"],"objectif":"raconter ce qui arrive aux familles","limites":["ne publie pas de noms de mineurs"],"relation_depart":{"confiance":30,"proximite":0,"tension":0},"liens":{},"autonome":["enquete","publie"],"note":"journaliste pour un site d'information local"},{"id":"nono","prenom":"Nordine","surnom":"Nono","groupe":"quartier","age_2021":19,"traits":["débrouillard","rigolo"],"objectif":"s'acheter un vrai scooter","limites":[],"relation_depart":{"confiance":60,"proximite":50,"tension":0},"liens":{},"autonome":["livre_tard","connait_toutes_les_rues"],"note":"livreur à scooter, connaît la ville par cœur"},{"id":"ines","prenom":"Inès","nom":"Haddad","groupe":"quartier","age_2021":16,"traits":["sérieuse","franche"],"objectif":"passer le concours de gardienne de la paix","limites":["ne fréquente pas le hall"],"relation_depart":{"confiance":50,"proximite":35,"tension":5},"liens":{},"autonome":["juge_tes_choix"],"note":"capitaine de l'équipe de hand du lycée"},{"id":"chouchou","prenom":"Steven","surnom":"Chouchou","groupe":"quartier","age_2021":17,"traits":["rêveur","bavard"],"objectif":"sortir un son qui tourne dans tout Marseille","limites":[],"relation_depart":{"confiance":60,"proximite":55,"tension":0},"liens":{},"autonome":["enregistre","parle_trop"],"note":"rappe dans sa chambre, micro scotché sur une lampe"},{"id":"rose_marie","prenom":"Rose-Marie","nom":"Lopes","groupe":"quartier","age_2021":62,"traits":["organisée","têtue"],"objectif":"faire réparer l'ascenseur","limites":["refuse la peur"],"relation_depart":{"confiance":55,"proximite":30,"tension":0},"liens":{},"autonome":["petition","appelle_la_mairie"],"note":"présidente de l'amicale des locataires"},{"id":"farid","prenom":"Farid","nom":"Haddad","surnom":"Monsieur Farid","groupe":"quartier","age_2021":47,"traits":["discret","observateur"],"objectif":"garder son poste jusqu'à la retraite","limites":["ne veut pas d'histoires dans ses cages d'escalier"],"relation_depart":{"confiance":50,"proximite":35,"tension":0},"liens":{},"autonome":["voit_tout","previent_le_bailleur"],"note":"gardien d'immeuble, père d'Inès"},{"id":"madame_lan","prenom":"Thi Lan","nom":"Nguyen","surnom":"Madame Lan","groupe":"quartier","age_2021":55,"traits":["patiente","maligne"],"objectif":"payer les études de son fils","limites":["fait crédit, pas de cadeaux"],"relation_depart":{"confiance":50,"proximite":40,"tension":0},"liens":{},"autonome":["ferme_tard","entend_les_rumeurs"],"note":"épicerie de nuit au pied du bâtiment"},{"id":"pastis","prenom":"Jean-Claude","nom":"Pellegrin","surnom":"Pastis","groupe":"quartier","age_2021":68,"traits":["râleur","fidèle"],"objectif":"qu'on se souvienne du port d'avant","limites":[],"relation_depart":{"confiance":55,"proximite":30,"tension":0},"liens":{},"autonome":["belote_avec_babou","raconte_les_dockers"],"note":"ancien docker, joue à la belote avec Babou"},{"id":"mika","prenom":"Mickaël","nom":"Santoni","surnom":"Mika","groupe":"organisation","age_2021":28,"traits":["calme","ponctuel"],"objectif":"rembourser son garage fermé","limites":["refuse la violence"],"relation_depart":{"confiance":40,"proximite":20,"tension":0},"liens":{},"autonome":["conduit","peut_lacher"],"note":"ex-mécanicien, chauffeur"},{"id":"zizou","prenom":"Yacine","surnom":"Zizou","groupe":"organisation","age_2021":20,"traits":["technique","impatient"],"objectif":"prendre la place de Rascasse","limites":[],"relation_depart":{"confiance":45,"proximite":35,"tension":15},"liens":{},"autonome":["vend","pousse_vers_la_guerre"],"note":"frère de Nono ; le surnom date de ses années de foot"},{"id":"bebe","prenom":"Rudy","surnom":"Bébé","groupe":"organisation","age_2021":17,"traits":["nerveux","attachant"],"objectif":"impressionner Zépek","limites":[],"relation_depart":{"confiance":50,"proximite":45,"tension":5},"liens":{},"autonome":["guette","vend","peut_etre_arrete"],"note":"le plus jeune vendeur du plan"},{"id":"sab","prenom":"Sabrina","surnom":"Sab","groupe":"organisation","age_2021":26,"traits":["précise","froide"],"objectif":"ouvrir son propre cabinet","limites":["ne touche jamais l'argent liquide"],"relation_depart":{"confiance":35,"proximite":15,"tension":0},"liens":{},"autonome":["tient_les_comptes","peut_partir"],"note":"comptable, apparaît quand il y a des façades"},{"id":"belkacem","prenom":"Karim","nom":"Belkacem","groupe":"institution","age_2021":38,"traits":["méthodique","humain"],"objectif":"comprendre avant d'arrêter","limites":["ne frappe pas"],"relation_depart":{"confiance":0,"proximite":0,"tension":0},"liens":{},"autonome":["enquete","propose_de_parler"],"note":"lieutenant de la police judiciaire, a grandi dans les quartiers nord"},{"id":"cpe","prenom":"Sylvie","nom":"Bonnet","groupe":"institution","age_2021":44,"traits":["énergique","franche"],"objectif":"qu'aucun élève ne disparaisse des listes","limites":[],"relation_depart":{"confiance":45,"proximite":25,"tension":5},"liens":{},"autonome":["appelle_la_famille","propose_stage"],"note":"conseillère principale d'éducation du lycée"},{"id":"elu","prenom":"Denis","nom":"Martinez","groupe":"ville","age_2021":57,"traits":["affable","prudent"],"objectif":"être réélu","limites":["évite les sujets qui fâchent"],"relation_depart":{"confiance":25,"proximite":0,"tension":0},"liens":{},"autonome":["promet","inaugure"],"note":"élu de secteur, personnage inventé"}]},"police":{"_doc":"Procédures représentées sans détail opérationnel. Noms d'opérations inventés.","etapes":["controle","convocation","garde_a_vue","mise_en_examen","detention_provisoire_ou_controle_judiciaire","proces","peine"],"peines_semaines":{"1":[0,26],"2":[26,104],"3":[52,208],"4":[156,520]},"mineur":{"avant_age":18,"mesures":["avertissement","mesure_educative","placement","detention_mineurs"],"peine_mult":0.5},"operations":[{"id":"operation_ciel_clair","nom":"Opération Ciel clair"},{"id":"operation_grand_large","nom":"Opération Grand Large"}],"corruption":{"reduction_enquete":25,"enquete_interne_par_semaine":1.2,"dependance":true}},"roles":{"liste":[{"id":"guetteur","nom":"Guetteur","chapitre_min":"la_confiance","salaire_semaine":250,"effet":{"police_alerte":0.25},"risque":1,"cout_humain":"Souvent un gamin du bâtiment. Il rate l'école, il a froid, il a peur."},{"id":"vendeur","nom":"Vendeur","chapitre_min":"la_confiance","salaire_semaine":500,"effet":{"plans_capacite":1},"risque":3,"cout_humain":"Il est le premier arrêté et le premier visé."},{"id":"nourrice","nom":"Nourrice","chapitre_min":"les_responsabilites","salaire_semaine":300,"effet":{"coffre_max":1},"risque":2,"cout_humain":"Souvent une famille endettée ou contrainte. Elle ne dort plus."},{"id":"chauffeur","nom":"Chauffeur","chapitre_min":"les_responsabilites","salaire_semaine":400,"effet":{"zones_reliees":1},"risque":2,"cout_humain":"Toujours sur la route, toujours exposé."},{"id":"bras_droit","nom":"Bras droit","chapitre_min":"les_responsabilites","salaire_semaine":1200,"effet":{"delegation":1},"risque":3,"cout_humain":"Il sait tout. Ça le rend précieux et dangereux."},{"id":"avocat","nom":"Avocat","chapitre_min":"les_responsabilites","salaire_semaine":900,"effet":{"peine_mult":0.8,"indices":1},"risque":0,"cout_humain":"Il défend, il ne protège pas."},{"id":"comptable","nom":"Comptable","chapitre_min":"l_intermediaire","salaire_semaine":800,"effet":{"facade_taux_bonus":0.1},"risque":1,"cout_humain":"Il a une famille et un vrai métier à perdre."}]},"zones":{"_doc":"Lieux et quartiers réels (à vérifier avant publication). Valeurs = départ 2021.","liste":[{"id":"centre_hist","nom":"Centre historique","arrondissements":["1er","2e"],"quartiers":["Belsunce","Noailles","Opéra","Thiers","Les Grands Carmes","Hôtel de Ville","La Joliette","Arenc"],"lieux":["Vieux-Port","Le Panier","Cours Belsunce","Marché des Capucins","Gare Saint-Charles","Ombrière du Vieux-Port","La Major"],"transports":["métro M1 Vieux-Port","métro M2 Noailles","tram T2/T3","bus","ferry-boat du Vieux-Port"],"revenu":1800,"population":5,"tension":45,"police":75,"humeur":45,"controle":"compagnie","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"centre","pas":6,"hmin":4,"hmax":10},"atout":"Passage, touristes, commerces : beaucoup d'argent qui circule, beaucoup de police.","plan":[[70,120],[115,100],[125,165],[130,200],[80,205],[60,165]],"court":"Centre"},{"id":"centre_nord","nom":"Centre nord","arrondissements":["3e"],"quartiers":["Belle de Mai","Saint-Lazare","Saint-Mauront","La Villette"],"lieux":["Friche la Belle de Mai","boulevard National","rue Loubon"],"transports":["métro M2 National","bus"],"revenu":1500,"population":4,"tension":60,"police":55,"humeur":40,"controle":"gabians","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"centre","pas":6,"hmin":3,"hmax":8},"atout":"Quartier populaire et serré : la main-d'œuvre est là, la tension aussi.","plan":[[115,100],[195,100],[250,112],[200,160],[125,165]],"court":"Centre nord"},{"id":"plaine","nom":"La Plaine / Cours Julien","arrondissements":["5e","6e"],"quartiers":["Notre-Dame-du-Mont","Lodi","Le Camas","Baille"],"lieux":["place Jean-Jaurès","Cours Julien","rue de la Bibliothèque"],"transports":["métro M2 Notre-Dame-du-Mont","bus"],"revenu":1600,"population":3,"tension":35,"police":60,"humeur":55,"controle":"tramontane","depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"centre","pas":6,"hmin":3,"hmax":7},"atout":"La nuit, les bars, les étudiants : une clientèle qui paie bien et qui parle.","plan":[[130,200],[125,165],[200,160],[205,210],[150,225]],"court":"La Plaine"},{"id":"prado","nom":"Prado / Castellane","arrondissements":["6e","7e","8e"],"quartiers":["Castellane","Préfecture","Vauban","Endoume","Saint-Victor","Roucas-Blanc","Périer","Saint-Giniez","Le Rouet"],"lieux":["place Castellane","Notre-Dame de la Garde","Corniche Kennedy","Vallon des Auffes","stade Vélodrome","avenue du Prado"],"transports":["métro M1/M2 Castellane","métro M2 Rond-point du Prado","bus 83"],"revenu":2000,"population":4,"tension":20,"police":70,"humeur":35,"controle":null,"depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"aise","pas":8,"hmin":3,"hmax":9},"atout":"Quartiers aisés : clientèle discrète, mais chaque erreur fait la une.","plan":[[80,205],[130,200],[150,225],[205,210],[245,255],[215,280],[120,300],[90,260]],"court":"Prado"},{"id":"nord_est","nom":"Nord-est","arrondissements":["13e"],"quartiers":["Malpassé","Frais-Vallon","Saint-Jérôme","Saint-Just","La Rose","Les Olives","Château-Gombert"],"lieux":["technopôle de Château-Gombert","campus de Saint-Jérôme"],"transports":["métro M1 La Rose","métro M1 Frais-Vallon","métro M1 Malpassé","bus"],"revenu":1700,"population":5,"tension":65,"police":50,"humeur":45,"controle":"compagnie","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"tours","pas":11,"hmin":6,"hmax":22},"atout":"Grands ensembles et collines : des plans connus de toute la ville.","plan":[[255,35],[335,55],[330,140],[250,112]],"court":"Nord-est"},{"id":"nord_central","nom":"Nord central","arrondissements":["14e"],"quartiers":["Saint-Barthélemy","Le Canet","Sainte-Marthe","Saint-Joseph","Le Merlan","Les Arnavaux","Bon-Secours"],"lieux":["centre commercial du Merlan","marché aux puces"],"transports":["métro M2 Gèze","bus"],"revenu":1600,"population":5,"tension":60,"police":50,"humeur":45,"controle":"ruisseau","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"mixte","pas":9,"hmin":2,"hmax":14},"atout":"Maisons et barres mêlées : les familles se connaissent toutes.","plan":[[185,22],[255,35],[250,112],[195,100]],"court":"Nord central"},{"id":"nord_ouest","nom":"Nord-ouest","arrondissements":["15e","16e"],"quartiers":["La Viste","Saint-Antoine","Verduron","Notre-Dame-Limite","Les Aygalades","Saint-Louis","La Cabucelle","Les Crottes"],"lieux":["Grand Littoral","Hôpital Nord","cité de La Castellane (15e-16e, à vérifier)"],"transports":["métro M2 Bougainville","bus"],"revenu":1900,"population":5,"tension":70,"police":55,"humeur":40,"controle":"compagnie","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"tours","pas":11,"hmin":7,"hmax":24},"atout":"Les tours au-dessus du port : la zone la plus disputée de Marseille.","plan":[[105,30],[185,22],[195,100],[115,100]],"court":"Nord-ouest"},{"id":"littoral_nord","nom":"Littoral nord","arrondissements":["16e"],"quartiers":["L'Estaque","Saint-Henri","Saint-André","Les Riaux"],"lieux":["port de l'Estaque","plage de Corbières","gare de L'Estaque"],"transports":["bus","TER"],"revenu":1200,"population":3,"tension":50,"police":40,"humeur":55,"controle":"gabians","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"port","pas":9,"hmin":2,"hmax":6},"atout":"Le port et le village : la mer, les quais, et ce qui y arrive.","plan":[[30,40],[105,30],[115,100],[45,115]],"court":"Littoral nord"},{"id":"est","nom":"Est","arrondissements":["11e","12e"],"quartiers":["La Valentine","Saint-Marcel","La Pomme","Les Caillols","Saint-Barnabé","Montolivet","Les Accates","La Treille"],"lieux":["centre commercial de La Valentine","village de Saint-Barnabé"],"transports":["métro M1 La Fourragère","bus"],"revenu":1300,"population":4,"tension":40,"police":45,"humeur":50,"controle":"ruisseau","depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"maisons","pas":9,"hmin":2,"hmax":5},"atout":"Noyaux villageois et centres commerciaux : calme apparent, argent discret.","plan":[[200,160],[250,112],[330,140],[325,270],[245,255],[205,210]],"court":"Est"},{"id":"sud","nom":"Sud","arrondissements":["8e","9e"],"quartiers":["Bonneveine","Pointe-Rouge","Montredon","Mazargues","Sainte-Marguerite","Le Redon","La Cayolle","La Soude"],"lieux":["plages du Prado","parc Borély","Calanques","centre pénitentiaire des Baumettes","Sormiou"],"transports":["métro M2 Sainte-Marguerite Dromel","bus 19"],"revenu":1400,"population":3,"tension":30,"police":55,"humeur":45,"controle":"calanquais","depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"maisons","pas":10,"hmin":2,"hmax":6},"atout":"Plages, parcs et calanques ; au pied des collines, les Baumettes.","plan":[[90,260],[120,300],[215,280],[245,255],[325,270],[310,360],[200,385],[110,360],[70,310]],"court":"Sud"}],"repere":{"_doc":"Plan schématique 360×400 (mer à l'ouest et au sud).","terre":[[30,40],[105,30],[185,22],[255,35],[335,55],[360,60],[360,400],[300,400],[310,360],[200,385],[110,360],[70,310],[90,260],[80,205],[60,165],[70,120],[45,115]],"vieux_port":[[60,150],[82,148],[92,170],[62,178]],"notre_dame":[108,232],"velodrome":[178,262],"grues":[[48,70],[62,88],[85,96],[100,62]],"calanques":[[130,372],[175,380],[225,378],[275,366],[300,350]]}}};
+window.DATA={"equilibrage":{"_doc":"Toutes les valeurs de CHOUF v2 (gestion pure). Règles : design/05-gestion-pure.md. Un cycle = une semaine.","depart":{"tresorerie":6000,"capacite":3,"operateurs":["force","pression","reperage"],"competence":[2,3],"controle_base":60,"presence_base_adverse":25,"connaissance_zone":1,"connaissance_base":3,"semaine":37,"annee":2021},"operateurs":{"types":{"reperage":{"nom":"Repérage","tache":"reperer","recrutement":900,"entretien":220,"couleur":"#8fc6ff","lettre":"R"},"pression":{"nom":"Pression","tache":"presser","recrutement":1200,"entretien":300,"couleur":"#e8b64c","lettre":"P"},"logistique":{"nom":"Logistique","tache":"flux","recrutement":1400,"entretien":320,"couleur":"#5fc4c4","lettre":"L"},"finances":{"nom":"Finances","tache":"optimiser","recrutement":1600,"entretien":380,"couleur":"#6ccf4f","lettre":"€"},"intelligence":{"nom":"Intelligence","tache":"surveiller","recrutement":1500,"entretien":350,"couleur":"#b48cff","lettre":"I"},"force":{"nom":"Force","tache":"securiser","recrutement":1300,"entretien":340,"couleur":"#e5484d","lettre":"F"}},"competence_recrue":[1,3],"hors_specialite":0.5,"competence_ref":3,"fatigue_repos":10,"fatigue_seuil_baisse":70,"fatigue_effet":0.7,"indispo_cycles":1,"fatigue_apres_indispo":60,"transit_adjacent":1,"transit_loin":2,"progression_competence":0.08,"visages":["grand_hall","rascasse","mika","zizou","sab","nono"]},"taches":{"securiser":{"nom":"Sécuriser","type":"force","fatigue":25,"baisse_adverse":14,"gain_controle":3,"pression":1.5,"exposition":1.5},"presser":{"nom":"Presser","type":"pression","fatigue":20,"gain_controle":9,"pression":1.0,"exposition":0.6},"reperer":{"nom":"Repérer","type":"reperage","fatigue":10,"connaissance":1,"voisins":true},"surveiller":{"nom":"Surveiller","type":"intelligence","fatigue":12,"reduction_attaque":0.35,"revele_voisins":true},"flux":{"nom":"Gérer les flux","type":"logistique","fatigue":15,"baisse_maintien":0.25,"fiabilite_flux":6},"optimiser":{"nom":"Optimiser","type":"finances","fatigue":10,"baisse_maintien":0.4,"baisse_entretien":0.03},"repos":{"nom":"Repos","type":null,"fatigue":0}},"controle":{"securise_controle":80,"securise_adverse":20,"acces_voisin":50,"abandon_cycles":2,"abandon_baisse":5,"degradation_sans_argent":3,"force_reduit_attaque":0.5},"quartiers":{"flux_variation":[0.7,1.3],"maintien_ratio":0.35,"investir_cout_ratio":2.5,"investir_gain":0.2,"investir_maintien":0.15,"points_interet":["épicerie de nuit","snack","garage","entrepôt","bar","parking","laverie","salle de sport","station de lavage","local commercial"],"presence_faction":[45,80],"presence_voisine":[0,15],"presence_neutre":[0,12]},"factions":{"revenu_ratio":0.5,"cout_effectif":120,"recrutement_seuil":3000,"recrutement_cout":1500,"budget_max":40000,"retraite_budget":0.3,"attaque_detecte":50,"force_action":[6,2,0.35],"actions_par_effectif":5,"alliance_proba":0.04,"alliance_duree":[6,12],"fragmentation_ratio":0.4,"fragmentation_min":4},"economie":{"revenu_sans_pression":0.5,"dette_interet":0.05,"faillite_cycles":3},"capacite":{"tous_les":12,"seuils_territoire":[15,30,45,60]},"indicateurs":{"pression_baisse":3,"pression_par_quartier_gagne":2,"pression_alerte":80,"pression_chute":100,"exposition_baisse":2,"exposition_alerte":80,"exposition_vers_pression":4,"stabilite_vers":50,"stabilite_derive":0.1,"stabilite_recrue":3,"stabilite_perte":10,"stabilite_fatigue":1,"stabilite_flux_sup":3,"stabilite_quartier_tenu":0.5,"stabilite_basse":20,"stabilite_basse_fatigue":1.3,"stabilite_basse_degradation":2},"flux":{"offres":[{"id":"route_sud","nom":"Partenaire Sud","volume":2,"engagement":8000,"activation":2500,"fiabilite":65,"exposition":0,"instabilite":20,"revenu":2600,"cout":700},{"id":"route_nord","nom":"Partenaire Nord","volume":3,"engagement":15000,"activation":4000,"fiabilite":55,"exposition":0,"instabilite":30,"revenu":4800,"cout":1200}],"exposition_par_volume":3,"instabilite_par_cycle":2,"rupture_div":250,"fiabilite_partenaire_perdu":30,"trop_de_flux":2},"evenements":{"arrestation":0.1,"elimination_contestee":0.04,"operation_exterieure":0.3,"operation_pression":12,"saisons":[{"id":"ete","nom":"Été","semaines":[27,34],"zones":["centre_hist","sud","prado","plaine"],"flux_mult":1.3},{"id":"match","nom":"Soir de match","pair_semaines":true,"hors_semaines":[22,31],"zones":["prado"],"flux_mult":1.15},{"id":"mistral","nom":"Mistral","proba":0.1,"zones":"*","flux_mult":0.9}]},"fin":{"victoire_territoire":70,"cycles_max":260},"carte":{"couleur_joueur":"#6ccf4f","couleur_neutre":"#8d9096","rotation_deg":-28,"ecrasement":0.56,"hauteur":0.85,"resolution":3}},"equipes":{"_doc":"Factions rivales inventées (IA). Agressivité 1-5, budget, effectif abstrait.","liste":[{"id":"compagnie","nom":"La Compagnie","style":"expansion","force":85,"argent":90,"origine":"nord_ouest","zones":["centre_hist","nord_est","nord_ouest"],"chef":{"surnom":"Le Notaire","prenom":"Kenzo","age_2021":34,"note":"pilote de loin, ne vient plus dans les quartiers"},"couleur":"#c8352e","embleme":"tour","agressivite":4,"budget":28000,"effectif":14},{"id":"gabians","nom":"Les Gabians","style":"violence","force":55,"argent":45,"origine":"centre_nord","zones":["centre_nord","littoral_nord"],"chef":{"surnom":"Grand-Mère","prenom":"Jordan","age_2021":27,"note":"tient ses hommes par la peur"},"couleur":"#3d7fd9","embleme":"oiseau","agressivite":5,"budget":12000,"effectif":8},{"id":"ruisseau","nom":"Le Ruisseau","style":"defense","force":45,"argent":40,"origine":"nord_central","zones":["nord_central","est"],"chef":{"surnom":"Tonton","prenom":"Fabrice","age_2021":45,"note":"l'ancien, connu de tout le quartier, veut durer"},"couleur":"#d08b2c","embleme":"vague","agressivite":2,"budget":9000,"effectif":7},{"id":"tramontane","nom":"Tramontane","style":"negociation","force":35,"argent":60,"origine":"plaine","zones":["plaine"],"chef":{"surnom":"La Prof","prenom":"Océane","age_2021":31,"note":"clientèle de nuit, aime les arrangements"},"couleur":"#8a5cd6","embleme":"vent","agressivite":3,"budget":11000,"effectif":5},{"id":"calanquais","nom":"Les Calanquais","style":"expansion","force":25,"argent":30,"origine":"sud","zones":["sud"],"chef":{"surnom":"Petit Prince","prenom":"Lorenzo","age_2021":22,"note":"jeune, pressé, sans règles"},"couleur":"#5fc4c4","embleme":"falaise","agressivite":4,"budget":6000,"effectif":4}]},"personnages":{"_doc":"Personnages 100 % inventés. La famille (mere, petit_frere, grande_soeur) est tirée parmi « familles » au début de la partie ; {famille} = prénom pris dans la famille tirée.","familles":[{"id":"ferrara","nom":"Ferrara","note":"famille italo-marseillaise, trois générations dans le même quartier","mere":{"prenom":"Sandrine","age_2021":43,"metier":"caissière"},"petit_frere":{"prenom":"Enzo","age_2021":11},"grande_soeur":{"prenom":"Jessica","age_2021":20}},{"id":"mmadi","nom":"Mmadi","note":"famille comorienne, une grande tante qui garde tout le monde","mere":{"prenom":"Zaïnaba","age_2021":42,"metier":"aide-soignante de nuit"},"petit_frere":{"prenom":"Kassim","age_2021":11},"grande_soeur":{"prenom":"Raïssa","age_2021":20}},{"id":"benali","nom":"Benali","note":"famille algérienne arrivée dans les années 80","mere":{"prenom":"Samia","age_2021":44,"metier":"agente d'entretien"},"petit_frere":{"prenom":"Ilyes","age_2021":11},"grande_soeur":{"prenom":"Leïla","age_2021":20}},{"id":"sarkissian","nom":"Sarkissian","note":"famille arménienne, le père a une petite carrosserie","mere":{"prenom":"Anahid","age_2021":45,"metier":"secrétaire médicale"},"petit_frere":{"prenom":"Tigran","age_2021":11},"grande_soeur":{"prenom":"Sona","age_2021":20}},{"id":"diallo","nom":"Diallo","note":"famille sénégalaise et marseillaise, le père est chauffeur de bus","mere":{"prenom":"Aminata","age_2021":41,"metier":"cantinière"},"petit_frere":{"prenom":"Moussa","age_2021":11},"grande_soeur":{"prenom":"Awa","age_2021":20}},{"id":"garcia","nom":"Garcia","note":"famille gitane sédentaire de longue date, très soudée","mere":{"prenom":"Carmen","age_2021":40,"metier":"vendeuse au marché"},"petit_frere":{"prenom":"Manolo","age_2021":11},"grande_soeur":{"prenom":"Esperanza","age_2021":20}}],"liste":[{"id":"mere","prenom":"{famille}","groupe":"famille","age_2021":null,"traits":["travailleuse","fière","inquiète"],"objectif":"que ses enfants s'en sortent","limites":["ne veut pas d'argent sale chez elle"],"relation_depart":{"confiance":75,"proximite":80,"tension":10},"liens":{"petit_frere":"fils","grande_soeur":"fille"},"autonome":["travaille_tard","appelle_si_absent_2_semaines"]},{"id":"petit_frere","prenom":"{famille}","groupe":"famille","age_2021":null,"traits":["admiratif","curieux"],"objectif":"te ressembler","limites":[],"relation_depart":{"confiance":85,"proximite":75,"tension":0},"liens":{"mere":"mère"},"autonome":["imite_le_protagoniste"]},{"id":"grande_soeur","prenom":"{famille}","groupe":"famille","age_2021":null,"traits":["lucide","directe"],"objectif":"finir son BTS et partir","limites":["refuse de mentir à la mère"],"relation_depart":{"confiance":60,"proximite":55,"tension":20},"liens":{"mere":"mère"},"autonome":["peut_quitter_marseille"]},{"id":"tante","prenom":"Nadège","groupe":"famille","age_2021":48,"traits":["drôle","franche"],"objectif":"garder la famille unie","limites":["dit tout à ta mère"],"relation_depart":{"confiance":65,"proximite":50,"tension":0},"liens":{"mere":"belle-sœur"},"autonome":["heberge_en_cas_de_crise"],"note":"infirmière à l'Hôpital Nord, tante par alliance"},{"id":"ami_enfance","prenom":"Kevin","nom":"Lombardi","surnom":"Totti","groupe":"quartier","age_2021":16,"traits":["drôle","loyal","prudent"],"objectif":"jouer en Régional avec son club","limites":["ne touche pas au trafic"],"relation_depart":{"confiance":80,"proximite":85,"tension":5},"liens":{},"autonome":["s_eloigne_si_crainte_haute"],"note":"ne quitte jamais son maillot, frappe les coups francs comme son idole"},{"id":"camarade","prenom":"Manon","nom":"Escoffier","groupe":"quartier","age_2021":16,"traits":["ambitieuse","moqueuse"],"objectif":"entrer en médecine","limites":["ne veut pas être vue avec le hall"],"relation_depart":{"confiance":45,"proximite":35,"tension":5},"liens":{},"autonome":["propose_reviser"]},{"id":"grand_hall","prenom":"Anthony","surnom":"Zépek","groupe":"organisation","age_2021":24,"traits":["charismatique","calculateur"],"objectif":"monter dans la Compagnie","limites":[],"relation_depart":{"confiance":40,"proximite":30,"tension":10},"liens":{},"autonome":["propose_service","peut_etre_arrete"],"note":"parle doucement, ne crie jamais"},{"id":"souris","prenom":"Dylan","surnom":"Souris","groupe":"organisation","age_2021":14,"traits":["vif","effrayé"],"objectif":"ramener de l'argent à sa grand-mère","limites":[],"relation_depart":{"confiance":50,"proximite":40,"tension":0},"liens":{},"autonome":["guette_pour_zepek","peut_etre_blesse"],"note":"le plus petit du bâtiment ; il guette déjà"},{"id":"pitchoun","prenom":"Ibrahima","surnom":"Pitchoun","groupe":"quartier","age_2021":15,"traits":["bagarreur","fidèle"],"objectif":"qu'on le respecte","limites":[],"relation_depart":{"confiance":55,"proximite":45,"tension":15},"liens":{},"autonome":["suit_le_plus_fort"],"note":"appelé Pitchoun depuis la maternelle, il fait maintenant 1,90 m"},{"id":"rascasse","prenom":"Grégory","surnom":"Rascasse","groupe":"organisation","age_2021":31,"traits":["nerveux","méfiant"],"objectif":"garder son plan","limites":["n'aime pas les nouveaux"],"relation_depart":{"confiance":20,"proximite":10,"tension":30},"liens":{},"autonome":["teste_les_nouveaux","peut_trahir"],"note":"gérant du plan du quartier pour la Compagnie"},{"id":"tata","prenom":"Martine","surnom":"Tata","groupe":"organisation","age_2021":58,"traits":["épuisée","gentille"],"objectif":"payer ses dettes de loyer","limites":["a honte"],"relation_depart":{"confiance":50,"proximite":30,"tension":0},"liens":{},"autonome":["garde_contre_loyer","peut_craquer"],"note":"nourrice contrainte, endettée ; tout le bâtiment le sait, personne ne dit rien"},{"id":"babou","prenom":"Gérard","surnom":"Babou","groupe":"quartier","age_2021":56,"traits":["calme","amer"],"objectif":"que les jeunes ne refassent pas ses erreurs","limites":[],"relation_depart":{"confiance":55,"proximite":30,"tension":0},"liens":{},"autonome":["raconte","previent"],"note":"vingt ans de prison derrière lui, joue aux boules devant le bâtiment"},{"id":"coach","prenom":"Patrice","surnom":"Coach Pat","groupe":"quartier","age_2021":50,"traits":["exigeant","chaleureux"],"objectif":"faire tenir son club amateur","limites":["exclut ceux qui trafiquent"],"relation_depart":{"confiance":60,"proximite":45,"tension":0},"liens":{},"autonome":["propose_essai","convoque"]},{"id":"educatrice","prenom":"Christelle","nom":"Ferrandi","groupe":"quartier","age_2021":38,"traits":["tenace","fatiguée"],"objectif":"garder le centre social ouvert","limites":["ne couvre personne"],"relation_depart":{"confiance":50,"proximite":40,"tension":0},"liens":{},"autonome":["propose_stage","organise_marche_blanche"]},{"id":"snack","prenom":"Hassen","groupe":"quartier","age_2021":52,"traits":["généreux","méfiant"],"objectif":"garder son snack hors des histoires","limites":["refuse de servir de façade"],"relation_depart":{"confiance":55,"proximite":45,"tension":0},"liens":{},"autonome":["peut_fermer"],"note":"son snack est le salon du quartier les soirs de match"},{"id":"voisine","prenom":"Josiane","nom":"Giordano","surnom":"Mamie Jo","groupe":"quartier","age_2021":71,"traits":["bavarde","courageuse"],"objectif":"pouvoir rentrer chez elle sans peur","limites":[],"relation_depart":{"confiance":60,"proximite":50,"tension":0},"liens":{},"autonome":["temoigne","demenage_si_peur"]},{"id":"prof","prenom":"Hélène","nom":"Roux","groupe":"institution","age_2021":46,"traits":["exigeante","juste"],"objectif":"que tu passes ton bac","limites":[],"relation_depart":{"confiance":45,"proximite":30,"tension":10},"liens":{},"autonome":["convoque_la_mere"]},{"id":"commandante","prenom":"Agnès","nom":"Vidal","groupe":"institution","age_2021":49,"traits":["patiente","obstinée"],"objectif":"faire tomber la Compagnie","limites":["ne négocie pas"],"relation_depart":{"confiance":0,"proximite":0,"tension":0},"liens":{},"autonome":["ouvre_enquete","propose_de_parler"]},{"id":"brigadier","prenom":"Julien","nom":"Mercier","surnom":"Robocop","groupe":"institution","age_2021":33,"traits":["brutal","fatigué"],"objectif":"tenir jusqu'à sa mutation","limites":[],"relation_depart":{"confiance":0,"proximite":0,"tension":20},"liens":{},"autonome":["controle","provoque"],"note":"surnommé ainsi par les jeunes du secteur"},{"id":"avocate","prenom":"Laure","nom":"Castelli","groupe":"institution","age_2021":40,"traits":["brillante","sans illusions"],"objectif":"gagner ses dossiers","limites":["ne ment pas au juge"],"relation_depart":{"confiance":30,"proximite":10,"tension":0},"liens":{},"autonome":["previent_si_payee"],"note":"« Maître Castelli », ça coûte cher"},{"id":"juge","prenom":"Florence","nom":"Arnaud","groupe":"institution","age_2021":52,"traits":["attentive","ferme"],"objectif":"éviter que les mineurs basculent","limites":[],"relation_depart":{"confiance":40,"proximite":0,"tension":0},"liens":{},"autonome":["mesure_educative"],"note":"juge des enfants"},{"id":"journaliste","prenom":"Clara","nom":"Mouret","groupe":"ville","age_2021":29,"traits":["obstinée","prudente"],"objectif":"raconter ce qui arrive aux familles","limites":["ne publie pas de noms de mineurs"],"relation_depart":{"confiance":30,"proximite":0,"tension":0},"liens":{},"autonome":["enquete","publie"],"note":"journaliste pour un site d'information local"},{"id":"nono","prenom":"Nordine","surnom":"Nono","groupe":"quartier","age_2021":19,"traits":["débrouillard","rigolo"],"objectif":"s'acheter un vrai scooter","limites":[],"relation_depart":{"confiance":60,"proximite":50,"tension":0},"liens":{},"autonome":["livre_tard","connait_toutes_les_rues"],"note":"livreur à scooter, connaît la ville par cœur"},{"id":"ines","prenom":"Inès","nom":"Haddad","groupe":"quartier","age_2021":16,"traits":["sérieuse","franche"],"objectif":"passer le concours de gardienne de la paix","limites":["ne fréquente pas le hall"],"relation_depart":{"confiance":50,"proximite":35,"tension":5},"liens":{},"autonome":["juge_tes_choix"],"note":"capitaine de l'équipe de hand du lycée"},{"id":"chouchou","prenom":"Steven","surnom":"Chouchou","groupe":"quartier","age_2021":17,"traits":["rêveur","bavard"],"objectif":"sortir un son qui tourne dans tout Marseille","limites":[],"relation_depart":{"confiance":60,"proximite":55,"tension":0},"liens":{},"autonome":["enregistre","parle_trop"],"note":"rappe dans sa chambre, micro scotché sur une lampe"},{"id":"rose_marie","prenom":"Rose-Marie","nom":"Lopes","groupe":"quartier","age_2021":62,"traits":["organisée","têtue"],"objectif":"faire réparer l'ascenseur","limites":["refuse la peur"],"relation_depart":{"confiance":55,"proximite":30,"tension":0},"liens":{},"autonome":["petition","appelle_la_mairie"],"note":"présidente de l'amicale des locataires"},{"id":"farid","prenom":"Farid","nom":"Haddad","surnom":"Monsieur Farid","groupe":"quartier","age_2021":47,"traits":["discret","observateur"],"objectif":"garder son poste jusqu'à la retraite","limites":["ne veut pas d'histoires dans ses cages d'escalier"],"relation_depart":{"confiance":50,"proximite":35,"tension":0},"liens":{},"autonome":["voit_tout","previent_le_bailleur"],"note":"gardien d'immeuble, père d'Inès"},{"id":"madame_lan","prenom":"Thi Lan","nom":"Nguyen","surnom":"Madame Lan","groupe":"quartier","age_2021":55,"traits":["patiente","maligne"],"objectif":"payer les études de son fils","limites":["fait crédit, pas de cadeaux"],"relation_depart":{"confiance":50,"proximite":40,"tension":0},"liens":{},"autonome":["ferme_tard","entend_les_rumeurs"],"note":"épicerie de nuit au pied du bâtiment"},{"id":"pastis","prenom":"Jean-Claude","nom":"Pellegrin","surnom":"Pastis","groupe":"quartier","age_2021":68,"traits":["râleur","fidèle"],"objectif":"qu'on se souvienne du port d'avant","limites":[],"relation_depart":{"confiance":55,"proximite":30,"tension":0},"liens":{},"autonome":["belote_avec_babou","raconte_les_dockers"],"note":"ancien docker, joue à la belote avec Babou"},{"id":"mika","prenom":"Mickaël","nom":"Santoni","surnom":"Mika","groupe":"organisation","age_2021":28,"traits":["calme","ponctuel"],"objectif":"rembourser son garage fermé","limites":["refuse la violence"],"relation_depart":{"confiance":40,"proximite":20,"tension":0},"liens":{},"autonome":["conduit","peut_lacher"],"note":"ex-mécanicien, chauffeur"},{"id":"zizou","prenom":"Yacine","surnom":"Zizou","groupe":"organisation","age_2021":20,"traits":["technique","impatient"],"objectif":"prendre la place de Rascasse","limites":[],"relation_depart":{"confiance":45,"proximite":35,"tension":15},"liens":{},"autonome":["vend","pousse_vers_la_guerre"],"note":"frère de Nono ; le surnom date de ses années de foot"},{"id":"bebe","prenom":"Rudy","surnom":"Bébé","groupe":"organisation","age_2021":17,"traits":["nerveux","attachant"],"objectif":"impressionner Zépek","limites":[],"relation_depart":{"confiance":50,"proximite":45,"tension":5},"liens":{},"autonome":["guette","vend","peut_etre_arrete"],"note":"le plus jeune vendeur du plan"},{"id":"sab","prenom":"Sabrina","surnom":"Sab","groupe":"organisation","age_2021":26,"traits":["précise","froide"],"objectif":"ouvrir son propre cabinet","limites":["ne touche jamais l'argent liquide"],"relation_depart":{"confiance":35,"proximite":15,"tension":0},"liens":{},"autonome":["tient_les_comptes","peut_partir"],"note":"comptable, apparaît quand il y a des façades"},{"id":"belkacem","prenom":"Karim","nom":"Belkacem","groupe":"institution","age_2021":38,"traits":["méthodique","humain"],"objectif":"comprendre avant d'arrêter","limites":["ne frappe pas"],"relation_depart":{"confiance":0,"proximite":0,"tension":0},"liens":{},"autonome":["enquete","propose_de_parler"],"note":"lieutenant de la police judiciaire, a grandi dans les quartiers nord"},{"id":"cpe","prenom":"Sylvie","nom":"Bonnet","groupe":"institution","age_2021":44,"traits":["énergique","franche"],"objectif":"qu'aucun élève ne disparaisse des listes","limites":[],"relation_depart":{"confiance":45,"proximite":25,"tension":5},"liens":{},"autonome":["appelle_la_famille","propose_stage"],"note":"conseillère principale d'éducation du lycée"},{"id":"elu","prenom":"Denis","nom":"Martinez","groupe":"ville","age_2021":57,"traits":["affable","prudent"],"objectif":"être réélu","limites":["évite les sujets qui fâchent"],"relation_depart":{"confiance":25,"proximite":0,"tension":0},"liens":{},"autonome":["promet","inaugure"],"note":"élu de secteur, personnage inventé"}]},"zones":{"_doc":"Lieux et quartiers réels (à vérifier avant publication). Valeurs = départ 2021.","liste":[{"id":"centre_hist","nom":"Centre historique","arrondissements":["1er","2e"],"quartiers":["Belsunce","Noailles","Opéra","Thiers","Les Grands Carmes","Hôtel de Ville","La Joliette","Arenc"],"lieux":["Vieux-Port","Le Panier","Cours Belsunce","Marché des Capucins","Gare Saint-Charles","Ombrière du Vieux-Port","La Major"],"transports":["métro M1 Vieux-Port","métro M2 Noailles","tram T2/T3","bus","ferry-boat du Vieux-Port"],"revenu":1800,"population":5,"tension":45,"police":75,"humeur":45,"controle":"compagnie","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"centre","pas":6,"hmin":4,"hmax":10},"atout":"Passage, touristes, commerces : beaucoup d'argent qui circule, beaucoup de police.","plan":[[70,120],[115,100],[125,165],[130,200],[80,205],[60,165]],"court":"Centre"},{"id":"centre_nord","nom":"Centre nord","arrondissements":["3e"],"quartiers":["Belle de Mai","Saint-Lazare","Saint-Mauront","La Villette"],"lieux":["Friche la Belle de Mai","boulevard National","rue Loubon"],"transports":["métro M2 National","bus"],"revenu":1500,"population":4,"tension":60,"police":55,"humeur":40,"controle":"gabians","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"centre","pas":6,"hmin":3,"hmax":8},"atout":"Quartier populaire et serré : la main-d'œuvre est là, la tension aussi.","plan":[[115,100],[195,100],[250,112],[200,160],[125,165]],"court":"Centre nord"},{"id":"plaine","nom":"La Plaine / Cours Julien","arrondissements":["5e","6e"],"quartiers":["Notre-Dame-du-Mont","Lodi","Le Camas","Baille"],"lieux":["place Jean-Jaurès","Cours Julien","rue de la Bibliothèque"],"transports":["métro M2 Notre-Dame-du-Mont","bus"],"revenu":1600,"population":3,"tension":35,"police":60,"humeur":55,"controle":"tramontane","depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"centre","pas":6,"hmin":3,"hmax":7},"atout":"La nuit, les bars, les étudiants : une clientèle qui paie bien et qui parle.","plan":[[130,200],[125,165],[200,160],[205,210],[150,225]],"court":"La Plaine"},{"id":"prado","nom":"Prado / Castellane","arrondissements":["6e","7e","8e"],"quartiers":["Castellane","Préfecture","Vauban","Endoume","Saint-Victor","Roucas-Blanc","Périer","Saint-Giniez","Le Rouet"],"lieux":["place Castellane","Notre-Dame de la Garde","Corniche Kennedy","Vallon des Auffes","stade Vélodrome","avenue du Prado"],"transports":["métro M1/M2 Castellane","métro M2 Rond-point du Prado","bus 83"],"revenu":2000,"population":4,"tension":20,"police":70,"humeur":35,"controle":null,"depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"aise","pas":8,"hmin":3,"hmax":9},"atout":"Quartiers aisés : clientèle discrète, mais chaque erreur fait la une.","plan":[[80,205],[130,200],[150,225],[205,210],[245,255],[215,280],[120,300],[90,260]],"court":"Prado"},{"id":"nord_est","nom":"Nord-est","arrondissements":["13e"],"quartiers":["Malpassé","Frais-Vallon","Saint-Jérôme","Saint-Just","La Rose","Les Olives","Château-Gombert"],"lieux":["technopôle de Château-Gombert","campus de Saint-Jérôme"],"transports":["métro M1 La Rose","métro M1 Frais-Vallon","métro M1 Malpassé","bus"],"revenu":1700,"population":5,"tension":65,"police":50,"humeur":45,"controle":"compagnie","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"tours","pas":11,"hmin":6,"hmax":22},"atout":"Grands ensembles et collines : des plans connus de toute la ville.","plan":[[255,35],[335,55],[330,140],[250,112]],"court":"Nord-est"},{"id":"nord_central","nom":"Nord central","arrondissements":["14e"],"quartiers":["Saint-Barthélemy","Le Canet","Sainte-Marthe","Saint-Joseph","Le Merlan","Les Arnavaux","Bon-Secours"],"lieux":["centre commercial du Merlan","marché aux puces"],"transports":["métro M2 Gèze","bus"],"revenu":1600,"population":5,"tension":60,"police":50,"humeur":45,"controle":"ruisseau","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"mixte","pas":9,"hmin":2,"hmax":14},"atout":"Maisons et barres mêlées : les familles se connaissent toutes.","plan":[[185,22],[255,35],[250,112],[195,100]],"court":"Nord central"},{"id":"nord_ouest","nom":"Nord-ouest","arrondissements":["15e","16e"],"quartiers":["La Viste","Saint-Antoine","Verduron","Notre-Dame-Limite","Les Aygalades","Saint-Louis","La Cabucelle","Les Crottes"],"lieux":["Grand Littoral","Hôpital Nord","cité de La Castellane (15e-16e, à vérifier)"],"transports":["métro M2 Bougainville","bus"],"revenu":1900,"population":5,"tension":70,"police":55,"humeur":40,"controle":"compagnie","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"tours","pas":11,"hmin":7,"hmax":24},"atout":"Les tours au-dessus du port : la zone la plus disputée de Marseille.","plan":[[105,30],[185,22],[195,100],[115,100]],"court":"Nord-ouest"},{"id":"littoral_nord","nom":"Littoral nord","arrondissements":["16e"],"quartiers":["L'Estaque","Saint-Henri","Saint-André","Les Riaux"],"lieux":["port de l'Estaque","plage de Corbières","gare de L'Estaque"],"transports":["bus","TER"],"revenu":1200,"population":3,"tension":50,"police":40,"humeur":55,"controle":"gabians","depart":true,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"port","pas":9,"hmin":2,"hmax":6},"atout":"Le port et le village : la mer, les quais, et ce qui y arrive.","plan":[[30,40],[105,30],[115,100],[45,115]],"court":"Littoral nord"},{"id":"est","nom":"Est","arrondissements":["11e","12e"],"quartiers":["La Valentine","Saint-Marcel","La Pomme","Les Caillols","Saint-Barnabé","Montolivet","Les Accates","La Treille"],"lieux":["centre commercial de La Valentine","village de Saint-Barnabé"],"transports":["métro M1 La Fourragère","bus"],"revenu":1300,"population":4,"tension":40,"police":45,"humeur":50,"controle":"ruisseau","depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"maisons","pas":9,"hmin":2,"hmax":5},"atout":"Noyaux villageois et centres commerciaux : calme apparent, argent discret.","plan":[[200,160],[250,112],[330,140],[325,270],[245,255],[205,210]],"court":"Est"},{"id":"sud","nom":"Sud","arrondissements":["8e","9e"],"quartiers":["Bonneveine","Pointe-Rouge","Montredon","Mazargues","Sainte-Marguerite","Le Redon","La Cayolle","La Soude"],"lieux":["plages du Prado","parc Borély","Calanques","centre pénitentiaire des Baumettes","Sormiou"],"transports":["métro M2 Sainte-Marguerite Dromel","bus 19"],"revenu":1400,"population":3,"tension":30,"police":55,"humeur":45,"controle":"calanquais","depart":false,"services":["commerçants","associations","mères de famille","jeunes","anciens"],"bati":{"type":"maisons","pas":10,"hmin":2,"hmax":6},"atout":"Plages, parcs et calanques ; au pied des collines, les Baumettes.","plan":[[90,260],[120,300],[215,280],[245,255],[325,270],[310,360],[200,385],[110,360],[70,310]],"court":"Sud"}],"repere":{"_doc":"Plan schématique 360×400 (mer à l'ouest et au sud).","terre":[[30,40],[105,30],[185,22],[255,35],[335,55],[360,60],[360,400],[300,400],[310,360],[200,385],[110,360],[70,310],[90,260],[80,205],[60,165],[70,120],[45,115]],"vieux_port":[[60,150],[82,148],[92,170],[62,178]],"notre_dame":[108,232],"velodrome":[178,262],"grues":[[48,70],[62,88],[85,96],[100,62]],"calanques":[[130,372],[175,380],[225,378],[275,366],[300,350]]}}};
 window.ASSETS={"banniere_centre_hist": "img/banniere_centre_hist.webp", "banniere_centre_nord": "img/banniere_centre_nord.webp", "banniere_plaine": "img/banniere_plaine.webp", "banniere_prado": "img/banniere_prado.webp", "banniere_nord_est": "img/banniere_nord_est.webp", "banniere_nord_central": "img/banniere_nord_central.webp", "banniere_nord_ouest": "img/banniere_nord_ouest.webp", "banniere_littoral_nord": "img/banniere_littoral_nord.webp", "banniere_est": "img/banniere_est.webp", "banniere_sud": "img/banniere_sud.webp", "banniere_baumettes": "img/banniere_baumettes.webp", "vue_centre": "img/vue_centre.webp", "vue_est_sud": "img/vue_est_sud.webp", "medaillon_mere_ferrara": "img/medaillon_mere_ferrara.webp", "joueur_ferrara_jeune": "img/joueur_ferrara_jeune.webp", "medaillon_mere_sarkissian": "img/medaillon_mere_sarkissian.webp", "medaillon_petit_frere_sarkissian": "img/medaillon_petit_frere_sarkissian.webp", "medaillon_grande_soeur_sarkissian": "img/medaillon_grande_soeur_sarkissian.webp", "medaillon_mere_diallo": "img/medaillon_mere_diallo.webp", "medaillon_petit_frere_diallo": "img/medaillon_petit_frere_diallo.webp", "medaillon_grande_soeur_diallo": "img/medaillon_grande_soeur_diallo.webp", "medaillon_mere_garcia": "img/medaillon_mere_garcia.webp", "medaillon_petit_frere_garcia": "img/medaillon_petit_frere_garcia.webp", "medaillon_grande_soeur_garcia": "img/medaillon_grande_soeur_garcia.webp", "scene_le_quotidien": "img/scene_le_quotidien.webp", "icone_energie": "img/icone_energie.webp", "icone_sangfroid": "img/icone_sangfroid.webp", "icone_propre": "img/icone_propre.webp", "icone_sale": "img/icone_sale.webp", "icone_police": "img/icone_police.webp", "icone_tension": "img/icone_tension.webp", "icone_humeur": "img/icone_humeur.webp", "icone_respect": "img/icone_respect.webp", "icone_influence": "img/icone_influence.webp", "medaillon_mere_benali": "img/medaillon_mere_benali.webp", "medaillon_petit_frere_benali": "img/medaillon_petit_frere_benali.webp", "medaillon_grande_soeur_benali": "img/medaillon_grande_soeur_benali.webp", "medaillon_petit_frere_ferrara": "img/medaillon_petit_frere_ferrara.webp", "medaillon_grande_soeur_ferrara": "img/medaillon_grande_soeur_ferrara.webp", "medaillon_mere_mmadi": "img/medaillon_mere_mmadi.webp", "medaillon_petit_frere_mmadi": "img/medaillon_petit_frere_mmadi.webp", "medaillon_grande_soeur_mmadi": "img/medaillon_grande_soeur_mmadi.webp"};
 /* ---- 00-core.js ---- */
-/* CHOUF — 00-core : état G, hasard reproductible, horloges, sauvegarde, journal.
-   Aucune valeur d'équilibrage ici : tout vient de DATA (data/*.json injecté par build.py). */
+/* CHOUF v2 — 00-core : état G, hasard reproductible, sauvegarde, journal.
+   Gestion pure (design/05-gestion-pure.md) : pas de personnage incarné, des opérateurs, des quartiers,
+   des factions, des cycles. Aucune valeur d'équilibrage ici : tout vient de DATA. */
 
-var D = window.DATA;            // données du jeu
-var B = D.equilibrage;           // raccourci équilibrage
-var G = null;                    // état de partie
-var SAVE_KEY = "chouf_v1";
+var D = window.DATA, B = D.equilibrage, G = null, SAVE_KEY = "chouf_v2";
 
-/** Horloge réelle injectable (le simulateur la remplace). */
-var CLOCK = { now: function () { return Date.now(); } };
-
-/** Index des listes de données par id. */
 var IDX = {};
-["zones", "personnages", "equipes", "roles", "competences", "evenements", "missions"].forEach(function (k) {
+["zones", "personnages", "equipes"].forEach(function (k) {
   IDX[k] = {};
   D[k].liste.forEach(function (x) { IDX[k][x.id] = x; });
 });
-IDX.chapitres = {};
-D.calendrier.chapitres.forEach(function (c, i) { c.i = i; IDX.chapitres[c.id] = c; });
-IDX.familles = {};
-(D.personnages.familles || []).forEach(function (f) { IDX.familles[f.id] = f; });
 
-/** Hasard reproductible (mulberry32), l'état tient dans G.seed. */
+/** Hasard de la partie (mulberry32), son état tient dans G.seed : une partie rejouée avec la même graine est identique. */
 function rnd() {
   var t = (G.seed = (G.seed + 0x6D2B79F5) | 0);
   t = Math.imul(t ^ (t >>> 15), t | 1);
@@ -108,114 +124,25 @@ function rnd() {
   return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
 }
 function rint(a, b) { return a + Math.floor(rnd() * (b - a + 1)); }
-function pick(arr) { return arr[Math.floor(rnd() * arr.length)]; }
+function rf(a, b) { return a + rnd() * (b - a); }
+function pick(a) { return a[Math.floor(rnd() * a.length)]; }
 function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+function r1(v) { return Math.round(v * 10) / 10; }
 
-/** Date de campagne → nombre de semaines depuis l'an 0 (comparaisons faciles). */
-function wk(c) { return c.annee * 52 + (c.semaine - 1); }
-function wkToCal(n) { return { annee: Math.floor(n / 52), semaine: (n % 52) + 1 }; }
-function nowWk() { return wk(G.cal); }
+/** Semaine de l'année du cycle courant (pour les saisons). */
+function semaine() { return ((B.depart.semaine - 1 + G.cycle - 1) % 52) + 1; }
+function annee() { return B.depart.annee + Math.floor((B.depart.semaine - 1 + G.cycle - 1) / 52); }
+var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+function moisNom() { return MOIS[Math.min(11, Math.floor((semaine() - 1) / 4.35))]; }
 
-/** Âge du protagoniste à la semaine courante. */
-function age() {
-  var n = G.protagoniste.naissance;
-  return Math.floor((nowWk() - wk(n)) / 52);
-}
-function estMineur() { return age() < D.equilibrage.evenements.mineur_age; }
-
-/** Nom affiché d'un personnage : surnom si l'usage du quartier, sinon prénom. */
-function pnjNom(id) {
-  var p = IDX.personnages[id];
-  if (!p) return id;
-  var pr = p.prenom === "{famille}" ? famillePrenom(id) : p.prenom;
-  return p.surnom || pr;
-}
-function pnjNomComplet(id) {
-  var p = IDX.personnages[id];
-  if (!p) return id;
-  var pr = p.prenom === "{famille}" ? famillePrenom(id) : p.prenom;
-  var nom = p.nom || (p.groupe === "famille" && p.prenom === "{famille}" ? IDX.familles[G.famille].nom : "");
-  var s = pr + (nom ? " " + nom : "");
-  return p.surnom ? s + " « " + p.surnom + " »" : s;
-}
-function famillePrenom(id) {
-  var f = IDX.familles[G.famille];
-  return f && f[id] ? f[id].prenom : id;
-}
-function pnjAge(id) {
-  var p = IDX.personnages[id];
-  var a = p.age_2021 != null ? p.age_2021 : (IDX.familles[G.famille][id] || {}).age_2021;
-  return a == null ? null : a + (G.cal.annee - 2021);
+/** Journal : une ligne courte par événement, avec sa cause (règle UX : comprendre pourquoi un indicateur bouge). */
+function log(t, type, q) {
+  G.journal.unshift({ c: G.cycle, t: t, type: type || "info", q: q || null });
+  if (G.journal.length > 400) G.journal.length = 400;
+  if (G.rapport) G.rapport.push({ t: t, type: type || "info", q: q || null });
 }
 
-/** Journal : chaque changement significatif garde sa cause (règle UX du GDD V7 §6). */
-function log(texte, type, cause) {
-  G.journal.unshift({ a: G.cal.annee, s: G.cal.semaine, t: texte, type: type || "info", cause: cause || null });
-  if (G.journal.length > 300) G.journal.length = 300;
-}
-
-/** Nouvelle partie. prenom : choisi par le joueur. seed : facultatif (tests). */
-function newGame(prenom, seed) {
-  var T = B.temps, P = B.protagoniste;
-  G = { v: 1, seed: (seed == null ? (CLOCK.now() & 0x7fffffff) : seed) | 0 };
-  var departs = D.zones.liste.filter(function (z) { return z.depart; });
-  var zo = pick(departs).id;
-  G.famille = pick(D.personnages.familles).id;
-  G.cal = { annee: T.semaine_depart.annee, semaine: T.semaine_depart.semaine };
-  G.chapitre = D.calendrier.chapitres[0].id;
-  G.temps = { energie: T.energie_depart, sangfroid: T.sangfroid_max, maj: CLOCK.now() };
-  G.protagoniste = {
-    prenom: (prenom || "Toi").trim().slice(0, 18) || "Toi",
-    naissance: { annee: P.naissance_annee, semaine: rint(P.naissance_semaines[0], P.naissance_semaines[1]) },
-    zone_origine: zo,
-    competences: JSON.parse(JSON.stringify(P.competences_depart)),
-    etat: JSON.parse(JSON.stringify(P.etat_depart)),
-    scolarite: { statut: "lycee", assiduite: 70 },
-    positionnement: { respect: 5, influence: 0, crainte: 0 },
-    responsabilites: [], engagements: []
-  };
-  G.argent = { propre: rint(P.argent_propre_depart[0], P.argent_propre_depart[1]), sale: 0, dettes: [] };
-  G.relations = {};
-  B.relations.connus_depart.forEach(function (id) { connaitre(id, true); });
-  G.zones = {};
-  var vois = B.zones.voisines[zo] || [];
-  D.zones.liste.forEach(function (z) {
-    G.zones[z.id] = {
-      connu: z.id === zo ? B.zones.connu_depart_zone_origine : vois.indexOf(z.id) >= 0 ? B.zones.connu_depart_voisines : B.zones.connu_depart_autres,
-      influence: 0, tension: z.tension, police: z.police, humeur: z.humeur, plans: 0, coffre: 0, controle: z.controle
-    };
-  });
-  G.zone = zo;                                   // zone affichée / où l'on agit
-  G.organisation = { existe: false, nom: null, stabilite: 50, confiance_interne: 50, resilience: 40, ancrage: 50, membres: [], facades: [], reseaux: [] };
-  G.police = { pression_ville: 30, enquete: 0, operation: null };
-  G.rivaux = {};
-  D.equipes.liste.forEach(function (e) { G.rivaux[e.id] = { force: e.force, relation: "neutre" }; });
-  G.progression = { drapeaux: [], irreversibles: [], options: [], signaux: {} };
-  G.evenements = { faits: {}, programmes: [], vus: {} };
-  G.maitrise = {};                               // missions : nombre de fois réussies
-  G.semaine_actions = 0;
-  G.journal = []; G.messages = []; G.file = []; G.carte = null;
-  G.absence = null;
-  D.equilibrage.evenements.prologue.forEach(function (p) { programmer(p.id, p.dans, {}); });
-  log("Rentrée " + G.cal.annee + ". Tu as " + age() + " ans. Tu habites " + IDX.zones[zo].nom + ".", "chapitre");
-  declencherCalendrier();
-  return G;
-}
-
-/** Rend un personnage connu (crée sa relation à partir des valeurs de départ). */
-function connaitre(id, silencieux) {
-  if (G.relations[id] || !IDX.personnages[id]) return;
-  var r = IDX.personnages[id].relation_depart;
-  G.relations[id] = { confiance: r.confiance, proximite: r.proximite, tension: r.tension, memoire: [], etat: "present", contact: nowWkSafe() };
-  if (!silencieux) log("Tu connais maintenant " + pnjNomComplet(id) + ".", "rencontre");
-}
-function nowWkSafe() { return G && G.cal ? nowWk() : 0; }
-
-function programmer(id, dans, ctx) {
-  G.evenements.programmes.push({ id: id, a: nowWk() + dans, ctx: ctx || {} });
-}
-
-/* ---------- Sauvegarde (même principe que KICK : un seul objet JSON) ---------- */
+/* ---------- Sauvegarde ---------- */
 var STORE = {
   get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
   set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} },
@@ -227,404 +154,657 @@ function loadSave() {
   var s = STORE.get(SAVE_KEY);
   if (!s) return false;
   try { G = JSON.parse(s); } catch (e) { return false; }
-  return migrate();
-}
-/** Migrations de sauvegarde par numéro de version. */
-function migrate() {
-  if (!G || G.v !== 1) return false;
+  if (!G || G.v !== 2) { G = null; return false; }
   return true;
 }
 function eraseSave() { STORE.del(SAVE_KEY); G = null; }
 
-/* ---- 10-regles.js ---- */
-/* CHOUF — 10-regles : interpréteur des conditions et des effets écrits dans data/*.json.
-   Grammaire (design/02-modele-donnees.md §12) :
-   conditions : fait:ID · competence:ID>=N · relation:ID.champ>=N / !=valeur · zone:champ>=N ·
-                police:enquete>=N · positionnement:x>=N · engagement_rompu:ID · a|b (ou)
-   effets     : relation:ID.champ±N · competence:ID±N · scolarite.assiduite±N · etat:champ±N ·
-                temps:energie±N · argent:propre±N · zone:champ±N · police:enquete±N ·
-                positionnement:x±N · engagement:PNJ:ID:SEMAINES */
+/* ---- 10-ville.js ---- */
+/* CHOUF v2 — 10-ville : les quartiers de Marseille (noms officiels de data/zones.json), leur découpage sur
+   le plan, leurs voisinages, leur contrôle (joueur et factions), et la mise en place d'une partie.
+   Le découpage est un schéma : chaque zone de jeu est partagée entre ses quartiers par regroupement de
+   points (pas les frontières officielles exactes). Il ne dépend pas de la partie (hasard du décor). */
 
-/** Remplace {pnj}, {mere}, {pnj.prenom}… dans un texte ou une règle. */
-function fill(s, ctx) {
-  if (!s) return s;
-  return String(s).replace(/\{pnj\}/g, (ctx && ctx.pnj) || "pnj");
+function rngDecor(txt) {
+  var h = 2166136261;
+  for (var i = 0; i < txt.length; i++) h = Math.imul(h ^ txt.charCodeAt(i), 16777619);
+  return function () { h = (h + 0x6D2B79F5) | 0; var t = Math.imul(h ^ (h >>> 15), h | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 }
-/** Texte affichable : {pnj} → nom du personnage. */
-function fillTexte(s, ctx) {
-  return String(s || "").replace(/\{(\w+)(?:\.(\w+))?\}/g, function (m, a) {
-    if (a === "joueur") return G.protagoniste.prenom;
-    var id = a === "pnj" ? (ctx && ctx.pnj) : a;
-    return IDX.personnages[id] ? pnjNom(id) : m;
+function dansPoly(pt, poly) {
+  var x = pt[0], y = pt[1], ins = false;
+  for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+    if (((yi > y) !== (yj > y)) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins;
+  }
+  return ins;
+}
+
+/** Découpage de la ville en quartiers : VILLE.q[id] = {id, zone, nom, arr, cx, cy, n}, VILLE.cell["x,y"] = id. */
+var VILLE = (function () {
+  var PAS = 2, cell = {}, q = {}, ordre = [], adj = {};
+  D.zones.liste.forEach(function (z) {
+    var pts = [], xs = z.plan.map(function (p) { return p[0]; }), ys = z.plan.map(function (p) { return p[1]; });
+    for (var x = Math.floor(Math.min.apply(0, xs) / PAS) * PAS; x <= Math.max.apply(0, xs); x += PAS)
+      for (var y = Math.floor(Math.min.apply(0, ys) / PAS) * PAS; y <= Math.max.apply(0, ys); y += PAS)
+        if (!cell[x + "," + y] && dansPoly([x + 0.5, y + 0.5], z.plan)) pts.push([x, y]);
+    var k = z.quartiers.length, r = rngDecor(z.id + ":q"), seeds = [];
+    // graines éloignées les unes des autres, puis quelques passes de regroupement
+    seeds.push(pts[Math.floor(r() * pts.length)].slice());
+    while (seeds.length < k) {
+      var best = null, bd = -1;
+      for (var i = 0; i < pts.length; i += 3) {
+        var d = Infinity;
+        seeds.forEach(function (s) { d = Math.min(d, (pts[i][0] - s[0]) * (pts[i][0] - s[0]) + (pts[i][1] - s[1]) * (pts[i][1] - s[1])); });
+        if (d > bd) { bd = d; best = pts[i]; }
+      }
+      seeds.push(best.slice());
+    }
+    var lab = new Array(pts.length);
+    for (var it = 0; it < 8; it++) {
+      var sx = seeds.map(function () { return [0, 0, 0]; });
+      pts.forEach(function (p, i) {
+        var bi = 0, bd2 = Infinity;
+        seeds.forEach(function (s, j) { var d = (p[0] - s[0]) * (p[0] - s[0]) + (p[1] - s[1]) * (p[1] - s[1]); if (d < bd2) { bd2 = d; bi = j; } });
+        lab[i] = bi; sx[bi][0] += p[0]; sx[bi][1] += p[1]; sx[bi][2]++;
+      });
+      seeds = sx.map(function (s, j) { return s[2] ? [s[0] / s[2], s[1] / s[2]] : seeds[j]; });
+    }
+    // ordre des quartiers : du nord au sud, pour que les noms tombent de façon stable
+    var ordreSeeds = seeds.map(function (s, j) { return j; }).sort(function (a, b) { return seeds[a][1] - seeds[b][1] || seeds[a][0] - seeds[b][0]; });
+    var nomDe = {};
+    ordreSeeds.forEach(function (j, rang) { nomDe[j] = rang; });
+    for (var j = 0; j < k; j++) {
+      var id = z.id + "_" + nomDe[j];
+      q[id] = { id: id, zone: z.id, nom: z.quartiers[nomDe[j]], arr: z.arrondissements.join("-"), cx: seeds[j][0], cy: seeds[j][1], n: 0 };
+    }
+    pts.forEach(function (p, i) { var id = z.id + "_" + nomDe[lab[i]]; cell[p[0] + "," + p[1]] = id; q[id].n++; });
   });
+  Object.keys(q).sort().forEach(function (id) { ordre.push(id); adj[id] = {}; });
+  Object.keys(cell).forEach(function (k) {
+    var a = cell[k], p = k.split(",").map(Number);
+    [[PAS, 0], [0, PAS]].forEach(function (d) {
+      var b = cell[(p[0] + d[0]) + "," + (p[1] + d[1])];
+      if (b && b !== a) { adj[a][b] = 1; adj[b][a] = 1; }
+    });
+  });
+  Object.keys(adj).forEach(function (k) { adj[k] = Object.keys(adj[k]); });
+  return { PAS: PAS, cell: cell, q: q, ordre: ordre, adj: adj };
+})();
+
+/** Quartier sous un point du plan. */
+function quartierEn(x, y) {
+  var P = VILLE.PAS, gx = Math.floor(x / P) * P, gy = Math.floor(y / P) * P;
+  return VILLE.cell[gx + "," + gy] || VILLE.cell[(gx + P) + "," + gy] || VILLE.cell[gx + "," + (gy + P)] || null;
 }
 
-/** Lit une valeur de l'état à partir d'une référence de règle. */
-function lire(ref) {
-  var m;
-  if ((m = /^relation:(\w+)\.(\w+)$/.exec(ref))) { var r = G.relations[m[1]]; return r ? r[m[2]] : undefined; }
-  if ((m = /^competence:(\w+)$/.exec(ref))) return G.protagoniste.competences[m[1]];
-  if ((m = /^zone:(\w+)$/.exec(ref))) return G.zones[G.zone][m[1]];
-  if (ref === "police:enquete") return G.police.enquete;
-  if ((m = /^positionnement:(\w+)$/.exec(ref))) return G.protagoniste.positionnement[m[1]];
-  if ((m = /^etat:(\w+)$/.exec(ref))) return G.protagoniste.etat[m[1]];
-  if (ref === "scolarite.assiduite") return G.protagoniste.scolarite.assiduite;
-  if ((m = /^membre:(\w+)\.(\w+)$/.exec(ref))) {
-    var mb = G.organisation.membres.filter(function (x) { return x.role === m[1] && x.statut === "actif"; })[0];
-    return mb ? mb[m[2]] : undefined;
-  }
-  return undefined;
+/* ---------- état des quartiers ---------- */
+function advTotal(s) { var t = 0; for (var f in s.adv) t += s.adv[f]; return t; }
+function libreDe(s) { return Math.max(0, 100 - s.ctl - advTotal(s)); }
+function factionDominante(s) {
+  var best = null, v = 0;
+  for (var f in s.adv) if (s.adv[f] > v && G.factions[f] && G.factions[f].vivante) { v = s.adv[f]; best = f; }
+  return best;
 }
-
-/** Évalue une condition (chaîne). */
-function cond(c, ctx) {
-  if (!c) return true;
-  c = fill(c, ctx);
-  if (c.indexOf("|") >= 0) return c.split("|").some(function (x) { return cond(x, ctx); });
-  var m;
-  if ((m = /^fait:(\w+)$/.exec(c))) return !!G.evenements.faits[m[1]];
-  if ((m = /^engagement_rompu:(\w+)$/.exec(c))) {
-    return G.protagoniste.engagements.some(function (e) { return e.envers === m[1] && e.tenu === false; });
-  }
-  if ((m = /^(.+?)(>=|<=|!=|=|>|<)(.+)$/.exec(c))) {
-    var v = lire(m[1]), w = isNaN(+m[3]) ? m[3] : +m[3];
-    if (v === undefined) return m[2] === "!=";
-    switch (m[2]) {
-      case ">=": return v >= w; case "<=": return v <= w; case ">": return v > w; case "<": return v < w;
-      case "=": return v == w; case "!=": return v != w;
+/** libre · joueur · securise · conteste · faction (règles §3.3). */
+function statut(id) {
+  var s = G.q[id], a = advTotal(s), C = B.controle;
+  if (s.ctl <= 0 && a <= 0.5) return "libre";
+  if (s.ctl >= C.securise_controle && a <= C.securise_adverse) return "securise";
+  if (s.ctl > 0 && a > 0.5) return "conteste";
+  if (s.ctl > 0) return "joueur";
+  return "faction";
+}
+var STATUT_NOM = { libre: "Libre", joueur: "À toi", securise: "Sécurisé", conteste: "Contesté", faction: "Tenu par une faction" };
+/** Le joueur peut-il y envoyer un opérateur ? (§3.4 : voisin à 50 % ou plus, ou déjà présent) */
+function accessible(id) {
+  if (G.q[id].ctl > 0) return true;
+  return VILLE.adj[id].some(function (v) { return G.q[v].ctl >= B.controle.acces_voisin; });
+}
+/** Part de la ville contrôlée par le joueur (moyenne des contrôles). */
+function territoire() {
+  var t = 0;
+  VILLE.ordre.forEach(function (id) { t += G.q[id].ctl; });
+  return t / VILLE.ordre.length;
+}
+/** Ajoute du contrôle au joueur : d'abord la part libre, puis aux dépens des factions (à moitié). */
+function gagnerControle(id, v) {
+  var s = G.q[id], avant = s.ctl, libre = libreDe(s), pris = Math.min(v, libre);
+  s.ctl += pris; v -= pris;
+  if (v > 0) {
+    var a = advTotal(s);
+    if (a > 0) {
+      var prise = Math.min(a, v * 0.5);
+      for (var f in s.adv) s.adv[f] = Math.max(0, s.adv[f] - prise * s.adv[f] / a);
+      s.ctl += prise;
     }
   }
-  return false;
+  s.ctl = clamp(s.ctl, 0, 100);
+  return s.ctl - avant;
 }
-function conds(list, ctx) { return (list || []).every(function (c) { return cond(c, ctx); }); }
-
-/** Applique un changement borné et écrit la cause dans le journal si elle est donnée. */
-function change(ref, delta, cause) {
-  var m, o, k, lo = 0, hi = 100;
-  if ((m = /^relation:(\w+)\.(\w+)$/.exec(ref))) { connaitre(m[1]); o = G.relations[m[1]]; k = m[2]; o.contact = nowWk(); }
-  else if ((m = /^competence:(\w+)$/.exec(ref))) { o = G.protagoniste.competences; k = m[1]; delta = gainCompetence(o[k], delta); }
-  else if ((m = /^zone:(\w+)$/.exec(ref))) { o = G.zones[G.zone]; k = m[1]; }
-  else if (ref === "police:enquete") { o = G.police; k = "enquete"; }
-  else if ((m = /^positionnement:(\w+)$/.exec(ref))) { o = G.protagoniste.positionnement; k = m[1]; }
-  else if ((m = /^etat:(\w+)$/.exec(ref))) { o = G.protagoniste.etat; k = m[1]; }
-  else if (ref === "scolarite.assiduite") { o = G.protagoniste.scolarite; k = "assiduite"; }
-  else if ((m = /^temps:(\w+)$/.exec(ref))) { o = G.temps; k = m[1]; hi = B.temps[k + "_max"] || 999; }
-  else if ((m = /^argent:(\w+)$/.exec(ref))) { o = G.argent; k = m[1]; hi = 1e12; lo = -1e12; }
-  else return 0;
-  var avant = o[k] || 0;
-  o[k] = clamp(Math.round((avant + delta) * 10) / 10, lo, hi);
-  var d = o[k] - avant;
-  if (cause && d && Math.abs(d) >= 3) log(libelle(ref) + " " + (d > 0 ? "+" : "") + Math.round(d), "chiffre", cause);
-  return d;
-}
-/** Rendement décroissant des compétences au palier 4 (GDD V7 §12 C, option 3). */
-function gainCompetence(v, delta) {
-  if (delta <= 0) return delta;
-  delta = Math.min(delta, B.competences.gain_max_par_evenement);
-  return v >= B.competences.seuils[3] ? delta * B.competences.rendement_palier4 : delta;
-}
-function libelle(ref) {
-  var m;
-  if ((m = /^relation:(\w+)\.(\w+)$/.exec(ref))) return m[2].charAt(0).toUpperCase() + m[2].slice(1) + " de " + pnjNom(m[1]);
-  if ((m = /^competence:(\w+)$/.exec(ref))) return IDX.competences[m[1]].nom;
-  if ((m = /^zone:(\w+)$/.exec(ref))) return m[1].charAt(0).toUpperCase() + m[1].slice(1) + " du quartier";
-  if (ref === "police:enquete") return "Attention de la police";
-  if ((m = /^\w+:(\w+)$/.exec(ref))) return m[1].charAt(0).toUpperCase() + m[1].slice(1);
-  return ref;
-}
-
-/** Applique un effet (chaîne). cause : texte court pour le journal. */
-function effet(e, ctx, cause) {
-  e = fill(e, ctx);
-  var m;
-  if ((m = /^engagement:(\w+):(\w+):(\d+)$/.exec(e))) {
-    G.protagoniste.engagements.push({ id: m[2], envers: m[1], echeance: nowWk() + +m[3], tenu: null });
-    log("Tu as promis quelque chose à " + pnjNom(m[1]) + ".", "engagement");
-    return;
+/** Une faction gagne de la présence : part libre, puis aux dépens du joueur et des autres (sauf alliées). */
+function gagnerPresence(id, f, v) {
+  var s = G.q[id], libre = libreDe(s), pris = Math.min(v, libre), perteJoueur = 0;
+  s.adv[f] = (s.adv[f] || 0) + pris; v -= pris;
+  if (v > 0) {
+    var cibles = s.ctl;
+    for (var g in s.adv) if (g !== f && !allies(f, g)) cibles += s.adv[g];
+    if (cibles > 0) {
+      var prise = Math.min(cibles, v);
+      perteJoueur = prise * s.ctl / cibles;
+      s.ctl = Math.max(0, s.ctl - perteJoueur);
+      for (var h in s.adv) if (h !== f && !allies(f, h)) s.adv[h] = Math.max(0, s.adv[h] - prise * s.adv[h] / cibles);
+      s.adv[f] += prise;
+    }
   }
-  if ((m = /^(.+?)([+-]\d+(?:\.\d+)?)$/.exec(e))) change(m[1], +m[2], cause);
+  return perteJoueur;
+}
+function allies(a, b) {
+  return G.alliances.some(function (x) { return (x.a === a && x.b === b) || (x.a === b && x.b === a); });
 }
 
-/** Mémoire : "pnj:drapeau" ou "*:drapeau" (fait de campagne). */
-function memoriser(s, ctx) {
-  if (!s) return;
-  s = fill(s, ctx);
-  var p = s.split(":");
-  if (p[0] === "*") { if (G.progression.drapeaux.indexOf(p[1]) < 0) G.progression.drapeaux.push(p[1]); return; }
-  connaitre(p[0]);
-  var r = G.relations[p[0]];
-  if (r && r.memoire.indexOf(p[1]) < 0) r.memoire.push(p[1]);
+/** Revenu et coût d'un quartier pour ce cycle (saisons comprises). */
+function multSaison(id) {
+  var m = 1, z = VILLE.q[id].zone;
+  (G.saisons || []).forEach(function (sid) {
+    var s = B.evenements.saisons.filter(function (x) { return x.id === sid; })[0];
+    if (s && (s.zones === "*" || s.zones.indexOf(z) >= 0)) m *= s.flux_mult;
+  });
+  return m;
 }
 
-/** Palier (1..4) d'une compétence. */
-function palier(v) {
-  var s = B.competences.seuils, p = 1;
-  for (var i = 1; i < s.length; i++) if (v >= s[i]) p = i + 1;
-  return p;
+/* ---------- nouvelle partie ---------- */
+/** Prépare une ville et un réseau de départ. seed : facultatif (tests). */
+function newGame(seed) {
+  var Dp = B.depart, Q = B.quartiers;
+  G = { v: 2, seed: (seed == null ? (Date.now() & 0x7fffffff) : seed) | 0 };
+  G.cycle = 1; G.tresorerie = Dp.tresorerie; G.dette = 0; G.cycles_zero = 0;
+  G.capacite = Dp.capacite; G.seuils_pris = []; G.ind = { pression: 15, stabilite: 55, exposition: 5 };
+  G.operateurs = []; G.prochain_op = 1; G.visages = B.operateurs.visages.slice();
+  G.factions = {}; G.alliances = []; G.flux = []; G.journal = []; G.rapport = null; G.fini = null; G.saisons = [];
+  G.historique = [];
+  D.equipes.liste.forEach(function (e) {
+    G.factions[e.id] = { id: e.id, budget: e.budget, effectif: e.effectif, agressivite: e.agressivite, objectif: "maintenir", cible: null,
+      vivante: true, pic: 0, intention: null };
+  });
+  G.q = {};
+  VILLE.ordre.forEach(function (id) {
+    var z = IDX.zones[VILLE.q[id].zone], n = z.quartiers.length;
+    var fl = Math.round(z.revenu / n * 1.6 * rf(Q.flux_variation[0], Q.flux_variation[1]) / 10) * 10;
+    var s = { ctl: 0, adv: {}, conn: 0, flux: fl, maintien: Math.round(fl * Q.maintien_ratio / 10) * 10, inv: 0, sans_op: 0, poi: [], ev: [] };
+    var np = rint(1, 3);
+    for (var i = 0; i < np; i++) s.poi.push(pick(Q.points_interet));
+    if (z.controle) s.adv[z.controle] = rint(Q.presence_faction[0], Q.presence_faction[1]);
+    else D.equipes.liste.forEach(function (e) { if (rnd() < 0.3) s.adv[e.id] = rint(Q.presence_neutre[0], Q.presence_neutre[1]); });
+    G.q[id] = s;
+  });
+  // présences voisines sur les bords des zones
+  VILLE.ordre.forEach(function (id) {
+    VILLE.adj[id].forEach(function (v) {
+      var zc = IDX.zones[VILLE.q[v].zone].controle;
+      if (zc && VILLE.q[v].zone !== VILLE.q[id].zone && !G.q[id].adv[zc] && rnd() < 0.5) G.q[id].adv[zc] = rint(Q.presence_voisine[0], Q.presence_voisine[1]);
+    });
+  });
+  VILLE.ordre.forEach(function (id) { var s = G.q[id], a = advTotal(s); if (a > 100) for (var f in s.adv) s.adv[f] *= 100 / a; });
+  // base du joueur
+  var zones = D.zones.liste.filter(function (z) { return z.depart; });
+  var zb = pick(zones), qs = VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === zb.id; });
+  var base = pick(qs), sb = G.q[base];
+  G.base = base;
+  sb.adv = {}; if (zb.controle) sb.adv[zb.controle] = Dp.presence_base_adverse;
+  sb.ctl = Dp.controle_base; sb.conn = Dp.connaissance_base;
+  qs.forEach(function (id) { G.q[id].conn = Math.max(G.q[id].conn, Dp.connaissance_zone); });
+  VILLE.adj[base].forEach(function (id) { G.q[id].conn = Math.max(G.q[id].conn, 1); });
+  Dp.operateurs.forEach(function (t) { creerOperateur(t, base, rint(Dp.competence[0], Dp.competence[1])); });
+  D.equipes.liste.forEach(function (e) { G.factions[e.id].pic = territoireFaction(e.id).length; });
+  log("Cycle 1. Ton réseau tient " + VILLE.q[base].nom + " (" + IDX.zones[zb.id].nom + ").", "debut", base);
+  return G;
+}
+/** Quartiers où une faction a 30 % ou plus (§5.2). */
+function territoireFaction(f) {
+  return VILLE.ordre.filter(function (id) { return (G.q[id].adv[f] || 0) >= 30; });
 }
 
-/* ---- 20-temps.js ---- */
-/* CHOUF — 20-temps : énergie et sang-froid en temps réel (rythme « mélange »).
-   La semaine de campagne n'avance que quand le joueur la clôture (30-semaine.js). */
+/* ---- 20-operateurs.js ---- */
+/* CHOUF v2 — 20-operateurs : recrutement, affectation (quartier + tâche), transit, fatigue, efficacité.
+   Un opérateur est une fonction (§4) ; il porte un numéro, un visage et un surnom pris dans les personnages
+   adultes du jeu, mais il n'a ni dialogue ni mémoire. */
 
-/** Recharge l'énergie et le sang-froid selon le temps réel écoulé depuis G.temps.maj.
-    Retourne le résumé « Pendant ton absence » si l'absence est assez longue. */
-function syncTemps() {
-  var T = B.temps, t = G.temps, now = CLOCK.now();
-  var dt = Math.max(0, now - t.maj);
-  var resume = null;
-  if (dt >= T.absence_resume_min * 60000) resume = { minutes: Math.round(dt / 60000), energie: t.energie, sangfroid: t.sangfroid };
-  var e = T.energie_regen_min * 60000, s = T.sangfroid_regen_min * 60000;
-  // on avance par pas entiers pour garder le reste
-  var gE = Math.floor(dt / e), gS = Math.floor(dt / s);
-  var avantE = t.energie, avantS = t.sangfroid;
-  t.energie = Math.min(T.energie_max, t.energie + gE);
-  t.sangfroid = Math.min(T.sangfroid_max, t.sangfroid + gS);
-  // le plus lent des deux fixe la nouvelle référence, sans perdre de recharge en cours
-  t.maj = (t.energie >= T.energie_max && t.sangfroid >= T.sangfroid_max) ? now : now - (dt % e);
-  if (resume) {
-    resume.energie = t.energie - avantE; resume.sangfroid = t.sangfroid - avantS;
-    if (resume.energie > 0 || resume.sangfroid > 0) G.absence = resume;
+function TYPES() { return B.operateurs.types; }
+
+function creerOperateur(type, qid, comp) {
+  var O = B.operateurs, visage = G.visages.length ? G.visages.shift() : null;
+  var op = { id: "OP-" + ("00" + G.prochain_op++).slice(-3), type: type, comp: comp || rint(O.competence_recrue[0], O.competence_recrue[1]),
+    xp: 0, fatigue: 0, dispo: "disponible", pos: qid, dest: null, transit: 0, tache: "repos", indispo: 0, visage: visage };
+  G.operateurs.push(op);
+  return op;
+}
+function opsActifs() { return G.operateurs.filter(function (o) { return o.dispo !== "perdu"; }); }
+function opParId(id) { return G.operateurs.filter(function (o) { return o.id === id; })[0]; }
+function nomOp(o) { return o.id + (o.visage && IDX.personnages[o.visage] ? " « " + (IDX.personnages[o.visage].surnom || IDX.personnages[o.visage].prenom) + " »" : ""); }
+
+/** Coût de recrutement, et raison du refus éventuel (capacité §7, trésorerie §6.3). */
+function peutRecruter(type) {
+  var c = TYPES()[type].recrutement;
+  if (opsActifs().length >= G.capacite) return { ok: false, raison: "Capacité atteinte (" + G.capacite + ")" };
+  if (G.tresorerie < c) return { ok: false, raison: "Trésorerie insuffisante" };
+  return { ok: true, cout: c };
+}
+function recruter(type) {
+  var r = peutRecruter(type);
+  if (!r.ok) return r;
+  G.tresorerie -= r.cout;
+  var op = creerOperateur(type, G.base);
+  G.ind.stabilite = clamp(G.ind.stabilite + B.indicateurs.stabilite_recrue, 0, 100);
+  log("Recrue : " + nomOp(op) + ", " + TYPES()[type].nom + " (−" + r.cout + " €).", "recrue", G.base);
+  save();
+  return { ok: true, op: op };
+}
+
+/** Distance en cycles entre deux quartiers (§4.4 : 1 si voisin, 2 sinon, 0 sur place). */
+function dureeTransit(a, b) {
+  if (a === b) return 0;
+  return VILLE.adj[a].indexOf(b) >= 0 ? B.operateurs.transit_adjacent : B.operateurs.transit_loin;
+}
+/** Efficacité d'un opérateur sur une tâche (§4.4 spécialisation, fatigue, stabilité). */
+function efficacite(o, tache) {
+  var t = B.taches[tache], O = B.operateurs;
+  if (!t || !t.type) return 0;
+  var e = o.comp / O.competence_ref;
+  if (t.type !== o.type) e *= O.hors_specialite;
+  if (o.fatigue >= O.fatigue_seuil_baisse) e *= O.fatigue_effet;
+  return r1(e);
+}
+/** Affecte un opérateur à un quartier et une tâche pour le cycle à venir. */
+function affecter(opId, qid, tache) {
+  var o = opParId(opId);
+  if (!o || o.dispo === "perdu") return { ok: false, raison: "Opérateur indisponible" };
+  if (o.dispo === "indisponible") return { ok: false, raison: "Épuisé : au repos ce cycle" };
+  if (qid !== o.pos && !accessible(qid)) return { ok: false, raison: "Quartier inaccessible : il faut un voisin à " + B.controle.acces_voisin + " %" };
+  o.tache = tache;
+  if (qid !== o.pos) { o.dest = qid; o.transit = dureeTransit(o.pos, qid); o.dispo = "transit"; }
+  else { o.dest = null; o.transit = 0; o.dispo = tache === "repos" ? "disponible" : "occupe"; }
+  save();
+  return { ok: true };
+}
+/** Quartier où l'opérateur agira (destination s'il voyage). */
+function lieuOp(o) { return o.dest || o.pos; }
+
+/* ---- 30-factions.js ---- */
+/* CHOUF v2 — 30-factions : l'IA des équipes rivales (§5). Chaque cycle, chaque faction :
+   gagne et dépense, recrute lentement, choisit un objectif (contre-attaquer, se rétracter, étendre, maintenir),
+   agit sur un ou plusieurs quartiers. Alliances temporaires, fragmentation, disparition. */
+
+function forceAction(f) {
+  var a = B.factions.force_action;
+  return a[0] + f.agressivite * a[1] + f.effectif * a[2];
+}
+/** Revenu d'une faction : ses quartiers selon sa présence. */
+function revenuFaction(fid) {
+  var t = 0;
+  VILLE.ordre.forEach(function (id) { t += G.q[id].flux * (G.q[id].adv[fid] || 0) / 100; });
+  return t * B.factions.revenu_ratio;
+}
+/** Défense du joueur dans un quartier (opérateurs Force sur place, surveillance). */
+function defense(id) {
+  var red = 0;
+  opsActifs().forEach(function (o) {
+    if (o.dispo === "transit" || o.pos !== id) return;
+    if (o.tache === "securiser") red += B.controle.force_reduit_attaque * efficacite(o, "securiser");
+    if (o.tache === "surveiller") red += B.taches.surveiller.reduction_attaque * efficacite(o, "surveiller");
+  });
+  return clamp(red, 0, 0.85);
+}
+
+/** Choisit l'objectif et la cible d'une faction (§5.3). Retourne la liste des quartiers visés. */
+function decider(fid) {
+  var f = G.factions[fid], F = B.factions, terr = territoireFaction(fid), cibles = [];
+  var eqp = IDX.equipes[fid];
+  // attaquée : un de ses quartiers où le joueur dépasse le seuil
+  var attaques = terr.concat(VILLE.ordre.filter(function (id) { return (G.q[id].adv[fid] || 0) >= 15; }))
+    .filter(function (id) { return G.q[id].ctl > F.attaque_detecte; });
+  if (attaques.length) { f.objectif = "contre"; cibles = attaques; }
+  else if (f.budget < F.budget_max * F.retraite_budget * (eqp.budget / F.budget_max + 0.5)) { f.objectif = "retraite"; cibles = []; }
+  else {
+    // faiblesse : quartier voisin de son territoire, libre ou peu tenu par le joueur
+    var voisins = {};
+    terr.forEach(function (id) { VILLE.adj[id].forEach(function (v) { if ((G.q[v].adv[fid] || 0) < 30) voisins[v] = 1; }); });
+    var faibles = Object.keys(voisins).filter(function (v) {
+      var s = G.q[v]; return s.ctl < 40 && !Object.keys(s.adv).some(function (g) { return g !== fid && allies(fid, g) && s.adv[g] > 30; });
+    });
+    if (faibles.length && rnd() < 0.25 + f.agressivite * 0.12) {
+      f.objectif = "etendre";
+      faibles.sort(function (a, b) { return (G.q[a].ctl + advTotal(G.q[a])) - (G.q[b].ctl + advTotal(G.q[b])); });
+      cibles = faibles;
+    } else { f.objectif = "maintenir"; cibles = []; }
   }
-  return resume;
+  var n = Math.max(1, Math.ceil(f.effectif / F.actions_par_effectif));
+  cibles = cibles.slice(0, n);
+  f.cible = cibles[0] || null;
+  return cibles;
 }
 
-/** Minutes avant le prochain point d'énergie (affichage). */
-function prochainPoint() {
-  var T = B.temps;
-  if (G.temps.energie >= T.energie_max) return 0;
-  var e = T.energie_regen_min * 60000;
-  return Math.max(1, Math.ceil((e - ((CLOCK.now() - G.temps.maj) % e)) / 60000));
+/** Fait jouer toutes les factions pour ce cycle. */
+function tourFactions() {
+  var F = B.factions, att = [];
+  Object.keys(G.factions).forEach(function (fid) {
+    var f = G.factions[fid];
+    if (!f.vivante) return;
+    f.budget = clamp(f.budget + revenuFaction(fid) - f.effectif * F.cout_effectif, 0, F.budget_max);
+    if (f.budget > F.recrutement_seuil + F.recrutement_cout && rnd() < 0.25) { f.budget -= F.recrutement_cout; f.effectif++; }
+    var cibles = decider(fid);
+    if (f.objectif === "retraite") {
+      // se concentre : abandonne un peu de présence dans ses quartiers les plus faibles
+      VILLE.ordre.forEach(function (id) { var s = G.q[id]; if (s.adv[fid] && s.adv[fid] < 25) s.adv[fid] = Math.max(0, s.adv[fid] - 4); });
+      if (f.agressivite > 1 && rnd() < 0.3) f.agressivite--;
+    }
+    if (f.objectif === "maintenir" && f.agressivite < IDX.equipes[fid].agressivite && rnd() < 0.2) f.agressivite++;
+    cibles.forEach(function (id) {
+      var v = forceAction(f) * (1 - defense(id));
+      var avant = G.q[id].ctl;
+      var perte = gagnerPresence(id, fid, v);
+      if (perte > 0.5) att.push({ f: fid, q: id, perte: perte, avant: avant });
+      else if (avant === 0 && G.q[id].conn > 0 && v > 3 && rnd() < 0.3) log(IDX.equipes[fid].nom + " avance sur " + VILLE.q[id].nom + ".", "faction", id);
+    });
+    f.intention = cibles[0] ? { objectif: f.objectif, q: cibles[0] } : { objectif: f.objectif, q: null };
+  });
+  att.forEach(function (a) {
+    log(IDX.equipes[a.f].nom + " attaque " + VILLE.q[a.q].nom + " : contrôle −" + Math.round(a.perte) + " %.", "attaque", a.q);
+    if (G.q[a.q].ctl <= 0 && a.avant > 0) log(VILLE.q[a.q].nom + " est perdu.", "perte", a.q);
+  });
+  alliancesEtFragmentation();
 }
 
-/** Dépense : retourne false si pas assez. */
-function depenser(cout) {
-  cout = cout || {};
-  if ((cout.energie || 0) > G.temps.energie || (cout.sangfroid || 0) > G.temps.sangfroid) return false;
-  G.temps.energie -= cout.energie || 0;
-  G.temps.sangfroid -= cout.sangfroid || 0;
-  return true;
-}
-
-/* ---- 30-monde.js ---- */
-/* CHOUF — 30-monde : missions, événements (cartes à choix, comme G.card dans KICK),
-   engagements, et clôture de la semaine. */
-
-/* ---------------- Missions ---------------- */
-
-/** Missions disponibles dans la zone courante pour le chapitre courant. */
-function missionsDispo() {
-  var ch = IDX.chapitres[G.chapitre].i;
-  return D.missions.liste.filter(function (m) {
-    return (m.zone === "*" ? G.zone === G.protagoniste.zone_origine : m.zone === G.zone) &&
-      IDX.chapitres[m.chapitre_min].i <= ch && (!m.condition || cond(m.condition));
+function alliancesEtFragmentation() {
+  var F = B.factions;
+  G.alliances = G.alliances.filter(function (x) { return --x.reste > 0 || (log("Fin de la trêve entre " + IDX.equipes[x.a].nom + " et " + IDX.equipes[x.b].nom + ".", "faction"), false); });
+  var vives = Object.keys(G.factions).filter(function (f) { return G.factions[f].vivante; });
+  if (vives.length >= 2 && rnd() < F.alliance_proba) {
+    var a = pick(vives), b = pick(vives.filter(function (x) { return x !== a; }));
+    if (!allies(a, b)) {
+      G.alliances.push({ a: a, b: b, reste: rint(F.alliance_duree[0], F.alliance_duree[1]) });
+      log("Trêve entre " + IDX.equipes[a].nom + " et " + IDX.equipes[b].nom + ".", "faction");
+    }
+  }
+  vives.forEach(function (fid) {
+    var f = G.factions[fid], t = territoireFaction(fid).length;
+    f.pic = Math.max(f.pic, t);
+    var reste = VILLE.ordre.some(function (id) { return (G.q[id].adv[fid] || 0) > 1; });
+    if (!reste) {
+      f.vivante = false;
+      log(IDX.equipes[fid].nom + " a disparu de la ville.", "disparition");
+    } else if (!f.fragmentee && f.pic >= F.fragmentation_min && t > 0 && t <= f.pic * F.fragmentation_ratio) {
+      f.fragmentee = true; f.effectif = Math.max(1, Math.round(f.effectif * 0.6)); f.agressivite = Math.min(5, f.agressivite + 1);
+      log(IDX.equipes[fid].nom + " se divise : moins nombreux, plus nerveux.", "faction");
+    }
   });
 }
-/** Niveau de maîtrise d'une mission (0..3). */
-function maitrise(id) {
-  var n = G.maitrise[id] || 0;
-  return n >= 8 ? 3 : n >= 4 ? 2 : n >= 1 ? 1 : 0;
+
+/* ---- 40-cycle.js ---- */
+/* CHOUF v2 — 40-cycle : économie (§6), capacité (§7), flux internationaux (§8), indicateurs (§9),
+   résolution d'un cycle (§10), événements, conditions de fin et bilan (§11).
+   Ordre de résolution : saisons → opérateurs (transit, tâches, fatigue) → argent → factions → abandon →
+   événements → indicateurs → trésorerie et dette → capacité → fin de partie. */
+
+/* ---------- flux internationaux ---------- */
+function offreFlux(id) { return B.flux.offres.filter(function (o) { return o.id === id; })[0]; }
+function activerFlux(id) {
+  var o = offreFlux(id);
+  if (!o || G.flux.some(function (f) { return f.id === id && f.actif; })) return { ok: false, raison: "Déjà actif" };
+  var cout = o.activation + o.engagement;
+  if (G.tresorerie < cout) return { ok: false, raison: "Il faut " + cout + " € (activation + engagement)" };
+  G.tresorerie -= cout;
+  G.flux = G.flux.filter(function (f) { return f.id !== id; });
+  G.flux.push({ id: id, actif: true, engage: o.engagement, fiabilite: o.fiabilite, exposition: o.exposition, instabilite: o.instabilite, cycles: 0, dernier: null });
+  log("Flux activé : " + o.nom + " (−" + cout + " €).", "flux");
+  save();
+  return { ok: true };
 }
-/** Convertit une clé de gain de mission en effet. */
-function cleEffet(k, v) {
-  if (k === "propre" || k === "sale") return "argent:" + k + (v >= 0 ? "+" : "") + v;
-  if (k === "enquete") return "police:enquete" + (v >= 0 ? "+" : "") + v;
-  return k + (v >= 0 ? "+" : "") + v;
+function couperFlux(id) {
+  var f = G.flux.filter(function (x) { return x.id === id && x.actif; })[0];
+  if (!f) return;
+  f.actif = false;
+  log("Flux coupé : " + offreFlux(id).nom + ". " + f.engage + " € immobilisés perdus.", "flux");
+  f.engage = 0;
+  save();
 }
-/** Fait une mission. Retourne {ok, texte}. */
-function faireMission(id) {
-  var m = IDX.missions[id];
-  if (!m) return { ok: false, texte: "Mission inconnue." };
-  if (!depenser(m.cout)) return { ok: false, texte: "Pas assez d'énergie." };
-  var bonus = 1 + 0.25 * maitrise(id);
-  Object.keys(m.gains).forEach(function (k) {
-    var v = m.gains[k];
-    if (k === "propre" || k === "sale") v = Math.round(v * bonus);
-    effet(cleEffet(k, v), {}, fillTexte(m.nom));
+function fluxActifs() { return G.flux.filter(function (f) { return f.actif; }); }
+
+/* ---------- calculs du cycle (aussi utilisés pour l'aperçu du tableau de bord) ---------- */
+/** Efficacité de pression appliquée aux revenus d'un quartier. */
+function effRevenu(id) {
+  var e = B.economie.revenu_sans_pression;
+  opsActifs().forEach(function (o) { if (o.dispo !== "transit" && o.pos === id && o.tache === "presser") e = Math.max(e, efficacite(o, "presser")); });
+  return e;
+}
+function reductionMaintien(id) {
+  var r = 0;
+  opsActifs().forEach(function (o) {
+    if (o.dispo === "transit") return;
+    if (o.pos === id && o.tache === "optimiser") r += B.taches.optimiser.baisse_maintien * efficacite(o, "optimiser");
+    if ((o.pos === id || VILLE.adj[o.pos].indexOf(id) >= 0) && o.tache === "flux") r += B.taches.flux.baisse_maintien * efficacite(o, "flux") * (o.pos === id ? 1 : 0.5);
   });
-  Object.keys(m.risques || {}).forEach(function (k) { effet(cleEffet(k, m.risques[k]), {}, m.nom); });
-  if (m.fait && !G.evenements.faits[m.fait]) G.evenements.faits[m.fait] = { a: nowWk() };
-  G.maitrise[id] = (G.maitrise[id] || 0) + 1;
-  G.semaine_actions++;
-  log(fillTexte(m.nom) + ".", "mission");
-  save();
-  return { ok: true, texte: fillTexte(m.voix || m.nom) };
+  return clamp(r, 0, 0.8);
 }
-
-/* ---------------- Engagements ---------------- */
-
-function engagementsOuverts() {
-  return G.protagoniste.engagements.filter(function (e) { return e.tenu === null; });
-}
-/** Tenir une promesse : coûte de l'énergie, renforce la confiance. */
-function tenirEngagement(i) {
-  var e = engagementsOuverts()[i];
-  if (!e || !depenser({ energie: B.engagements.cout_tenir_energie })) return false;
-  e.tenu = true;
-  change("relation:" + e.envers + ".confiance", 6, "Promesse tenue");
-  memoriser(e.envers + ":promesse_tenue");
-  log("Tu as tenu ta promesse à " + pnjNom(e.envers) + ".", "engagement");
-  G.semaine_actions++;
-  save();
-  return true;
-}
-
-/* ---------------- Événements ---------------- */
-
-/** Peut-on tirer cet événement maintenant ? */
-function evenementPossible(ev, ctx) {
-  if (ev.once && G.evenements.faits[ev.id]) return false;
-  var vu = G.evenements.vus[ev.id];
-  if (vu != null && ev.delai_retour && nowWk() - vu < ev.delai_retour) return false;
-  if (vu != null && !ev.delai_retour && ev.once !== false && ev.declencheur !== "programme") return false;
-  return conds(ev.conditions, ctx);
-}
-/** Met un événement dans la file des cartes. */
-function empiler(id, ctx) {
-  G.file.push({ id: id, ctx: ctx || {} });
-  G.evenements.vus[id] = nowWk();
-}
-/** Ouvre la carte suivante de la file. */
-function carteSuivante() {
-  if (G.carte || !G.file.length) return G.carte;
-  G.carte = G.file.shift();
-  return G.carte;
-}
-/** Options visibles d'une carte (celles dont la condition est remplie). */
-function optionsCarte(c) {
-  var ev = IDX.evenements[c.id];
-  return ev.options.map(function (o, i) { return { o: o, i: i }; })
-    .filter(function (x) { return !x.o.condition || cond(x.o.condition, c.ctx); });
-}
-/** Le joueur choisit l'option i (index dans ev.options). */
-function choisir(i) {
-  var c = G.carte;
-  if (!c) return;
-  var ev = IDX.evenements[c.id], o = ev.options[i];
-  (o.effets || []).forEach(function (e) { effet(e, c.ctx, ev.titre); });
-  memoriser(o.memoire, c.ctx);
-  memoriser(ev.memoire, c.ctx);
-  (o.programme || []).forEach(function (p) { programmer(p.id, p.dans, c.ctx); });
-  G.evenements.faits[ev.id] = { a: nowWk(), option: i };
-  if (ev.irreversible || o.irreversible) G.progression.irreversibles.push(ev.id);
-  log(ev.titre + " — " + o.t + ".", "choix");
-  G.carte = null;
-  carteSuivante();
-  save();
-}
-
-/** Événements fixés au calendrier (date précise). */
-function declencherCalendrier() {
-  D.evenements.liste.forEach(function (ev) {
-    if (ev.declencheur === "calendrier" && ev.quand && wk(ev.quand) === nowWk() && evenementPossible(ev, {})) empiler(ev.id, {});
+/** Prévision des entrées et sorties pour ce cycle (§6.2). */
+function previsions() {
+  var rev = 0, maint = 0, entr = 0, fluxRev = 0, fluxCout = 0, redEntr = 0;
+  VILLE.ordre.forEach(function (id) {
+    var s = G.q[id];
+    if (s.ctl <= 0) return;
+    rev += s.flux * (1 + s.inv * B.quartiers.investir_gain) * multSaison(id) * s.ctl / 100 * effRevenu(id);
+    maint += s.maintien * (1 + s.inv * B.quartiers.investir_maintien) * (1 - reductionMaintien(id)) * s.ctl / 100;
   });
-  carteSuivante();
+  opsActifs().forEach(function (o) {
+    if (o.tache === "optimiser" && o.dispo !== "transit") redEntr += B.taches.optimiser.baisse_entretien * efficacite(o, "optimiser");
+  });
+  opsActifs().forEach(function (o) { entr += TYPES()[o.type].entretien; });
+  entr *= 1 - clamp(redEntr, 0, 0.3);
+  fluxActifs().forEach(function (f) { var o = offreFlux(f.id); fluxRev += o.revenu * f.fiabilite / 100; fluxCout += o.cout; });
+  var interets = G.dette * B.economie.dette_interet;
+  return { revenus: Math.round(rev), maintien: Math.round(maint), entretien: Math.round(entr), flux_revenus: Math.round(fluxRev), flux_couts: fluxCout,
+    interets: Math.round(interets), solde: Math.round(rev + fluxRev - maint - entr - fluxCout - interets) };
 }
 
-/** Rendez-vous de la ville actifs cette semaine (match de l'OM, mistral…). */
-function villeCetteSemaine() {
-  var s = G.cal.semaine, out = [];
-  D.calendrier.ville.forEach(function (v) {
-    if (v.semaines && (v.semaines.length === 1 ? s === v.semaines[0] : s >= v.semaines[0] && s <= v.semaines[1])) out.push(v.id);
-    else if (v.frequence === "tous_les_15_jours_aout_mai" && (s >= 32 || s <= 21) && s % 2 === 0) out.push(v.id);
-    else if (v.proba_semaine && rnd() < v.proba_semaine) out.push(v.id);
+/* ---------- résolution ---------- */
+function saisonsDuCycle() {
+  var s = semaine(), out = [];
+  B.evenements.saisons.forEach(function (x) {
+    if (x.semaines && s >= x.semaines[0] && s <= x.semaines[1]) out.push(x.id);
+    else if (x.pair_semaines && s % 2 === 0 && !(s >= x.hors_semaines[0] && s <= x.hors_semaines[1])) out.push(x.id);
+    else if (x.proba && rnd() < x.proba) out.push(x.id);
   });
   return out;
 }
 
-/* ---------------- Clôture de la semaine ---------------- */
+/** Valide le cycle : le système résout tout et retourne le rapport (lignes courtes). */
+function validerCycle() {
+  if (G.fini) return null;
+  var I = B.indicateurs, O = B.operateurs, T = B.taches, ind = G.ind;
+  G.rapport = [];
+  var avant = { tresorerie: G.tresorerie, territoire: territoire(), pression: ind.pression, stabilite: ind.stabilite, exposition: ind.exposition };
+  var possede = {};
+  VILLE.ordre.forEach(function (id) { possede[id] = G.q[id].ctl > 0; });
+  G.saisons = saisonsDuCycle();
+  G.saisons.forEach(function (sid) { if (sid !== "match") log(B.evenements.saisons.filter(function (x) { return x.id === sid; })[0].nom + " : revenus modifiés.", "saison"); });
 
-/** Résout la semaine et passe à la suivante. Retourne le bilan affichable. */
-function cloreSemaine() {
-  if (G.carte) return null;                      // une décision attend
-  var bilan = { lignes: [], cartes: 0 };
-  var E = B.evenements, Z = B.zones;
+  // 1. opérateurs
+  var present = {};
+  opsActifs().forEach(function (o) {
+    if (o.dispo === "indisponible") {
+      if (--o.indispo <= 0) { o.dispo = "disponible"; o.fatigue = O.fatigue_apres_indispo; o.tache = "repos"; }
+      return;
+    }
+    if (o.dispo === "transit") {
+      if (--o.transit > 0) return;
+      o.pos = o.dest; o.dest = null; o.dispo = o.tache === "repos" ? "disponible" : "occupe";
+      log(nomOp(o) + " arrive à " + VILLE.q[o.pos].nom + ".", "op", o.pos);
+    }
+    present[o.pos] = true;
+    var t = T[o.tache], e = efficacite(o, o.tache), s = G.q[o.pos];
+    if (!t || o.tache === "repos") { o.fatigue = Math.max(0, o.fatigue - O.fatigue_repos); return; }
+    o.fatigue = clamp(o.fatigue + t.fatigue * (ind.stabilite < I.stabilite_basse ? I.stabilite_basse_fatigue : 1), 0, 100);
+    o.xp += O.progression_competence * (t.type === o.type ? 1 : 0.5);
+    if (o.xp >= 1 && o.comp < 5) { o.xp = 0; o.comp++; log(nomOp(o) + " progresse : compétence " + o.comp + ".", "op"); }
+    switch (o.tache) {
+      case "securiser":
+        var a = advTotal(s), baisse = Math.min(a, t.baisse_adverse * e);
+        if (a > 0) for (var f in s.adv) s.adv[f] = Math.max(0, s.adv[f] - baisse * s.adv[f] / a);
+        if (s.ctl > 0 || a > 0) gagnerControle(o.pos, t.gain_controle * e);
+        ind.pression += t.pression; ind.exposition += t.exposition;
+        break;
+      case "presser":
+        gagnerControle(o.pos, t.gain_controle * e);
+        ind.pression += t.pression; ind.exposition += t.exposition;
+        break;
+      case "reperer":
+        if (rnd() < Math.min(1, 0.4 + e * 0.5)) s.conn = Math.min(3, s.conn + t.connaissance);
+        VILLE.adj[o.pos].forEach(function (v) { if (rnd() < 0.3 * e) G.q[v].conn = Math.min(3, Math.max(G.q[v].conn, 1)); });
+        break;
+      case "surveiller":
+        s.conn = Math.max(s.conn, 2);
+        VILLE.adj[o.pos].forEach(function (v) { G.q[v].vu = G.cycle + 1; });
+        s.vu = G.cycle + 1;
+        break;
+      case "flux":
+        fluxActifs().forEach(function (fl) { fl.fiabilite = clamp(fl.fiabilite + t.fiabilite_flux * e, 0, 100); });
+        break;
+    }
+    if (o.fatigue >= 100) { o.dispo = "indisponible"; o.indispo = O.indispo_cycles; log(nomOp(o) + " est épuisé : indisponible 1 cycle.", "fatigue"); }
+  });
 
-  // 1. engagements échus
-  G.protagoniste.engagements.forEach(function (e) {
-    if (e.tenu === null && nowWk() >= e.echeance) {
-      e.tenu = false;
-      memoriser(e.envers + ":promesse_rompue");
-      bilan.lignes.push("Tu n'as pas tenu ta promesse à " + pnjNom(e.envers) + ".");
-      programmer("promesse_oubliee", 1, { pnj: e.envers });
+  // 2. argent du cycle
+  var p = previsions();
+  var fluxNet = 0;
+  fluxActifs().forEach(function (fl) {
+    var o = offreFlux(fl.id), Fx = B.flux;
+    fl.cycles++;
+    ind.exposition += o.volume * Fx.exposition_par_volume * 0.5;
+    fl.exposition = clamp(fl.exposition + o.volume * Fx.exposition_par_volume, 0, 100);
+    fl.instabilite = clamp(fl.instabilite + Fx.instabilite_par_cycle, 0, 100);
+    if (rnd() * 100 < fl.fiabilite) { fluxNet += o.revenu - o.cout; fl.dernier = "ok"; }
+    else { fluxNet -= o.cout; fl.dernier = "perte"; fl.fiabilite = clamp(fl.fiabilite - 5, 0, 100); log(o.nom + " : livraison ratée, pas de revenu.", "flux"); }
+    if (rnd() < fl.instabilite / Fx.rupture_div) {
+      fl.actif = false;
+      log("Rupture : " + o.nom + ". " + fl.engage + " € perdus, pression +8.", "rupture");
+      G.dette += Math.round(fl.engage * 0.25); ind.pression += 8; fl.engage = 0;
+      var lg = opsActifs().filter(function (x) { return x.type === "logistique" && x.dispo !== "transit"; })[0];
+      if (lg && rnd() < 0.4) perdreOp(lg, "arrêté après la rupture du flux");
+    } else if (fl.fiabilite < Fx.fiabilite_partenaire_perdu) {
+      fl.actif = false; log("Le partenaire de " + o.nom + " disparaît. Flux perdu.", "rupture"); fl.engage = 0;
     }
   });
+  var solde = p.revenus - p.maintien - p.entretien - p.interets + fluxNet;
 
-  // 2. police : l'attention retombe lentement
-  change("police:enquete", -B.police.enquete_baisse_semaine);
+  // 3. factions
+  tourFactions();
 
-  // 3. zones : l'humeur revient vers la moyenne, la tension retombe
-  Object.keys(G.zones).forEach(function (id) {
-    var z = G.zones[id];
-    z.humeur += (Z.humeur_derive_vers - z.humeur) * Z.humeur_derive / 10;
-    z.tension = clamp(z.tension + Z.tension_derive, 0, 100);
+  // 4. quartiers laissés seuls ou sans argent
+  VILLE.ordre.forEach(function (id) {
+    var s = G.q[id];
+    if (s.ctl <= 0) { s.sans_op = 0; return; }
+    if (present[id]) s.sans_op = 0; else s.sans_op++;
+    if (s.sans_op > B.controle.abandon_cycles) s.ctl = Math.max(0, s.ctl - B.controle.abandon_baisse);
+    if (G.tresorerie <= 0 && G.dette > 0) s.ctl = Math.max(0, s.ctl - B.controle.degradation_sans_argent);
+    if (ind.stabilite < I.stabilite_basse) s.ctl = Math.max(0, s.ctl - I.stabilite_basse_degradation);
   });
 
-  // 4. relations : sans contact, la proximité baisse
-  Object.keys(G.relations).forEach(function (id) {
-    var r = G.relations[id];
-    if (nowWk() - (r.contact || 0) > B.relations.semaines_sans_contact_avant_derive) r.proximite = clamp(r.proximite + B.relations.derive_proximite_sans_contact, 0, 100);
+  // 5. événements
+  evenementsCycle();
+
+  // 6. indicateurs
+  var gagnes = VILLE.ordre.filter(function (id) { return !possede[id] && G.q[id].ctl > 0; });
+  gagnes.forEach(function (id) { log("Nouveau quartier : " + VILLE.q[id].nom + ".", "gain", id); });
+  ind.pression += gagnes.length * I.pression_par_quartier_gagne;
+  if (ind.exposition > I.exposition_alerte) { ind.pression += I.exposition_vers_pression; log("Exposition trop haute : la pression monte.", "alerte"); }
+  ind.pression -= I.pression_baisse; ind.exposition -= I.exposition_baisse;
+  ind.stabilite += (I.stabilite_vers - ind.stabilite) * I.stabilite_derive;
+  opsActifs().forEach(function (o) { if (o.fatigue > 80) ind.stabilite -= I.stabilite_fatigue; });
+  ind.stabilite += Math.min(4, Object.keys(present).filter(function (id) { return G.q[id].ctl > 0; }).length * I.stabilite_quartier_tenu);
+  if (fluxActifs().length > B.flux.trop_de_flux) ind.stabilite -= (fluxActifs().length - B.flux.trop_de_flux) * I.stabilite_flux_sup;
+  ind.pression = clamp(ind.pression, 0, 100); ind.exposition = clamp(ind.exposition, 0, 100); ind.stabilite = clamp(ind.stabilite, 0, 100);
+
+  // 7. trésorerie et dette (§6.3)
+  G.tresorerie += solde;
+  if (G.tresorerie < 0) { G.dette += -G.tresorerie; G.tresorerie = 0; log("Trésorerie à zéro : dette +" + Math.round(G.dette) + " €.", "dette"); }
+  else if (G.dette > 0) { var r = Math.min(G.dette, G.tresorerie * 0.5); G.dette -= r; G.tresorerie -= r; }
+  G.tresorerie = Math.round(G.tresorerie); G.dette = Math.round(G.dette);
+  G.cycles_zero = G.tresorerie <= 0 ? G.cycles_zero + 1 : 0;
+
+  // 8. capacité (§7)
+  if (G.cycle % B.capacite.tous_les === 0) { G.capacite++; log("Capacité +1 (" + G.capacite + ").", "capacite"); }
+  var terr = territoire();
+  B.capacite.seuils_territoire.forEach(function (sv) {
+    if (terr >= sv && G.seuils_pris.indexOf(sv) < 0) { G.seuils_pris.push(sv); G.capacite++; log("Territoire " + sv + " % : capacité +1 (" + G.capacite + ").", "capacite"); }
   });
 
-  // 5. stress et santé
-  var et = G.protagoniste.etat, S = B.stress;
-  et.stress = clamp(et.stress + S.par_semaine_base + (G.semaine_actions === 0 ? S.repos_semaine : 0) + (G.police.enquete >= B.police.seuil_indice ? S.par_enquete_connue : 0), 0, 100);
-  if (et.stress >= S.seuil_sante) { et.sante = clamp(et.sante - S.perte_sante_si_seuil, 0, 100); bilan.lignes.push("Tu dors mal. Ta santé baisse."); }
-
-  // 6. avancer le calendrier
-  var avantCh = G.chapitre, avantAge = age();
-  var n = nowWk() + 1, c = wkToCal(n);
-  G.cal.annee = c.annee; G.cal.semaine = c.semaine;
-  G.semaine_actions = 0;
-  G.temps.energie = Math.min(B.temps.energie_max, G.temps.energie + B.temps.energie_par_semaine);
-  G.temps.sangfroid = Math.min(B.temps.sangfroid_max, G.temps.sangfroid + B.temps.sangfroid_par_semaine);
-  if (age() > avantAge) bilan.lignes.push("Tu as " + age() + " ans.");
-  majChapitre();
-  if (G.chapitre !== avantCh) bilan.lignes.push("Nouveau chapitre : " + IDX.chapitres[G.chapitre].nom + ".");
-
-  // 7. cartes : programmées, calendrier, rendez-vous de ville, seuils, tirage
-  var max = E.cartes_max_par_semaine;
-  function pousse(id, ctx) { if (bilan.cartes < max) { empiler(id, ctx); bilan.cartes++; } }
-  G.evenements.programmes = G.evenements.programmes.filter(function (p) {
-    if (p.a > nowWk()) return true;
-    var ev = IDX.evenements[p.id];
-    if (ev && bilan.cartes < max && evenementPossible(ev, p.ctx)) { pousse(p.id, p.ctx); return false; }
-    return bilan.cartes >= max;                  // garde pour la semaine suivante si la file est pleine
-  });
-  D.evenements.liste.forEach(function (ev) {
-    if (ev.declencheur === "calendrier" && ev.quand && wk(ev.quand) === nowWk() && evenementPossible(ev, {})) pousse(ev.id, {});
-  });
-  var ville = villeCetteSemaine();
-  D.evenements.liste.forEach(function (ev) {
-    if (ev.ville && ville.indexOf(ev.ville) >= 0 && evenementPossible(ev, {})) pousse(ev.id, {});
-  });
-  D.evenements.liste.forEach(function (ev) {
-    if (ev.declencheur === "seuil" && evenementPossible(ev, {})) pousse(ev.id, {});
-  });
-  if (bilan.cartes < max && rnd() < E.proba_tirage_semaine) {
-    var pool = D.evenements.liste.filter(function (ev) { return ev.declencheur === "tirage" && evenementPossible(ev, {}); });
-    var tot = pool.reduce(function (a, ev) { return a + (ev.poids || 1); }, 0), r = rnd() * tot;
-    for (var i = 0; i < pool.length; i++) { r -= pool[i].poids || 1; if (r <= 0) { pousse(pool[i].id, {}); break; } }
-  }
-
-  // 8. bilan mensuel
-  if (G.cal.semaine % B.temps.bilan_mensuel_toutes === 0) bilan.mensuel = true;
-  bilan.lignes.forEach(function (l) { log(l, "semaine"); });
-  log("Semaine " + G.cal.semaine + ", " + G.cal.annee + ".", "semaine");
-  carteSuivante();
+  // 9. bilan du cycle et fin
+  G.dernier = { solde: Math.round(solde), revenus: p.revenus, couts: p.maintien + p.entretien + p.interets, flux: Math.round(fluxNet),
+    d_territoire: r1(terr - avant.territoire), d_pression: r1(ind.pression - avant.pression), d_stabilite: r1(ind.stabilite - avant.stabilite), d_exposition: r1(ind.exposition - avant.exposition) };
+  G.historique.push({ c: G.cycle, t: r1(terr), tr: G.tresorerie, p: Math.round(ind.pression) });
+  verifierFin();
+  var rap = G.rapport; G.rapport = null;
+  G.cycle++;
   save();
-  return bilan;
+  return { lignes: rap, d: G.dernier };
 }
 
-/** Chapitre courant d'après la date (les chapitres sont des cadres, GDD V7 §3). */
-function majChapitre() {
-  var ch = D.calendrier.chapitres;
-  for (var i = ch.length - 1; i >= 0; i--) {
-    if (G.cal.annee >= ch[i].annees[0]) { G.chapitre = ch[i].id; return; }
-  }
+function perdreOp(o, raison) {
+  o.dispo = "perdu"; o.tache = "repos";
+  G.ind.stabilite = clamp(G.ind.stabilite - B.indicateurs.stabilite_perte, 0, 100);
+  log(nomOp(o) + " (" + TYPES()[o.type].nom + ") perdu : " + raison + ".", "perteop", o.pos);
 }
-/** La campagne est-elle terminée ? */
-function finCampagne() { return nowWk() > wk(B.temps.semaine_fin); }
+
+function evenementsCycle() {
+  var E = B.evenements, ind = G.ind;
+  var operation = ind.pression > B.indicateurs.pression_alerte && rnd() < E.operation_exterieure;
+  if (operation) {
+    ind.pression += E.operation_pression * 0.25;
+    var tenus = VILLE.ordre.filter(function (id) { return G.q[id].ctl > 0; });
+    tenus.sort(function () { return rnd() - 0.5; }).slice(0, 2).forEach(function (id) { G.q[id].ctl = Math.max(0, G.q[id].ctl - 10); });
+    log("Opération extérieure : descentes dans tes quartiers, contrôle −10 dans deux d'entre eux.", "operation");
+  }
+  opsActifs().forEach(function (o) {
+    if (o.dispo === "transit" || o.dispo === "perdu") return;
+    var z = IDX.zones[VILLE.q[o.pos].zone];
+    var pa = E.arrestation * (ind.pression / 100) * (z.police / 60) * (operation ? 2 : 1) * (o.tache === "repos" ? 0.3 : 1);
+    if (rnd() < pa) { perdreOp(o, "arrêté"); return; }
+    var s = G.q[o.pos], dom = factionDominante(s);
+    if (o.type !== "force" && dom && s.adv[dom] > 50 && s.ctl > 0 && rnd() < E.elimination_contestee) perdreOp(o, "écarté par " + IDX.equipes[dom].nom);
+  });
+}
+
+/** Conditions de fin (§11). */
+function verifierFin() {
+  var Fn = B.fin, terr = territoire();
+  if (G.ind.pression >= B.indicateurs.pression_chute) return finir("chute");
+  if (G.cycles_zero >= B.economie.faillite_cycles) return finir("faillite");
+  if (terr >= Fn.victoire_territoire && G.tresorerie > 0) return finir("victoire");
+  if (!opsActifs().length && G.tresorerie < Math.min.apply(0, Object.keys(TYPES()).map(function (t) { return TYPES()[t].recrutement; }))) return finir("faillite");
+  if (G.cycle >= Fn.cycles_max) return finir("fin");
+}
+function finir(type) {
+  var terr = territoire();
+  var morts = Object.keys(G.factions).filter(function (f) { return !G.factions[f].vivante; }).length;
+  var score = terr + Math.min(30, G.tresorerie / 2000) + morts * 6 + opsActifs().length * 2 - G.ind.pression / 5 - G.dette / 2000 + (type === "victoire" ? 20 : type === "fin" ? 0 : -25);
+  var note = score >= 85 ? "A" : score >= 65 ? "B" : score >= 45 ? "C" : score >= 25 ? "D" : "E";
+  G.fini = { type: type, cycles: G.cycle, territoire: r1(terr), tresorerie: G.tresorerie, dette: G.dette, operateurs: opsActifs().length,
+    factions: Object.keys(G.factions).filter(function (f) { return G.factions[f].vivante; }).length, flux: fluxActifs().length,
+    pression: Math.round(G.ind.pression), stabilite: Math.round(G.ind.stabilite), exposition: Math.round(G.ind.exposition), note: note };
+  log("Fin de partie : " + type + ".", "fin");
+}
+function abandonner() { if (!G.fini) { finir("abandon"); save(); } }
+
+/** Investir dans un quartier (§6.3). */
+function coutInvestir(id) { return Math.round(G.q[id].flux * B.quartiers.investir_cout_ratio * (1 + G.q[id].inv)); }
+function investir(id) {
+  var s = G.q[id], c = coutInvestir(id);
+  if (s.ctl <= 0) return { ok: false, raison: "Il faut tenir le quartier" };
+  if (G.tresorerie < c) return { ok: false, raison: "Il faut " + c + " €" };
+  G.tresorerie -= c; s.inv++;
+  log("Investissement à " + VILLE.q[id].nom + " (−" + c + " €) : revenus et coûts en hausse.", "invest", id);
+  save();
+  return { ok: true };
+}
 
 /* ---- 55-plan.js ---- */
 /* CHOUF — 55-plan : la ville en relief (vue stratégique façon jeu de gestion de territoires).
@@ -648,31 +828,24 @@ function deproj(P, ox, oy) {
   var rx = ox / P.R + P.minX, ry = (oy / P.R + P.minY) / P.k;
   return [rx * P.c + ry * P.s + 180, -rx * P.s + ry * P.c + 200];
 }
-function dansPoly(pt, poly) {
-  var x = pt[0], y = pt[1], ins = false;
-  for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    var xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
-    if (((yi > y) !== (yj > y)) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) ins = !ins;
-  }
-  return ins;
-}
-/** Hasard du décor, indépendant de G.seed (le décor ne doit pas changer la partie). */
-function rngDecor(txt) {
-  var h = 2166136261;
-  for (var i = 0; i < txt.length; i++) h = Math.imul(h ^ txt.charCodeAt(i), 16777619);
-  return function () { h = (h + 0x6D2B79F5) | 0; var t = Math.imul(h ^ (h >>> 15), h | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-}
 function hex(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; }
 function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
 function rgb(c, f) { f = f == null ? 1 : f; return "rgb(" + Math.round(c[0] * f) + "," + Math.round(c[1] * f) + "," + Math.round(c[2] * f) + ")"; }
 
-/** Couleur de l'équipe qui tient une zone (ou neutre / joueur). */
-function couleurZone(id) {
-  var c = G.zones[id].controle;
-  if (c === "joueur") return B.carte.couleur_joueur;
-  return c && IDX.equipes[c] ? IDX.equipes[c].couleur : B.carte.couleur_neutre;
+/** Couleur d'un quartier selon son statut (§12.2 : vert joueur, couleur de faction, gris libre, orange contesté). */
+var COUL = { joueur: "#6ccf4f", securise: "#4fd06a", conteste: "#e8862c", libre: "#8d9096" };
+function couleurQuartier(id) {
+  var st = statut(id), s = G.q[id];
+  if (s.conn === 0 && s.ctl <= 0) return null;                  // inconnu : brouillard
+  if (st === "faction") { var f = factionDominante(s); return f ? IDX.equipes[f].couleur : COUL.libre; }
+  return COUL[st];
 }
-
+function forceTeinte(id) {
+  var s = G.q[id], st = statut(id);
+  if (st === "faction") return 0.25 + Math.min(0.4, advTotal(s) / 200);
+  if (st === "libre") return 0;
+  return 0.3 + Math.min(0.35, s.ctl / 250);
+}
 /** Génère les immeubles d'une zone (déterministe). */
 function immeubles(z) {
   var r = rngDecor(z.id), b = z.bati, s = b.pas, out = [];
@@ -694,7 +867,7 @@ function immeubles(z) {
 
 /** Dessine toute la ville dans une image hors écran. Refait seulement si le contrôle des zones change. */
 function planCache() {
-  var sig = D.zones.liste.map(function (z) { return z.id + G.zones[z.id].controle + G.zones[z.id].connu; }).join("|");
+  var sig = VILLE.ordre.map(function (id) { var s = G.q[id]; return statut(id) + (factionDominante(s) || "") + (s.conn > 0 ? 1 : 0) + Math.floor(s.ctl / 20); }).join("|");
   if (PLAN.cache && PLAN.sig === sig) return PLAN.cache;
   var P = planProj(), R = D.zones.repere;
   // bornes
@@ -719,22 +892,40 @@ function planCache() {
   g.fillStyle = gr; g.fillRect(0, 0, W, H);
   // terre et sol des zones
   poly(R.terre, 0, "#2f3134");
-  D.zones.liste.forEach(function (z) {
-    var gz = G.zones[z.id], col = hex(couleurZone(z.id));
-    var base = gz.connu === 0 ? [44, 46, 49] : mix([70, 72, 76], col, gz.controle ? 0.38 : 0);
-    poly(z.plan, 0, rgb(base), "#9a9ea5", 1.6 * P.R);
+  // sol : une case par point du découpage, teintée selon le quartier
+  var PAS = VILLE.PAS, couleurs = {};
+  VILLE.ordre.forEach(function (id) {
+    var c = couleurQuartier(id);
+    couleurs[id] = c ? rgb(mix([70, 72, 76], hex(c), forceTeinte(id))) : "rgb(44,46,49)";
+  });
+  Object.keys(VILLE.cell).forEach(function (k) {
+    var p = k.split(",").map(Number);
+    poly([[p[0], p[1]], [p[0] + PAS, p[1]], [p[0] + PAS, p[1] + PAS], [p[0], p[1] + PAS]], 0, couleurs[VILLE.cell[k]], couleurs[VILLE.cell[k]], 0.6);
+  });
+  // limites : fines entre quartiers, épaisses entre zones
+  g.lineCap = "round";
+  Object.keys(VILLE.cell).forEach(function (k) {
+    var p = k.split(",").map(Number), a = VILLE.cell[k];
+    [[PAS, 0, [p[0] + PAS, p[1]], [p[0] + PAS, p[1] + PAS]], [0, PAS, [p[0], p[1] + PAS], [p[0] + PAS, p[1] + PAS]]].forEach(function (d) {
+      var b = VILLE.cell[(p[0] + d[0]) + "," + (p[1] + d[1])];
+      if (!b || b === a) return;
+      var zz = VILLE.q[a].zone !== VILLE.q[b].zone;
+      var q1 = proj(P, d[2][0], d[2][1], 0), q2 = proj(P, d[3][0], d[3][1], 0);
+      g.beginPath(); g.moveTo(q1[0], q1[1]); g.lineTo(q2[0], q2[1]);
+      g.strokeStyle = zz ? "#b9bdc4" : "rgba(160,165,172,.45)"; g.lineWidth = (zz ? 1.4 : 0.6) * P.R; g.stroke();
+    });
   });
   poly(R.vieux_port, 0, "#1c2a33", "#4a4e55", 1);
   // immeubles, triés de l'arrière vers l'avant
   var all = [];
   D.zones.liste.forEach(function (z) { all = all.concat(immeubles(z)); });
+  all.forEach(function (b) { b.q = quartierEn(b.cx, b.cy) || VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === b.z; })[0]; });
   all.forEach(function (b) { b.prof = (b.cx - 180) * P.s + (b.cy - 200) * P.c; });
   all.sort(function (a, b) { return a.prof - b.prof; });
   var lum = [0.62, 0.48];
   all.forEach(function (b) {
-    var gz = G.zones[b.z], col = hex(couleurZone(b.z));
-    var c = gz.connu === 0 ? [70, 72, 76] : mix([196, 198, 202], col, gz.controle ? 0.45 : 0);
-    if (gz.controle === "joueur") c = mix(c, col, 0.3);
+    var cq = couleurQuartier(b.q), inconnu = !cq;
+    var c = inconnu ? [70, 72, 76] : mix([196, 198, 202], hex(cq), forceTeinte(b.q) * 1.3);
     for (var i = 0; i < 4; i++) {
       var p1 = b.pts[i], p2 = b.pts[(i + 1) % 4];
       var nx = p2[1] - p1[1], ny = -(p2[0] - p1[0]);           // normale extérieure
@@ -746,7 +937,7 @@ function planCache() {
     }
     poly(b.pts, b.h, rgb(c, 0.92), rgb(c, 0.55), 0.6);
     // fenêtres allumées sur les hautes tours
-    if (b.h > 12 && gz.connu > 0) {
+    if (b.h > 12 && !inconnu) {
       var q = proj(P, b.pts[3][0], b.pts[3][1], 0), q2 = proj(P, b.pts[2][0], b.pts[2][1], 0);
       g.fillStyle = "rgba(255,190,110,.55)";
       for (var f = 3; f < b.h - 1; f += 3) for (var t = 0.25; t < 0.9; t += 0.3) {
@@ -812,15 +1003,21 @@ function badge(g, x, y, r, anneau, type, fond) {
   g.lineWidth = r * 0.2; g.strokeStyle = anneau; g.stroke();
   glyphe(g, type, x, y, r);
 }
-/** Badges d'une zone : équipe qui la tient, chez toi, police forte, tension forte. */
-function badgesZone(id) {
-  var gz = G.zones[id], l = [];
-  if (gz.connu === 0) return [{ t: "brouillard", c: "#6b6e73" }];
-  if (id === G.protagoniste.zone_origine) l.push({ t: "maison", c: B.carte.couleur_joueur });
-  if (gz.controle && IDX.equipes[gz.controle]) l.push({ t: IDX.equipes[gz.controle].embleme, c: IDX.equipes[gz.controle].couleur, f: IDX.equipes[gz.controle].couleur });
-  if (gz.police >= 60) l.push({ t: "police", c: "#3d7fd9" });
-  if (gz.tension >= 60) l.push({ t: "tension", c: "#e5484d" });
-  return l;
+/* ---------- contours des quartiers (pour la sélection) ---------- */
+var BORDS = null;
+function bords(id) {
+  if (!BORDS) {
+    BORDS = {};
+    var PAS = VILLE.PAS;
+    Object.keys(VILLE.cell).forEach(function (k) {
+      var p = k.split(",").map(Number), a = VILLE.cell[k];
+      [[PAS, 0, p[0] + PAS, p[1], p[0] + PAS, p[1] + PAS], [-PAS, 0, p[0], p[1], p[0], p[1] + PAS],
+       [0, PAS, p[0], p[1] + PAS, p[0] + PAS, p[1] + PAS], [0, -PAS, p[0], p[1], p[0] + PAS, p[1]]].forEach(function (d) {
+        if (VILLE.cell[(p[0] + d[0]) + "," + (p[1] + d[1])] !== a) (BORDS[a] = BORDS[a] || []).push([d[2], d[3], d[4], d[5]]);
+      });
+    });
+  }
+  return BORDS[id] || [];
 }
 
 /* ---------- affichage et gestes ---------- */
@@ -830,62 +1027,103 @@ function planMonter(el) {
   var W = el.clientWidth, H = el.clientHeight;
   el.width = W * dpr; el.height = H * dpr;
   if (!PLAN.cam) {
-    var z0 = D.zones.liste.filter(function (z) { return z.id === G.protagoniste.zone_origine; })[0];
-    var c = centrePlan(z0), q = proj(C.P, c[0], c[1], 0);
-    PLAN.cam = { x: q[0], y: q[1] + 40, z: Math.max(W / C.W * 2.3, 0.3) };
+    var b = VILLE.q[G.base], q = proj(C.P, b.cx, b.cy, 0);
+    PLAN.cam = { x: q[0], y: q[1] + 20, z: Math.max(W / C.W * 2.6, 0.32) };
   }
   if (!el.dataset.ok) {
     el.dataset.ok = "1";
     el.addEventListener("pointerdown", planDown);
     el.addEventListener("pointermove", planMove);
     el.addEventListener("pointerup", planUp);
-    el.addEventListener("pointercancel", planUp);
+    el.addEventListener("pointercancel", function (e) { delete PLAN.ptr[e.pointerId]; });
     el.addEventListener("wheel", function (e) { e.preventDefault(); zoomer(e.deltaY < 0 ? 1.12 : 1 / 1.12); }, { passive: false });
   }
   planDessin();
-}
-function centrePlan(z) {
-  var sx = 0, sy = 0;
-  z.plan.forEach(function (p) { sx += p[0]; sy += p[1]; });
-  return [sx / z.plan.length, sy / z.plan.length];
 }
 function versEcran(ox, oy) {
   var el = PLAN.el, cam = PLAN.cam;
   return [(ox - cam.x) * cam.z + el.clientWidth / 2, (oy - cam.y) * cam.z + el.clientHeight / 2];
 }
+function ecranQ(id, h) { var q = VILLE.q[id], p = proj(PLAN.cache.P, q.cx, q.cy, h || 0); return versEcran(p[0], p[1]); }
 function zoomer(f) {
   var C = PLAN.cache;
-  PLAN.cam.z = clamp(PLAN.cam.z * f, PLAN.el.clientWidth / C.W * 0.9, 1.6);
+  PLAN.cam.z = clamp(PLAN.cam.z * f, PLAN.el.clientWidth / C.W * 0.9, 2.2);
   planDessin();
+}
+function contour(g, id, couleur, largeur, glow) {
+  var P = PLAN.cache.P;
+  g.beginPath();
+  bords(id).forEach(function (s) {
+    var a = proj(P, s[0], s[1], 0), b = proj(P, s[2], s[3], 0), A = versEcran(a[0], a[1]), Bq = versEcran(b[0], b[1]);
+    g.moveTo(A[0], A[1]); g.lineTo(Bq[0], Bq[1]);
+  });
+  g.lineWidth = largeur; g.strokeStyle = couleur; g.lineCap = "round";
+  if (glow) { g.shadowColor = couleur; g.shadowBlur = glow; }
+  g.stroke(); g.shadowBlur = 0;
+}
+function pastille(g, x, y, r, anneau, lettre, fond, plein) {
+  g.beginPath(); g.arc(x, y + 1.5, r + 2, 0, Math.PI * 2); g.fillStyle = "rgba(0,0,0,.5)"; g.fill();
+  g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fillStyle = plein ? anneau : (fond || "#1b1c1f"); g.fill();
+  g.lineWidth = Math.max(2, r * 0.22); g.strokeStyle = plein ? "#fff" : anneau; g.stroke();
+  g.fillStyle = plein ? "#111" : "#fff"; g.font = "700 " + Math.round(r * 1.05) + "px system-ui"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillText(lettre, x, y + 0.5);
 }
 function planDessin() {
   var el = PLAN.el;
   if (!el || !el.isConnected) return;
   var g = el.getContext("2d"), dpr = window.devicePixelRatio || 1, C = PLAN.cache, cam = PLAN.cam;
   var W = el.clientWidth, H = el.clientHeight;
-  // bornes de la caméra
   cam.x = clamp(cam.x, 0, C.W); cam.y = clamp(cam.y, 0, C.H);
   g.setTransform(dpr, 0, 0, dpr, 0, 0);
   g.fillStyle = "#0d151b"; g.fillRect(0, 0, W, H);
-  g.imageSmoothingEnabled = true;
   g.drawImage(C.cv, W / 2 - cam.x * cam.z, H / 2 - cam.y * cam.z, C.W * cam.z, C.H * cam.z);
-  // zone choisie : contour lumineux
-  var sel = UI.sel ? IDX.zones[UI.sel] : null;
-  if (sel) {
-    g.beginPath();
-    sel.plan.forEach(function (p, i) { var q = proj(C.P, p[0], p[1], 0), s = versEcran(q[0], q[1]); i ? g.lineTo(s[0], s[1]) : g.moveTo(s[0], s[1]); });
-    g.closePath(); g.lineWidth = 3; g.strokeStyle = "#f2c94c"; g.shadowColor = "#f2c94c"; g.shadowBlur = 12; g.stroke(); g.shadowBlur = 0;
-  }
-  // badges et noms
+  var op = UI.selOp ? opParId(UI.selOp) : null;
+  // accès possibles pour l'opérateur choisi
+  if (op) VILLE.ordre.forEach(function (id) { if (accessible(id)) contour(g, id, "rgba(108,207,79,.55)", 1.4); });
+  if (UI.selQ) contour(g, UI.selQ, "#f2c94c", 3, 12);
   PLAN.hits = [];
-  var r = clamp(11 * Math.sqrt(cam.z / 0.5), 9, 16);
-  D.zones.liste.forEach(function (z) {
-    var c = centrePlan(z), q = proj(C.P, c[0], c[1], 0), s = versEcran(q[0], q[1]);
-    var l = badgesZone(z.id), w = l.length * (r * 2 + 4) - 4, x0 = s[0] - w / 2 + r, y = s[1] - r * 2.2;
-    l.forEach(function (b, i) { badge(g, x0 + i * (r * 2 + 4), y, r, b.c, b.t, b.f); PLAN.hits.push({ x: x0 + i * (r * 2 + 4), y: y, r: r + 4, z: z.id }); });
-    g.font = "600 " + Math.round(r * 1.05) + "px system-ui"; g.textAlign = "center"; g.textBaseline = "top";
-    g.lineWidth = 3; g.strokeStyle = "rgba(0,0,0,.8)"; g.strokeText(z.court, s[0], s[1] - r * 0.6);
-    g.fillStyle = G.zones[z.id].connu ? "#f4f1ea" : "#8d9096"; g.fillText(z.court, s[0], s[1] - r * 0.6);
+  var r = clamp(9 * Math.sqrt(cam.z / 0.5), 8, 15);
+  // noms : zones de loin, quartiers de près
+  g.textAlign = "center"; g.textBaseline = "middle"; g.lineWidth = 3; g.strokeStyle = "rgba(0,0,0,.8)";
+  if (cam.z < 0.62) {
+    D.zones.liste.forEach(function (z) {
+      var ids = VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === z.id; }), sx = 0, sy = 0;
+      ids.forEach(function (id) { sx += VILLE.q[id].cx; sy += VILLE.q[id].cy; });
+      var p = proj(C.P, sx / ids.length, sy / ids.length, 0), s = versEcran(p[0], p[1]);
+      g.font = "700 12px system-ui"; g.strokeText(z.court, s[0], s[1]); g.fillStyle = "#f4f1ea"; g.fillText(z.court, s[0], s[1]);
+    });
+  } else {
+    VILLE.ordre.forEach(function (id) {
+      var s = ecranQ(id), conn = G.q[id].conn > 0 || G.q[id].ctl > 0;
+      if (s[0] < -40 || s[0] > W + 40 || s[1] < -20 || s[1] > H + 20) return;
+      g.font = "600 " + Math.round(clamp(10 * cam.z, 9, 13)) + "px system-ui";
+      g.strokeText(VILLE.q[id].nom, s[0], s[1] + r * 1.6); g.fillStyle = conn ? "#f4f1ea" : "#8d9096"; g.fillText(VILLE.q[id].nom, s[0], s[1] + r * 1.6);
+    });
+  }
+  // alertes et intentions repérées
+  VILLE.ordre.forEach(function (id) {
+    var s = G.q[id], p = ecranQ(id);
+    if (G.alertes && G.alertes[id]) pastille(g, p[0] + r * 1.3, p[1] - r * 2.4, r * 0.75, "#e5484d", "!", null, true);
+    if (s.vu >= G.cycle) {
+      Object.keys(G.factions).forEach(function (fid) {
+        var f = G.factions[fid];
+        if (f.vivante && f.intention && f.intention.q === id && f.intention.objectif !== "maintenir")
+          pastille(g, p[0] - r * 1.3, p[1] - r * 2.4, r * 0.75, IDX.equipes[fid].couleur, "⚔", null, false);
+      });
+    }
+  });
+  // opérateurs, groupés par quartier
+  var parQ = {};
+  opsActifs().forEach(function (o) { var q = lieuOp(o); (parQ[q] = parQ[q] || []).push(o); });
+  Object.keys(parQ).forEach(function (id) {
+    var l = parQ[id], p = ecranQ(id), w = l.length * (r * 2 + 3) - 3, x0 = p[0] - w / 2 + r;
+    l.forEach(function (o, i) {
+      var t = TYPES()[o.type], x = x0 + i * (r * 2 + 3), y = p[1] - r * 0.4;
+      if (UI.selOp === o.id) { g.beginPath(); g.arc(x, y, r + 5, 0, Math.PI * 2); g.fillStyle = "rgba(242,201,76,.45)"; g.fill(); }
+      pastille(g, x, y, r, t.couleur, t.lettre, o.dispo === "indisponible" ? "#4a1c1c" : null, false);
+      if (o.dispo === "transit") { g.setLineDash([3, 3]); g.beginPath(); g.arc(x, y, r + 3, 0, Math.PI * 2); g.strokeStyle = "#fff"; g.lineWidth = 1.5; g.stroke(); g.setLineDash([]); }
+      PLAN.hits.push({ x: x, y: y, r: r + 4, op: o.id });
+    });
   });
 }
 function planDown(e) {
@@ -897,8 +1135,7 @@ function planMove(e) {
   if (!p) return;
   var ids = Object.keys(PLAN.ptr);
   if (ids.length === 2) {
-    var a = PLAN.ptr[ids[0]], b = PLAN.ptr[ids[1]];
-    var d0 = Math.hypot(a.x - b.x, a.y - b.y);
+    var a = PLAN.ptr[ids[0]], b = PLAN.ptr[ids[1]], d0 = Math.hypot(a.x - b.x, a.y - b.y);
     p.x = e.clientX; p.y = e.clientY;
     var d1 = Math.hypot(a.x - b.x, a.y - b.y);
     if (d0 > 0) zoomer(d1 / d0);
@@ -911,25 +1148,16 @@ function planMove(e) {
 function planUp(e) {
   var p = PLAN.ptr[e.pointerId];
   delete PLAN.ptr[e.pointerId];
-  if (!p || Math.hypot(e.clientX - p.x0, e.clientY - p.y0) > 8 || Date.now() - p.t > 450) return;
-  var rc = PLAN.el.getBoundingClientRect(), sx = e.clientX - rc.left, sy = e.clientY - rc.top;
-  var id = zoneSous(sx, sy);
-  UI.sel = id || null;
-  render();
+  if (!p || Math.hypot(e.clientX - p.x0, e.clientY - p.y0) > 8 || Date.now() - p.t > 500) return;
+  var rc = PLAN.el.getBoundingClientRect();
+  toucherPlan(e.clientX - rc.left, e.clientY - rc.top);
 }
-/** Zone sous un point de l'écran (badges d'abord, puis sol). */
-function zoneSous(sx, sy) {
-  for (var i = 0; i < (PLAN.hits || []).length; i++) { var h = PLAN.hits[i]; if (Math.hypot(sx - h.x, sy - h.y) <= h.r) return h.z; }
+/** Ce qui est sous le doigt : un opérateur (badge) ou un quartier (sol). */
+function sousDoigt(sx, sy) {
+  for (var i = 0; i < (PLAN.hits || []).length; i++) { var h = PLAN.hits[i]; if (Math.hypot(sx - h.x, sy - h.y) <= h.r) return { op: h.op }; }
   var cam = PLAN.cam, el = PLAN.el, ox = (sx - el.clientWidth / 2) / cam.z + cam.x, oy = (sy - el.clientHeight / 2) / cam.z + cam.y;
   var w = deproj(PLAN.cache.P, ox, oy);
-  var z = D.zones.liste.filter(function (z) { return dansPoly(w, z.plan); })[0];
-  return z ? z.id : null;
-}
-/** Part de la ville tenue par chaque équipe (pondérée par la population). */
-function partsVille() {
-  var t = {}, tot = 0;
-  D.zones.liste.forEach(function (z) { var c = G.zones[z.id].controle || "aucun"; t[c] = (t[c] || 0) + z.population; tot += z.population; });
-  return Object.keys(t).map(function (k) { return { id: k, p: t[k] / tot }; }).sort(function (a, b) { return b.p - a.p; });
+  return { q: quartierEn(w[0], w[1]) };
 }
 
 /* ---- 60-ui.js ---- */
