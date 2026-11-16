@@ -14,9 +14,6 @@
  "vue_est_sud": "img/vue_est_sud.webp",
  "medaillon_mere_ferrara": "img/medaillon_mere_ferrara.webp",
  "joueur_ferrara_jeune": "img/joueur_ferrara_jeune.webp",
- "medaillon_mere_benali": "img/medaillon_mere_benali.webp",
- "medaillon_petit_frere_benali": "img/medaillon_petit_frere_benali.webp",
- "medaillon_grande_soeur_benali": "img/medaillon_grande_soeur_benali.webp",
  "medaillon_mere_sarkissian": "img/medaillon_mere_sarkissian.webp",
  "medaillon_petit_frere_sarkissian": "img/medaillon_petit_frere_sarkissian.webp",
  "medaillon_grande_soeur_sarkissian": "img/medaillon_grande_soeur_sarkissian.webp",
@@ -35,5 +32,13 @@
  "icone_tension": "img/icone_tension.webp",
  "icone_humeur": "img/icone_humeur.webp",
  "icone_respect": "img/icone_respect.webp",
- "icone_influence": "img/icone_influence.webp"
+ "icone_influence": "img/icone_influence.webp",
+ "medaillon_mere_benali": "img/medaillon_mere_benali.webp",
+ "medaillon_petit_frere_benali": "img/medaillon_petit_frere_benali.webp",
+ "medaillon_grande_soeur_benali": "img/medaillon_grande_soeur_benali.webp",
+ "medaillon_petit_frere_ferrara": "img/medaillon_petit_frere_ferrara.webp",
+ "medaillon_grande_soeur_ferrara": "img/medaillon_grande_soeur_ferrara.webp",
+ "medaillon_mere_mmadi": "img/medaillon_mere_mmadi.webp",
+ "medaillon_petit_frere_mmadi": "img/medaillon_petit_frere_mmadi.webp",
+ "medaillon_grande_soeur_mmadi": "img/medaillon_grande_soeur_mmadi.webp"
 }
