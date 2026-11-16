@@ -1,11 +1,121 @@
 {
- "_doc": "Personnages importants du prologue, tous inventés. Les liens familiaux s'adaptent à la zone de départ.",
+ "_doc": "Personnages 100 % inventés. La famille (mere, petit_frere, grande_soeur) est tirée parmi « familles » au début de la partie ; {famille} = prénom pris dans la famille tirée.",
+ "familles": [
+  {
+   "id": "ferrara",
+   "nom": "Ferrara",
+   "note": "famille italo-marseillaise, trois générations dans le même quartier",
+   "mere": {
+    "prenom": "Sandrine",
+    "age_2021": 43,
+    "metier": "caissière"
+   },
+   "petit_frere": {
+    "prenom": "Enzo",
+    "age_2021": 11
+   },
+   "grande_soeur": {
+    "prenom": "Jessica",
+    "age_2021": 20
+   }
+  },
+  {
+   "id": "mmadi",
+   "nom": "Mmadi",
+   "note": "famille comorienne, une grande tante qui garde tout le monde",
+   "mere": {
+    "prenom": "Zaïnaba",
+    "age_2021": 42,
+    "metier": "aide-soignante de nuit"
+   },
+   "petit_frere": {
+    "prenom": "Kassim",
+    "age_2021": 11
+   },
+   "grande_soeur": {
+    "prenom": "Raïssa",
+    "age_2021": 20
+   }
+  },
+  {
+   "id": "benali",
+   "nom": "Benali",
+   "note": "famille algérienne arrivée dans les années 80",
+   "mere": {
+    "prenom": "Samia",
+    "age_2021": 44,
+    "metier": "agente d'entretien"
+   },
+   "petit_frere": {
+    "prenom": "Ilyes",
+    "age_2021": 11
+   },
+   "grande_soeur": {
+    "prenom": "Leïla",
+    "age_2021": 20
+   }
+  },
+  {
+   "id": "sarkissian",
+   "nom": "Sarkissian",
+   "note": "famille arménienne, le père a une petite carrosserie",
+   "mere": {
+    "prenom": "Anahid",
+    "age_2021": 45,
+    "metier": "secrétaire médicale"
+   },
+   "petit_frere": {
+    "prenom": "Tigran",
+    "age_2021": 11
+   },
+   "grande_soeur": {
+    "prenom": "Sona",
+    "age_2021": 20
+   }
+  },
+  {
+   "id": "diallo",
+   "nom": "Diallo",
+   "note": "famille sénégalaise et marseillaise, le père est chauffeur de bus",
+   "mere": {
+    "prenom": "Aminata",
+    "age_2021": 41,
+    "metier": "cantinière"
+   },
+   "petit_frere": {
+    "prenom": "Moussa",
+    "age_2021": 11
+   },
+   "grande_soeur": {
+    "prenom": "Awa",
+    "age_2021": 20
+   }
+  },
+  {
+   "id": "garcia",
+   "nom": "Garcia",
+   "note": "famille gitane sédentaire de longue date, très soudée",
+   "mere": {
+    "prenom": "Carmen",
+    "age_2021": 40,
+    "metier": "vendeuse au marché"
+   },
+   "petit_frere": {
+    "prenom": "Manolo",
+    "age_2021": 11
+   },
+   "grande_soeur": {
+    "prenom": "Esperanza",
+    "age_2021": 20
+   }
+  }
+ ],
  "liste": [
   {
    "id": "mere",
-   "prenom": "Samia",
+   "prenom": "{famille}",
    "groupe": "famille",
-   "age_2021": 44,
+   "age_2021": null,
    "traits": [
     "travailleuse",
     "fière",
@@ -25,15 +135,15 @@
     "grande_soeur": "fille"
    },
    "autonome": [
-    "travaille_de_nuit",
+    "travaille_tard",
     "appelle_si_absent_2_semaines"
    ]
   },
   {
    "id": "petit_frere",
-   "prenom": "Ilyes",
+   "prenom": "{famille}",
    "groupe": "famille",
-   "age_2021": 11,
+   "age_2021": null,
    "traits": [
     "admiratif",
     "curieux"
@@ -54,9 +164,9 @@
   },
   {
    "id": "grande_soeur",
-   "prenom": "Leïla",
+   "prenom": "{famille}",
    "groupe": "famille",
-   "age_2021": 20,
+   "age_2021": null,
    "traits": [
     "lucide",
     "directe"
@@ -78,8 +188,36 @@
    ]
   },
   {
+   "id": "tante",
+   "prenom": "Nadège",
+   "groupe": "famille",
+   "age_2021": 48,
+   "traits": [
+    "drôle",
+    "franche"
+   ],
+   "objectif": "garder la famille unie",
+   "limites": [
+    "dit tout à ta mère"
+   ],
+   "relation_depart": {
+    "confiance": 65,
+    "proximite": 50,
+    "tension": 0
+   },
+   "liens": {
+    "mere": "belle-sœur"
+   },
+   "autonome": [
+    "heberge_en_cas_de_crise"
+   ],
+   "note": "infirmière à l'Hôpital Nord, tante par alliance"
+  },
+  {
    "id": "ami_enfance",
-   "prenom": "Yanis",
+   "prenom": "Kevin",
+   "nom": "Lombardi",
+   "surnom": "Totti",
    "groupe": "quartier",
    "age_2021": 16,
    "traits": [
@@ -87,7 +225,7 @@
     "loyal",
     "prudent"
    ],
-   "objectif": "entrer dans le foot amateur ou à l'apprentissage",
+   "objectif": "jouer en Régional avec son club",
    "limites": [
     "ne touche pas au trafic"
    ],
@@ -99,12 +237,37 @@
    "liens": {},
    "autonome": [
     "s_eloigne_si_crainte_haute"
+   ],
+   "note": "ne quitte jamais son maillot, frappe les coups francs comme son idole"
+  },
+  {
+   "id": "camarade",
+   "prenom": "Manon",
+   "nom": "Escoffier",
+   "groupe": "quartier",
+   "age_2021": 16,
+   "traits": [
+    "ambitieuse",
+    "moqueuse"
+   ],
+   "objectif": "entrer en médecine",
+   "limites": [
+    "ne veut pas être vue avec le hall"
+   ],
+   "relation_depart": {
+    "confiance": 45,
+    "proximite": 35,
+    "tension": 5
+   },
+   "liens": {},
+   "autonome": [
+    "propose_reviser"
    ]
   },
   {
    "id": "grand_hall",
-   "prenom": "Toufik",
-   "surnom": "Tof",
+   "prenom": "Anthony",
+   "surnom": "Zépek",
    "groupe": "organisation",
    "age_2021": 24,
    "traits": [
@@ -122,11 +285,161 @@
    "autonome": [
     "propose_service",
     "peut_etre_arrete"
+   ],
+   "note": "parle doucement, ne crie jamais"
+  },
+  {
+   "id": "souris",
+   "prenom": "Dylan",
+   "surnom": "Souris",
+   "groupe": "organisation",
+   "age_2021": 14,
+   "traits": [
+    "vif",
+    "effrayé"
+   ],
+   "objectif": "ramener de l'argent à sa grand-mère",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 40,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "guette_pour_zepek",
+    "peut_etre_blesse"
+   ],
+   "note": "le plus petit du bâtiment ; il guette déjà"
+  },
+  {
+   "id": "pitchoun",
+   "prenom": "Ibrahima",
+   "surnom": "Pitchoun",
+   "groupe": "quartier",
+   "age_2021": 15,
+   "traits": [
+    "bagarreur",
+    "fidèle"
+   ],
+   "objectif": "qu'on le respecte",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 55,
+    "proximite": 45,
+    "tension": 15
+   },
+   "liens": {},
+   "autonome": [
+    "suit_le_plus_fort"
+   ],
+   "note": "appelé Pitchoun depuis la maternelle, il fait maintenant 1,90 m"
+  },
+  {
+   "id": "rascasse",
+   "prenom": "Grégory",
+   "surnom": "Rascasse",
+   "groupe": "organisation",
+   "age_2021": 31,
+   "traits": [
+    "nerveux",
+    "méfiant"
+   ],
+   "objectif": "garder son plan",
+   "limites": [
+    "n'aime pas les nouveaux"
+   ],
+   "relation_depart": {
+    "confiance": 20,
+    "proximite": 10,
+    "tension": 30
+   },
+   "liens": {},
+   "autonome": [
+    "teste_les_nouveaux",
+    "peut_trahir"
+   ],
+   "note": "gérant du plan du quartier pour la Compagnie"
+  },
+  {
+   "id": "tata",
+   "prenom": "Martine",
+   "surnom": "Tata",
+   "groupe": "organisation",
+   "age_2021": 58,
+   "traits": [
+    "épuisée",
+    "gentille"
+   ],
+   "objectif": "payer ses dettes de loyer",
+   "limites": [
+    "a honte"
+   ],
+   "relation_depart": {
+    "confiance": 50,
+    "proximite": 30,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "garde_contre_loyer",
+    "peut_craquer"
+   ],
+   "note": "nourrice contrainte, endettée ; tout le bâtiment le sait, personne ne dit rien"
+  },
+  {
+   "id": "babou",
+   "prenom": "Gérard",
+   "surnom": "Babou",
+   "groupe": "quartier",
+   "age_2021": 56,
+   "traits": [
+    "calme",
+    "amer"
+   ],
+   "objectif": "que les jeunes ne refassent pas ses erreurs",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 55,
+    "proximite": 30,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "raconte",
+    "previent"
+   ],
+   "note": "vingt ans de prison derrière lui, joue aux boules devant le bâtiment"
+  },
+  {
+   "id": "coach",
+   "prenom": "Patrice",
+   "surnom": "Coach Pat",
+   "groupe": "quartier",
+   "age_2021": 50,
+   "traits": [
+    "exigeant",
+    "chaleureux"
+   ],
+   "objectif": "faire tenir son club amateur",
+   "limites": [
+    "exclut ceux qui trafiquent"
+   ],
+   "relation_depart": {
+    "confiance": 60,
+    "proximite": 45,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "propose_essai",
+    "convoque"
    ]
   },
   {
    "id": "educatrice",
    "prenom": "Christelle",
+   "nom": "Ferrandi",
    "groupe": "quartier",
    "age_2021": 38,
    "traits": [
@@ -169,12 +482,14 @@
    "liens": {},
    "autonome": [
     "peut_fermer"
-   ]
+   ],
+   "note": "son snack est le salon du quartier les soirs de match"
   },
   {
    "id": "voisine",
    "prenom": "Josiane",
    "nom": "Giordano",
+   "surnom": "Mamie Jo",
    "groupe": "quartier",
    "age_2021": 71,
    "traits": [
@@ -240,6 +555,105 @@
     "ouvre_enquete",
     "propose_de_parler"
    ]
+  },
+  {
+   "id": "brigadier",
+   "prenom": "Julien",
+   "nom": "Mercier",
+   "surnom": "Robocop",
+   "groupe": "institution",
+   "age_2021": 33,
+   "traits": [
+    "brutal",
+    "fatigué"
+   ],
+   "objectif": "tenir jusqu'à sa mutation",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 0,
+    "proximite": 0,
+    "tension": 20
+   },
+   "liens": {},
+   "autonome": [
+    "controle",
+    "provoque"
+   ],
+   "note": "surnommé ainsi par les jeunes du secteur"
+  },
+  {
+   "id": "avocate",
+   "prenom": "Laure",
+   "nom": "Castelli",
+   "groupe": "institution",
+   "age_2021": 40,
+   "traits": [
+    "brillante",
+    "sans illusions"
+   ],
+   "objectif": "gagner ses dossiers",
+   "limites": [
+    "ne ment pas au juge"
+   ],
+   "relation_depart": {
+    "confiance": 30,
+    "proximite": 10,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "previent_si_payee"
+   ],
+   "note": "« Maître Castelli », ça coûte cher"
+  },
+  {
+   "id": "juge",
+   "prenom": "Florence",
+   "nom": "Arnaud",
+   "groupe": "institution",
+   "age_2021": 52,
+   "traits": [
+    "attentive",
+    "ferme"
+   ],
+   "objectif": "éviter que les mineurs basculent",
+   "limites": [],
+   "relation_depart": {
+    "confiance": 40,
+    "proximite": 0,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "mesure_educative"
+   ],
+   "note": "juge des enfants"
+  },
+  {
+   "id": "journaliste",
+   "prenom": "Clara",
+   "nom": "Mouret",
+   "groupe": "ville",
+   "age_2021": 29,
+   "traits": [
+    "obstinée",
+    "prudente"
+   ],
+   "objectif": "raconter ce qui arrive aux familles",
+   "limites": [
+    "ne publie pas de noms de mineurs"
+   ],
+   "relation_depart": {
+    "confiance": 30,
+    "proximite": 0,
+    "tension": 0
+   },
+   "liens": {},
+   "autonome": [
+    "enquete",
+    "publie"
+   ],
+   "note": "journaliste pour un site d'information local"
   }
  ]
 }

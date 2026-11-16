@@ -161,9 +161,21 @@ Tous **inventés**, composites. Champs : `id, prenom, nom (facultatif), age_2021
 `relation_depart {confiance, proximite, tension}`, `liens {autre_id: nature}`, `portrait` (planche Gemini),
 `autonome` (règles simples : ce qu'il fait seul à la clôture de semaine selon son état).
 
-Le prologue en contient 10 : la mère, le petit frère, la grande sœur, l'ami d'enfance, le grand du hall,
-l'éducatrice du centre social, le patron du snack, la voisine, la professeure principale, le commandant de
-police du secteur (fictif). La famille est générée à partir de ces gabarits selon la zone de départ.
+**Famille tirée au sort** parmi 6 familles marseillaises (italo-marseillaise, comorienne, algérienne,
+arménienne, sénégalaise, gitane sédentaire) : la mère, le petit frère, la grande sœur prennent les prénoms
+de la famille tirée ; le protagoniste choisit son prénom et porte le nom de famille.
+
+**Surnoms** : champ `surnom`, affiché à la place du prénom quand c'est l'usage du quartier.
+
+Le prologue compte **22 personnages** :
+
+| Groupe | Personnages |
+|---|---|
+| Famille | la mère, le petit frère, la grande sœur (selon la famille tirée), tante Nadège (infirmière à l'Hôpital Nord) |
+| Quartier | Kevin « Totti » (ami d'enfance, footballeur), Manon (camarade, vise médecine), Ibrahima « Pitchoun » (1,90 m, bagarreur), Gérard « Babou » (vingt ans de prison derrière lui), Patrice « Coach Pat » (club amateur), Christelle (éducatrice), Hassen (snack), Josiane « Mamie Jo » (voisine) |
+| Organisation | Anthony « Zépek » (le grand du hall), Dylan « Souris » (guetteur de 14 ans), Grégory « Rascasse » (gérant du plan), Martine « Tata » (nourrice contrainte, endettée) |
+| Institutions | Hélène Roux (prof), commandante Agnès Vidal, brigadier Julien Mercier « Robocop », Maître Laure Castelli (avocate), Florence Arnaud (juge des enfants) |
+| Ville | Clara Mouret (journaliste locale) |
 
 ## 6. Compétences et responsabilités
 

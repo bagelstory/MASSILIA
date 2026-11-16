@@ -34,7 +34,7 @@
   {
    "id": "garder_frere",
    "zone": "*",
-   "nom": "Garder Ilyes",
+   "nom": "Garder {petit_frere}",
    "chapitre_min": "le_debut",
    "cout": {
     "energie": 3
@@ -44,12 +44,12 @@
     "relation:mere.confiance": 2
    },
    "risques": {},
-   "voix": "Ilyes : « Tu m'apprends le coup franc ? »"
+   "voix": "{petit_frere} : « Tu m'apprends le coup franc ? »"
   },
   {
    "id": "service_tof",
    "zone": "*",
-   "nom": "Rendre un service à Tof",
+   "nom": "Rendre un service à Zépek",
    "chapitre_min": "le_debut",
    "cout": {
     "energie": 2,
@@ -65,7 +65,22 @@
     "relation:mere.confiance": -2
    },
    "fait": "premier_service",
-   "voix": "Madame Giordano, à sa fenêtre : « Toi aussi, maintenant ? »"
+   "voix": "Mamie Jo, à sa fenêtre : « Toi aussi, maintenant ? »"
+  },
+  {
+   "id": "courses_tata",
+   "zone": "*",
+   "nom": "Monter les courses de Tata",
+   "chapitre_min": "le_debut",
+   "cout": {
+    "energie": 2
+   },
+   "gains": {
+    "relation:tata.confiance": 3,
+    "relation:voisine.confiance": 1
+   },
+   "risques": {},
+   "voix": "Tata : « Tu poses le sac là, pas dans la chambre. Pas dans la chambre, j'ai dit. »"
   }
  ]
 }

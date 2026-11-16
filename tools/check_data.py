@@ -53,6 +53,10 @@ for p in D["personnages"]["liste"]:
     for o in p.get("liens", {}):
         if o not in P:
             err.append(f"personnage {p['id']} : lien vers inconnu {o}")
+for f in D["personnages"].get("familles", []):
+    for k in ("mere", "petit_frere", "grande_soeur"):
+        if k not in f or not f[k].get("prenom"):
+            err.append(f"famille {f['id']} : {k} manquant")
 for r in D["roles"]["liste"]:
     if r["chapitre_min"] not in CH:
         err.append(f"rôle {r['id']} : chapitre inconnu {r['chapitre_min']}")

@@ -10,10 +10,10 @@
     "semaine": 37
    },
    "once": true,
-   "texte": "Rentrée. Samia part au travail avant le jour, Ilyes ne trouve pas son cartable, et en bas, le hall est déjà occupé.",
+   "texte": "Rentrée. {mere} part au travail avant le jour, {petit_frere} ne trouve pas son cartable, et en bas, le hall est déjà occupé.",
    "options": [
     {
-     "t": "Accompagner Ilyes à l'école",
+     "t": "Accompagner {petit_frere} à l'école",
      "effets": [
       "relation:petit_frere.proximite+5",
       "relation:mere.confiance+3",
@@ -21,7 +21,7 @@
      ]
     },
     {
-     "t": "Traîner en bas avec Yanis",
+     "t": "Traîner en bas avec Totti",
      "effets": [
       "relation:ami_enfance.proximite+4",
       "relation:grand_hall.proximite+2"
@@ -41,7 +41,7 @@
    "titre": "Les visages",
    "declencheur": "programme",
    "once": true,
-   "texte": "Tof t'appelle par ton prénom. Tu ne savais pas qu'il le connaissait. « Passe me voir, j'ai un truc simple. »",
+   "texte": "Zépek t'appelle par ton prénom. Tu ne savais pas qu'il le connaissait. « Passe me voir, j'ai un truc simple. »",
    "options": [
     {
      "t": "Y aller",
@@ -64,7 +64,7 @@
    "titre": "La promesse",
    "declencheur": "programme",
    "once": true,
-   "texte": "Samia te demande d'être là samedi pour le rendez-vous avec la prof. Le même samedi, Tof a besoin de toi.",
+   "texte": "{mere} te demande d'être là samedi pour le rendez-vous avec la prof. Le même samedi, Zépek a besoin de toi.",
    "options": [
     {
      "t": "Promettre à ta mère",
@@ -74,7 +74,7 @@
      "memoire": "mere:a_promis_rdv"
     },
     {
-     "t": "Promettre à Tof",
+     "t": "Promettre à Zépek",
      "effets": [
       "engagement:grand_hall:samedi:2",
       "relation:grand_hall.confiance+4"
@@ -205,17 +205,17 @@
     "fait:premier_service"
    ],
    "delai_retour": 10,
-   "texte": "Six heures du matin. Des portières, des pas dans l'escalier. Ce n'est pas chez vous, c'est chez le voisin du dessous. Ilyes s'est réveillé.",
+   "texte": "Six heures du matin. Des portières, des pas dans l'escalier. Ce n'est pas chez vous, c'est chez le voisin du dessous. {petit_frere} s'est réveillé.",
    "options": [
     {
-     "t": "Rassurer Ilyes",
+     "t": "Rassurer {petit_frere}",
      "effets": [
       "relation:petit_frere.confiance+4",
       "etat:stress+4"
      ]
     },
     {
-     "t": "Prévenir Tof",
+     "t": "Prévenir Zépek",
      "effets": [
       "relation:grand_hall.confiance+6",
       "police:enquete+3"
@@ -251,6 +251,89 @@
     }
    ],
    "memoire": "*:marche_blanche"
+  },
+  {
+   "id": "souris_dans_le_froid",
+   "titre": "Souris",
+   "declencheur": "tirage",
+   "conditions": [
+    "fait:premier_service"
+   ],
+   "poids": 1,
+   "delai_retour": 10,
+   "texte": "Il est 23 h et Souris est encore assis sur le muret, capuche serrée. Il a quatorze ans. Il te demande l'heure trois fois en dix minutes.",
+   "options": [
+    {
+     "t": "Lui dire de rentrer, tu prends sa place",
+     "effets": [
+      "relation:souris.confiance+6",
+      "relation:rascasse.tension+5",
+      "police:enquete+1"
+     ]
+    },
+    {
+     "t": "Lui ramener un sandwich de chez Hassen",
+     "effets": [
+      "relation:souris.proximite+4",
+      "argent:propre-5"
+     ]
+    },
+    {
+     "t": "Passer sans t'arrêter",
+     "effets": [
+      "relation:souris.confiance-3"
+     ],
+     "memoire": "souris:est_passe"
+    }
+   ]
+  },
+  {
+   "id": "babou_raconte",
+   "titre": "Les boules",
+   "declencheur": "tirage",
+   "poids": 1,
+   "delai_retour": 16,
+   "texte": "Babou pointe, rate, jure. « À ton âge j'avais une voiture que je savais pas conduire. Après j'ai eu vingt ans pour apprendre la patience. »",
+   "options": [
+    {
+     "t": "L'écouter jusqu'au bout",
+     "effets": [
+      "competence:sang_froid+2",
+      "relation:babou.confiance+4"
+     ]
+    },
+    {
+     "t": "Rigoler et partir",
+     "effets": [
+      "relation:babou.proximite-3"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "essai_au_club",
+   "titre": "L'essai",
+   "declencheur": "tirage",
+   "once": true,
+   "texte": "Coach Pat a vu Totti jouer et il veut te voir aussi, samedi matin, au stade du quartier. « Je prends pas ceux qui traînent au hall. »",
+   "options": [
+    {
+     "t": "Y aller",
+     "effets": [
+      "relation:coach.confiance+6",
+      "relation:ami_enfance.proximite+4",
+      "etat:stress-4"
+     ],
+     "memoire": "coach:essai_fait"
+    },
+    {
+     "t": "Dire que t'as pas le temps",
+     "effets": [
+      "relation:ami_enfance.confiance-4"
+     ],
+     "memoire": "coach:essai_refuse"
+    }
+   ]
   }
  ]
 }
