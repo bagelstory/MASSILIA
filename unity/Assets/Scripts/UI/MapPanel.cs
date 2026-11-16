@@ -27,6 +27,9 @@ namespace Marseille.UI
         /// <inheritdoc />
         public override string TabLabel { get { return "Carte"; } }
 
+        /// <inheritdoc />
+        public override string TabIcon { get { return "tab_carte"; } }
+
         /// <summary>La carte affichée.</summary>
         public MapController Map { get { return map; } }
 

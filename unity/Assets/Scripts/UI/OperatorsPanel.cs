@@ -2,6 +2,7 @@
 // Écran « Équipe » (spec §4) : opérateurs actifs (état, tâche, fatigue) avec raccourcis, recrutement
 // limité par la capacité, liste des opérateurs perdus.
 
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Data;
 using Marseille.Systems;
@@ -13,6 +14,9 @@ namespace Marseille.UI
     {
         /// <inheritdoc />
         public override string TabLabel { get { return "Équipe"; } }
+
+        /// <inheritdoc />
+        public override string TabIcon { get { return "tab_equipe"; } }
 
         /// <summary>Remplit la liste des opérateurs et des recrues possibles.</summary>
         /// <param name="data">Partie.</param>
@@ -39,6 +43,7 @@ namespace Marseille.UI
         private void AddOperatorCard(OperatorData op, GameData data, GameConfig config)
         {
             UiCard card = UiCard.Create(Column, 3, config);
+            card.SetIcon(ArtLibrary.TypeIcon(op.type), config.uiFontSizes.z * 3.4f);
             string where = op.status == OperatorStatus.InTransit
                 ? "vers " + UiText.QuarterName(data, op.destinationQuarter) + " (" + op.transitCycles + " cycle(s))"
                 : UiText.QuarterName(data, op.currentQuarter);
@@ -59,6 +64,7 @@ namespace Marseille.UI
         private void AddRecruitCard(OperatorTypeSettings s, GameData data, GameConfig config)
         {
             UiCard card = UiCard.Create(Column, 2, config);
+            card.SetIcon(ArtLibrary.TypeIcon(s.type), config.uiFontSizes.z * 2.4f);
             card.Text.text = s.displayName + " · spécialité : " + UiText.Task(s.specialtyTask, config) + "\n"
                              + "Recrutement " + UiText.Money(s.recruitCost) + " · entretien " + UiText.Money(s.upkeep) + "/cycle";
             OperatorType type = s.type;

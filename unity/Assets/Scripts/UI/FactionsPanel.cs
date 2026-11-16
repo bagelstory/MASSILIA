@@ -2,6 +2,7 @@
 // Écran « Factions » (spec §5) : équipes rivales fictives, territoire, effectifs, agressivité, trêves.
 // Le budget n'est donné qu'en ordre de grandeur, l'objectif seulement s'il a été repéré (surveillance).
 
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Data;
 using Marseille.Map;
@@ -14,6 +15,9 @@ namespace Marseille.UI
     {
         /// <inheritdoc />
         public override string TabLabel { get { return "Rivaux"; } }
+
+        /// <inheritdoc />
+        public override string TabIcon { get { return "tab_rivaux"; } }
 
         /// <summary>Remplit la liste des factions.</summary>
         /// <param name="data">Partie.</param>
@@ -31,6 +35,7 @@ namespace Marseille.UI
         private void AddFactionCard(FactionData f, GameData data, GameConfig config)
         {
             UiCard card = UiCard.Create(Column, 4, config);
+            card.SetIcon(ArtLibrary.FactionEmblem(f.id), config.uiFontSizes.z * 4f);
             card.Text.color = f.isAlive ? MapStyle.FromHex(f.colorHex) : config.uiTextDim;
             if (!f.isAlive) { card.Text.text = f.name + " · a disparu de la ville."; return; }
             string truce = f.allianceCyclesLeft > 0

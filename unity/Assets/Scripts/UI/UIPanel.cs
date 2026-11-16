@@ -16,6 +16,9 @@ namespace Marseille.UI
         /// <summary>Libellé de l'onglet.</summary>
         public abstract string TabLabel { get; }
 
+        /// <summary>Pictogramme de l'onglet dans Resources/Art/tabs (null : libellé seul).</summary>
+        public virtual string TabIcon { get { return null; } }
+
         /// <summary>Gestionnaire d'interface propriétaire.</summary>
         protected UIManager Manager { get; private set; }
 

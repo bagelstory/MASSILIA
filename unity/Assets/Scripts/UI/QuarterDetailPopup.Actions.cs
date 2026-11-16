@@ -2,6 +2,7 @@
 // Partie « actions » du détail de quartier : liste des charbons (ouvrir, reprendre, fermer) et
 // investissement. Les règles sont dans EconomyActions ; ici on affiche et on appelle UIManager.Perform.
 
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Data;
 using Marseille.Systems;
@@ -25,6 +26,7 @@ namespace Marseille.UI
                 PoiData poi = q.pois[p];
                 if (poi.kind != PoiKind.Charbon) continue;
                 UiCard card = UiCard.Create(Body, 2, c);
+                card.SetIcon(ArtLibrary.Symbol("charbon"), c.uiFontSizes.z * 2.4f);
                 card.Text.text = poi.name + " · " + UiText.Money(poi.revenue) + "/cycle · risque " + poi.risk + "/3\n" + OwnerText(poi, data);
                 int qid = q.id, pid = poi.id;
                 if (poi.ownerId == Owners.Player)

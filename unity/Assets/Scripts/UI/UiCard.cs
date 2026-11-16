@@ -47,6 +47,22 @@ namespace Marseille.UI
             return card;
         }
 
+        /// <summary>Pose une icône dans le coin haut droit de la carte (sans effet si le sprite manque).</summary>
+        /// <param name="sprite">Image.</param>
+        /// <param name="size">Côté en pixels.</param>
+        public void SetIcon(Sprite sprite, float size)
+        {
+            if (sprite == null) return;
+            Image icon = UiFactory.CreateImage("Icon", Root, Color.white, false);
+            icon.sprite = sprite;
+            icon.preserveAspect = true;
+            icon.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
+            RectTransform rt = icon.rectTransform;
+            rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(1f, 1f);
+            rt.sizeDelta = new Vector2(size, size);
+            rt.anchoredPosition = new Vector2(-config.uiPadding * 0.4f, -config.uiPadding * 0.4f);
+        }
+
         /// <summary>Ajoute un bouton dans la rangée du bas de la carte.</summary>
         /// <param name="label">Libellé.</param>
         /// <param name="color">Couleur.</param>

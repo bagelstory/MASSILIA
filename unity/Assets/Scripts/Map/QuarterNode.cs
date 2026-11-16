@@ -3,6 +3,7 @@
 // pastille (charbons du joueur, ou « ! » si une menace est repérée), contour de sélection.
 // Ne fait rien à chaque image : il est mis à jour par MapController quand les données changent.
 
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Data;
 using UnityEngine;
@@ -38,6 +39,8 @@ namespace Marseille.Map
         public static QuarterNode CreateDefault(Transform parent, Font font, GameConfig config)
         {
             Image bg = UiFactory.CreateImage("Quarter", parent, config.mapColorFree, true);
+            Sprite tile = ArtLibrary.Shape("tile");
+            if (tile != null) { bg.sprite = tile; bg.type = Image.Type.Sliced; bg.pixelsPerUnitMultiplier = 4f; }
             QuarterNode node = bg.gameObject.AddComponent<QuarterNode>();
             node.background = bg;
             node.controlBar = UiFactory.CreateImage("Control", bg.transform, config.mapColorPlayer, false);

@@ -16,6 +16,9 @@ namespace Marseille.UI
         /// <inheritdoc />
         public override string TabLabel { get { return "Flux"; } }
 
+        /// <inheritdoc />
+        public override string TabIcon { get { return "tab_flux"; } }
+
         /// <summary>Remplit la liste des flux.</summary>
         /// <param name="data">Partie.</param>
         /// <param name="config">Configuration.</param>

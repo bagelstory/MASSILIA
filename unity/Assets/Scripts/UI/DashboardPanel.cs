@@ -2,6 +2,7 @@
 // Écran « Tableau de bord » (spec §12.3) : les 6 indicateurs, la prévision du prochain cycle,
 // capacité et dette, les objectifs en cours, le bouton de validation du cycle.
 
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
 using Marseille.Data;
@@ -30,6 +31,9 @@ namespace Marseille.UI
         /// <inheritdoc />
         public override string TabLabel { get { return "Bilan"; } }
 
+        /// <inheritdoc />
+        public override string TabIcon { get { return "tab_bilan"; } }
+
         /// <summary>Construit l'écran.</summary>
         /// <param name="config">Configuration.</param>
         protected override void Build(GameConfig config)
@@ -37,12 +41,12 @@ namespace Marseille.UI
             UiKit.Panel("Background", transform, config.uiBackground).raycastTarget = false;
             RectTransform col = UiKit.ScrollColumn(transform, config);
             UiKit.Label(col, "Indicateurs", config.uiFontSizes.x, config.uiText);
-            territory = IndicatorBar.Create(col, "Territoire", config);
-            treasury = IndicatorBar.Create(col, "Trésorerie", config);
-            effectifs = IndicatorBar.Create(col, "Effectifs", config);
-            pressure = IndicatorBar.Create(col, "Pression", config);
-            stability = IndicatorBar.Create(col, "Stabilité", config);
-            exposure = IndicatorBar.Create(col, "Exposition", config);
+            territory = IndicatorBar.Create(col, "Territoire", config, ArtLibrary.Indicator("territoire"));
+            treasury = IndicatorBar.Create(col, "Trésorerie", config, ArtLibrary.Indicator("tresorerie"));
+            effectifs = IndicatorBar.Create(col, "Effectifs", config, ArtLibrary.Indicator("effectifs"));
+            pressure = IndicatorBar.Create(col, "Pression", config, ArtLibrary.Indicator("pression"));
+            stability = IndicatorBar.Create(col, "Stabilité", config, ArtLibrary.Indicator("stabilite"));
+            exposure = IndicatorBar.Create(col, "Exposition", config, ArtLibrary.Indicator("exposition"));
             UiKit.Label(col, "Prochain cycle", config.uiFontSizes.x, config.uiText);
             forecast = MultiLine(col, 7, config);
             network = MultiLine(col, 3, config);

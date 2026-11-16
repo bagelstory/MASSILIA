@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
 using Marseille.Data;
@@ -66,6 +67,7 @@ namespace Marseille.Map
             SelectedQuarterId = Owners.None;
             SelectedOperatorId = Owners.None;
             if (font == null) font = MapStyle.BuiltinFont();
+            if (operatorSprite == null) operatorSprite = ArtLibrary.Shape("pawn");
         }
 
         /// <summary>Abonnements aux événements de jeu.</summary>

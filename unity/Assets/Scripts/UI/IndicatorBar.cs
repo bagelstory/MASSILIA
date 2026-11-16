@@ -19,8 +19,9 @@ namespace Marseille.UI
         /// <param name="parent">Parent (colonne).</param>
         /// <param name="name">Nom affiché.</param>
         /// <param name="config">Configuration.</param>
+        /// <param name="icon">Icône à gauche (facultative).</param>
         /// <returns>La barre.</returns>
-        public static IndicatorBar Create(Transform parent, string name, GameConfig config)
+        public static IndicatorBar Create(Transform parent, string name, GameConfig config, Sprite icon = null)
         {
             RectTransform root = UiFactory.CreateRect("Indicator " + name, parent);
             UiKit.SetHeight(root, config.uiFontSizes.y * 2.6f);
@@ -28,12 +29,20 @@ namespace Marseille.UI
             bar.title = UiFactory.CreateText("Title", root, UiKit.Font, config.uiFontSizes.y, config.uiText);
             bar.title.alignment = TextAnchor.UpperLeft;
             bar.title.text = name;
-            UiFactory.Stretch(bar.title.rectTransform, new Vector2(0f, 0.4f), new Vector2(0.7f, 1f));
+            float left = icon != null ? 0.12f : 0f;
+            if (icon != null)
+            {
+                Image img = UiFactory.CreateImage("Icon", root, Color.white, false);
+                img.sprite = icon;
+                img.preserveAspect = true;
+                UiFactory.Stretch(img.rectTransform, Vector2.zero, new Vector2(0.1f, 1f));
+            }
+            UiFactory.Stretch(bar.title.rectTransform, new Vector2(left, 0.4f), new Vector2(0.7f, 1f));
             bar.value = UiFactory.CreateText("Value", root, UiKit.Font, config.uiFontSizes.y, config.uiText);
             bar.value.alignment = TextAnchor.UpperRight;
             UiFactory.Stretch(bar.value.rectTransform, new Vector2(0.5f, 0.4f), new Vector2(1f, 1f));
             Image track = UiFactory.CreateImage("Track", root, config.uiButton, false);
-            UiFactory.Stretch(track.rectTransform, new Vector2(0f, 0.08f), new Vector2(1f, 0.3f));
+            UiFactory.Stretch(track.rectTransform, new Vector2(left, 0.08f), new Vector2(1f, 0.3f));
             bar.fill = UiFactory.CreateImage("Fill", track.transform, config.uiAccent, false);
             return bar;
         }

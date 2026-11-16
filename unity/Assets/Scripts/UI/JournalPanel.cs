@@ -22,6 +22,9 @@ namespace Marseille.UI
         /// <inheritdoc />
         public override string TabLabel { get { return "Journal"; } }
 
+        /// <inheritdoc />
+        public override string TabIcon { get { return "tab_journal"; } }
+
         /// <summary>Remplit les filtres et les lignes.</summary>
         /// <param name="data">Partie.</param>
         /// <param name="config">Configuration.</param>

@@ -3,6 +3,7 @@
 // pression), zone centrale, barre d'onglets, message court. Construit par code au lancement.
 
 using System.Collections.Generic;
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
 using Marseille.Data;
@@ -117,7 +118,17 @@ namespace Marseille.UI
             {
                 int index = i;
                 Button b = UiKit.MakeButton(tabBar, panels[i].TabLabel, config.uiPanel, () => ShowPanel(index), config);
-                b.GetComponentInChildren<Text>().fontSize = config.uiFontSizes.z;
+                Text label = b.GetComponentInChildren<Text>();
+                label.fontSize = config.uiFontSizes.z;
+                Sprite icon = ArtLibrary.Tab(panels[i].TabIcon);
+                if (icon != null)
+                {
+                    Image img = UiFactory.CreateImage("Icon", b.transform, Color.white, false);
+                    img.sprite = icon;
+                    img.preserveAspect = true;
+                    UiFactory.Stretch(img.rectTransform, new Vector2(0.2f, 0.42f), new Vector2(0.8f, 0.92f));
+                    UiFactory.Stretch(label.rectTransform, new Vector2(0f, 0f), new Vector2(1f, 0.42f));
+                }
                 tabButtons.Add(b);
             }
         }
@@ -131,6 +142,8 @@ namespace Marseille.UI
             {
                 tabButtons[i].targetGraphic.color = i == current ? config.uiButton : config.uiPanel;
                 tabButtons[i].GetComponentInChildren<Text>().color = i == current ? config.uiAccent : config.uiTextDim;
+                Transform icon = tabButtons[i].transform.Find("Icon");
+                if (icon != null) icon.GetComponent<Image>().color = i == current ? config.uiAccent : config.uiTextDim;
             }
         }
 
