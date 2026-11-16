@@ -1,12 +1,14 @@
 # CHOUF
 
-Jeu de gestion noir, 18+, à Marseille (2021 → 2026, puis l'après). Fiction : lieux réels, personnages et équipes inventés.
+Jeu de gestion stratégique mobile, 18+, sur la vraie carte de Marseille (111 quartiers). Tu diriges un réseau
+depuis la carte : opérateurs, charbons, argent, pression, factions rivales inventées. Fiction : lieux réels,
+personnages et équipes inventés.
 
-- Jouer : ouvrir `dist/chouf.html` dans un navigateur (téléphone conseillé).
-- Construire : `python3 src/build.py`
-- Vérifier les données : `python3 tools/check_data.py`
-- Simuler des vies : `node tests/sim/sim.js 200 hasard` (styles : `hasard`, `prudent`, `hall`)
-- Tester l'interface : `python3 tests/ui/smoke.py` (captures dans `production/qa/evidence/`)
+- Jouer : ouvrir `dist/chouf.html` (téléphone conseillé).
+- Construire : `python3 src/build.py` · images : `python3 tools/assets.py` · carte : `python3 tools/geo.py`
+- Vérifier : `python3 tools/check_data.py` · `node tests/sim/sim.js 40 equilibre` · `python3 tests/ui/smoke.py`
 
-Conception : `design/01-plan-v1.md`, `design/02-modele-donnees.md`, `design/04-prompts-3d.md` (prompts d'images, générés par `tools/gen_prompts.py`).
-Équilibrage : tout est dans `data/*.json`.
+Conception : `design/05-gestion-pure.md` (jeu) · `design/04-prompts-3d.md` (images).
+Équilibrage : `data/*.json`. Ancienne version narrative : `archive/v1-narratif/`.
+
+Contours des quartiers : data.gouv.fr, « Quartiers de Marseille » (Joël Gombin), Licence ouverte 2.0.

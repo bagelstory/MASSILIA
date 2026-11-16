@@ -17,56 +17,51 @@ function dansPoly(pt, poly) {
   return ins;
 }
 
-/** Découpage de la ville en quartiers : VILLE.q[id] = {id, zone, nom, arr, cx, cy, n}, VILLE.cell["x,y"] = id. */
+/** La ville : les 111 quartiers officiels (data/quartiers.json, tools/geo.py), rastérisés sur une grille du plan.
+    VILLE.q[id] = {id, zone, nom, arr, cx, cy, n, cells[]}, VILLE.cell["x,y"] = id, VILLE.adj[id] = voisins. */
 var VILLE = (function () {
   var PAS = 2, cell = {}, q = {}, ordre = [], adj = {};
-  D.zones.liste.forEach(function (z) {
-    var pts = [], xs = z.plan.map(function (p) { return p[0]; }), ys = z.plan.map(function (p) { return p[1]; });
+  D.quartiers.liste.forEach(function (Q) {
+    var xs = [], ys = [];
+    Q.polys.forEach(function (r) { r.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    var o = { id: Q.id, zone: Q.zone, nom: Q.nom, arr: Q.arr, cx: 0, cy: 0, n: 0, cells: [] };
     for (var x = Math.floor(Math.min.apply(0, xs) / PAS) * PAS; x <= Math.max.apply(0, xs); x += PAS)
-      for (var y = Math.floor(Math.min.apply(0, ys) / PAS) * PAS; y <= Math.max.apply(0, ys); y += PAS)
-        if (!cell[x + "," + y] && dansPoly([x + 0.5, y + 0.5], z.plan)) pts.push([x, y]);
-    var k = z.quartiers.length, r = rngDecor(z.id + ":q"), seeds = [];
-    // graines éloignées les unes des autres, puis quelques passes de regroupement
-    seeds.push(pts[Math.floor(r() * pts.length)].slice());
-    while (seeds.length < k) {
-      var best = null, bd = -1;
-      for (var i = 0; i < pts.length; i += 3) {
-        var d = Infinity;
-        seeds.forEach(function (s) { d = Math.min(d, (pts[i][0] - s[0]) * (pts[i][0] - s[0]) + (pts[i][1] - s[1]) * (pts[i][1] - s[1])); });
-        if (d > bd) { bd = d; best = pts[i]; }
+      for (var y = Math.floor(Math.min.apply(0, ys) / PAS) * PAS; y <= Math.max.apply(0, ys); y += PAS) {
+        var k = x + "," + y;
+        if (cell[k]) continue;
+        var c = [x + PAS / 2, y + PAS / 2];
+        if (Q.polys.some(function (r) { return dansPoly(c, r); })) { cell[k] = Q.id; o.cells.push([x, y]); o.cx += c[0]; o.cy += c[1]; o.n++; }
       }
-      seeds.push(best.slice());
+    if (!o.n) {                                    // très petit quartier : au moins une case
+      var cx = (Math.min.apply(0, xs) + Math.max.apply(0, xs)) / 2, cy = (Math.min.apply(0, ys) + Math.max.apply(0, ys)) / 2;
+      var kx = Math.floor(cx / PAS) * PAS, ky = Math.floor(cy / PAS) * PAS;
+      cell[kx + "," + ky] = Q.id; o.cells.push([kx, ky]); o.cx = cx; o.cy = cy; o.n = 1;
+    } else { o.cx /= o.n; o.cy /= o.n; }
+    // le centre doit tomber dans le quartier (quartiers en croissant) : sinon la case la plus proche du centre
+    var ck = Math.floor(o.cx / PAS) * PAS + "," + Math.floor(o.cy / PAS) * PAS;
+    if (cell[ck] !== Q.id) {
+      var best = o.cells[0], bd = Infinity;
+      o.cells.forEach(function (p) { var d = (p[0] - o.cx) * (p[0] - o.cx) + (p[1] - o.cy) * (p[1] - o.cy); if (d < bd) { bd = d; best = p; } });
+      o.cx = best[0] + PAS / 2; o.cy = best[1] + PAS / 2;
     }
-    var lab = new Array(pts.length);
-    for (var it = 0; it < 8; it++) {
-      var sx = seeds.map(function () { return [0, 0, 0]; });
-      pts.forEach(function (p, i) {
-        var bi = 0, bd2 = Infinity;
-        seeds.forEach(function (s, j) { var d = (p[0] - s[0]) * (p[0] - s[0]) + (p[1] - s[1]) * (p[1] - s[1]); if (d < bd2) { bd2 = d; bi = j; } });
-        lab[i] = bi; sx[bi][0] += p[0]; sx[bi][1] += p[1]; sx[bi][2]++;
-      });
-      seeds = sx.map(function (s, j) { return s[2] ? [s[0] / s[2], s[1] / s[2]] : seeds[j]; });
-    }
-    // ordre des quartiers : du nord au sud, pour que les noms tombent de façon stable
-    var ordreSeeds = seeds.map(function (s, j) { return j; }).sort(function (a, b) { return seeds[a][1] - seeds[b][1] || seeds[a][0] - seeds[b][0]; });
-    var nomDe = {};
-    ordreSeeds.forEach(function (j, rang) { nomDe[j] = rang; });
-    for (var j = 0; j < k; j++) {
-      var id = z.id + "_" + nomDe[j];
-      q[id] = { id: id, zone: z.id, nom: z.quartiers[nomDe[j]], arr: z.arrondissements.join("-"), cx: seeds[j][0], cy: seeds[j][1], n: 0 };
-    }
-    pts.forEach(function (p, i) { var id = z.id + "_" + nomDe[lab[i]]; cell[p[0] + "," + p[1]] = id; q[id].n++; });
+    q[Q.id] = o; ordre.push(Q.id); adj[Q.id] = {};
   });
-  Object.keys(q).sort().forEach(function (id) { ordre.push(id); adj[id] = {}; });
   Object.keys(cell).forEach(function (k) {
     var a = cell[k], p = k.split(",").map(Number);
-    [[PAS, 0], [0, PAS]].forEach(function (d) {
+    [[PAS, 0], [0, PAS], [PAS, PAS], [PAS, -PAS]].forEach(function (d) {
       var b = cell[(p[0] + d[0]) + "," + (p[1] + d[1])];
       if (b && b !== a) { adj[a][b] = 1; adj[b][a] = 1; }
     });
   });
   Object.keys(adj).forEach(function (k) { adj[k] = Object.keys(adj[k]); });
-  return { PAS: PAS, cell: cell, q: q, ordre: ordre, adj: adj };
+  // les îles du Frioul : reliées au Vieux-Port et au Pharo (navettes maritimes)
+  var iles = ordre.filter(function (id) { return q[id].nom === "Les Îles"; })[0];
+  if (iles) ordre.filter(function (id) { return q[id].nom === "Le Pharo" || q[id].nom === "Hôtel de Ville"; }).forEach(function (v) {
+    if (adj[iles].indexOf(v) < 0) { adj[iles].push(v); adj[v].push(iles); }
+  });
+  var zones = {};
+  ordre.forEach(function (id) { (zones[q[id].zone] = zones[q[id].zone] || []).push(id); });
+  return { PAS: PAS, cell: cell, q: q, ordre: ordre, adj: adj, zones: zones, taille: D.quartiers.taille };
 })();
 
 /** Quartier sous un point du plan. */
@@ -94,7 +89,10 @@ function statut(id) {
 }
 var STATUT_NOM = { libre: "Libre", joueur: "À toi", securise: "Sécurisé", conteste: "Contesté", faction: "Tenu par une faction" };
 /** Le joueur peut-il y envoyer un opérateur ? (§3.4 : voisin à 50 % ou plus, ou déjà présent) */
-function accessible(id) {
+function accessible(id, tache) {
+  // le Repérage peut entrer dans une zone verrouillée, depuis un quartier voisin où tu es présent
+  if (tache === "reperer" && G.q[id].ctl <= 0 && VILLE.adj[id].some(function (v) { return G.q[v].ctl > 0; })) return true;
+  if (!zoneOuverte(VILLE.q[id].zone)) return false;
   if (G.q[id].ctl > 0) return true;
   return VILLE.adj[id].some(function (v) { return G.q[v].ctl >= B.controle.acces_voisin; });
 }
@@ -159,18 +157,16 @@ function newGame(seed) {
   G.capacite = Dp.capacite; G.seuils_pris = []; G.ind = { pression: 15, stabilite: 55, exposition: 5 };
   G.operateurs = []; G.prochain_op = 1; G.visages = B.operateurs.visages.slice();
   G.factions = {}; G.alliances = []; G.flux = []; G.journal = []; G.rapport = null; G.fini = null; G.saisons = [];
-  G.historique = [];
+  G.historique = []; G.quetesFaites = {}; G.zonesOuvertes = [];
   D.equipes.liste.forEach(function (e) {
     G.factions[e.id] = { id: e.id, budget: e.budget, effectif: e.effectif, agressivite: e.agressivite, objectif: "maintenir", cible: null,
       vivante: true, pic: 0, intention: null };
   });
   G.q = {};
   VILLE.ordre.forEach(function (id) {
-    var z = IDX.zones[VILLE.q[id].zone], n = z.quartiers.length;
-    var fl = Math.round(z.revenu / n * 1.6 * rf(Q.flux_variation[0], Q.flux_variation[1]) / 10) * 10;
-    var s = { ctl: 0, adv: {}, conn: 0, flux: fl, maintien: Math.round(fl * Q.maintien_ratio / 10) * 10, inv: 0, sans_op: 0, poi: [], ev: [] };
-    var np = rint(1, 3);
-    for (var i = 0; i < np; i++) s.poi.push(pick(Q.points_interet));
+    var z = IDX.zones[VILLE.q[id].zone];
+    var s = { ctl: 0, adv: {}, conn: 0, ch: genererCharbons(id), inv: 0, sans_op: 0 };
+    s.maintien = Math.round(s.ch.reduce(function (t, c) { return t + c.rent; }, 0) * B.charbons.maintien_ratio / 10) * 10 + 40;
     if (z.controle) s.adv[z.controle] = rint(Q.presence_faction[0], Q.presence_faction[1]);
     else D.equipes.liste.forEach(function (e) { if (rnd() < 0.3) s.adv[e.id] = rint(Q.presence_neutre[0], Q.presence_neutre[1]); });
     G.q[id] = s;
@@ -183,10 +179,20 @@ function newGame(seed) {
     });
   });
   VILLE.ordre.forEach(function (id) { var s = G.q[id], a = advTotal(s); if (a > 100) for (var f in s.adv) s.adv[f] *= 100 / a; });
+  // les factions tiennent les charbons là où elles sont fortes
+  VILLE.ordre.forEach(function (id) {
+    var s = G.q[id], dom = factionDominante(s);
+    s.ch.forEach(function (c) { if (dom && s.adv[dom] >= 30) { c.proprio = dom; c.ouvert = true; } });
+  });
   // base du joueur
   var zones = D.zones.liste.filter(function (z) { return z.depart; });
-  var zb = pick(zones), qs = VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === zb.id; });
-  var base = pick(qs), sb = G.q[base];
+  var zb = pick(zones), qs = VILLE.zones[zb.id].slice();
+  var cand = qs.filter(function (id) { return G.q[id].ch.length; });
+  var base = pick(cand.length ? cand : qs), sb = G.q[base];
+  G.zonesOuvertes = [zb.id];
+  var nb = Dp.charbons_base, essai = 0;
+  while (sb.ch.length < nb && essai++ < 10) sb.ch = sb.ch.concat(genererCharbons(base)).slice(0, Math.max(nb, sb.ch.length));
+  sb.ch.forEach(function (c, i) { c.proprio = i < nb ? "joueur" : null; c.ouvert = i < nb; });
   G.base = base;
   sb.adv = {}; if (zb.controle) sb.adv[zb.controle] = Dp.presence_base_adverse;
   sb.ctl = Dp.controle_base; sb.conn = Dp.connaissance_base;

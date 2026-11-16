@@ -1,296 +1,285 @@
-/* CHOUF — 60-ui : écrans. Même principe que KICK : TAB + SUB, go(), render() par table d'écrans.
-   Aucune règle de jeu ici : l'interface appelle les fonctions des modules 00 à 30. */
+/* CHOUF v2 — 60-ui : écrans. CARTE par défaut ; OBJECTIFS, ÉQUIPE (opérateurs), BORD (indicateurs, prévisions,
+   flux internationaux), FACTIONS, JOURNAL. Six indicateurs toujours visibles en haut, bouton unique
+   « Valider le cycle » en bas. Notifications d'une ligne. Aucune règle de jeu ici. */
 
-var TAB = "quartier", SUB = null, UI = { creation: null, toast: null, bilan: null };
+var TAB = "carte", UI = { selOp: null, selQ: null, taches: false, rapport: null, toast: null, sousBord: null };
 var $ = function (s) { return document.querySelector(s); };
 function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+function eur(n) { return Math.round(n).toLocaleString("fr-FR") + " €"; }
+function sgn(n, u) { n = Math.round(n * 10) / 10; return (n > 0 ? "+" : "") + n + (u || ""); }
+function jauge(v, cls) { return '<div class="jauge ' + (cls || "") + '"><i style="width:' + clamp(v, 0, 100) + '%"></i></div>'; }
 
-/** Images : ASSETS est injecté par build.py (index des planches découpées). Sinon, aplat. */
 var ASSET = {
   u: function (k) { var a = window.ASSETS || {}; return a[k] || null; },
-  img: function (k, cls) {
-    var u = ASSET.u(k);
-    return u ? '<img class="' + (cls || "") + '" src="' + u + '" alt="">' : '<div class="' + (cls || "") + ' ph ph-' + esc(k.split("_")[0]) + '"></div>';
-  }
+  img: function (k, cls) { var u = ASSET.u(k); return u ? '<img class="' + (cls || "") + '" src="' + u + '" alt="">' : '<div class="' + (cls || "") + ' ph"></div>'; }
 };
+function ico(k, repli) { var u = ASSET.u("icone_" + k); return u ? '<img class="ico" src="' + u + '" alt="">' : (repli || ""); }
+function toast(t) { UI.toast = t; render(); setTimeout(function () { if (UI.toast === t) { UI.toast = null; render(); } }, 2400); }
+function go(t) { TAB = t; UI.taches = false; UI.sousBord = null; render(); }
 
-/** Explications contextuelles des indicateurs (GDD V7 §6 : chiffré, jamais sans explication). */
-var EXPL = {
-  tension: [[25, "Calme. Les gens se parlent dans le hall."], [50, "Quelques embrouilles, rien d'ouvert."], [75, "Ça se regarde de travers. Les mères rentrent les enfants tôt."], [101, "Ça peut éclater à tout moment."]],
-  police: [[25, "On ne voit presque jamais de patrouille."], [50, "Une voiture passe de temps en temps."], [75, "Contrôles réguliers, les guetteurs sont sur les nerfs."], [101, "La police est là tous les jours."]],
-  humeur: [[25, "Le quartier n'en peut plus des réseaux."], [50, "Les gens se taisent, mais ils n'en pensent pas moins."], [75, "On laisse faire, tant que ça reste discret."], [101, "Beaucoup comptent sur l'argent qui circule."]],
-  stress: [[25, "Tu dors bien."], [50, "Ça tourne un peu dans ta tête le soir."], [75, "Tu sursautes au moindre bruit d'escalier."], [101, "Tu ne dors plus."]],
-  confiance: [[25, "Ne te croit plus."], [50, "Se méfie."], [75, "Te fait plutôt confiance."], [101, "Compte sur toi."]]
-};
-/** Petite icône d'interface (série I) ou, à défaut, un caractère. */
-function ico(k, repli) { var u = ASSET.u("icone_" + k); return u ? '<img class="ico" src="' + u + '" alt="">' : repli; }
-/** Portrait du protagoniste selon sa famille et son âge. */
-function clePortraitJoueur() {
-  var a = age(), k = "joueur_" + G.famille + "_" + (a >= 35 ? "ancien" : a >= 19 ? "adulte" : "jeune");
-  return ASSET.u(k) ? k : "joueur_" + G.famille + "_jeune";
+/* ---------------- indicateurs ---------------- */
+function indicateurs() {
+  var d = G.dernier || {}, ind = G.ind;
+  return [
+    { k: "territoire", n: "Territoire", v: Math.round(territoire()) + " %", d: d.d_territoire, i: "humeur", e: "Part de la ville que tu tiens. Victoire à " + B.fin.victoire_territoire + " %." },
+    { k: "tresorerie", n: "Trésorerie", v: eur(G.tresorerie), d: d.solde, i: "propre", e: "À zéro " + B.economie.faillite_cycles + " cycles de suite : faillite." + (G.dette ? " Dette : " + eur(G.dette) + "." : "") },
+    { k: "effectif", n: "Effectif", v: opsActifs().filter(function (o) { return o.dispo !== "indisponible"; }).length + "/" + opsActifs().length + " · " + G.capacite, i: "respect", e: "Opérateurs disponibles / total · capacité." },
+    { k: "pression", n: "Pression", v: Math.round(ind.pression), d: d.d_pression, i: "police", alerte: ind.pression > B.indicateurs.pression_alerte, inv: true, e: "Surveillance. Au-dessus de " + B.indicateurs.pression_alerte + " : opérations. À 100 : chute." },
+    { k: "stabilite", n: "Stabilité", v: Math.round(ind.stabilite), d: d.d_stabilite, i: "sangfroid", alerte: ind.stabilite < B.indicateurs.stabilite_basse, e: "Cohérence du réseau. Sous " + B.indicateurs.stabilite_basse + " : tout s'use plus vite." },
+    { k: "exposition", n: "Exposition", v: Math.round(ind.exposition), d: d.d_exposition, i: "tension", alerte: ind.exposition > B.indicateurs.exposition_alerte, inv: true, e: "Risque cumulé. Au-dessus de " + B.indicateurs.exposition_alerte + " : la pression monte seule." }
+  ];
 }
-function expl(k, v) { var t = EXPL[k]; for (var i = 0; i < t.length; i++) if (v < t[i][0]) return t[i][1]; return ""; }
-function jauge(v, cls) { return '<div class="jauge ' + (cls || "") + '"><i style="width:' + clamp(v, 0, 100) + '%"></i></div>'; }
-function euros(n) { return Math.round(n).toLocaleString("fr-FR") + " €"; }
-
-/* ---------------- Navigation ---------------- */
-
-function go(t) { TAB = t; SUB = null; render(); }
-function setSub(s) { SUB = s; render(); }
-function toast(t) {
-  UI.toast = t; render();
-  setTimeout(function () { if (UI.toast === t) { UI.toast = null; render(); } }, 2600);
+function vBandeau() {
+  return '<header class="bandeau"><div class="cyc"><b>Cycle ' + G.cycle + "</b><span>" + moisNom() + " " + annee() + "</span></div><div class=\"chips\">" +
+    indicateurs().map(function (x) {
+      var bon = x.d > 0 !== !!x.inv;
+      return '<button class="chip' + (x.alerte ? " al" : "") + '" data-ind="' + x.k + '">' + ico(x.i) + "<span><small>" + x.n + "</small><b>" + esc(x.v) + "</b>" +
+        (x.d ? '<em class="' + (bon ? "up" : "dn") + '">' + sgn(x.d) + "</em>" : "") + "</span></button>";
+    }).join("") + "</div></header>";
+}
+function vPied() {
+  var nq = quetesActives().filter(function (q) { return !q.fini; }).length;
+  var o = [["carte", "Carte"], ["objectifs", "Objectifs"], ["equipe", "Équipe"], ["bord", "Bord"], ["factions", "Factions"], ["journal", "Journal"]];
+  return '<div class="pied"><button class="btn valider" data-a="valider">Valider le cycle ' + G.cycle + '</button><nav class="onglets">' +
+    o.map(function (x) { return '<button data-tab="' + x[0] + '" class="' + (TAB === x[0] ? "on" : "") + '">' + x[1] + (x[0] === "objectifs" && nq ? " <i class=\"nb\">" + nq + "</i>" : "") + "</button>"; }).join("") + "</nav></div>";
 }
 
-/** Point d'entrée de l'affichage. */
 function render() {
   var app = $("#app");
   if (!G) { app.innerHTML = vAccueil(); return; }
-  syncTemps();
-  if (finCampagne()) { app.innerHTML = vFin(); return; }
-  var ecrans = { carte: vCarte, quartier: vQuartier, gens: vGens, journal: vJournal, moi: vMoi };
-  var corps = SUB === "zone" ? vZoneDistante() : SUB && SUB.indexOf("pnj:") === 0 ? vPnj(SUB.slice(4)) : ecrans[TAB]();
-  app.innerHTML = vEntete() + '<main class="corps">' + corps + "</main>" + vOnglets() +
-    (G.carte ? vCarteEvenement() : "") + (UI.bilan && !G.carte ? vBilan() : "") + (G.absence && !G.carte ? vAbsence() : "") +
-    (UI.toast ? '<div class="toast">' + esc(UI.toast) + "</div>" : "");
+  if (G.fini) { app.innerHTML = vFin(); return; }
+  var ecr = { carte: vCarte, objectifs: vObjectifs, equipe: vEquipe, bord: UI.sousBord === "flux" ? vFlux : vBord, factions: vFactions, journal: vJournal }[TAB]();
+  app.innerHTML = vBandeau() + '<main class="corps ' + TAB + '">' + ecr + "</main>" + vPied() +
+    (UI.taches ? vTaches() : "") + (UI.rapport ? vRapport() : "") + (UI.toast ? '<div class="toast">' + esc(UI.toast) + "</div>" : "");
   var pl = $("#plan");
   if (pl) planMonter(pl);
 }
 
-/* ---------------- Accueil et création ---------------- */
-
 function vAccueil() {
-  var c = UI.creation;
-  if (c) {
-    var f = IDX.familles[c.G.famille], z = IDX.zones[c.G.protagoniste.zone_origine];
-    return '<div class="accueil"><h1 class="titre">CHOUF</h1>' +
-      '<div class="carte-bloc"><p class="petit">Rentrée 2021. Tu as 16 ans.</p>' +
-      '<div class="duo">' + ASSET.img("joueur_" + c.G.famille + "_jeune", "med grand") + ASSET.img("medaillon_mere_" + c.G.famille, "med grand") + "</div>" +
-      "<h2>" + esc(c.G.protagoniste.prenom + " " + f.nom) + "</h2>" +
-      "<p>Tu grandis à <b>" + esc(z.nom) + "</b> (" + esc(z.quartiers.slice(0, 3).join(", ")) + "…).</p>" +
-      "<p>" + esc(f.note.charAt(0).toUpperCase() + f.note.slice(1)) + ". Ta mère, " + esc(f.mere.prenom) + ", est " + esc(f.mere.metier) +
-      ". Ton petit frère " + esc(f.petit_frere.prenom) + " a 11 ans, ta grande sœur " + esc(f.grande_soeur.prenom) + " en a 20.</p></div>" +
-      '<button class="btn" data-a="commencer">Commencer cette vie</button>' +
-      '<button class="btn sec" data-a="retirer">Tirer une autre vie</button></div>';
-  }
-  return '<div class="accueil">' + (ASSET.u("vue_centre") ? '<img class="hero" src="' + ASSET.u("vue_centre") + '" alt="">' : "") + '<h1 class="titre">CHOUF</h1><p class="sous">Marseille, 2021 → 2026</p>' +
-    '<p class="avert">Jeu de fiction pour adultes. Lieux réels, personnages et équipes inventés. Le jeu montre la prison, le deuil, la peur et les proches abîmés.</p>' +
+  return '<div class="accueil">' + (ASSET.u("vue_centre") ? '<img class="hero" src="' + ASSET.u("vue_centre") + '" alt="">' : "") +
+    '<h1 class="titre">CHOUF</h1><p class="sous">Marseille · 111 quartiers</p>' +
+    '<p class="avert">Jeu de stratégie pour adultes. Vrais quartiers, factions inventées. Tu diriges un réseau depuis la carte : opérateurs, charbons, argent, pression.</p>' +
     (hasSave() ? '<button class="btn" data-a="continuer">Continuer</button>' : "") +
-    '<label class="champ">Ton prénom<input id="prenom" maxlength="18" autocomplete="off" placeholder="Ton prénom"></label>' +
-    '<button class="btn ' + (hasSave() ? "sec" : "") + '" data-a="nouvelle">Nouvelle vie</button></div>';
+    '<button class="btn ' + (hasSave() ? "sec" : "") + '" data-a="nouvelle">Nouvelle partie</button>' +
+    '<p class="source">Contours des quartiers : data.gouv.fr, « Quartiers de Marseille » (Licence ouverte).</p></div>';
 }
 
-/* ---------------- En-tête et onglets ---------------- */
-
-function vEntete() {
-  var t = G.temps, T = B.temps, ch = IDX.chapitres[G.chapitre];
-  var pp = prochainPoint();
-  return '<header class="entete"><div class="l1"><b>Sem. ' + G.cal.semaine + " · " + G.cal.annee + "</b><span>" + age() + " ans · " + esc(ch.nom) + "</span></div>" +
-    '<div class="l2"><span class="res e" title="Énergie">' + ico("energie", "⚡") + " " + t.energie + "/" + T.energie_max + (pp ? ' <small>+1 dans ' + pp + " min</small>" : "") + "</span>" +
-    '<span class="res s" title="Sang-froid">' + ico("sangfroid", "❄") + " " + t.sangfroid + "/" + T.sangfroid_max + "</span>" +
-    '<span class="res a">' + ico("propre", "") + " " + euros(G.argent.propre) + "</span></div></header>";
-}
-function vOnglets() {
-  var o = [["carte", "Carte"], ["quartier", "Quartier"], ["gens", "Gens"], ["journal", "Journal"], ["moi", "Moi"]];
-  return '<nav class="onglets">' + o.map(function (x) {
-    return '<button data-tab="' + x[0] + '" class="' + (TAB === x[0] && !SUB ? "on" : "") + '">' + x[1] + "</button>";
-  }).join("") + "</nav>";
-}
-function vCloreBouton() {
-  return '<div class="clore"><button class="btn" data-a="clore">Clore la semaine</button><p class="petit">La ville avance d\'une semaine. Ton énergie remonte un peu.</p></div>';
-}
-
-/* ---------------- Carte de Marseille ---------------- */
-
-/* La carte est dessinée par 55-plan.js dans <canvas id="plan">. Ici : le cadre, la légende et le panneau
-   d'information de la zone touchée (façon barre de territoire des jeux de gestion de ville). */
-function nomEquipe(id) { return id === "joueur" ? "toi" : id && IDX.equipes[id] ? IDX.equipes[id].nom : "personne"; }
-function couleurEquipe(id) { return id === "joueur" ? B.carte.couleur_joueur : id && IDX.equipes[id] ? IDX.equipes[id].couleur : B.carte.couleur_neutre; }
+/* ---------------- CARTE ---------------- */
 function vCarte() {
-  var parts = partsVille();
-  var barre = '<div class="parts" title="Qui tient la ville">' + parts.map(function (x) {
-    return '<i style="width:' + (x.p * 100).toFixed(1) + '%;background:' + couleurEquipe(x.id === "aucun" ? null : x.id) + '"></i>';
-  }).join("") + "</div>";
-  var leg = parts.map(function (x) {
-    return '<span><b style="background:' + couleurEquipe(x.id === "aucun" ? null : x.id) + '"></b>' + esc(x.id === "aucun" ? "Personne" : nomEquipe(x.id)) + " " + Math.round(x.p * 100) + "%</span>";
-  }).join("");
-  var h = '<div class="vue-ville"><canvas id="plan"></canvas>' +
-    '<div class="hud-haut"><div class="hud-titre">Marseille · qui tient la ville</div>' + barre + '<div class="hud-leg">' + leg + "</div></div>" +
-    '<div class="hud-zoom"><button data-a="zplus">+</button><button data-a="zmoins">−</button></div>';
-  if (UI.sel) {
-    var z = IDX.zones[UI.sel], g = G.zones[z.id];
-    h += '<div class="hud-bas"><div class="hb-l1"><b>' + esc(z.nom) + "</b><span>" + esc(z.arrondissements.join(", ")) + "</span></div>";
-    if (g.connu === 0) h += '<p class="hb-txt">Tu n\'y as jamais mis les pieds.</p>';
-    else h += '<div class="hb-ctrl"><b style="background:' + couleurZone(z.id) + '"></b>Tenu par ' + esc(nomEquipe(g.controle)) + "</div>" +
-      '<div class="hb-stats"><span>Tension <b>' + Math.round(g.tension) + "</b></span><span>Police <b>" + Math.round(g.police) + "</b></span><span>Humeur <b>" + Math.round(g.humeur) + "</b></span></div>" +
-      '<p class="hb-txt">' + esc(z.atout) + "</p>";
-    h += '<div class="hb-btns"><button class="btn" data-a="ouvrirzone">' + (z.id === G.protagoniste.zone_origine ? "Ton quartier" : "Voir la zone") + '</button><button class="btn sec" data-a="fermersel">Fermer</button></div></div>';
-  } else h += '<div class="hud-bas petit-hb">Glisse pour te déplacer, pince pour zoomer, touche un quartier.</div>';
-  return h + "</div>" + vCloreBouton();
+  var h = '<div class="vue-ville"><canvas id="plan"></canvas><div class="hud-zoom"><button data-a="zplus">+</button><button data-a="zmoins">−</button></div>';
+  var op = UI.selOp ? opParId(UI.selOp) : null;
+  if (op && !UI.taches) {
+    h += '<div class="hud-bas"><div class="hb-l1"><b>' + esc(nomOp(op)) + "</b><span>" + esc(TYPES()[op.type].nom) + " · " + esc(VILLE.q[lieuOp(op)].nom) + "</span></div>" +
+      '<p class="hb-txt">Touche un quartier entouré de vert pour lui donner une tâche.</p><div class="hb-btns"><button class="btn sec" data-a="annuler">Annuler</button></div></div>';
+  } else if (UI.selQ && !UI.taches) h += vFicheQ(UI.selQ);
+  else if (!UI.taches) h += '<div class="hud-bas petit-hb">Touche un opérateur (rond de couleur), puis un quartier. Touche un quartier pour sa fiche. Zoome pour voir les charbons.</div>';
+  return h + "</div>";
 }
-/** Fiche d'une zone vue de la carte. */
-function vZoneDistante() {
-  var z = IDX.zones[UI.zoneVue], g = G.zones[z.id];
-  var h = '<button class="retour" data-a="retour">‹ Carte</button>' + ASSET.img("banniere_" + z.id, "banniere") +
-    '<h2 class="h">' + esc(z.nom) + '</h2><p class="petit">' + esc(z.arrondissements.join(", ")) + " arrondissement</p>";
-  if (g.connu === 0) return h + '<p>Tu n\'y as jamais mis les pieds. Tu en connais le nom, c\'est tout.</p>';
-  h += "<p>" + esc(z.quartiers.join(" · ")) + '</p><p class="petit">' + esc(z.lieux.join(" · ")) + "</p>";
-  if (g.connu >= 1) h += vIndic(g);
-  if (g.connu < 3) h += '<p class="petit">Tu n\'y as encore personne. Il faudra une raison, ou quelqu\'un, pour y aller.</p>';
+var ETAT_CH = function (c) { return c.saisi ? "saisi (" + c.saisi + ")" : c.proprio === "joueur" ? (c.ouvert ? "à toi" : "fermé") : c.proprio ? IDX.equipes[c.proprio].nom : "libre"; };
+function vFicheQ(id) {
+  var q = VILLE.q[id], s = G.q[id], st = statut(id), z = IDX.zones[q.zone], ouv = zoneOuverte(q.zone);
+  var h = '<div class="hud-bas fiche-q">' + ASSET.img("banniere_" + q.zone, "fq-ban") + '<div class="hb-l1"><b>' + esc(q.nom) + "</b><span>" + q.arr + "e arr. · " + esc(z.court) + "</span></div>";
+  if (!ouv) h += '<p class="hb-txt verrou">🔒 Zone verrouillée. Va dans Objectifs pour l\'ouvrir.</p>';
+  if (s.conn === 0 && s.ctl <= 0) return h + '<p class="hb-txt">Inconnu. Un opérateur Repérage dans un quartier voisin le fera apparaître.</p><div class="hb-btns"><button class="btn sec" data-a="fermer">Fermer</button></div></div>';
+  var dom = factionDominante(s);
+  h += '<div class="hb-ctrl"><b style="background:' + (couleurQuartier(id) || "#555") + '"></b>' + STATUT_NOM[st] + (st === "faction" && dom ? " : " + esc(IDX.equipes[dom].nom) : "") + "</div>";
+  h += '<div class="barre-ctl"><i class="moi" style="width:' + s.ctl + '%"></i>' + (s.conn >= 2 ? Object.keys(s.adv).filter(function (f) { return s.adv[f] > 0.5; }).map(function (f) {
+    return '<i style="width:' + s.adv[f] + '%;background:' + IDX.equipes[f].couleur + '"></i>';
+  }).join("") : '<i style="width:' + advTotal(s) + '%;background:#9a5050"></i>') + "</div>";
+  h += '<div class="hb-stats"><span>Contrôle <b>' + Math.round(s.ctl) + " %</b></span><span>Adverse <b>" + (s.conn >= 1 ? Math.round(advTotal(s)) + " %" : "?") + "</b></span><span>Maintien <b>" + eur(s.maintien) + "</b></span></div>";
+  if (s.conn >= 2 || s.ctl > 0) {
+    h += '<div class="charbons">' + (s.ch.length ? s.ch.map(function (c, i) {
+      var p = peutCharbon(id, i), act = c.proprio === "joueur" ? '<button class="mini" data-fermerch="' + i + '">' + (c.ouvert ? "Fermer" : "Rouvrir") + "</button>"
+        : p.ok ? '<button class="mini or" data-ch="' + i + '">' + (p.reprise ? "Reprendre " : "Ouvrir ") + eur(p.cout) + "</button>" : '<span class="petit">' + esc(p.raison) + "</span>";
+      return '<div class="ch"><span><b>' + esc(c.nom) + "</b><small>" + eur(c.rent) + "/cycle · risque " + "▲".repeat(c.risque) + " · " + esc(ETAT_CH(c)) + "</small></span>" + act + "</div>";
+    }).join("") : '<p class="petit">Aucun charbon ici.</p>') + "</div>";
+  } else h += '<p class="petit">Charbons : envoie un Repérage pour les voir (connaissance ' + s.conn + "/3).</p>";
+  var ici = opsActifs().filter(function (o) { return lieuOp(o) === id; });
+  if (ici.length) h += '<p class="petit">Sur place : ' + ici.map(function (o) { return esc(o.id) + " " + esc(B.taches[o.tache].nom.toLowerCase()); }).join(" · ") + "</p>";
+  h += '<div class="hb-btns">' + (s.ctl > 0 ? '<button class="btn sec" data-a="investir">Investir ' + eur(coutInvestir(id)) + "</button>" : "") + '<button class="btn sec" data-a="fermer">Fermer</button></div></div>';
+  return h;
+}
+function vTaches() {
+  var o = opParId(UI.selOp), id = UI.selQ, tr = dureeTransit(o.pos, id);
+  var l = Object.keys(B.taches).map(function (k) {
+    var t = B.taches[k], e = efficacite(o, k), spe = t.type === o.type;
+    return '<button class="ligne-action' + (spe ? " spe" : "") + '" data-tache="' + k + '"><span><b>' + esc(t.nom) + (spe ? " ★" : "") + "</b><small>" +
+      (k === "repos" ? "fatigue −" + B.operateurs.fatigue_repos : "efficacité " + Math.round(e * 100) + " % · fatigue +" + t.fatigue) + "</small></span><em>" + (tr ? tr + " cycle" + (tr > 1 ? "s" : "") + " de trajet" : "sur place") + "</em></button>";
+  }).join("");
+  return '<div class="voile"><div class="sheet"><h2>' + esc(o.id) + " → " + esc(VILLE.q[id].nom) + '</h2><p class="petit">' + esc(TYPES()[o.type].nom) + " · compétence " + o.comp + " · fatigue " + Math.round(o.fatigue) +
+    "</p>" + l + '<button class="btn sec" data-a="fermertaches">Annuler</button></div></div>';
+}
+
+/* ---------------- OBJECTIFS ---------------- */
+function vObjectifs() {
+  var l = quetesActives();
+  function bloc(q) {
+    var r = q.recompense || {}, rec = [];
+    if (q.zone) rec.push("ouvre la zone");
+    if (r.argent) rec.push("+" + eur(r.argent));
+    if (r.capacite) rec.push("capacité +" + r.capacite);
+    if (r.capacite_toutes_les) rec.push("capacité +1 toutes les " + r.capacite_toutes_les + " zones");
+    return '<div class="carte-bloc quete' + (q.zone ? " zq" : "") + '">' + (q.zone ? ASSET.img("banniere_" + q.zone, "q-ban") : "") + '<div class="ligne"><b>' + esc(q.nom) + "</b></div>" +
+      q.avance.map(function (a) {
+        return '<div class="obj' + (a.ok ? " ok" : "") + '"><span>' + (a.ok ? "✔ " : "○ ") + esc(a.txt) + "</span><b>" + Math.min(a.v, a.but).toLocaleString("fr-FR") + " / " + a.but.toLocaleString("fr-FR") + "</b></div>" +
+          jauge(a.but ? Math.min(100, a.v / a.but * 100) : 0, "q");
+      }).join("") + '<p class="petit">Récompense : ' + esc(rec.join(" · ")) + "</p></div>";
+  }
+  var zq = l.filter(function (q) { return q.zone; }), aut = l.filter(function (q) { return !q.zone; });
+  return '<h2 class="h">Objectifs</h2><p class="petit">Zones ouvertes : ' + G.zonesOuvertes.map(function (z) { return esc(IDX.zones[z].court); }).join(", ") + ".</p>" +
+    '<h3 class="h3">Ouvrir une zone</h3>' + (zq.length ? zq.map(bloc).join("") : '<p class="petit">Toute la ville est ouverte.</p>') +
+    '<h3 class="h3">Réseau</h3>' + (aut.length ? aut.map(bloc).join("") : '<p class="petit">Tout est fait.</p>');
+}
+
+/* ---------------- ÉQUIPE ---------------- */
+function vEquipe() {
+  var l = opsActifs();
+  var h = '<h2 class="h">Opérateurs <small>' + l.length + "/" + G.capacite + "</small></h2>" + l.map(function (o) {
+    var t = TYPES()[o.type], v = o.visage ? "medaillon_" + o.visage : null;
+    return '<button class="op" data-op="' + o.id + '">' + (v && ASSET.u(v) ? ASSET.img(v, "med") : '<span class="med lettre" style="border-color:' + t.couleur + '">' + esc(t.lettre) + "</span>") +
+      "<span><b>" + esc(nomOp(o)) + "</b><small>" + esc(t.nom) + " · " + "★".repeat(o.comp) + "☆".repeat(5 - o.comp) + "</small><small>" +
+      esc({ disponible: "disponible", transit: "en trajet (" + o.transit + ")", occupe: "occupé", indisponible: "épuisé" }[o.dispo] || o.dispo) + " · " + esc(VILLE.q[lieuOp(o)].nom) + " · " + esc(B.taches[o.tache].nom) + "</small>" +
+      jauge(o.fatigue, "fat") + "</span></button>";
+  }).join("");
+  h += '<h3 class="h3">Recruter</h3>' + Object.keys(TYPES()).map(function (k) {
+    var t = TYPES()[k], r = peutRecruter(k);
+    return '<button class="ligne-action' + (r.ok ? "" : " off") + '" data-recruter="' + k + '"><span><b><i class="pt" style="background:' + t.couleur + '"></i> ' + esc(t.nom) + "</b><small>" +
+      esc(B.taches[t.tache].nom) + " · entretien " + eur(t.entretien) + "/cycle" + (r.ok ? "" : " · " + r.raison) + "</small></span><em>" + eur(t.recrutement) + "</em></button>";
+  }).join("");
   return h;
 }
 
-/* ---------------- Quartier (zone de vie) ---------------- */
-
-function vIndic(g) {
-  return '<div class="indics">' + ["tension", "police", "humeur"].map(function (k) {
-    var nom = { tension: "Tension", police: "Présence policière", humeur: "Humeur envers les réseaux" }[k];
-    return '<div class="indic"><div class="ligne"><span>' + nom + "</span><b>" + Math.round(g[k]) + "/100</b></div>" + jauge(g[k], k) + '<p class="petit">' + expl(k, g[k]) + "</p></div>";
-  }).join("") + "</div>";
+/* ---------------- BORD ---------------- */
+function vBord() {
+  var p = previsions(), al = [];
+  if (G.ind.pression > B.indicateurs.pression_alerte) al.push("Pression critique : opérations et arrestations possibles.");
+  if (G.ind.exposition > B.indicateurs.exposition_alerte) al.push("Exposition trop haute.");
+  if (G.tresorerie + p.solde < 0) al.push("Le prochain cycle te met à zéro.");
+  if (G.cycles_zero) al.push("Trésorerie à zéro depuis " + G.cycles_zero + " cycle(s).");
+  opsActifs().forEach(function (o) { if (o.fatigue >= 80) al.push(o.id + " presque épuisé."); });
+  Object.keys(G.alertes || {}).forEach(function (id) { al.push("Attaque subie : " + VILLE.q[id].nom + "."); });
+  return '<h2 class="h">Tableau de bord</h2>' + indicateurs().map(function (x) {
+    return '<div class="indic"><div class="ligne"><span>' + ico(x.i) + " " + x.n + "</span><b>" + esc(x.v) + "</b></div>" + '<p class="petit">' + esc(x.e) + "</p></div>";
+  }).join("") +
+    '<h3 class="h3">Prévision du cycle ' + G.cycle + "</h3>" + [["Charbons (" + charbonsJoueur() + ")", p.revenus], ["Flux internationaux (attendu)", p.flux_revenus - p.flux_couts], ["Maintien des quartiers", -p.maintien], ["Entretien des opérateurs", -p.entretien], ["Intérêts de la dette", -p.interets]]
+      .map(function (x) { return '<div class="ligne-chiffre"><span>' + esc(x[0]) + "</span><b class=\"" + (x[1] < 0 ? "neg" : "") + '">' + sgn(x[1]) + " €</b></div>"; }).join("") +
+    '<div class="ligne-chiffre tot"><span>Solde prévu</span><b>' + sgn(p.solde) + " €</b></div>" +
+    '<button class="ligne-action" data-a="voirflux"><span><b>Flux internationaux</b><small>' + fluxActifs().length + " actif(s) sur " + B.flux.offres.length + "</small></span><em>›</em></button>" +
+    '<h3 class="h3">Alertes</h3>' + (al.length ? '<ul class="alertes">' + al.map(function (a) { return "<li>" + esc(a) + "</li>"; }).join("") + "</ul>" : '<p class="petit">Rien d\'urgent.</p>') +
+    '<button class="btn sec" data-a="abandon">Abandonner la partie</button>';
 }
-function vQuartier() {
-  var z = IDX.zones[G.zone], g = G.zones[G.zone];
-  var h = ASSET.img("banniere_" + z.id, "banniere") + '<h2 class="h">' + esc(z.nom) + "</h2>" + vIndic(g);
-  var eng = engagementsOuverts();
-  if (eng.length) {
-    h += '<h3 class="h3">Tes promesses</h3>' + eng.map(function (e, i) {
-      var reste = e.echeance - nowWk();
-      return '<button class="ligne-action" data-eng="' + i + '"><span><b>Tenir ta promesse à ' + esc(pnjNom(e.envers)) + "</b><small>" +
-        (reste <= 0 ? "c'est cette semaine" : "encore " + reste + " semaine" + (reste > 1 ? "s" : "")) + '</small></span><em>⚡ ' + B.engagements.cout_tenir_energie + "</em></button>";
-    }).join("");
-  }
-  h += '<h3 class="h3">Ta semaine</h3>' + missionsDispo().map(function (m) {
-    var c = m.cout || {}, ok = (c.energie || 0) <= G.temps.energie && (c.sangfroid || 0) <= G.temps.sangfroid;
-    var mt = maitrise(m.id);
-    return '<button class="ligne-action ' + (ok ? "" : "off") + '" data-mission="' + m.id + '"><span><b>' + esc(fillTexte(m.nom)) + "</b><small>" +
-      (mt ? "★".repeat(mt) + "☆".repeat(3 - mt) : "jamais fait") + "</small></span><em>⚡ " + (c.energie || 0) + (c.sangfroid ? " ❄ " + c.sangfroid : "") + "</em></button>";
-  }).join("");
-  return h + vCloreBouton();
-}
-
-/* ---------------- Gens ---------------- */
-
-/** Clé d'image d'un personnage (design/03-prompts-illustrations.md) : famille et version 2025. */
-function cleMed(id) {
-  var p = IDX.personnages[id], k = "medaillon_" + id + (p.prenom === "{famille}" ? "_" + G.famille : "");
-  return G.cal.annee >= 2025 && ASSET.u(k + "_2025") ? k + "_2025" : k;
+function vFlux() {
+  return '<button class="retour" data-a="retourbord">‹ Bord</button><h2 class="h">Flux internationaux</h2><p class="petit">Engagements abstraits avec des partenaires extérieurs. Plus de volume : plus de revenus, plus d\'exposition.</p>' +
+    B.flux.offres.map(function (o) {
+      var f = G.flux.filter(function (x) { return x.id === o.id && x.actif; })[0], v = f || o;
+      return '<div class="carte-bloc"><div class="ligne"><b>' + esc(o.nom) + "</b><span>" + (f ? '<i class="ok">actif · ' + f.cycles + " cycles</i>" : "inactif") + "</span></div>" +
+        '<div class="grille">' + [["Volume", o.volume + "/5"], ["Revenu", eur(o.revenu) + "/cycle"], ["Coût", eur(o.cout) + "/cycle"], ["Engagement", eur(f ? f.engage : o.engagement)],
+          ["Fiabilité", Math.round(v.fiabilite) + " %"], ["Exposition", Math.round(v.exposition)], ["Instabilité", Math.round(v.instabilite)], ["Activation", eur(o.activation)]]
+          .map(function (x) { return "<span><small>" + x[0] + "</small><b>" + x[1] + "</b></span>"; }).join("") + "</div>" +
+        (f ? '<button class="btn sec" data-couper="' + o.id + '">Couper (perd ' + eur(f.engage) + ")</button>" : '<button class="btn" data-activer="' + o.id + '">Activer · ' + eur(o.activation + o.engagement) + "</button>") + "</div>";
+    }).join("") + '<p class="petit">Un opérateur Logistique sur « Gérer les flux » améliore la fiabilité. Plus de ' + B.flux.trop_de_flux + " flux à la fois : la stabilité baisse.</p>";
 }
 
-var GROUPES = [["famille", "Famille"], ["quartier", "Quartier"], ["organisation", "Le hall"], ["institution", "Institutions"], ["ville", "La ville"]];
-function vGens() {
-  var ids = Object.keys(G.relations);
-  return '<h2 class="h">Les gens</h2>' + GROUPES.map(function (gr) {
-    var l = ids.filter(function (id) { return IDX.personnages[id].groupe === gr[0]; });
-    if (!l.length) return "";
-    return '<h3 class="h3">' + gr[1] + "</h3>" + l.map(function (id) {
-      var r = G.relations[id];
-      return '<button class="pnj" data-pnj="' + id + '">' + ASSET.img(cleMed(id), "med") + "<span><b>" + esc(pnjNom(id)) + "</b><small>" +
-        esc(expl("confiance", r.confiance)) + "</small>" + jauge(r.confiance, "conf") + "</span></button>";
-    }).join("");
-  }).join("");
+/* ---------------- FACTIONS ---------------- */
+var OBJ = { contre: "Contre-attaquer", retraite: "Se rétracter", etendre: "Étendre", maintenir: "Maintenir" };
+function vFactions() {
+  var renseigne = opsActifs().some(function (o) { return o.tache === "surveiller" && o.dispo === "occupe"; });
+  return '<h2 class="h">Factions</h2>' + D.equipes.liste.map(function (e) {
+    var f = G.factions[e.id], t = territoireFaction(e.id), al = G.alliances.filter(function (x) { return x.a === e.id || x.b === e.id; })[0];
+    var nch = 0; VILLE.ordre.forEach(function (id) { G.q[id].ch.forEach(function (c) { if (c.proprio === e.id) nch++; }); });
+    return '<div class="carte-bloc faction' + (f.vivante ? "" : " morte") + '" style="border-left-color:' + e.couleur + '"><div class="ligne">' +
+      (ASSET.u("chef_" + e.id) ? ASSET.img("chef_" + e.id, "med") : "") + "<b>" + esc(e.nom) + "</b><span>" + (f.vivante ? t.length + " quartiers · " + nch + " charbons" : "disparue") + "</span></div>" +
+      (f.vivante ? '<div class="grille">' + [["Effectif", renseigne ? f.effectif : "≈ " + Math.max(1, Math.round(f.effectif / 3) * 3)], ["Budget", renseigne ? eur(f.budget) : "?"], ["Agressivité", "●".repeat(f.agressivite) + "○".repeat(5 - f.agressivite)],
+        ["Objectif", renseigne ? OBJ[f.objectif] : "?"], ["Cible", renseigne && f.cible ? VILLE.q[f.cible].nom : "?"], ["Trêve", al ? "avec " + IDX.equipes[al.a === e.id ? al.b : al.a].nom : "—"]]
+        .map(function (x) { return "<span><small>" + x[0] + "</small><b>" + esc(x[1]) + "</b></span>"; }).join("") + "</div>" : "") + "</div>";
+  }).join("") + (renseigne ? "" : '<p class="petit">Mets un opérateur Intelligence sur « Surveiller » pour connaître objectifs, cibles et budgets.</p>');
 }
-function vPnj(id) {
-  var p = IDX.personnages[id], r = G.relations[id], a = pnjAge(id);
-  var mem = (r.memoire || []).map(function (m) { return MEMOIRE[m] || null; }).filter(Boolean);
-  return '<button class="retour" data-a="retour">‹ Les gens</button><div class="fiche">' + ASSET.img(cleMed(id), "med grand") +
-    "<h2>" + esc(pnjNomComplet(id)) + '</h2><p class="petit">' + (a ? a + " ans · " : "") + esc((p.traits || []).join(", ")) + "</p>" +
-    (p.note ? "<p>" + esc(p.note.charAt(0).toUpperCase() + p.note.slice(1)) + ".</p>" : "") +
-    "<p><i>Ce qu'il ou elle veut :</i> " + esc(p.objectif) + ".</p></div>" +
-    ["confiance", "proximite", "tension"].map(function (k) {
-      return '<div class="indic"><div class="ligne"><span>' + { confiance: "Confiance", proximite: "Proximité", tension: "Tension" }[k] + "</span><b>" + Math.round(r[k]) + "/100</b></div>" + jauge(r[k], k) + "</div>";
-    }).join("") + (mem.length ? '<h3 class="h3">Se souvient que</h3><ul class="mem">' + mem.map(function (m) { return "<li>" + esc(m) + "</li>"; }).join("") + "</ul>" : "");
-}
-var MEMOIRE = {
-  promesse_tenue: "tu as tenu ta promesse", promesse_rompue: "tu n'as pas tenu ta promesse", a_reconnu: "tu as reconnu ton erreur",
-  a_fui: "tu as évité la conversation", est_venu: "tu es venu quand il t'a appelé", a_refuse: "tu as refusé son « truc simple »",
-  a_promis: "tu lui as promis ton samedi", a_promis_rdv: "tu as promis d'être au rendez-vous", est_passe: "tu es passé sans t'arrêter",
-  essai_fait: "tu es venu à l'essai", essai_refuse: "tu as refusé l'essai", a_vu_le_tel: "tu as sorti ton téléphone pendant la descente",
-  a_vu_avec_flic: "on t'a vu parler avec un policier"
-};
 
-/* ---------------- Journal et Moi ---------------- */
-
+/* ---------------- JOURNAL ---------------- */
 function vJournal() {
-  return '<h2 class="h">Journal</h2><ul class="journal">' + G.journal.slice(0, 80).map(function (j) {
-    return '<li class="' + j.type + '"><small>S' + j.s + " " + j.a + "</small> " + esc(j.t) + (j.cause ? ' <em>— ' + esc(j.cause) + "</em>" : "") + "</li>";
+  return '<h2 class="h">Journal</h2><ul class="journal">' + G.journal.slice(0, 150).map(function (j) {
+    return '<li class="' + j.type + '"><small>C' + j.c + "</small> " + esc(j.t) + "</li>";
   }).join("") + "</ul>";
 }
-function vMoi() {
-  var p = G.protagoniste, f = IDX.familles[G.famille];
-  return '<div class="fiche">' + ASSET.img(clePortraitJoueur(), "med grand") + '</div><h2 class="h" style="text-align:center">' + esc(p.prenom + " " + f.nom) + '</h2><p class="petit" style="text-align:center">' + age() + " ans · " + esc(IDX.zones[p.zone_origine].nom) + " · " +
-    (p.scolarite.statut === "lycee" ? "au lycée" : esc(p.scolarite.statut)) + "</p>" +
-    '<h3 class="h3">Compétences</h3>' + D.competences.liste.map(function (c) {
-      var v = p.competences[c.id], pl = palier(v), t = c.paliers[pl - 1];
-      return '<div class="indic"><div class="ligne"><span>' + esc(c.nom) + "</span><b>Palier " + pl + " — " + esc(t[0]) + "</b></div>" + jauge(v, "comp") + '<p class="petit">' + esc(t[1]) + "</p></div>";
-    }).join("") +
-    '<h3 class="h3">Toi</h3>' + [["Stabilité", p.etat.stabilite, ""], ["Stress", p.etat.stress, expl("stress", p.etat.stress)], ["Santé", p.etat.sante, ""], ["Assiduité au lycée", p.scolarite.assiduite, ""]].map(function (x) {
-      return '<div class="indic"><div class="ligne"><span>' + x[0] + "</span><b>" + Math.round(x[1]) + "/100</b></div>" + jauge(x[1]) + (x[2] ? '<p class="petit">' + x[2] + "</p>" : "") + "</div>";
-    }).join("") +
-    '<h3 class="h3">Ce qu\'on pense de toi</h3><p>Respect ' + p.positionnement.respect + " · Influence " + p.positionnement.influence + " · Crainte " + p.positionnement.crainte + "</p>" +
-    '<button class="btn sec" data-a="effacer">Effacer cette vie</button>';
-}
 
-/* ---------------- Fenêtres ---------------- */
-
-function vCarteEvenement() {
-  var c = G.carte, ev = IDX.evenements[c.id];
-  return '<div class="voile"><div class="sheet">' + ASSET.img("scene_" + ev.id, "scene") + "<h2>" + esc(ev.titre) + "</h2><p>" + esc(fillTexte(ev.texte, c.ctx)) + "</p>" +
-    optionsCarte(c).map(function (x) { return '<button class="btn opt" data-opt="' + x.i + '">' + esc(fillTexte(x.o.t, c.ctx)) + "</button>"; }).join("") + "</div></div>";
+/* ---------------- fenêtres ---------------- */
+function vRapport() {
+  var r = UI.rapport, d = r.d;
+  return '<div class="voile"><div class="sheet"><h2>Cycle ' + (G.cycle - 1) + " résolu</h2>" +
+    '<div class="grille">' + [["Solde", sgn(d.solde) + " €"], ["Territoire", sgn(d.d_territoire, " %")], ["Pression", sgn(d.d_pression)], ["Stabilité", sgn(d.d_stabilite)]]
+      .map(function (x) { return "<span><small>" + x[0] + "</small><b>" + x[1] + "</b></span>"; }).join("") + "</div>" +
+    '<ul class="rapport">' + r.lignes.slice(0, 16).map(function (l) { return '<li class="' + l.type + '">' + esc(l.t) + "</li>"; }).join("") + "</ul>" +
+    '<button class="btn" data-a="okrapport">Planifier le cycle ' + G.cycle + "</button></div></div>";
 }
-function vBilan() {
-  var b = UI.bilan;
-  return '<div class="voile"><div class="sheet"><h2>Semaine ' + G.cal.semaine + " · " + G.cal.annee + "</h2>" +
-    (b.lignes.length ? "<ul>" + b.lignes.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>" : "<p>Une semaine comme les autres.</p>") +
-    (b.mensuel ? '<p class="petit">Fin du mois. Argent : ' + euros(G.argent.propre) + ". Stress : " + Math.round(G.protagoniste.etat.stress) + "/100.</p>" : "") +
-    '<button class="btn" data-a="okbilan">Continuer</button></div></div>';
-}
-function vAbsence() {
-  var a = G.absence;
-  return '<div class="voile"><div class="sheet"><h2>Pendant ton absence</h2><p>' + (a.minutes >= 120 ? Math.round(a.minutes / 60) + " heures" : a.minutes + " minutes") +
-    " ont passé.</p><ul>" + (a.energie ? "<li>Énergie +" + a.energie + "</li>" : "") + (a.sangfroid ? "<li>Sang-froid +" + a.sangfroid + "</li>" : "") +
-    '</ul><p class="petit">La semaine, elle, n\'avance que quand tu la clôtures.</p><button class="btn" data-a="okabsence">Continuer</button></div></div>';
-}
+var FIN = { victoire: "Victoire", faillite: "Faillite", chute: "Chute", abandon: "Abandon", fin: "Fin du temps" };
 function vFin() {
-  return '<div class="accueil"><h1 class="titre">2026</h1><p>Fin de la campagne du prototype. L\'après arrive dans une prochaine version.</p>' +
-    '<button class="btn sec" data-a="effacer">Recommencer une vie</button></div>';
+  var f = G.fini;
+  return '<div class="accueil"><h1 class="titre">' + FIN[f.type] + '</h1><p class="note">Note ' + f.note + "</p>" +
+    '<div class="grille">' + [["Cycles joués", f.cycles], ["Territoire", f.territoire + " %"], ["Trésorerie", eur(f.tresorerie)], ["Dette", eur(f.dette)], ["Opérateurs", f.operateurs],
+      ["Factions restantes", f.factions], ["Flux actifs", f.flux], ["Pression", f.pression], ["Stabilité", f.stabilite], ["Exposition", f.exposition]]
+      .map(function (x) { return "<span><small>" + x[0] + "</small><b>" + esc(x[1]) + "</b></span>"; }).join("") + "</div>" +
+    '<button class="btn" data-a="rejouer">Nouvelle partie</button></div>';
 }
 
-/* ---------------- Événements d'interface ---------------- */
-
+/* ---------------- gestes ---------------- */
+function toucherPlan(sx, sy) {
+  var h = sousDoigt(sx, sy);
+  if (h.op) { UI.selOp = UI.selOp === h.op ? null : h.op; UI.selQ = null; return render(); }
+  if (!h.q) { UI.selQ = null; return render(); }
+  if (UI.selOp) {
+    var o = opParId(UI.selOp);
+    var okR = o.type === "reperage" && accessible(h.q, "reperer");
+    if (h.q !== o.pos && !accessible(h.q) && !okR) return toast(zoneOuverte(VILLE.q[h.q].zone) ? "Inaccessible : il faut un quartier voisin à " + B.controle.acces_voisin + " %." : "Zone verrouillée : seul un Repérage peut y entrer, depuis un quartier voisin.");
+    UI.selQ = h.q; UI.taches = true; return render();
+  }
+  UI.selQ = h.q; render();
+}
 function onClick(ev) {
-  var t = ev.target.closest("[data-a],[data-tab],[data-mission],[data-opt],[data-pnj],[data-eng]");
+  var t = ev.target.closest("[data-a],[data-tab],[data-tache],[data-op],[data-recruter],[data-activer],[data-couper],[data-ind],[data-ch],[data-fermerch]");
   if (!t) return;
   var d = t.dataset;
   if (d.tab) return go(d.tab);
-  if (d.pnj) return setSub("pnj:" + d.pnj);
-  if (d.opt != null) { choisir(+d.opt); return render(); }
-  if (d.eng != null) { if (!tenirEngagement(+d.eng)) toast("Pas assez d'énergie."); return render(); }
-  if (d.mission) { var r = faireMission(d.mission); toast(r.texte); return; }
+  if (d.ind) { var x = indicateurs().filter(function (i) { return i.k === d.ind; })[0]; return toast(x.n + " : " + x.e); }
+  if (d.ch != null) { var rc = prendreCharbon(UI.selQ, +d.ch); return rc.ok ? render() : toast(rc.raison); }
+  if (d.fermerch != null) { fermerCharbon(UI.selQ, +d.fermerch); return render(); }
+  if (d.tache) {
+    var r = affecter(UI.selOp, UI.selQ, d.tache);
+    UI.taches = false;
+    if (!r.ok) return toast(r.raison);
+    var o = opParId(UI.selOp); UI.selOp = null; UI.selQ = null;
+    return toast(o.id + " : " + B.taches[d.tache].nom + " à " + VILLE.q[lieuOp(o)].nom + ".");
+  }
+  if (d.op) {
+    UI.selOp = d.op; UI.selQ = null; TAB = "carte";
+    var q = VILLE.q[lieuOp(opParId(d.op))];
+    if (PLAN.cam && PLAN.cache) { var p = proj(PLAN.cache.P, q.cx, q.cy, 0); PLAN.cam.x = p[0]; PLAN.cam.y = p[1]; }
+    return render();
+  }
+  if (d.recruter) { var rr = recruter(d.recruter); return rr.ok ? toast(rr.op.id + " recruté.") : toast(rr.raison); }
+  if (d.activer) { var ra = activerFlux(d.activer); verifierQuetes(); return ra.ok ? render() : toast(ra.raison); }
+  if (d.couper) { couperFlux(d.couper); return render(); }
   switch (d.a) {
-    case "nouvelle":
-      var pr = ($("#prenom") || {}).value || "";
-      UI.creation = { prenom: pr, G: newGame(pr) }; G = null; return render();
-    case "retirer": UI.creation = { prenom: UI.creation.prenom, G: newGame(UI.creation.prenom) }; G = null; return render();
-    case "commencer": G = UI.creation.G; UI.creation = null; TAB = "quartier"; save(); return render();
-    case "continuer": if (loadSave()) { TAB = "quartier"; } return render();
-    case "clore": UI.bilan = cloreSemaine(); return render();
-    case "okbilan": UI.bilan = null; return render();
-    case "okabsence": G.absence = null; save(); return render();
-    case "retour": SUB = null; return render();
-    case "ouvrirzone": if (UI.sel === G.protagoniste.zone_origine) return go("quartier"); UI.zoneVue = UI.sel; return setSub("zone");
-    case "fermersel": UI.sel = null; return render();
-    case "zplus": zoomer(1.25); return;
-    case "zmoins": zoomer(0.8); return;
-    case "effacer":
-      if (!UI.confirmeEffacer) { UI.confirmeEffacer = true; toast("Touche encore une fois pour effacer cette vie."); setTimeout(function () { UI.confirmeEffacer = false; }, 4000); return; }
-      UI.confirmeEffacer = false; eraseSave(); UI.creation = null; return render();
+    case "nouvelle": case "rejouer": eraseSave(); newGame(); PLAN.cam = null; PLAN.cache = null; TAB = "carte"; UI.selOp = UI.selQ = null; save(); return render();
+    case "continuer": loadSave(); PLAN.cam = null; PLAN.cache = null; return render();
+    case "valider":
+      UI.selOp = null; UI.selQ = null; UI.taches = false;
+      var rap = validerCycle();
+      if (!rap) return render();
+      G.alertes = {};
+      rap.lignes.forEach(function (l) { if ((l.type === "attaque" || l.type === "perte") && l.q) G.alertes[l.q] = 1; });
+      UI.rapport = G.fini ? null : rap; save(); return render();
+    case "okrapport": UI.rapport = null; return render();
+    case "annuler": UI.selOp = null; return render();
+    case "fermer": UI.selQ = null; return render();
+    case "fermertaches": UI.taches = false; UI.selQ = null; return render();
+    case "investir": var ri = investir(UI.selQ); return ri.ok ? render() : toast(ri.raison);
+    case "voirflux": UI.sousBord = "flux"; return render();
+    case "retourbord": UI.sousBord = null; return render();
+    case "zplus": return zoomer(1.25);
+    case "zmoins": return zoomer(0.8);
+    case "abandon":
+      if (!UI.confAb) { UI.confAb = true; setTimeout(function () { UI.confAb = false; }, 4000); return toast("Touche encore pour abandonner."); }
+      abandonner(); return render();
   }
 }
-
-/** Démarrage : écouteurs et premier affichage. */
-function boot() {
-  document.addEventListener("click", onClick);
-  document.addEventListener("visibilitychange", function () { if (!document.hidden && G) render(); });
-  setInterval(function () { if (G && !G.carte && !UI.bilan && document.activeElement.tagName !== "INPUT") render(); }, 30000);
-  render();
-}
+function boot() { document.addEventListener("click", onClick); render(); }

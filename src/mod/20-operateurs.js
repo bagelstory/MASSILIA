@@ -52,7 +52,7 @@ function affecter(opId, qid, tache) {
   var o = opParId(opId);
   if (!o || o.dispo === "perdu") return { ok: false, raison: "Opérateur indisponible" };
   if (o.dispo === "indisponible") return { ok: false, raison: "Épuisé : au repos ce cycle" };
-  if (qid !== o.pos && !accessible(qid)) return { ok: false, raison: "Quartier inaccessible : il faut un voisin à " + B.controle.acces_voisin + " %" };
+  if (qid !== o.pos && !accessible(qid, tache)) return { ok: false, raison: "Quartier inaccessible : il faut un voisin à " + B.controle.acces_voisin + " %" };
   o.tache = tache;
   if (qid !== o.pos) { o.dest = qid; o.transit = dureeTransit(o.pos, qid); o.dispo = "transit"; }
   else { o.dest = null; o.transit = 0; o.dispo = tache === "repos" ? "disponible" : "occupe"; }

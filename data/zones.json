@@ -1,5 +1,5 @@
 {
- "_doc": "Lieux et quartiers réels (à vérifier avant publication). Valeurs = départ 2021.",
+ "_doc": "10 zones de jeu ; leurs quartiers réels viennent de data/quartiers.json (découpage par arrondissement, tools/geo.py).",
  "liste": [
   {
    "id": "centre_hist",
@@ -10,13 +10,15 @@
    ],
    "quartiers": [
     "Belsunce",
+    "Le Chapitre",
     "Noailles",
     "Opéra",
+    "Saint-Charles",
     "Thiers",
-    "Les Grands Carmes",
-    "Hôtel de Ville",
-    "La Joliette",
-    "Arenc"
+    "Arenc",
+    "Les Grands-Carmes",
+    "Hôtel-de-Ville",
+    "La Joliette"
    ],
    "lieux": [
     "Vieux-Port",
@@ -55,32 +57,6 @@
     "hmax": 10
    },
    "atout": "Passage, touristes, commerces : beaucoup d'argent qui circule, beaucoup de police.",
-   "plan": [
-    [
-     70,
-     120
-    ],
-    [
-     115,
-     100
-    ],
-    [
-     125,
-     165
-    ],
-    [
-     130,
-     200
-    ],
-    [
-     80,
-     205
-    ],
-    [
-     60,
-     165
-    ]
-   ],
    "court": "Centre"
   },
   {
@@ -125,42 +101,27 @@
     "hmax": 8
    },
    "atout": "Quartier populaire et serré : la main-d'œuvre est là, la tension aussi.",
-   "plan": [
-    [
-     115,
-     100
-    ],
-    [
-     195,
-     100
-    ],
-    [
-     250,
-     112
-    ],
-    [
-     200,
-     160
-    ],
-    [
-     125,
-     165
-    ]
-   ],
    "court": "Centre nord"
   },
   {
    "id": "plaine",
    "nom": "La Plaine / Cours Julien",
    "arrondissements": [
+    "4e",
     "5e",
     "6e"
    ],
    "quartiers": [
-    "Notre-Dame-du-Mont",
-    "Lodi",
+    "La Blancarde",
+    "Les Chartreux",
+    "Chutes-Lavie",
+    "Cinq Avenues",
+    "Baille",
     "Le Camas",
-    "Baille"
+    "La Conception",
+    "Saint-Pierre",
+    "Lodi",
+    "Notre-Dame-du-Mont"
    ],
    "lieux": [
     "place Jean-Jaurès",
@@ -192,28 +153,6 @@
     "hmax": 7
    },
    "atout": "La nuit, les bars, les étudiants : une clientèle qui paie bien et qui parle.",
-   "plan": [
-    [
-     130,
-     200
-    ],
-    [
-     125,
-     165
-    ],
-    [
-     200,
-     160
-    ],
-    [
-     205,
-     210
-    ],
-    [
-     150,
-     225
-    ]
-   ],
    "court": "La Plaine"
   },
   {
@@ -226,14 +165,20 @@
    ],
    "quartiers": [
     "Castellane",
+    "Palais de Justice",
     "Préfecture",
     "Vauban",
+    "Bompard",
     "Endoume",
+    "Les Îles",
+    "Le Pharo",
+    "Le Roucas Blanc",
+    "Saint-Lambert",
     "Saint-Victor",
-    "Roucas-Blanc",
     "Périer",
+    "Le Rouet",
     "Saint-Giniez",
-    "Le Rouet"
+    "Sainte-Anne"
    ],
    "lieux": [
     "place Castellane",
@@ -269,40 +214,6 @@
     "hmax": 9
    },
    "atout": "Quartiers aisés : clientèle discrète, mais chaque erreur fait la une.",
-   "plan": [
-    [
-     80,
-     205
-    ],
-    [
-     130,
-     200
-    ],
-    [
-     150,
-     225
-    ],
-    [
-     205,
-     210
-    ],
-    [
-     245,
-     255
-    ],
-    [
-     215,
-     280
-    ],
-    [
-     120,
-     300
-    ],
-    [
-     90,
-     260
-    ]
-   ],
    "court": "Prado"
   },
   {
@@ -312,13 +223,17 @@
     "13e"
    ],
    "quartiers": [
+    "Château Gombert",
+    "La Croix-Rouge",
     "Malpassé",
-    "Frais-Vallon",
+    "Les Médecins",
+    "Les Mourets",
+    "Les Olives",
+    "Palama",
+    "La Rose",
     "Saint-Jérôme",
     "Saint-Just",
-    "La Rose",
-    "Les Olives",
-    "Château-Gombert"
+    "Saint-Mitre"
    ],
    "lieux": [
     "technopôle de Château-Gombert",
@@ -351,24 +266,6 @@
     "hmax": 22
    },
    "atout": "Grands ensembles et collines : des plans connus de toute la ville.",
-   "plan": [
-    [
-     255,
-     35
-    ],
-    [
-     335,
-     55
-    ],
-    [
-     330,
-     140
-    ],
-    [
-     250,
-     112
-    ]
-   ],
    "court": "Nord-est"
   },
   {
@@ -378,13 +275,13 @@
     "14e"
    ],
    "quartiers": [
-    "Saint-Barthélemy",
-    "Le Canet",
-    "Sainte-Marthe",
-    "Saint-Joseph",
-    "Le Merlan",
     "Les Arnavaux",
-    "Bon-Secours"
+    "Bon-Secours",
+    "Le Canet",
+    "Le Merlan",
+    "Saint-Barthélemy",
+    "Saint-Joseph",
+    "Sainte-Marthe"
    ],
    "lieux": [
     "centre commercial du Merlan",
@@ -415,42 +312,26 @@
     "hmax": 14
    },
    "atout": "Maisons et barres mêlées : les familles se connaissent toutes.",
-   "plan": [
-    [
-     185,
-     22
-    ],
-    [
-     255,
-     35
-    ],
-    [
-     250,
-     112
-    ],
-    [
-     195,
-     100
-    ]
-   ],
    "court": "Nord central"
   },
   {
    "id": "nord_ouest",
    "nom": "Nord-ouest",
    "arrondissements": [
-    "15e",
-    "16e"
+    "15e"
    ],
    "quartiers": [
-    "La Viste",
-    "Saint-Antoine",
-    "Verduron",
-    "Notre-Dame-Limite",
     "Les Aygalades",
-    "Saint-Louis",
+    "Borel",
     "La Cabucelle",
-    "Les Crottes"
+    "La Calade",
+    "Les Crottes",
+    "La Delorme",
+    "Notre-Dame Limite",
+    "Saint-Antoine",
+    "Saint-Louis",
+    "Verduron",
+    "La Viste"
    ],
    "lieux": [
     "Grand Littoral",
@@ -482,24 +363,6 @@
     "hmax": 24
    },
    "atout": "Les tours au-dessus du port : la zone la plus disputée de Marseille.",
-   "plan": [
-    [
-     105,
-     30
-    ],
-    [
-     185,
-     22
-    ],
-    [
-     195,
-     100
-    ],
-    [
-     115,
-     100
-    ]
-   ],
    "court": "Nord-ouest"
   },
   {
@@ -510,9 +373,9 @@
    ],
    "quartiers": [
     "L'Estaque",
-    "Saint-Henri",
+    "Les Riaux",
     "Saint-André",
-    "Les Riaux"
+    "Saint-Henri"
    ],
    "lieux": [
     "port de l'Estaque",
@@ -544,42 +407,41 @@
     "hmax": 6
    },
    "atout": "Le port et le village : la mer, les quais, et ce qui y arrive.",
-   "plan": [
-    [
-     30,
-     40
-    ],
-    [
-     105,
-     30
-    ],
-    [
-     115,
-     100
-    ],
-    [
-     45,
-     115
-    ]
-   ],
    "court": "Littoral nord"
   },
   {
    "id": "est",
    "nom": "Est",
    "arrondissements": [
+    "10e",
     "11e",
     "12e"
    ],
    "quartiers": [
-    "La Valentine",
-    "Saint-Marcel",
-    "La Pomme",
-    "Les Caillols",
-    "Saint-Barnabé",
-    "Montolivet",
+    "La Capelette",
+    "Menpenti",
+    "Pont-de-Vivaux",
+    "Saint-Loup",
+    "Saint-Tronc",
+    "La Timone",
     "Les Accates",
-    "La Treille"
+    "La Barasse",
+    "Les Camoins",
+    "Éoures",
+    "La Millière",
+    "La Pomme",
+    "Saint-Marcel",
+    "Saint-Menet",
+    "La Treille",
+    "La Valbarelle",
+    "La Valentine",
+    "Les Caillols",
+    "La Fourragère",
+    "Montolivet",
+    "Saint-Barnabé",
+    "Saint-Jean du Désert",
+    "Saint-Julien",
+    "Les Trois-Lucs"
    ],
    "lieux": [
     "centre commercial de La Valentine",
@@ -610,32 +472,6 @@
     "hmax": 5
    },
    "atout": "Noyaux villageois et centres commerciaux : calme apparent, argent discret.",
-   "plan": [
-    [
-     200,
-     160
-    ],
-    [
-     250,
-     112
-    ],
-    [
-     330,
-     140
-    ],
-    [
-     325,
-     270
-    ],
-    [
-     245,
-     255
-    ],
-    [
-     205,
-     210
-    ]
-   ],
    "court": "Est"
   },
   {
@@ -647,13 +483,20 @@
    ],
    "quartiers": [
     "Bonneveine",
-    "Pointe-Rouge",
+    "Les Goudes",
     "Montredon",
+    "La Plage",
+    "La Pointe Rouge",
+    "Vieille Chapelle",
+    "Les Baumettes",
+    "Le Cabot",
+    "Carpiagne",
     "Mazargues",
-    "Sainte-Marguerite",
+    "La Panouse",
     "Le Redon",
-    "La Cayolle",
-    "La Soude"
+    "Sormiou",
+    "Sainte-Marguerite",
+    "Vaufrèges"
    ],
    "lieux": [
     "plages du Prado",
@@ -687,184 +530,7 @@
     "hmax": 6
    },
    "atout": "Plages, parcs et calanques ; au pied des collines, les Baumettes.",
-   "plan": [
-    [
-     90,
-     260
-    ],
-    [
-     120,
-     300
-    ],
-    [
-     215,
-     280
-    ],
-    [
-     245,
-     255
-    ],
-    [
-     325,
-     270
-    ],
-    [
-     310,
-     360
-    ],
-    [
-     200,
-     385
-    ],
-    [
-     110,
-     360
-    ],
-    [
-     70,
-     310
-    ]
-   ],
    "court": "Sud"
   }
- ],
- "repere": {
-  "_doc": "Plan schématique 360×400 (mer à l'ouest et au sud).",
-  "terre": [
-   [
-    30,
-    40
-   ],
-   [
-    105,
-    30
-   ],
-   [
-    185,
-    22
-   ],
-   [
-    255,
-    35
-   ],
-   [
-    335,
-    55
-   ],
-   [
-    360,
-    60
-   ],
-   [
-    360,
-    400
-   ],
-   [
-    300,
-    400
-   ],
-   [
-    310,
-    360
-   ],
-   [
-    200,
-    385
-   ],
-   [
-    110,
-    360
-   ],
-   [
-    70,
-    310
-   ],
-   [
-    90,
-    260
-   ],
-   [
-    80,
-    205
-   ],
-   [
-    60,
-    165
-   ],
-   [
-    70,
-    120
-   ],
-   [
-    45,
-    115
-   ]
-  ],
-  "vieux_port": [
-   [
-    60,
-    150
-   ],
-   [
-    82,
-    148
-   ],
-   [
-    92,
-    170
-   ],
-   [
-    62,
-    178
-   ]
-  ],
-  "notre_dame": [
-   108,
-   232
-  ],
-  "velodrome": [
-   178,
-   262
-  ],
-  "grues": [
-   [
-    48,
-    70
-   ],
-   [
-    62,
-    88
-   ],
-   [
-    85,
-    96
-   ],
-   [
-    100,
-    62
-   ]
-  ],
-  "calanques": [
-   [
-    130,
-    372
-   ],
-   [
-    175,
-    380
-   ],
-   [
-    225,
-    378
-   ],
-   [
-    275,
-    366
-   ],
-   [
-    300,
-    350
-   ]
-  ]
- }
+ ]
 }

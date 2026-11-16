@@ -85,7 +85,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .barre-ctl{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#3a3d42;margin:4px 0}.barre-ctl i{display:block;height:100%}.barre-ctl i.moi{background:#6ccf4f}
 .ligne-action.spe{border:1px solid var(--sodium)}
 .op{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--nuit2);border-radius:var(--r);padding:10px 12px;margin:6px 0}
-.op>span{flex:1;min-width:0}.op small{display:block;color:var(--gris);font-size:12px}.med.lettre{display:flex;align-items:center;justify-content:center;border:3px solid;font-weight:800;font-size:18px;background:#1b1c1f}
+.op>span:not(.med){flex:1;min-width:0}.op>.med{flex:none;width:46px;height:46px}.op small{display:block;color:var(--gris);font-size:12px}.med.lettre{display:flex;align-items:center;justify-content:center;border:3px solid;font-weight:800;font-size:18px;background:#1b1c1f}
 .jauge.fat i{background:#e5484d}.pt{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0}
 .carte-bloc .ligne{display:flex;justify-content:space-between;align-items:center;gap:8px}.carte-bloc .ligne b{flex:1}
 .grille{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 12px;margin:8px 0}.grille small{display:block;font-size:11px;color:var(--gris)}.grille b{font-size:14px}
@@ -95,6 +95,14 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .rapport{list-style:none;padding:0;margin:8px 0;font-size:14px}.rapport li{padding:5px 0;border-bottom:1px solid var(--nuit3)}
 .rapport .attaque,.rapport .perte,.rapport .perteop,.rapport .rupture,.rapport .operation{color:#f0a0a0}.rapport .gain,.rapport .capacite,.rapport .recrue{color:#9fe08a}
 .note{font-size:28px;color:var(--sodium);margin:0 0 14px}.h small{font-size:14px;color:var(--gris)}
+.nb{font-style:normal;background:#e5484d;color:#fff;border-radius:8px;padding:0 5px;font-size:10px}
+.hud-bas{max-height:62%;overflow:auto}.verrou{color:#f2c94c}
+.charbons{margin:6px 0}.ch{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0;border-top:1px solid #2c2e33}.ch small{display:block;color:var(--gris);font-size:11.5px}
+.mini{background:#2c2e33;border-radius:8px;padding:6px 9px;font-size:12px;white-space:nowrap}.mini.or{background:var(--sodium);color:#1a1205;font-weight:700}
+.jauge.q i{background:var(--sodium)}.quete{overflow:hidden}.quete .obj{display:flex;justify-content:space-between;font-size:13px;margin-top:6px}.quete .obj.ok{color:#6ccf4f}
+.q-ban{display:block;width:calc(100% + 28px);max-width:none;margin:-14px -14px 8px;height:70px;object-fit:cover}
+.source{font-size:11px;color:var(--gris);margin-top:24px}.pied .onglets button{font-size:11.5px}
+.rapport .quete{color:#9fe08a}.corps.carte{padding:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>

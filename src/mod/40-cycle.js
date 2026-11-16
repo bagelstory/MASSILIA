@@ -49,13 +49,16 @@ function previsions() {
   VILLE.ordre.forEach(function (id) {
     var s = G.q[id];
     if (s.ctl <= 0) return;
-    rev += s.flux * (1 + s.inv * B.quartiers.investir_gain) * multSaison(id) * s.ctl / 100 * effRevenu(id);
+    var ch = s.ch.reduce(function (t, c) { return t + (c.proprio === "joueur" && c.ouvert && !c.saisi ? c.rent : 0); }, 0);
+    rev += ch * (1 + s.inv * B.quartiers.investir_gain) * multSaison(id) * s.ctl / 100 * effRevenu(id);
     maint += s.maintien * (1 + s.inv * B.quartiers.investir_maintien) * (1 - reductionMaintien(id)) * s.ctl / 100;
   });
   opsActifs().forEach(function (o) {
     if (o.tache === "optimiser" && o.dispo !== "transit") redEntr += B.taches.optimiser.baisse_entretien * efficacite(o, "optimiser");
   });
+  var nops = opsActifs().length;
   opsActifs().forEach(function (o) { entr += TYPES()[o.type].entretien; });
+  entr *= 1 + Math.max(0, nops - 6) * (B.operateurs.entretien_progressif || 0);    // un gros réseau coûte plus cher par tête
   entr *= 1 - clamp(redEntr, 0, 0.3);
   fluxActifs().forEach(function (f) { var o = offreFlux(f.id); fluxRev += o.revenu * f.fiabilite / 100; fluxCout += o.cout; });
   var interets = G.dette * B.economie.dette_interet;
@@ -100,7 +103,7 @@ function validerCycle() {
     present[o.pos] = true;
     var t = T[o.tache], e = efficacite(o, o.tache), s = G.q[o.pos];
     if (!t || o.tache === "repos") { o.fatigue = Math.max(0, o.fatigue - O.fatigue_repos); return; }
-    o.fatigue = clamp(o.fatigue + t.fatigue * (ind.stabilite < I.stabilite_basse ? I.stabilite_basse_fatigue : 1), 0, 100);
+    o.fatigue = clamp(o.fatigue + t.fatigue * O.fatigue_par_cycle_ratio * (ind.stabilite < I.stabilite_basse ? I.stabilite_basse_fatigue : 1), 0, 100);
     o.xp += O.progression_competence * (t.type === o.type ? 1 : 0.5);
     if (o.xp >= 1 && o.comp < 5) { o.xp = 0; o.comp++; log(nomOp(o) + " progresse : compétence " + o.comp + ".", "op"); }
     switch (o.tache) {
@@ -116,12 +119,15 @@ function validerCycle() {
         break;
       case "reperer":
         if (rnd() < Math.min(1, 0.4 + e * 0.5)) s.conn = Math.min(3, s.conn + t.connaissance);
-        VILLE.adj[o.pos].forEach(function (v) { if (rnd() < 0.3 * e) G.q[v].conn = Math.min(3, Math.max(G.q[v].conn, 1)); });
+        VILLE.adj[o.pos].forEach(function (v) { if (rnd() < 0.6 * e) G.q[v].conn = Math.min(3, Math.max(G.q[v].conn, 1)); });
         break;
       case "surveiller":
         s.conn = Math.max(s.conn, 2);
         VILLE.adj[o.pos].forEach(function (v) { G.q[v].vu = G.cycle + 1; });
         s.vu = G.cycle + 1;
+        break;
+      case "optimiser":
+        ind.exposition -= (t.baisse_exposition || 0) * e;
         break;
       case "flux":
         fluxActifs().forEach(function (fl) { fl.fiabilite = clamp(fl.fiabilite + t.fiabilite_flux * e, 0, 100); });
@@ -156,12 +162,18 @@ function validerCycle() {
   // 3. factions
   tourFactions();
 
+  majCharbons();
+
   // 4. quartiers laissés seuls ou sans argent
   VILLE.ordre.forEach(function (id) {
     var s = G.q[id];
     if (s.ctl <= 0) { s.sans_op = 0; return; }
     if (present[id]) s.sans_op = 0; else s.sans_op++;
-    if (s.sans_op > B.controle.abandon_cycles) s.ctl = Math.max(0, s.ctl - B.controle.abandon_baisse);
+    if (s.sans_op > B.controle.abandon_cycles) {
+      // un quartier sécurisé tient seul (plancher), les autres s'effritent sans présence
+      if (statut(id) === "securise") s.ctl = Math.max(B.controle.securise_controle, s.ctl - 1);
+      else s.ctl = Math.max(0, s.ctl - B.controle.abandon_baisse);
+    }
     if (G.tresorerie <= 0 && G.dette > 0) s.ctl = Math.max(0, s.ctl - B.controle.degradation_sans_argent);
     if (ind.stabilite < I.stabilite_basse) s.ctl = Math.max(0, s.ctl - I.stabilite_basse_degradation);
   });
@@ -174,7 +186,7 @@ function validerCycle() {
   gagnes.forEach(function (id) { log("Nouveau quartier : " + VILLE.q[id].nom + ".", "gain", id); });
   ind.pression += gagnes.length * I.pression_par_quartier_gagne;
   if (ind.exposition > I.exposition_alerte) { ind.pression += I.exposition_vers_pression; log("Exposition trop haute : la pression monte.", "alerte"); }
-  ind.pression -= I.pression_baisse; ind.exposition -= I.exposition_baisse;
+  ind.pression -= I.pression_baisse + ind.pression * I.pression_baisse_ratio; ind.exposition -= I.exposition_baisse + ind.exposition * I.exposition_baisse_ratio;
   ind.stabilite += (I.stabilite_vers - ind.stabilite) * I.stabilite_derive;
   opsActifs().forEach(function (o) { if (o.fatigue > 80) ind.stabilite -= I.stabilite_fatigue; });
   ind.stabilite += Math.min(4, Object.keys(present).filter(function (id) { return G.q[id].ctl > 0; }).length * I.stabilite_quartier_tenu);
@@ -194,6 +206,8 @@ function validerCycle() {
   B.capacite.seuils_territoire.forEach(function (sv) {
     if (terr >= sv && G.seuils_pris.indexOf(sv) < 0) { G.seuils_pris.push(sv); G.capacite++; log("Territoire " + sv + " % : capacité +1 (" + G.capacite + ").", "capacite"); }
   });
+
+  verifierQuetes();
 
   // 9. bilan du cycle et fin
   G.dernier = { solde: Math.round(solde), revenus: p.revenus, couts: p.maintien + p.entretien + p.interets, flux: Math.round(fluxNet),
@@ -253,7 +267,7 @@ function finir(type) {
 function abandonner() { if (!G.fini) { finir("abandon"); save(); } }
 
 /** Investir dans un quartier (§6.3). */
-function coutInvestir(id) { return Math.round(G.q[id].flux * B.quartiers.investir_cout_ratio * (1 + G.q[id].inv)); }
+function coutInvestir(id) { return Math.round(Math.max(400, fluxQuartier(id)) * B.quartiers.investir_cout_ratio * (1 + G.q[id].inv)); }
 function investir(id) {
   var s = G.q[id], c = coutInvestir(id);
   if (s.ctl <= 0) return { ok: false, raison: "Il faut tenir le quartier" };

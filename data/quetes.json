@@ -1,0 +1,149 @@
+{
+ "_doc": "Objectifs (quêtes) chiffrés, sans narration. Types : quartiers_tenus(seuil,n), connaissance_zone(n,niveau), charbons(n), tresorerie(v), securises(n), operateurs(n), territoire(v), flux(n).",
+ "ouverture_zone": {
+  "nom": "Ouvrir {zone}",
+  "objectifs": [
+   {
+    "type": "quartiers_tenus",
+    "seuil": 50,
+    "n": 2,
+    "n_par_zone": 1
+   },
+   {
+    "type": "connaissance_zone",
+    "n": 2,
+    "niveau": 1
+   },
+   {
+    "type": "charbons",
+    "n": 1,
+    "n_par_zone": 1
+   }
+  ],
+  "recompense": {
+   "argent": 1500,
+   "capacite_toutes_les": 2
+  }
+ },
+ "liste": [
+  {
+   "id": "premier_charbon",
+   "nom": "Deuxième charbon",
+   "objectifs": [
+    {
+     "type": "charbons",
+     "n": 2
+    }
+   ],
+   "recompense": {
+    "argent": 800
+   }
+  },
+  {
+   "id": "voir_le_quartier",
+   "nom": "Connaître le voisinage",
+   "objectifs": [
+    {
+     "type": "connaissance",
+     "n": 4,
+     "niveau": 2
+    }
+   ],
+   "recompense": {
+    "argent": 600
+   }
+  },
+  {
+   "id": "tenir_base",
+   "nom": "Verrouiller ta base",
+   "objectifs": [
+    {
+     "type": "securises",
+     "n": 1
+    }
+   ],
+   "recompense": {
+    "argent": 1000
+   }
+  },
+  {
+   "id": "equipe_4",
+   "nom": "Quatre opérateurs",
+   "objectifs": [
+    {
+     "type": "operateurs",
+     "n": 4
+    }
+   ],
+   "recompense": {
+    "capacite": 1
+   }
+  },
+  {
+   "id": "caisse_15k",
+   "nom": "Une vraie caisse",
+   "objectifs": [
+    {
+     "type": "tresorerie",
+     "v": 15000
+    }
+   ],
+   "recompense": {
+    "capacite": 1
+   }
+  },
+  {
+   "id": "cinq_charbons",
+   "nom": "Cinq charbons",
+   "objectifs": [
+    {
+     "type": "charbons",
+     "n": 5
+    }
+   ],
+   "recompense": {
+    "argent": 2500
+   }
+  },
+  {
+   "id": "territoire_10",
+   "nom": "10 % de la ville",
+   "objectifs": [
+    {
+     "type": "territoire",
+     "v": 10
+    }
+   ],
+   "recompense": {
+    "argent": 3000
+   }
+  },
+  {
+   "id": "premier_flux",
+   "nom": "Premier flux",
+   "objectifs": [
+    {
+     "type": "flux",
+     "n": 1
+    }
+   ],
+   "recompense": {
+    "argent": 2000
+   }
+  },
+  {
+   "id": "territoire_25",
+   "nom": "Un quart de la ville",
+   "objectifs": [
+    {
+     "type": "territoire",
+     "v": 25
+    }
+   ],
+   "recompense": {
+    "capacite": 1,
+    "argent": 5000
+   }
+  }
+ ]
+}

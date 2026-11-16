@@ -11,13 +11,13 @@ function planProj() {
   return { c: Math.cos(a), s: Math.sin(a), k: C.ecrasement, hk: C.hauteur, R: C.resolution, minX: 0, minY: 0 };
 }
 function proj(P, x, y, h) {
-  var dx = x - 180, dy = y - 200;
+  var dx = x - VILLE.taille[0] / 2, dy = y - VILLE.taille[1] / 2;
   var rx = dx * P.c - dy * P.s, ry = dx * P.s + dy * P.c;
   return [(rx - P.minX) * P.R, (ry * P.k - (h || 0) * P.hk - P.minY) * P.R];
 }
 function deproj(P, ox, oy) {
   var rx = ox / P.R + P.minX, ry = (oy / P.R + P.minY) / P.k;
-  return [rx * P.c + ry * P.s + 180, -rx * P.s + ry * P.c + 200];
+  return [rx * P.c + ry * P.s + VILLE.taille[0] / 2, -rx * P.s + ry * P.c + VILLE.taille[1] / 2];
 }
 function hex(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; }
 function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
@@ -37,20 +37,24 @@ function forceTeinte(id) {
   if (st === "libre") return 0;
   return 0.3 + Math.min(0.35, s.ctl / 250);
 }
-/** Génère les immeubles d'une zone (déterministe). */
+/** Génère les immeubles d'une zone sur les cases de ses quartiers (déterministe). */
 function immeubles(z) {
-  var r = rngDecor(z.id), b = z.bati, s = b.pas, out = [];
-  var xs = z.plan.map(function (p) { return p[0]; }), ys = z.plan.map(function (p) { return p[1]; });
-  var dens = { centre: 0.92, aise: 0.8, tours: 0.42, mixte: 0.62, port: 0.55, maisons: 0.6 }[b.type] || 0.6;
+  var r = rngDecor(z.id), b = z.bati, s = b.pas, out = [], ids = VILLE.zones[z.id] || [];
+  var dens = { centre: 0.92, aise: 0.8, tours: 0.42, mixte: 0.62, port: 0.55, maisons: 0.55 }[b.type] || 0.6;
+  var xs = [], ys = [];
+  ids.forEach(function (id) { VILLE.q[id].cells.forEach(function (c) { xs.push(c[0]); ys.push(c[1]); }); });
+  if (!xs.length) return out;
+  function dans(x, y) { var q = quartierEn(x, y); return q && VILLE.q[q].zone === z.id ? q : null; }
   for (var x = Math.min.apply(0, xs); x < Math.max.apply(0, xs); x += s) {
     for (var y = Math.min.apply(0, ys); y < Math.max.apply(0, ys); y += s) {
       if (r() > dens) continue;
       var cx = x + s / 2 + (r() - 0.5) * s * 0.25, cy = y + s / 2 + (r() - 0.5) * s * 0.25;
       var w = s * (b.type === "tours" ? 0.42 + r() * 0.2 : 0.55 + r() * 0.25), d = s * (b.type === "tours" ? 0.42 + r() * 0.5 : 0.55 + r() * 0.25);
       var pts = [[cx - w / 2, cy - d / 2], [cx + w / 2, cy - d / 2], [cx + w / 2, cy + d / 2], [cx - w / 2, cy + d / 2]];
-      if (!pts.every(function (p) { return dansPoly(p, z.plan); })) continue;
+      var q = dans(cx, cy);
+      if (!q || !pts.every(function (p) { return dans(p[0], p[1]); })) continue;
       var h = b.hmin + Math.pow(r(), b.type === "tours" ? 0.7 : 1.6) * (b.hmax - b.hmin);
-      out.push({ pts: pts, h: h, cx: cx, cy: cy, z: z.id });
+      out.push({ pts: pts, h: h, cx: cx, cy: cy, z: z.id, q: q });
     }
   }
   return out;
@@ -58,13 +62,13 @@ function immeubles(z) {
 
 /** Dessine toute la ville dans une image hors écran. Refait seulement si le contrôle des zones change. */
 function planCache() {
-  var sig = VILLE.ordre.map(function (id) { var s = G.q[id]; return statut(id) + (factionDominante(s) || "") + (s.conn > 0 ? 1 : 0) + Math.floor(s.ctl / 20); }).join("|");
+  var sig = VILLE.ordre.map(function (id) { var s = G.q[id]; return statut(id) + (factionDominante(s) || "") + (s.conn > 0 ? 1 : 0) + Math.floor(s.ctl / 20) + (zoneOuverte(VILLE.q[id].zone) ? "o" : "v"); }).join("|");
   if (PLAN.cache && PLAN.sig === sig) return PLAN.cache;
-  var P = planProj(), R = D.zones.repere;
+  var P = planProj(), R = D.quartiers.repere, TX = VILLE.taille[0], TY = VILLE.taille[1];
   // bornes
   var bx = [1e9, -1e9, 1e9, -1e9];
-  [[0, 0], [360, 0], [360, 400], [0, 400]].forEach(function (p) {
-    var dx = p[0] - 180, dy = p[1] - 200, rx = dx * P.c - dy * P.s, ry = (dx * P.s + dy * P.c) * P.k;
+  [[0, 0], [TX, 0], [TX, TY], [0, TY]].forEach(function (p) {
+    var dx = p[0] - TX / 2, dy = p[1] - TY / 2, rx = dx * P.c - dy * P.s, ry = (dx * P.s + dy * P.c) * P.k;
     bx[0] = Math.min(bx[0], rx); bx[1] = Math.max(bx[1], rx); bx[2] = Math.min(bx[2], ry - 30); bx[3] = Math.max(bx[3], ry);
   });
   P.minX = bx[0] - 10; P.minY = bx[2] - 10;
@@ -82,12 +86,12 @@ function planCache() {
   var gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#1c2a33"); gr.addColorStop(1, "#0d151b");
   g.fillStyle = gr; g.fillRect(0, 0, W, H);
   // terre et sol des zones
-  poly(R.terre, 0, "#2f3134");
   // sol : une case par point du découpage, teintée selon le quartier
   var PAS = VILLE.PAS, couleurs = {};
   VILLE.ordre.forEach(function (id) {
     var c = couleurQuartier(id);
-    couleurs[id] = c ? rgb(mix([70, 72, 76], hex(c), forceTeinte(id))) : "rgb(44,46,49)";
+    var ouv = zoneOuverte(VILLE.q[id].zone);
+    couleurs[id] = c ? rgb(mix([70, 72, 76], hex(c), forceTeinte(id)), ouv ? 1 : 0.62) : (ouv ? "rgb(52,54,58)" : "rgb(36,38,41)");
   });
   Object.keys(VILLE.cell).forEach(function (k) {
     var p = k.split(",").map(Number);
@@ -110,13 +114,13 @@ function planCache() {
   // immeubles, triés de l'arrière vers l'avant
   var all = [];
   D.zones.liste.forEach(function (z) { all = all.concat(immeubles(z)); });
-  all.forEach(function (b) { b.q = quartierEn(b.cx, b.cy) || VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === b.z; })[0]; });
-  all.forEach(function (b) { b.prof = (b.cx - 180) * P.s + (b.cy - 200) * P.c; });
+  all.forEach(function (b) { b.prof = (b.cx - TX / 2) * P.s + (b.cy - TY / 2) * P.c; });
   all.sort(function (a, b) { return a.prof - b.prof; });
   var lum = [0.62, 0.48];
   all.forEach(function (b) {
     var cq = couleurQuartier(b.q), inconnu = !cq;
     var c = inconnu ? [70, 72, 76] : mix([196, 198, 202], hex(cq), forceTeinte(b.q) * 1.3);
+    if (!zoneOuverte(b.z)) c = mix(c, [40, 42, 46], 0.45);
     for (var i = 0; i < 4; i++) {
       var p1 = b.pts[i], p2 = b.pts[(i + 1) % 4];
       var nx = p2[1] - p1[1], ny = -(p2[0] - p1[0]);           // normale extérieure
@@ -270,13 +274,16 @@ function planDessin() {
   g.drawImage(C.cv, W / 2 - cam.x * cam.z, H / 2 - cam.y * cam.z, C.W * cam.z, C.H * cam.z);
   var op = UI.selOp ? opParId(UI.selOp) : null;
   // accès possibles pour l'opérateur choisi
-  if (op) VILLE.ordre.forEach(function (id) { if (accessible(id)) contour(g, id, "rgba(108,207,79,.55)", 1.4); });
+  if (op) VILLE.ordre.forEach(function (id) {
+    if (accessible(id)) contour(g, id, "rgba(108,207,79,.55)", 1.4);
+    else if (op.type === "reperage" && accessible(id, "reperer")) contour(g, id, "rgba(143,198,255,.6)", 1.4);
+  });
   if (UI.selQ) contour(g, UI.selQ, "#f2c94c", 3, 12);
   PLAN.hits = [];
   var r = clamp(9 * Math.sqrt(cam.z / 0.5), 8, 15);
   // noms : zones de loin, quartiers de près
   g.textAlign = "center"; g.textBaseline = "middle"; g.lineWidth = 3; g.strokeStyle = "rgba(0,0,0,.8)";
-  if (cam.z < 0.62) {
+  if (cam.z < 0.9) {
     D.zones.liste.forEach(function (z) {
       var ids = VILLE.ordre.filter(function (id) { return VILLE.q[id].zone === z.id; }), sx = 0, sy = 0;
       ids.forEach(function (id) { sx += VILLE.q[id].cx; sy += VILLE.q[id].cy; });
@@ -286,6 +293,7 @@ function planDessin() {
   } else {
     VILLE.ordre.forEach(function (id) {
       var s = ecranQ(id), conn = G.q[id].conn > 0 || G.q[id].ctl > 0;
+      if (!conn && cam.z < 1.3) return;
       if (s[0] < -40 || s[0] > W + 40 || s[1] < -20 || s[1] > H + 20) return;
       g.font = "600 " + Math.round(clamp(10 * cam.z, 9, 13)) + "px system-ui";
       g.strokeText(VILLE.q[id].nom, s[0], s[1] + r * 1.6); g.fillStyle = conn ? "#f4f1ea" : "#8d9096"; g.fillText(VILLE.q[id].nom, s[0], s[1] + r * 1.6);
@@ -302,6 +310,26 @@ function planDessin() {
           pastille(g, p[0] - r * 1.3, p[1] - r * 2.4, r * 0.75, IDX.equipes[fid].couleur, "⚔", null, false);
       });
     }
+  });
+  // zones verrouillées : un cadenas au centre de la zone
+  D.zones.liste.forEach(function (z) {
+    if (zoneOuverte(z.id)) return;
+    var ids = VILLE.zones[z.id], sx = 0, sy = 0;
+    ids.forEach(function (id) { sx += VILLE.q[id].cx; sy += VILLE.q[id].cy; });
+    var p = proj(C.P, sx / ids.length, sy / ids.length, 0), e = versEcran(p[0], p[1]);
+    pastille(g, e[0], e[1] - r * 2.2, r * 0.95, "#8d9096", "🔒", "#26282c", false);
+  });
+  // charbons (de près) : or = à toi, couleur = faction, gris = libre
+  if (cam.z >= 0.62) VILLE.ordre.forEach(function (id) {
+    var s = G.q[id];
+    if (s.conn < 2 && s.ctl <= 0) return;
+    s.ch.forEach(function (c) {
+      var p = proj(C.P, c.x, c.y, 1), e = versEcran(p[0], p[1]);
+      if (e[0] < -10 || e[0] > W + 10 || e[1] < -10 || e[1] > H + 10) return;
+      var col = c.proprio === "joueur" ? (c.saisi ? "#7a5a20" : "#f2c94c") : c.proprio ? IDX.equipes[c.proprio].couleur : "#8d9096";
+      g.beginPath(); g.arc(e[0], e[1], r * 0.42, 0, Math.PI * 2); g.fillStyle = col; g.fill();
+      g.lineWidth = 1.5; g.strokeStyle = "#111"; g.stroke();
+    });
   });
   // opérateurs, groupés par quartier
   var parQ = {};

@@ -4,12 +4,13 @@
 
 function forceAction(f) {
   var a = B.factions.force_action;
-  return a[0] + f.agressivite * a[1] + f.effectif * a[2];
+  var h = B.factions.force_hasard;
+  return (a[0] + f.agressivite * a[1] + f.effectif * a[2]) * rf(h[0], h[1]);
 }
 /** Revenu d'une faction : ses quartiers selon sa présence. */
 function revenuFaction(fid) {
   var t = 0;
-  VILLE.ordre.forEach(function (id) { t += G.q[id].flux * (G.q[id].adv[fid] || 0) / 100; });
+  VILLE.ordre.forEach(function (id) { t += fluxQuartier(id) * (G.q[id].adv[fid] || 0) / 100; });
   return t * B.factions.revenu_ratio;
 }
 /** Défense du joueur dans un quartier (opérateurs Force sur place, surveillance). */
@@ -28,8 +29,9 @@ function decider(fid) {
   var f = G.factions[fid], F = B.factions, terr = territoireFaction(fid), cibles = [];
   var eqp = IDX.equipes[fid];
   // attaquée : un de ses quartiers où le joueur dépasse le seuil
-  var attaques = terr.concat(VILLE.ordre.filter(function (id) { return (G.q[id].adv[fid] || 0) >= 15; }))
-    .filter(function (id) { return G.q[id].ctl > F.attaque_detecte; });
+  // attaquée : un quartier de son territoire où le joueur dépasse le seuil (pas pendant la période calme du début)
+  var attaques = G.cycle <= F.periode_calme ? [] : terr.filter(function (id) { return G.q[id].ctl > F.attaque_detecte; });
+  attaques = attaques.filter(function () { return rnd() < f.agressivite * F.proba_contre_par_agressivite + 0.1; });
   if (attaques.length) { f.objectif = "contre"; cibles = attaques; }
   else if (f.budget < F.budget_max * F.retraite_budget * (eqp.budget / F.budget_max + 0.5)) { f.objectif = "retraite"; cibles = []; }
   else {
@@ -37,7 +39,7 @@ function decider(fid) {
     var voisins = {};
     terr.forEach(function (id) { VILLE.adj[id].forEach(function (v) { if ((G.q[v].adv[fid] || 0) < 30) voisins[v] = 1; }); });
     var faibles = Object.keys(voisins).filter(function (v) {
-      var s = G.q[v]; return s.ctl < 40 && !Object.keys(s.adv).some(function (g) { return g !== fid && allies(fid, g) && s.adv[g] > 30; });
+      var s = G.q[v]; return (s.ctl <= 0 || G.cycle > F.periode_calme) && s.ctl < 40 && !Object.keys(s.adv).some(function (g) { return g !== fid && allies(fid, g) && s.adv[g] > 30; });
     });
     if (faibles.length && rnd() < 0.25 + f.agressivite * 0.12) {
       f.objectif = "etendre";
@@ -46,7 +48,7 @@ function decider(fid) {
     } else { f.objectif = "maintenir"; cibles = []; }
   }
   var n = Math.max(1, Math.ceil(f.effectif / F.actions_par_effectif));
-  cibles = cibles.slice(0, n);
+  cibles = cibles.filter(function (id, i) { return cibles.indexOf(id) === i; }).slice(0, n);
   f.cible = cibles[0] || null;
   return cibles;
 }
@@ -58,7 +60,7 @@ function tourFactions() {
     var f = G.factions[fid];
     if (!f.vivante) return;
     f.budget = clamp(f.budget + revenuFaction(fid) - f.effectif * F.cout_effectif, 0, F.budget_max);
-    if (f.budget > F.recrutement_seuil + F.recrutement_cout && rnd() < 0.25) { f.budget -= F.recrutement_cout; f.effectif++; }
+    if (f.effectif < F.effectif_max && f.budget > F.recrutement_seuil + F.recrutement_cout && rnd() < 0.25) { f.budget -= F.recrutement_cout; f.effectif++; }
     var cibles = decider(fid);
     if (f.objectif === "retraite") {
       // se concentre : abandonne un peu de présence dans ses quartiers les plus faibles
@@ -67,6 +69,8 @@ function tourFactions() {
     }
     if (f.objectif === "maintenir" && f.agressivite < IDX.equipes[fid].agressivite && rnd() < 0.2) f.agressivite++;
     cibles.forEach(function (id) {
+      if (f.budget < F.cout_action) return;
+      f.budget -= F.cout_action;
       var v = forceAction(f) * (1 - defense(id));
       var avant = G.q[id].ctl;
       var perte = gagnerPresence(id, fid, v);
