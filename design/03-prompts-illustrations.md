@@ -1,4 +1,4 @@
-# CHOUF — prompts Gemini pour TOUTES les illustrations
+# CHOUF — prompts Gemini pour TOUTES les illustrations (rendu 3D)
 
 Document de commande, même méthode que KICK (`design/v62/prompts-*.txt`) : une planche = un prompt =
 une image, découpée ensuite par `tools/slice.py` (repris de `v62_slice.py`).
@@ -22,7 +22,10 @@ une image, découpée ensuite par `tools/slice.py` (repris de `v62_slice.py`).
 - **Rien d'opérationnel** : pas d'arme, pas de drogue, pas de sang, pas de geste de deal. La
   marchandise n'existe qu'en icônes abstraites (cartons et sacs fermés). Les conséquences se voient
   sur les visages et dans les lieux.
-- **Pas de caricature** : les habitants sont dessinés avec dignité, des visages variés et réalistes,
+- **Tout en 3D** : rendu de moteur de jeu, jamais de dessin, de 2D ou de cartoon. Si Gemini repart en
+  dessin, ajoute « 3D render, game engine, not an illustration » au début du prompt, et joins une de tes
+  captures de référence (vue de ville en relief) en disant « same rendering style as the attached image ».
+- **Pas de caricature** : les habitants sont rendus avec dignité, des visages variés et réalistes,
   comme les gens de Marseille. Personne n'a « une tête de délinquant ».
 - **Grilles** (maximums de KICK) : décors 3 × 2 (6 par planche), personnages 4 × 2 (8 par planche),
   portraits de famille 3 × 2 (6), icônes 6 × 4 (24). Cases identiques, rien ne déborde d'une case.
@@ -39,12 +42,15 @@ Direction artistique validée le 16 novembre : **vue stratégique de jeu de gest
 doivent aller avec la carte du jeu : ville désaturée, gris et béton, avec de rares couleurs fortes.
 
 ```
-Stylized 3D-rendered look for a premium crime-management strategy game, Mediterranean noir set in
-Marseille. Desaturated, almost monochrome palette: concrete greys, charcoal, off-white stone, muted ochre
-roofs, dark slate-blue sea, with only a few strong accent colors (a red, a blue, a warm sodium-orange
-light). Clean low-to-mid poly shapes with soft global illumination, gentle ambient occlusion, slight tilt-
-shift depth of field on landscapes, cinematic dusk or night lighting with sodium streetlights and cold blue
-moonlight. Grounded and realistic proportions, humane and sober, never glamorous, never caricatural.
+Full 3D render, real-time game-engine look of a console crime-strategy game (strategic city view and
+in-game cinematics), NOT a drawing, NOT 2D, NOT cartoon, NOT flat vector. Physically based materials:
+weathered concrete, plaster, stone, asphalt, glass, worn fabric, real skin with pores. Mediterranean noir
+set in Marseille. Desaturated, almost monochrome palette: concrete greys, charcoal, off-white stone, muted
+ochre roof tiles, dark slate-blue sea, with only a few strong accent colors (a red, a blue, a warm
+sodium-orange light). Soft global illumination, ambient occlusion, light volumetric haze, slight bloom on
+lights, tilt-shift depth of field on city views, cinematic dusk or night lighting with sodium streetlights
+and cold blue moonlight. Realistic human proportions and faces, humane and sober, never glamorous, never
+caricatural.
 No real brands, no logos, no club crests, no sponsors, no watermark, no readable text, no numbers, no
 license plates. No weapons, no drugs, no blood.
 ```
@@ -64,7 +70,7 @@ Les Gabians bleu #3d7fd9, Le Ruisseau ocre #d08b2c, Tramontane violet #8a5cd6, L
 | Icône | `icone_<id>` |
 | Grands écrans | `ecran_accueil`, `ecran_fin`, `ecran_chapitre_<id>` |
 
-## Inventaire (30 planches + 6 images seules)
+## Inventaire (30 planches + 10 images seules)
 
 | Série | Planches | Images |
 |---|---|---|
@@ -77,6 +83,7 @@ Les Gabians bleu #3d7fd9, Le Ruisseau ocre #d08b2c, Tramontane violet #8a5cd6, L
 | I — icônes | I01–I03 | 72 |
 | R — chefs et emblèmes des équipes rivales | R01 | 8 |
 | E — grands écrans (images seules, 9:16) | E1–E6 | 6 |
+| V — vues 3D de Marseille (images seules, 16:9, option) | V1–V4 | 4 |
 
 ---
 
@@ -85,9 +92,10 @@ Les Gabians bleu #3d7fd9, Le Ruisseau ocre #d08b2c, Tramontane violet #8a5cd6, L
 Prompt commun à ajouter après le BLOC STYLE :
 
 ```
-Sprite sheet of 6 wide landscape scenes, seen from a raised three-quarter aerial angle like a strategy game
-camera, in a strict 3 columns x 2 rows grid, every cell the same size
-(16:9), thin dark navy gutters between cells, each scene filling its cell edge to edge. Top row: three
+Sprite sheet of 6 wide 3D-rendered city views, seen from a high three-quarter aerial camera like the
+strategic map of a crime-management game (miniature-like 3D city blocks, rooftops, streets, tilt-shift),
+in a strict 3 columns x 2 rows grid, every cell the same size (16:9), thin black gutters between cells,
+each view filling its cell edge to edge. Top row: three
 places by day (late afternoon Mediterranean light). Bottom row: the SAME three places, same framing,
 same buildings, at night (sodium streetlights, lit windows, deep blue sky). The bottom 35% of each scene
 is calm and darker because the game puts text there. Few people, small and in the distance, no faces in
@@ -141,8 +149,10 @@ close-up. No readable text, no signs, no logos, no brands.
 Prompt commun :
 
 ```
-Sprite sheet of 6 character portraits in a strict 3 columns x 2 rows grid, every cell the same size,
-on a perfectly flat pure magenta #FF00FF background, no shadow on the ground, nothing touching the cell
+Sprite sheet of 6 realistic 3D character renders (game-engine character busts, like the character
+portraits of a console crime game: real skin, real hair strands, fabric folds, soft studio key light from
+the left and a cool rim light), in a strict 3 columns x 2 rows grid, every cell the same size, on a
+perfectly flat pure magenta #FF00FF background, no shadow on the background, nothing touching the cell
 borders. Each portrait: head and shoulders, centered, facing slightly to the left, same size and same
 eye height in every cell, so they can be cut into round medallions. Realistic, dignified, everyday
 people of Marseille, varied faces, natural skin tones, no caricature. Simple everyday clothes, no logos,
@@ -189,9 +199,11 @@ voir série A pour la règle).
 Prompt commun :
 
 ```
-Sprite sheet of 8 character portraits in a strict 4 columns x 2 rows grid, every cell the same size,
-on a perfectly flat pure magenta #FF00FF background, no shadow, nothing touching the cell borders.
-Each portrait: head and shoulders, centered, facing slightly to the left, same size and same eye height
+Sprite sheet of 8 realistic 3D character renders (game-engine character busts, like the character
+portraits of a console crime game: real skin, real hair strands, fabric folds, soft studio key light from
+the left and a cool rim light), in a strict 4 columns x 2 rows grid, every cell the same size, on a
+perfectly flat pure magenta #FF00FF background, no shadow on the background, nothing touching the cell
+borders. Each portrait: head and shoulders, centered, facing slightly to the left, same size and same eye height
 in every cell, so they can be cut into round medallions. Realistic, dignified people of Marseille,
 varied faces and skin tones, no caricature, no villain faces. Everyday clothes, no logos, no readable
 text, no weapons.
@@ -248,7 +260,7 @@ text, no weapons.
 1. **elu** Denis Martinez, 57, local elected official, grey hair, suit without tie, affable public smile.
 2. à 6. libres (réserve pour les prochains personnages) : laisse ces cases vides, magenta uni.
 7. **chef_calanquais** « Petit Prince » Lorenzo, 22, sunburnt, bleached hair, too-big smile, impatient eyes.
-8. **emblème calanquais** a white limestone cliff above blue water (simple emblem, no letters).
+8. **emblème calanquais** a white limestone cliff above blue water, as a 3D round badge with a turquoise ring (no letters).
 
 ---
 
@@ -270,7 +282,9 @@ planche F de la famille.
 Prompt commun :
 
 ```
-Sprite sheet of 6 portraits of THE SAME young man in a strict 3 columns x 2 rows grid, every cell the
+Sprite sheet of 6 realistic 3D character renders of THE SAME young man (game-engine character bust, real
+skin, real hair, fabric folds, soft studio key light from the left, cool rim light) in a strict 3 columns
+x 2 rows grid, every cell the
 same size, perfectly flat pure magenta #FF00FF background, no shadow, nothing touching the cell borders.
 Head and chest, centered, facing slightly to the left, same size and same eye height in every cell.
 He belongs to the family in the attached sheet: same skin tone, same family features. Top row, neutral
@@ -300,8 +314,10 @@ choisie par le jeu selon la santé, le stress, la prison et les deuils.
 Prompt commun :
 
 ```
-Sprite sheet of 6 narrative scenes in a strict 3 columns x 2 rows grid, every cell the same size (16:9),
-thin dark navy gutters, each scene filling its cell edge to edge. Cinematic framing, characters seen from
+Sprite sheet of 6 in-game 3D cinematic stills (real-time game-engine render, like the cutscenes of a
+console crime game: realistic 3D characters and sets, physically based materials, volumetric light,
+shallow depth of field) in a strict 3 columns x 2 rows grid, every cell the same size (16:9), thin black
+gutters, each scene filling its cell edge to edge. Cinematic framing, characters seen from
 a distance or from behind, faces small or turned away, emotion carried by posture, light and place.
 Humane and sober, never glamorous. No readable text, no logos, no weapons, no drugs, no blood.
 ```
@@ -400,8 +416,9 @@ Prompt commun :
 ```
 Icon sheet of 24 icons in a strict 6 columns x 4 rows grid, every cell the same size, perfectly flat pure
 magenta #FF00FF background, each icon centered, same visual weight, nothing touching cell borders.
-Style: round strategy-game badges like map markers: a dark charcoal disc (#1b1c1f) with a thick colored ring
-and a simple bold white glyph in the middle, subtle bevel and drop shadow, readable at 32 px. Ring color per
+Style: 3D-rendered round map-marker badges of a console strategy game: a glossy dark charcoal disc
+(#1b1c1f) with a thick beveled metallic colored ring, a simple bold white embossed glyph in the middle,
+soft specular highlight on top, small drop shadow, readable at 32 px. Seen straight from the front. Ring color per
 icon: gold #e8b64c by default, blue #3d7fd9 for police, red #e5484d for danger, green #6ccf4f for the player. No readable text, no letters, no numbers, no logos, no weapons,
 no drugs.
 ```
@@ -450,7 +467,7 @@ face half in shadow, calm and distant · 2. **Les Gabians** — « Grand-Mère �
 tracksuit, cold eyes · 3. **Le Ruisseau** — « Tonton » Fabrice, 45, heavy-set, grey hair, kind-looking
 uncle face that worries more than it reassures · 4. **Tramontane** — « La Prof » Océane, 31, elegant,
 glasses, night-bar light.
-Ligne 2 (emblèmes simples, sans lettres, faciles à lire en petit) : 5. **compagnie** a black chess rook ·
+Ligne 2 (emblèmes en badges 3D ronds, même rendu que la série I, anneau à la couleur de l'équipe, sans lettres) : 5. **compagnie** a black chess rook ·
 6. **gabians** a seagull in flight · 7. **ruisseau** a stream of water between two stones · 8. **tramontane**
 a north-wind gust curl.
 Les Calanquais (chef et emblème) sont dans les cases 7 et 8 de P05.
@@ -459,8 +476,9 @@ Les Calanquais (chef et emblème) sont dans les cases 7 et 8 de P05.
 
 # SÉRIE E — GRANDS ÉCRANS (une image par prompt, format vertical 9:16)
 
-Ajouter : « Vertical 9:16 full illustration. The top 30% is calm sky because the game puts the title
-there. No readable text. »
+Ajouter : « Vertical 9:16 full-screen 3D cinematic render (real-time game-engine look, realistic 3D
+characters and city, volumetric light, shallow depth of field). The top 30% is calm sky because the game
+puts the title there. No readable text. »
 
 - **E1 ecran_accueil** — Marseille at night seen from the roof of a housing block in the north: a teenager
   sitting on the edge, back to the viewer, Notre-Dame de la Garde lit in the distance, the port, the sea,
@@ -475,6 +493,24 @@ there. No readable text. »
   wind in his jacket, facing the dark sea.
 
 ---
+
+# SÉRIE V — VUES 3D DE MARSEILLE (images seules, 16:9, option)
+
+Pour les fonds de l'écran de carte, les transitions de chapitre et les bilans. Même ville que la vue en
+relief du jeu, rendue en vrai.
+
+Ajouter : « Wide 16:9 3D render of a miniature-like strategic city view, high three-quarter aerial camera,
+tilt-shift, desaturated grey city with a few territories tinted in strong team colors, glowing round map
+markers floating above some blocks (blank, no symbols, no text). »
+
+- **V1 vue_nord** — The northern districts of Marseille: housing towers on hills, the port cranes, the sea;
+  two areas tinted red (#c8352e), one tinted blue (#3d7fd9).
+- **V2 vue_centre** — The Vieux-Port, the Panier, the cathedral by the sea and Notre-Dame de la Garde on its
+  hill; one area tinted red, one violet (#8a5cd6).
+- **V3 vue_est_sud** — The eastern villages, the Vélodrome, the long southern beaches and the white
+  calanques; one area tinted ochre (#d08b2c), one turquoise (#5fc4c4).
+- **V4 vue_nuit** — The whole city at night from very high, lit streets, a few areas glowing red, sodium
+  lights, a police helicopter light over the north.
 
 ## Ce que le code fera (inutile de le dessiner)
 
