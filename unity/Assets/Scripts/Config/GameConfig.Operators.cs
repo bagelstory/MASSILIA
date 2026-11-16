@@ -23,6 +23,8 @@ namespace Marseille.Config
         [Min(0f)] public float upkeep;
         /// <summary>Couleur de l'icône sur la carte.</summary>
         public Color color = Color.white;
+        /// <summary>Initiale affichée sur le pion.</summary>
+        public string letter = "?";
     }
 
     /// <summary>Effets d'une tâche par cycle, à efficacité 1. Les champs sans objet restent à 0.</summary>
@@ -63,12 +65,12 @@ namespace Marseille.Config
         [Tooltip("Paramètres par type (un élément par OperatorType).")]
         public List<OperatorTypeSettings> operatorTypes = new List<OperatorTypeSettings>
         {
-            new OperatorTypeSettings { type = OperatorType.Recon, displayName = "Repérage", specialtyTask = OperatorTask.Scout, recruitCost = 900f, upkeep = 150f, color = new Color(0.56f, 0.78f, 1f) },
-            new OperatorTypeSettings { type = OperatorType.Pressure, displayName = "Pression", specialtyTask = OperatorTask.Press, recruitCost = 1200f, upkeep = 220f, color = new Color(1f, 0.6f, 0.2f) },
-            new OperatorTypeSettings { type = OperatorType.Logistics, displayName = "Logistique", specialtyTask = OperatorTask.ManageFlux, recruitCost = 1400f, upkeep = 240f, color = new Color(0.3f, 0.8f, 0.4f) },
-            new OperatorTypeSettings { type = OperatorType.Finance, displayName = "Finances", specialtyTask = OperatorTask.Optimize, recruitCost = 1600f, upkeep = 260f, color = new Color(0.95f, 0.85f, 0.25f) },
-            new OperatorTypeSettings { type = OperatorType.Intel, displayName = "Intelligence", specialtyTask = OperatorTask.Watch, recruitCost = 1500f, upkeep = 250f, color = new Color(0.7f, 0.55f, 1f) },
-            new OperatorTypeSettings { type = OperatorType.Force, displayName = "Force", specialtyTask = OperatorTask.Secure, recruitCost = 1300f, upkeep = 240f, color = new Color(0.9f, 0.28f, 0.3f) }
+            new OperatorTypeSettings { type = OperatorType.Recon, letter = "R", displayName = "Repérage", specialtyTask = OperatorTask.Scout, recruitCost = 900f, upkeep = 150f, color = new Color(0.56f, 0.78f, 1f) },
+            new OperatorTypeSettings { type = OperatorType.Pressure, letter = "P", displayName = "Pression", specialtyTask = OperatorTask.Press, recruitCost = 1200f, upkeep = 220f, color = new Color(1f, 0.6f, 0.2f) },
+            new OperatorTypeSettings { type = OperatorType.Logistics, letter = "L", displayName = "Logistique", specialtyTask = OperatorTask.ManageFlux, recruitCost = 1400f, upkeep = 240f, color = new Color(0.3f, 0.8f, 0.4f) },
+            new OperatorTypeSettings { type = OperatorType.Finance, letter = "€", displayName = "Finances", specialtyTask = OperatorTask.Optimize, recruitCost = 1600f, upkeep = 260f, color = new Color(0.95f, 0.85f, 0.25f) },
+            new OperatorTypeSettings { type = OperatorType.Intel, letter = "I", displayName = "Intelligence", specialtyTask = OperatorTask.Watch, recruitCost = 1500f, upkeep = 250f, color = new Color(0.7f, 0.55f, 1f) },
+            new OperatorTypeSettings { type = OperatorType.Force, letter = "F", displayName = "Force", specialtyTask = OperatorTask.Secure, recruitCost = 1300f, upkeep = 240f, color = new Color(0.9f, 0.28f, 0.3f) }
         };
 
         [Tooltip("Effets des tâches (un élément par OperatorTask).")]
