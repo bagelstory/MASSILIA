@@ -23,7 +23,7 @@ namespace Marseille.UI
     {
         [Tooltip("Écrans principaux, dans l'ordre des onglets. Vide : écrans par défaut créés par code.")]
         [SerializeField] private List<UIPanel> panels = new List<UIPanel>();
-        [Tooltip("Écran des résultats d'un cycle (étape 8). Vide : les résultats sont validés d'office.")]
+        [Tooltip("Écran des résultats d'un cycle. Vide : ResultOverlay créé par code.")]
         [SerializeField] private MonoBehaviour resultsHandler;
         [SerializeField] private Font font;
 
@@ -66,7 +66,10 @@ namespace Marseille.UI
                 panels[i].Initialize(this);
             }
             BuildTabs(gm.Config);
+            BuildOverlays(gm.Config);
+            if (toastBackground != null) toastBackground.transform.SetAsLastSibling();
             if (!gm.HasGame && !gm.TryContinue()) gm.NewGame();
+            else if (gm.HasGame) EventBus.RaiseGameLoaded();
             ShowPanel(0);
             RefreshTopBar();
         }

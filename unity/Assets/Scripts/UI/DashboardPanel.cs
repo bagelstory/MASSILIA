@@ -24,6 +24,8 @@ namespace Marseille.UI
         private Text network;
         private Text quests;
         private Button validate;
+        private Button abandon;
+        private bool confirmAbandon;
 
         /// <inheritdoc />
         public override string TabLabel { get { return "Bilan"; } }
@@ -47,6 +49,7 @@ namespace Marseille.UI
             UiKit.Label(col, "Objectifs", config.uiFontSizes.x, config.uiText);
             quests = MultiLine(col, 7, config);
             validate = UiKit.MakeButton(col, "Valider le cycle", config.uiAccent, OnValidate, config);
+            abandon = UiKit.MakeButton(col, "Abandonner la partie", config.uiButton, OnAbandon, config);
         }
 
         /// <summary>Met à jour tout l'écran.</summary>
@@ -68,6 +71,12 @@ namespace Marseille.UI
             network.text = NetworkText(d, c);
             quests.text = QuestsText(d, c);
             if (validate != null) validate.interactable = gm.State == GameState.Planning;
+            if (abandon != null)
+            {
+                abandon.interactable = gm.State == GameState.Planning;
+                UiKit.SetButtonText(abandon, confirmAbandon ? "Confirmer l'abandon" : "Abandonner la partie");
+                abandon.targetGraphic.color = confirmAbandon ? c.uiNegative : c.uiButton;
+            }
         }
 
         /// <summary>Texte sur plusieurs lignes, hauteur réservée.</summary>
@@ -83,9 +92,18 @@ namespace Marseille.UI
             return t;
         }
 
+        /// <summary>Bouton « Abandonner » : il faut toucher deux fois.</summary>
+        private void OnAbandon()
+        {
+            if (!confirmAbandon) { confirmAbandon = true; Refresh(); return; }
+            confirmAbandon = false;
+            if (GameManager.Instance != null) GameManager.Instance.Abandon();
+        }
+
         /// <summary>Bouton « Valider le cycle ».</summary>
         private void OnValidate()
         {
+            confirmAbandon = false;
             if (Manager != null) Manager.ValidateCycle();
         }
     }
