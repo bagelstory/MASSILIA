@@ -162,6 +162,12 @@ function vQuartier() {
 
 /* ---------------- Gens ---------------- */
 
+/** Clé d'image d'un personnage (design/03-prompts-illustrations.md) : famille et version 2025. */
+function cleMed(id) {
+  var p = IDX.personnages[id], k = "medaillon_" + id + (p.prenom === "{famille}" ? "_" + G.famille : "");
+  return G.cal.annee >= 2025 && ASSET.u(k + "_2025") ? k + "_2025" : k;
+}
+
 var GROUPES = [["famille", "Famille"], ["quartier", "Quartier"], ["organisation", "Le hall"], ["institution", "Institutions"], ["ville", "La ville"]];
 function vGens() {
   var ids = Object.keys(G.relations);
@@ -170,7 +176,7 @@ function vGens() {
     if (!l.length) return "";
     return '<h3 class="h3">' + gr[1] + "</h3>" + l.map(function (id) {
       var r = G.relations[id];
-      return '<button class="pnj" data-pnj="' + id + '">' + ASSET.img("medaillon_" + id, "med") + "<span><b>" + esc(pnjNom(id)) + "</b><small>" +
+      return '<button class="pnj" data-pnj="' + id + '">' + ASSET.img(cleMed(id), "med") + "<span><b>" + esc(pnjNom(id)) + "</b><small>" +
         esc(expl("confiance", r.confiance)) + "</small>" + jauge(r.confiance, "conf") + "</span></button>";
     }).join("");
   }).join("");
@@ -178,7 +184,7 @@ function vGens() {
 function vPnj(id) {
   var p = IDX.personnages[id], r = G.relations[id], a = pnjAge(id);
   var mem = (r.memoire || []).map(function (m) { return MEMOIRE[m] || null; }).filter(Boolean);
-  return '<button class="retour" data-a="retour">‹ Les gens</button><div class="fiche">' + ASSET.img("medaillon_" + id, "med grand") +
+  return '<button class="retour" data-a="retour">‹ Les gens</button><div class="fiche">' + ASSET.img(cleMed(id), "med grand") +
     "<h2>" + esc(pnjNomComplet(id)) + '</h2><p class="petit">' + (a ? a + " ans · " : "") + esc((p.traits || []).join(", ")) + "</p>" +
     (p.note ? "<p>" + esc(p.note.charAt(0).toUpperCase() + p.note.slice(1)) + ".</p>" : "") +
     "<p><i>Ce qu'il ou elle veut :</i> " + esc(p.objectif) + ".</p></div>" +
