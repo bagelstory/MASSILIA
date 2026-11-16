@@ -3,6 +3,7 @@
 // recrutement limité par la capacité (§7), affectation à un quartier et une tâche.
 
 using Marseille.Config;
+using Marseille.Core;
 using Marseille.Data;
 
 namespace Marseille.Systems
@@ -142,6 +143,32 @@ namespace Marseille.Systems
             data.operators[i] = op;
             TaskSettings t = config.GetTaskSettings(task);
             return ActionResult.Success(op.Label() + " : " + (t != null ? t.displayName : task.ToString()) + (duration > 0 ? " (trajet " + duration + " cycle(s))." : "."));
+        }
+
+        /// <summary>Perd définitivement un opérateur (arrêté, écarté) : stabilité en baisse, ligne au journal.</summary>
+        /// <param name="data">Partie modifiée.</param>
+        /// <param name="index">Index de l'opérateur dans la liste.</param>
+        /// <param name="reason">Raison courte (« arrêté »).</param>
+        /// <param name="context">Contexte du cycle.</param>
+        public static void Lose(ref GameData data, int index, string reason, CycleContext context)
+        {
+            OperatorData op = data.operators[index];
+            if (op.status == OperatorStatus.Lost) return;
+            op.status = OperatorStatus.Lost;
+            op.SetTask(OperatorTask.Rest);
+            op.destinationQuarter = Owners.None;
+            data.operators[index] = op;
+            data.indicators.stability = System.Math.Max(0f, data.indicators.stability - context.Config.stabilityPerOperatorLost);
+            OperatorTypeSettings s = context.Config.GetOperatorSettings(op.type);
+            context.Log(op.Label() + " (" + (s != null ? s.displayName : op.type.ToString()) + ") perdu : " + reason + ".", JournalType.OperatorLost, op.currentQuarter);
+        }
+
+        /// <summary>L'opérateur est-il sur place dans un quartier (ni en trajet, ni épuisé, ni perdu) ?</summary>
+        /// <param name="op">Opérateur.</param>
+        /// <returns>Vrai s'il agit ce cycle.</returns>
+        public static bool IsOnSite(OperatorData op)
+        {
+            return op.status == OperatorStatus.Available || op.status == OperatorStatus.Occupied;
         }
     }
 }

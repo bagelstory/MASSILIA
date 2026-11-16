@@ -1,6 +1,6 @@
 // MARSEILLE — Systems/WorldBuilder.cs
 // Construit le monde d'une nouvelle partie : zones, factions, 111 quartiers, présences adverses,
-// charbons, quartier de base et opérateurs de départ. Déterministe pour une graine donnée.
+// charbons, quartier de base, opérateurs de départ, offres de flux et objectifs. Déterministe pour une graine donnée.
 
 using System.Collections.Generic;
 using Marseille.Config;
@@ -39,6 +39,9 @@ namespace Marseille.Systems
             }
             WorldStart.PlaceBase(ref data, config, rng, ref poiId);
             WorldStart.AddStartingOperators(ref data, config, rng);
+            FluxActions.CreateOffers(ref data, config);
+            QuestRules.CreateFixedQuests(ref data, config);
+            QuestRules.EnsureZoneQuests(ref data, config);
             data.indicators.territory = TerritoryRules.Territory(data);
         }
 

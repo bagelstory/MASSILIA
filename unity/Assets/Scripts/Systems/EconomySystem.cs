@@ -23,11 +23,12 @@ namespace Marseille.Systems
             GameConfig c = context.Config;
             CycleLedger ledger = context.Ledger;
             HashSet<int> pressure = EconomyRules.PressureQuarters(data);
+            List<SeasonSettings> seasons = SeasonRules.Active(data.randomSeed, context.Cycle, c);
             Dictionary<int, float> reductions = EconomyRules.MaintenanceReductions(data, c);
             for (int i = 0; i < data.quarters.Count; i++)
             {
                 QuarterData q = data.quarters[i];
-                ledger.quarterIncome += EconomyRules.QuarterIncome(q, pressure.Contains(q.id), c);
+                ledger.quarterIncome += EconomyRules.QuarterIncome(q, pressure.Contains(q.id), SeasonRules.IncomeMultiplier(seasons, q.zoneId), c);
                 float r;
                 reductions.TryGetValue(q.id, out r);
                 ledger.maintenance += EconomyRules.QuarterMaintenance(q, r, c);

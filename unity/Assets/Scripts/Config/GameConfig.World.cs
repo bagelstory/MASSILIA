@@ -26,6 +26,8 @@ namespace Marseille.Config
         public Vector2Int charbonsPerQuarter = new Vector2Int(1, 2);
         /// <summary>Revenu de référence de la zone (€), multiplié par un tirage pour chaque charbon.</summary>
         [Min(0f)] public float referenceIncome = 1500f;
+        [Tooltip("Présence policière (0-100) : multiplie les risques d'arrestation et de saisie (référence 60).")]
+        [Range(0, 100)] public int policeLevel = 60;
     }
 
     /// <summary>Définition d'une faction rivale (inventée).</summary>
@@ -52,16 +54,16 @@ namespace Marseille.Config
         [Tooltip("Les 10 zones de jeu.")]
         public List<ZoneSettings> zones = new List<ZoneSettings>
         {
-            new ZoneSettings { id = 1, name = "Centre historique", shortName = "Centre", canBeStart = true, startingFactionId = 1, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1800f },
-            new ZoneSettings { id = 2, name = "Centre nord", shortName = "Centre nord", canBeStart = true, startingFactionId = 2, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1500f },
-            new ZoneSettings { id = 3, name = "La Plaine / Cours Julien", shortName = "La Plaine", canBeStart = false, startingFactionId = 4, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1600f },
-            new ZoneSettings { id = 4, name = "Prado / Castellane", shortName = "Prado", canBeStart = false, startingFactionId = 0, charbonsPerQuarter = new Vector2Int(1, 2), referenceIncome = 2000f },
-            new ZoneSettings { id = 5, name = "Nord-est", shortName = "Nord-est", canBeStart = true, startingFactionId = 1, charbonsPerQuarter = new Vector2Int(2, 4), referenceIncome = 1700f },
-            new ZoneSettings { id = 6, name = "Nord central", shortName = "Nord central", canBeStart = true, startingFactionId = 3, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1600f },
-            new ZoneSettings { id = 7, name = "Nord-ouest", shortName = "Nord-ouest", canBeStart = true, startingFactionId = 1, charbonsPerQuarter = new Vector2Int(2, 4), referenceIncome = 1900f },
-            new ZoneSettings { id = 8, name = "Littoral nord", shortName = "Littoral nord", canBeStart = true, startingFactionId = 2, charbonsPerQuarter = new Vector2Int(1, 2), referenceIncome = 1200f },
-            new ZoneSettings { id = 9, name = "Est", shortName = "Est", canBeStart = false, startingFactionId = 3, charbonsPerQuarter = new Vector2Int(0, 2), referenceIncome = 1300f },
-            new ZoneSettings { id = 10, name = "Sud", shortName = "Sud", canBeStart = false, startingFactionId = 5, charbonsPerQuarter = new Vector2Int(0, 2), referenceIncome = 1400f }
+            new ZoneSettings { id = 1, name = "Centre historique", shortName = "Centre", canBeStart = true, startingFactionId = 1, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1800f, policeLevel = 75 },
+            new ZoneSettings { id = 2, name = "Centre nord", shortName = "Centre nord", canBeStart = true, startingFactionId = 2, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1500f, policeLevel = 55 },
+            new ZoneSettings { id = 3, name = "La Plaine / Cours Julien", shortName = "La Plaine", canBeStart = false, startingFactionId = 4, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1600f, policeLevel = 60 },
+            new ZoneSettings { id = 4, name = "Prado / Castellane", shortName = "Prado", canBeStart = false, startingFactionId = 0, charbonsPerQuarter = new Vector2Int(1, 2), referenceIncome = 2000f, policeLevel = 70 },
+            new ZoneSettings { id = 5, name = "Nord-est", shortName = "Nord-est", canBeStart = true, startingFactionId = 1, charbonsPerQuarter = new Vector2Int(2, 4), referenceIncome = 1700f, policeLevel = 50 },
+            new ZoneSettings { id = 6, name = "Nord central", shortName = "Nord central", canBeStart = true, startingFactionId = 3, charbonsPerQuarter = new Vector2Int(1, 3), referenceIncome = 1600f, policeLevel = 50 },
+            new ZoneSettings { id = 7, name = "Nord-ouest", shortName = "Nord-ouest", canBeStart = true, startingFactionId = 1, charbonsPerQuarter = new Vector2Int(2, 4), referenceIncome = 1900f, policeLevel = 55 },
+            new ZoneSettings { id = 8, name = "Littoral nord", shortName = "Littoral nord", canBeStart = true, startingFactionId = 2, charbonsPerQuarter = new Vector2Int(1, 2), referenceIncome = 1200f, policeLevel = 40 },
+            new ZoneSettings { id = 9, name = "Est", shortName = "Est", canBeStart = false, startingFactionId = 3, charbonsPerQuarter = new Vector2Int(0, 2), referenceIncome = 1300f, policeLevel = 45 },
+            new ZoneSettings { id = 10, name = "Sud", shortName = "Sud", canBeStart = false, startingFactionId = 5, charbonsPerQuarter = new Vector2Int(0, 2), referenceIncome = 1400f, policeLevel = 55 }
         };
 
         [Tooltip("Les factions rivales (noms inventés).")]

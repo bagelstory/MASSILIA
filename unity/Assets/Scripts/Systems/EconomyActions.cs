@@ -34,11 +34,12 @@ namespace Marseille.Systems
         {
             EconomyForecast f = new EconomyForecast();
             HashSet<int> pressure = EconomyRules.PressureQuarters(data);
+            List<SeasonSettings> seasons = SeasonRules.Active(data.randomSeed, data.currentCycle, config);
             Dictionary<int, float> reductions = EconomyRules.MaintenanceReductions(data, config);
             for (int i = 0; i < data.quarters.Count; i++)
             {
                 QuarterData q = data.quarters[i];
-                f.income += EconomyRules.QuarterIncome(q, pressure.Contains(q.id), config);
+                f.income += EconomyRules.QuarterIncome(q, pressure.Contains(q.id), SeasonRules.IncomeMultiplier(seasons, q.zoneId), config);
                 float r;
                 reductions.TryGetValue(q.id, out r);
                 f.maintenance += EconomyRules.QuarterMaintenance(q, r, config);
