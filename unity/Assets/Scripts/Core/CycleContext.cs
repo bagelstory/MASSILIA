@@ -23,6 +23,9 @@ namespace Marseille.Core
         /// <summary>Lignes produites pendant ce cycle, dans l'ordre chronologique.</summary>
         public List<JournalEntry> Report { get; private set; }
 
+        /// <summary>Registre de travail partagé entre systèmes pendant ce cycle.</summary>
+        public CycleLedger Ledger { get; private set; }
+
         /// <summary>Crée le contexte d'un cycle.</summary>
         /// <param name="config">Configuration de jeu.</param>
         /// <param name="cycle">Cycle résolu.</param>
@@ -33,6 +36,7 @@ namespace Marseille.Core
             Cycle = cycle;
             Random = new System.Random(unchecked(seed * 31 + cycle * 7919));
             Report = new List<JournalEntry>();
+            Ledger = new CycleLedger();
         }
 
         /// <summary>Ajoute une ligne au rapport du cycle.</summary>

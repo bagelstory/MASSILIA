@@ -57,6 +57,9 @@ namespace Marseille.Data
         /// <summary>Cycles consécutifs sans opérateur du joueur sur place.</summary>
         public int cyclesWithoutOperator;
 
+        /// <summary>Intentions adverses visibles jusqu'à ce cycle inclus (surveillance Intelligence).</summary>
+        public int revealedUntilCycle;
+
         /// <summary>Points d'intérêt, dont les charbons.</summary>
         public List<PoiData> pois;
 
