@@ -1,0 +1,158 @@
+// MARSEILLE — UI/UIManager.Chrome.cs
+// Partie « habillage » de UIManager : Canvas portrait, barre du haut (date, trésorerie, territoire,
+// pression), zone centrale, barre d'onglets, message court. Construit par code au lancement.
+
+using System.Collections.Generic;
+using Marseille.Config;
+using Marseille.Core;
+using Marseille.Data;
+using Marseille.Map;
+using Marseille.Systems;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Marseille.UI
+{
+    public partial class UIManager
+    {
+        private RectTransform contentArea;
+        private RectTransform tabBar;
+        private Text topLeft;
+        private Text topRight;
+        private Text toast;
+        private Image toastBackground;
+        private readonly List<Button> tabButtons = new List<Button>();
+
+        /// <summary>Zone centrale où vivent les écrans et les fenêtres.</summary>
+        public RectTransform ContentArea { get { return contentArea; } }
+
+        /// <summary>Crée Canvas, EventSystem, barres et zone centrale.</summary>
+        /// <param name="config">Configuration.</param>
+        private void BuildChrome(GameConfig config)
+        {
+            EnsureCanvas(config);
+            if (FindObjectOfType<EventSystem>() == null)
+                new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+            UiKit.Panel("Background", transform, config.uiBackground).raycastTarget = false;
+            float top = config.uiBarHeights.x, bottom = config.uiBarHeights.y;
+
+            Image bar = UiFactory.CreateImage("TopBar", transform, config.uiPanel, true);
+            UiFactory.Stretch(bar.rectTransform, new Vector2(0f, 1f), Vector2.one);
+            bar.rectTransform.offsetMin = new Vector2(0f, -top);
+            topLeft = UiFactory.CreateText("Left", bar.transform, UiKit.Font, config.uiFontSizes.y, config.uiText);
+            topLeft.alignment = TextAnchor.MiddleLeft;
+            UiFactory.Stretch(topLeft.rectTransform, new Vector2(0.03f, 0f), new Vector2(0.5f, 1f));
+            topRight = UiFactory.CreateText("Right", bar.transform, UiKit.Font, config.uiFontSizes.z, config.uiText);
+            topRight.alignment = TextAnchor.MiddleRight;
+            UiFactory.Stretch(topRight.rectTransform, new Vector2(0.45f, 0f), new Vector2(0.97f, 1f));
+
+            contentArea = UiFactory.CreateRect("Content", transform);
+            UiFactory.Stretch(contentArea, Vector2.zero, Vector2.one);
+            contentArea.offsetMin = new Vector2(0f, bottom);
+            contentArea.offsetMax = new Vector2(0f, -top);
+
+            Image tabs = UiFactory.CreateImage("TabBar", transform, config.uiPanel, true);
+            UiFactory.Stretch(tabs.rectTransform, Vector2.zero, new Vector2(1f, 0f));
+            tabs.rectTransform.offsetMax = new Vector2(0f, bottom);
+            tabBar = tabs.rectTransform;
+            HorizontalLayoutGroup h = tabs.gameObject.AddComponent<HorizontalLayoutGroup>();
+            h.childControlWidth = h.childControlHeight = h.childForceExpandWidth = h.childForceExpandHeight = true;
+            h.spacing = 4f;
+
+            toastBackground = UiFactory.CreateImage("Toast", transform, new Color(0f, 0f, 0f, 0.85f), false);
+            UiFactory.Stretch(toastBackground.rectTransform, new Vector2(0.05f, 0f), new Vector2(0.95f, 0f));
+            toastBackground.rectTransform.offsetMin = new Vector2(0f, bottom + 20f);
+            toastBackground.rectTransform.offsetMax = new Vector2(0f, bottom + 20f + config.uiButtonHeight * 1.2f);
+            toast = UiFactory.CreateText("Text", toastBackground.transform, UiKit.Font, config.uiFontSizes.z, config.uiText);
+            UiFactory.Stretch(toast.rectTransform, new Vector2(0.03f, 0f), new Vector2(0.97f, 1f));
+            toastBackground.gameObject.SetActive(false);
+            toast = toastBackground.GetComponentInChildren<Text>(true);
+        }
+
+        /// <summary>Ajoute Canvas, CanvasScaler (portrait) et GraphicRaycaster s'ils manquent.</summary>
+        /// <param name="config">Configuration.</param>
+        private void EnsureCanvas(GameConfig config)
+        {
+            if (GetComponent<RectTransform>() == null) gameObject.AddComponent<RectTransform>();
+            Canvas canvas = GetComponent<Canvas>();
+            if (canvas == null) { canvas = gameObject.AddComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; }
+            CanvasScaler scaler = GetComponent<CanvasScaler>();
+            if (scaler == null) scaler = gameObject.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = config.uiReferenceResolution;
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            scaler.matchWidthOrHeight = 0f;
+            if (GetComponent<GraphicRaycaster>() == null) gameObject.AddComponent<GraphicRaycaster>();
+        }
+
+        /// <summary>Crée les écrans par défaut (complétés aux étapes 7 et 8).</summary>
+        /// <param name="config">Configuration.</param>
+        private void CreateDefaultPanels(GameConfig config)
+        {
+            panels.Add(CreatePanel<MapPanel>("MapPanel"));
+            panels.Add(CreatePanel<DashboardPanel>("DashboardPanel"));
+        }
+
+        /// <summary>Crée un écran vide étiré sur la zone centrale.</summary>
+        /// <typeparam name="T">Type d'écran.</typeparam>
+        /// <param name="name">Nom de l'objet.</param>
+        /// <returns>L'écran.</returns>
+        private T CreatePanel<T>(string name) where T : UIPanel
+        {
+            RectTransform rt = UiFactory.CreateRect(name, contentArea);
+            UiFactory.Stretch(rt, Vector2.zero, Vector2.one);
+            return rt.gameObject.AddComponent<T>();
+        }
+
+        /// <summary>Crée un bouton d'onglet par écran.</summary>
+        /// <param name="config">Configuration.</param>
+        private void BuildTabs(GameConfig config)
+        {
+            for (int i = 0; i < panels.Count; i++)
+            {
+                int index = i;
+                Button b = UiKit.MakeButton(tabBar, panels[i].TabLabel, config.uiPanel, () => ShowPanel(index), config);
+                b.GetComponentInChildren<Text>().fontSize = config.uiFontSizes.z;
+                tabButtons.Add(b);
+            }
+        }
+
+        /// <summary>Met en évidence l'onglet courant.</summary>
+        private void RefreshTabs()
+        {
+            GameConfig config = Config;
+            if (config == null) return;
+            for (int i = 0; i < tabButtons.Count; i++)
+            {
+                tabButtons[i].targetGraphic.color = i == current ? config.uiButton : config.uiPanel;
+                tabButtons[i].GetComponentInChildren<Text>().color = i == current ? config.uiAccent : config.uiTextDim;
+            }
+        }
+
+        /// <summary>Barre du haut : date du cycle, trésorerie, territoire, pression, capacité.</summary>
+        public void RefreshTopBar()
+        {
+            GameManager gm = GameManager.Instance;
+            if (topLeft == null || gm == null || !gm.HasGame) return;
+            GameData d = gm.Data;
+            topLeft.text = "Cycle " + d.currentCycle + "  ·  " + SeasonRules.Label(d.currentCycle, gm.Config);
+            topRight.text = d.indicators.treasury.ToString("N0") + " €" + (d.debt > 0f ? " (dette " + d.debt.ToString("N0") + ")" : "")
+                            + "\nTerritoire " + d.indicators.territory.ToString("0.0") + " %  ·  Pression " + d.indicators.pressure.ToString("0")
+                            + "  ·  " + OperatorRules.ActiveCount(d) + "/" + d.capacity;
+        }
+
+        /// <summary>Affiche un message court au-dessus des onglets.</summary>
+        /// <param name="message">Texte.</param>
+        /// <param name="positive">Vert si vrai, rouge sinon.</param>
+        public void ShowToast(string message, bool positive)
+        {
+            GameConfig config = Config;
+            if (toast == null || config == null) return;
+            toast.text = message;
+            toast.color = positive ? config.uiText : config.uiNegative;
+            toastBackground.gameObject.SetActive(true);
+            toastHideAt = Time.unscaledTime + config.uiToastSeconds;
+        }
+    }
+}

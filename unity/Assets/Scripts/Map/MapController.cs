@@ -45,8 +45,20 @@ namespace Marseille.Map
         /// <summary>Opérateur sélectionné, ou -1.</summary>
         public int SelectedOperatorId { get; private set; }
 
-        /// <summary>Navigation de la carte.</summary>
-        public MapViewport Viewport { get { return viewport; } }
+        /// <summary>Navigation de la carte (modifiable par code : l'abonnement au zoom suit).</summary>
+        public MapViewport Viewport
+        {
+            get { return viewport; }
+            set
+            {
+                if (viewport != null) viewport.ZoomChanged -= HandleZoom;
+                viewport = value;
+                if (viewport != null && isActiveAndEnabled) viewport.ZoomChanged += HandleZoom;
+            }
+        }
+
+        /// <summary>Graine de la partie pour laquelle la carte a été construite (0 si jamais construite).</summary>
+        public int BuiltSeed { get; private set; }
 
         /// <summary>Valeurs par défaut.</summary>
         private void Awake()
@@ -91,6 +103,7 @@ namespace Marseille.Map
             EnsureLayers(config);
             Clear();
             positions = MapLayout.Compute(data.quarters, config);
+            BuiltSeed = data.randomSeed;
             Vector2 size = MapLayout.NodeSize(config);
             for (int i = 0; i < data.quarters.Count; i++)
             {
