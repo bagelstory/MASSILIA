@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>CHOUF</title>
+<style>
+:root{--nuit:#0b1020;--nuit2:#141b33;--nuit3:#1e2847;--sodium:#ff9e3d;--mer:#2d7fd6;--ciel:#8fc6ff;--craie:#f2ede3;--gris:#9aa3b8;--rouge:#e5484d;--vert:#3fb27f;--r:14px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--nuit);color:var(--craie);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.entete{position:sticky;top:0;z-index:5;background:var(--nuit);box-shadow:0 6px 10px var(--nuit);padding:10px 14px 8px}
+.entete .l1{display:flex;justify-content:space-between;align-items:baseline}.entete .l1 span{color:var(--gris);font-size:13px}
+.entete .l2{display:flex;gap:12px;margin-top:4px;font-size:14px}.res small{color:var(--gris);font-size:11px}
+.res.e{color:var(--sodium)}.res.s{color:var(--ciel)}.res.a{margin-left:auto}
+.corps{padding:0 14px 150px}
+.onglets{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:var(--nuit2);border-top:1px solid var(--nuit3);padding-bottom:env(safe-area-inset-bottom);z-index:6}
+.onglets button{flex:1;padding:13px 0;font-size:13px;color:var(--gris)}.onglets button.on{color:var(--sodium);font-weight:600}
+.h{font-size:22px;margin:10px 0 6px}.h3{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--gris);margin:20px 0 8px}
+.petit{font-size:13px;color:var(--gris);margin:4px 0}
+.btn{display:block;width:100%;padding:14px;border-radius:var(--r);background:var(--sodium);color:#1a1205;font-weight:700;margin:10px 0;text-align:center}
+.btn.sec{background:var(--nuit3);color:var(--craie);font-weight:500}.btn.opt{background:var(--nuit3);color:var(--craie);text-align:left;font-weight:500}
+.jauge{height:6px;background:var(--nuit3);border-radius:3px;overflow:hidden;margin:4px 0}.jauge i{display:block;height:100%;background:var(--sodium)}
+.jauge.police i{background:var(--mer)}.jauge.tension i{background:var(--rouge)}.jauge.humeur i,.jauge.conf i,.jauge.confiance i{background:var(--vert)}.jauge.comp i{background:var(--ciel)}
+.indic{margin:10px 0}.indic .ligne{display:flex;justify-content:space-between;font-size:14px}
+.ligne-action{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;background:var(--nuit2);border-radius:var(--r);padding:12px 14px;margin:8px 0}
+.ligne-action small{display:block;color:var(--gris);font-size:12px}.ligne-action em{font-style:normal;color:var(--sodium);white-space:nowrap}.ligne-action.off{opacity:.45}
+.clore{margin-top:22px}
+.banniere{width:calc(100% + 28px);margin:0 -14px;height:150px;object-fit:cover;display:block}
+.ph{background:linear-gradient(135deg,#1e2847,#0b1020 60%,#3a2414)}.ph-medaillon{background:radial-gradient(circle at 50% 40%,#2c3760,#141b33)}
+.ph-scene{background:linear-gradient(160deg,#2a3358,#0b1020 70%,#4a2a10)}
+.plan{width:100%;display:block;border-radius:var(--r)}.plan .mer{fill:#0f2a4d}.plan .terre{fill:#1a2138}
+.plan .zone{stroke:#0b1020;stroke-width:2;fill:#232c4a;cursor:pointer}.plan .zone.c1,.plan .zone.c2{fill:#2f3c66}.plan .zone.c3,.plan .zone.c4{fill:#5b4a2e}
+.plan .zone.chez{fill:#8a5a22}.plan .zone.ici{stroke:var(--sodium);stroke-width:3}
+.plan .lbl{fill:var(--craie);font-size:9.5px;text-anchor:middle;pointer-events:none;font-weight:600}.plan .mer-lbl{fill:#5f86b8;font-style:italic;text-anchor:start}
+.legende .pt{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle}.pt.c3{background:#8a5a22}.pt.c1{background:#2f3c66}.pt.c0{background:#232c4a}
+.retour{color:var(--sodium);padding:8px 0;font-size:15px}
+.pnj{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--nuit2);border-radius:var(--r);padding:10px 12px;margin:6px 0}
+.pnj span{flex:1}.pnj small{display:block;color:var(--gris);font-size:12px}
+.med{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none}.med.grand{width:96px;height:96px;margin:6px auto;display:block}
+.fiche{text-align:center}.fiche p{text-align:left}.mem{padding-left:18px}
+.journal{list-style:none;padding:0}.journal li{padding:8px 0;border-bottom:1px solid var(--nuit3);font-size:14px}.journal small{color:var(--gris)}.journal em{color:var(--gris)}
+.journal .choix{color:var(--craie)}.journal .chiffre{color:var(--gris);font-size:13px}.journal .chapitre{color:var(--sodium)}
+.voile{position:fixed;inset:0;background:rgba(5,8,18,.78);display:flex;align-items:flex-end;justify-content:center;z-index:10}
+.sheet{width:100%;max-width:480px;max-height:92vh;overflow:auto;background:var(--nuit2);border-radius:20px 20px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom))}
+.sheet h2{margin:10px 0 6px}.scene{width:100%;height:170px;border-radius:12px;object-fit:cover;display:block}
+.toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:var(--craie);color:var(--nuit);padding:10px 16px;border-radius:12px;max-width:92%;z-index:20;font-size:14px}
+.accueil{padding:40px 20px}.titre{font-size:56px;letter-spacing:.2em;margin:30px 0 0;color:var(--sodium)}.sous{color:var(--gris);margin-top:0}
+.avert{font-size:13px;color:var(--gris);border-left:3px solid var(--sodium);padding-left:10px}
+.champ{display:block;margin:18px 0 0;font-size:13px;color:var(--gris)}.champ input{display:block;width:100%;margin-top:6px;padding:13px;border-radius:12px;border:1px solid var(--nuit3);background:var(--nuit2);color:var(--craie);font:inherit}
+.carte-bloc{background:var(--nuit2);border-radius:var(--r);padding:14px;margin:18px 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/*__DATA__*/
+/*__ASSETS__*/
+/*__MODS__*/
+if (!window.__NOBOOT__) boot();
+</script>
+</body>
+</html>
