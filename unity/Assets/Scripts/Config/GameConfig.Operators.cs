@@ -107,6 +107,8 @@ namespace Marseille.Config
         [Min(0f)] public float experiencePerCycle = 0.08f;
         [Tooltip("Hausse de l'entretien par opérateur au-delà de 6 (part).")]
         [Min(0f)] public float progressiveUpkeep = 0.04f;
+        [Tooltip("Nombre d'opérateurs à partir duquel la hausse s'applique.")]
+        [Min(1)] public int progressiveUpkeepFrom = 6;
         [Tooltip("Fatigue multipliée par ce facteur quand la stabilité est basse.")]
         [Min(1f)] public float lowStabilityFatigueFactor = 1.3f;
         [Tooltip("Stabilité gagnée par recrutement.")]

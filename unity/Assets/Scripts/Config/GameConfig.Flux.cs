@@ -48,7 +48,7 @@ namespace Marseille.Config
         [Tooltip("Instabilité gagnée par cycle actif.")]
         [Min(0f)] public float fluxInstabilityPerCycle = 2f;
         [Tooltip("Probabilité de rupture = instabilité / ce diviseur.")]
-        [Min(1f)] public float fluxRuptureDivisor = 250f;
+        [Min(1f)] public float fluxRuptureDivisor = 600f;
         [Tooltip("Fiabilité perdue après un cycle raté.")]
         [Min(0f)] public float fluxFailedReliabilityLoss = 5f;
         [Tooltip("Sous cette fiabilité, le partenaire disparaît et le flux s'arrête.")]

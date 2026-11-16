@@ -49,7 +49,7 @@ namespace Marseille.Systems
             return q.maintenanceCost * (1f + q.investmentLevel * config.investMaintenanceGain) * (1f - r);
         }
 
-        /// <summary>Entretien total des opérateurs, avec majoration progressive par opérateur au-delà du premier.</summary>
+        /// <summary>Entretien total des opérateurs, avec majoration progressive par opérateur au-delà de progressiveUpkeepFrom.</summary>
         /// <param name="data">Partie.</param>
         /// <param name="config">Configuration.</param>
         /// <returns>Entretien en €.</returns>
@@ -63,7 +63,7 @@ namespace Marseille.Systems
                 total += data.operators[i].upkeepCost;
                 count++;
             }
-            return total * (1f + System.Math.Max(0, count - 1) * config.progressiveUpkeep);
+            return total * (1f + System.Math.Max(0, count - config.progressiveUpkeepFrom) * config.progressiveUpkeep);
         }
 
         /// <summary>Quartiers où se trouve un opérateur Pression actif (ni en trajet, ni épuisé, ni perdu).</summary>

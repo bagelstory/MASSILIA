@@ -84,13 +84,13 @@ namespace Marseille.Config
         [Tooltip("Probabilité qu'une faction voisine soit présente sur un bord de zone.")]
         [Range(0f, 1f)] public float borderPresenceChance = 0.5f;
         [Tooltip("Rentabilité d'un charbon = revenu de zone × tirage dans cet intervalle.")]
-        public Vector2 charbonIncomeRatio = new Vector2(0.35f, 1f);
+        public Vector2 charbonIncomeRatio = new Vector2(0.5f, 1f);
         [Tooltip("Seuils de rentabilité (ratio) pour le risque 2 et le risque 3.")]
         public Vector2 charbonRiskThresholds = new Vector2(0.55f, 0.8f);
         [Tooltip("Coût de maintien d'un quartier = potentiel × ce facteur + base.")]
         [Min(0f)] public float maintenanceRatio = 0.15f;
         [Tooltip("Coût de maintien minimal d'un quartier (€).")]
-        [Min(0f)] public float maintenanceBase = 40f;
+        [Min(0f)] public float maintenanceBase = 120f;
         [Tooltip("Noms fictifs des charbons.")]
         public List<string> charbonNames = new List<string>
         {

@@ -32,7 +32,7 @@ namespace Marseille.Config
     {
         [Header("Fin de partie")]
         [Tooltip("Territoire (%) qui donne la victoire, trésorerie positive.")]
-        [Range(0f, 100f)] public float victoryTerritory = 70f;
+        [Range(0f, 100f)] public float victoryTerritory = 60f;
         [Tooltip("Nombre maximal de cycles (fin par le temps). 260 = 5 ans.")]
         [Min(1)] public int maxCycles = 260;
         [Tooltip("Note finale : seuils A, B, C, D (score).")]
@@ -40,7 +40,7 @@ namespace Marseille.Config
         [Tooltip("Score : bonus de victoire, malus de défaite.")]
         public Vector2 scoreEndBonus = new Vector2(20f, -25f);
         [Tooltip("Score : € par point de trésorerie, plafond ; € par point de dette ; points par faction disparue ; par opérateur ; pression divisée par.")]
-        public float scoreMoneyDivisor = 2000f, scoreMoneyMax = 30f, scorePerFactionGone = 6f, scorePerOperator = 2f, scorePressureDivisor = 5f;
+        public float scoreMoneyDivisor = 4000f, scoreMoneyMax = 30f, scorePerFactionGone = 6f, scorePerOperator = 2f, scorePressureDivisor = 5f;
 
         [Header("Ouverture des zones")]
         [Tooltip("Quartiers à tenir (contrôle ≥ seuil) : nombre de base, + par zone déjà ouverte, seuil.")]

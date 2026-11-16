@@ -37,9 +37,9 @@ namespace Marseille.Config
         [Tooltip("Contrôle requis pour reprendre le charbon d'une faction.")]
         [Range(0f, 100f)] public float charbonTakeControl = 50f;
         [Tooltip("Coût d'ouverture = rentabilité × ce facteur.")]
-        [Min(0f)] public float charbonOpenCostRatio = 1.2f;
+        [Min(0f)] public float charbonOpenCostRatio = 3f;
         [Tooltip("Coût de reprise = rentabilité × ce facteur.")]
-        [Min(0f)] public float charbonTakeCostRatio = 2f;
+        [Min(0f)] public float charbonTakeCostRatio = 4f;
         [Tooltip("Pression et exposition ajoutées en reprenant un charbon.")]
         public Vector2 charbonTakeHeat = new Vector2(3f, 2f);
         [Tooltip("Sous ce contrôle, les charbons du joueur sont perdus.")]
