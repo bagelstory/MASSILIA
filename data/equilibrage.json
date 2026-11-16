@@ -209,5 +209,13 @@
  "engagements": {
   "cout_tenir_energie": 3,
   "proba_rappel": 1.0
+ },
+ "carte": {
+  "couleur_joueur": "#6ccf4f",
+  "couleur_neutre": "#8d9096",
+  "rotation_deg": -28,
+  "ecrasement": 0.56,
+  "hauteur": 0.85,
+  "resolution": 3
  }
 }

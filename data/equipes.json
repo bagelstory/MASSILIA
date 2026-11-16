@@ -18,7 +18,9 @@
     "prenom": "Kenzo",
     "age_2021": 34,
     "note": "pilote de loin, ne vient plus dans les quartiers"
-   }
+   },
+   "couleur": "#c8352e",
+   "embleme": "tour"
   },
   {
    "id": "gabians",
@@ -36,7 +38,9 @@
     "prenom": "Jordan",
     "age_2021": 27,
     "note": "tient ses hommes par la peur"
-   }
+   },
+   "couleur": "#3d7fd9",
+   "embleme": "oiseau"
   },
   {
    "id": "ruisseau",
@@ -54,7 +58,9 @@
     "prenom": "Fabrice",
     "age_2021": 45,
     "note": "l'ancien, connu de tout le quartier, veut durer"
-   }
+   },
+   "couleur": "#d08b2c",
+   "embleme": "vague"
   },
   {
    "id": "tramontane",
@@ -71,7 +77,9 @@
     "prenom": "Océane",
     "age_2021": 31,
     "note": "clientèle de nuit, aime les arrangements"
-   }
+   },
+   "couleur": "#8a5cd6",
+   "embleme": "vent"
   },
   {
    "id": "calanquais",
@@ -88,7 +96,9 @@
     "prenom": "Lorenzo",
     "age_2021": 22,
     "note": "jeune, pressé, sans règles"
-   }
+   },
+   "couleur": "#5fc4c4",
+   "embleme": "falaise"
   }
  ]
 }

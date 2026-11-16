@@ -34,17 +34,24 @@ une image, découpée ensuite par `tools/slice.py` (repris de `v62_slice.py`).
 
 ## BLOC STYLE (à coller en premier, toujours)
 
+Direction artistique validée le 16 novembre : **vue stratégique de jeu de gestion de territoires**
+(références envoyées : ville grise en relief, territoires teintés par équipe, badges ronds). Les images
+doivent aller avec la carte du jeu : ville désaturée, gris et béton, avec de rares couleurs fortes.
+
 ```
-Premium 2026 mobile game illustration, 2D, modern semi-realistic cartoon style, top-grossing mobile game
-polish, same family as a premium narrative management game. Clean confident vector-like shapes with soft
-painterly shading, dark navy outlines (about 2 px at 1024 px), soft ambient occlusion, subtle gradients.
-Mood: Mediterranean noir, Marseille, realistic and humane, never glamorous, never caricatural.
-Lighting: warm sodium-orange streetlight key light, cool blue moonlight or sea light as fill, small
-chalk-white highlights. Palette: night navy #0b1020 and #141b33, deep blue #1e2847, sodium orange #ff9e3d,
-Mediterranean blue #2d7fd6, sky blue #8fc6ff, chalk white #f2ede3, warm ochre and terracotta for walls and
-roofs. No real brands, no logos, no club crests, no sponsors, no watermark, no readable text, no numbers,
-no license plates. No weapons, no drugs, no blood. Crisp edges, no blur, no photo, no 3D render look.
+Stylized 3D-rendered look for a premium crime-management strategy game, Mediterranean noir set in
+Marseille. Desaturated, almost monochrome palette: concrete greys, charcoal, off-white stone, muted ochre
+roofs, dark slate-blue sea, with only a few strong accent colors (a red, a blue, a warm sodium-orange
+light). Clean low-to-mid poly shapes with soft global illumination, gentle ambient occlusion, slight tilt-
+shift depth of field on landscapes, cinematic dusk or night lighting with sodium streetlights and cold blue
+moonlight. Grounded and realistic proportions, humane and sober, never glamorous, never caricatural.
+No real brands, no logos, no club crests, no sponsors, no watermark, no readable text, no numbers, no
+license plates. No weapons, no drugs, no blood.
 ```
+
+Couleurs des équipes (à citer quand une image montre un territoire tenu) : La Compagnie rouge #c8352e,
+Les Gabians bleu #3d7fd9, Le Ruisseau ocre #d08b2c, Tramontane violet #8a5cd6, Les Calanquais turquoise
+#5fc4c4, le joueur vert #6ccf4f.
 
 ## Clés des fichiers (pour le jeu)
 
@@ -78,7 +85,8 @@ no license plates. No weapons, no drugs, no blood. Crisp edges, no blur, no phot
 Prompt commun à ajouter après le BLOC STYLE :
 
 ```
-Sprite sheet of 6 wide landscape scenes in a strict 3 columns x 2 rows grid, every cell the same size
+Sprite sheet of 6 wide landscape scenes, seen from a raised three-quarter aerial angle like a strategy game
+camera, in a strict 3 columns x 2 rows grid, every cell the same size
 (16:9), thin dark navy gutters between cells, each scene filling its cell edge to edge. Top row: three
 places by day (late afternoon Mediterranean light). Bottom row: the SAME three places, same framing,
 same buildings, at night (sodium streetlights, lit windows, deep blue sky). The bottom 35% of each scene
@@ -392,8 +400,9 @@ Prompt commun :
 ```
 Icon sheet of 24 icons in a strict 6 columns x 4 rows grid, every cell the same size, perfectly flat pure
 magenta #FF00FF background, each icon centered, same visual weight, nothing touching cell borders.
-Style: bold simple game icons, dark navy outline, soft shading, palette sodium orange, Mediterranean blue,
-chalk white, small touches of red and green. No readable text, no letters, no numbers, no logos, no weapons,
+Style: round strategy-game badges like map markers: a dark charcoal disc (#1b1c1f) with a thick colored ring
+and a simple bold white glyph in the middle, subtle bevel and drop shadow, readable at 32 px. Ring color per
+icon: gold #e8b64c by default, blue #3d7fd9 for police, red #e5484d for danger, green #6ccf4f for the player. No readable text, no letters, no numbers, no logos, no weapons,
 no drugs.
 ```
 
@@ -473,4 +482,5 @@ there. No readable text. »
   ajoutés par le jeu sur les bannières.
 - Les cadres ronds des médaillons, les jauges, les boutons, les textes.
 - Le choix entre version normale et « abîmée » du protagoniste.
-- La carte de Marseille reste dessinée par le jeu (zones cliquables) ; pas besoin d'image de carte.
+- La vue de la ville en relief (immeubles, territoires teintés, badges) est dessinée par le jeu, à partir
+  de `data/zones.json` : pas besoin d'image de carte. Les icônes I01–I03 remplaceront les badges dessinés.

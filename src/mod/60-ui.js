@@ -46,6 +46,8 @@ function render() {
   app.innerHTML = vEntete() + '<main class="corps">' + corps + "</main>" + vOnglets() +
     (G.carte ? vCarteEvenement() : "") + (UI.bilan && !G.carte ? vBilan() : "") + (G.absence && !G.carte ? vAbsence() : "") +
     (UI.toast ? '<div class="toast">' + esc(UI.toast) + "</div>" : "");
+  var pl = $("#plan");
+  if (pl) planMonter(pl);
 }
 
 /* ---------------- Accueil et création ---------------- */
@@ -92,33 +94,31 @@ function vCloreBouton() {
 
 /* ---------------- Carte de Marseille ---------------- */
 
-/* Schéma stylisé (pas une carte exacte) : la mer à l'ouest et au sud. */
-var POLY = {
-  littoral_nord: "30,40 105,30 115,100 45,115", nord_ouest: "105,30 185,22 195,100 115,100",
-  nord_central: "185,22 255,35 250,112 195,100", nord_est: "255,35 335,55 330,140 250,112",
-  centre_nord: "115,100 195,100 250,112 200,160 125,165", centre_hist: "70,120 115,100 125,165 130,200 80,205 60,165",
-  plaine: "130,200 125,165 200,160 205,210 150,225", est: "200,160 250,112 330,140 325,270 245,255 205,210",
-  prado: "80,205 130,200 150,225 205,210 245,255 215,280 120,300 90,260", sud: "90,260 120,300 215,280 245,255 325,270 310,360 200,385 110,360 70,310"
-};
-var COURT = { centre_hist: "Centre", centre_nord: "Centre nord", plaine: "La Plaine", prado: "Prado", littoral_nord: "Littoral nord" };
-function centre(pts) {
-  var p = pts.split(" ").map(function (x) { return x.split(",").map(Number); }), sx = 0, sy = 0;
-  p.forEach(function (q) { sx += q[0]; sy += q[1]; });
-  return [sx / p.length, sy / p.length];
-}
+/* La carte est dessinée par 55-plan.js dans <canvas id="plan">. Ici : le cadre, la légende et le panneau
+   d'information de la zone touchée (façon barre de territoire des jeux de gestion de ville). */
+function nomEquipe(id) { return id === "joueur" ? "toi" : id && IDX.equipes[id] ? IDX.equipes[id].nom : "personne"; }
+function couleurEquipe(id) { return id === "joueur" ? B.carte.couleur_joueur : id && IDX.equipes[id] ? IDX.equipes[id].couleur : B.carte.couleur_neutre; }
 function vCarte() {
-  var s = '<svg class="plan" viewBox="0 0 360 400"><rect width="360" height="400" class="mer"/>' +
-    '<path class="terre" d="M30,40 L105,30 185,22 255,35 335,55 360,60 360,400 300,400 310,360 200,385 110,360 70,310 90,260 80,205 60,165 70,120 45,115 Z"/>';
-  D.zones.liste.forEach(function (z) {
-    var g = G.zones[z.id], c = centre(POLY[z.id]);
-    var cls = "zone c" + g.connu + (z.id === G.protagoniste.zone_origine ? " chez" : "") + (z.id === G.zone ? " ici" : "");
-    s += '<g data-zone="' + z.id + '"><polygon class="' + cls + '" points="' + POLY[z.id] + '"/>' +
-      '<text x="' + c[0] + '" y="' + c[1] + '" class="lbl">' + esc(COURT[z.id] || z.nom) + "</text></g>";
-  });
-  s += '<text x="22" y="250" class="lbl mer-lbl">Méditerranée</text></svg>';
-  return '<h2 class="h">Marseille</h2>' + s +
-    '<p class="petit legende"><span class="pt c3"></span> chez toi · <span class="pt c1"></span> connu · <span class="pt c0"></span> inconnu — touche une zone</p>' +
-    vCloreBouton();
+  var parts = partsVille();
+  var barre = '<div class="parts" title="Qui tient la ville">' + parts.map(function (x) {
+    return '<i style="width:' + (x.p * 100).toFixed(1) + '%;background:' + couleurEquipe(x.id === "aucun" ? null : x.id) + '"></i>';
+  }).join("") + "</div>";
+  var leg = parts.map(function (x) {
+    return '<span><b style="background:' + couleurEquipe(x.id === "aucun" ? null : x.id) + '"></b>' + esc(x.id === "aucun" ? "Personne" : nomEquipe(x.id)) + " " + Math.round(x.p * 100) + "%</span>";
+  }).join("");
+  var h = '<div class="vue-ville"><canvas id="plan"></canvas>' +
+    '<div class="hud-haut"><div class="hud-titre">Marseille · qui tient la ville</div>' + barre + '<div class="hud-leg">' + leg + "</div></div>" +
+    '<div class="hud-zoom"><button data-a="zplus">+</button><button data-a="zmoins">−</button></div>';
+  if (UI.sel) {
+    var z = IDX.zones[UI.sel], g = G.zones[z.id];
+    h += '<div class="hud-bas"><div class="hb-l1"><b>' + esc(z.nom) + "</b><span>" + esc(z.arrondissements.join(", ")) + "</span></div>";
+    if (g.connu === 0) h += '<p class="hb-txt">Tu n\'y as jamais mis les pieds.</p>';
+    else h += '<div class="hb-ctrl"><b style="background:' + couleurZone(z.id) + '"></b>Tenu par ' + esc(nomEquipe(g.controle)) + "</div>" +
+      '<div class="hb-stats"><span>Tension <b>' + Math.round(g.tension) + "</b></span><span>Police <b>" + Math.round(g.police) + "</b></span><span>Humeur <b>" + Math.round(g.humeur) + "</b></span></div>" +
+      '<p class="hb-txt">' + esc(z.atout) + "</p>";
+    h += '<div class="hb-btns"><button class="btn" data-a="ouvrirzone">' + (z.id === G.protagoniste.zone_origine ? "Ton quartier" : "Voir la zone") + '</button><button class="btn sec" data-a="fermersel">Fermer</button></div></div>';
+  } else h += '<div class="hud-bas petit-hb">Glisse pour te déplacer, pince pour zoomer, touche un quartier.</div>';
+  return h + "</div>" + vCloreBouton();
 }
 /** Fiche d'une zone vue de la carte. */
 function vZoneDistante() {
@@ -250,11 +250,10 @@ function vFin() {
 /* ---------------- Événements d'interface ---------------- */
 
 function onClick(ev) {
-  var t = ev.target.closest("[data-a],[data-tab],[data-zone],[data-mission],[data-opt],[data-pnj],[data-eng]");
+  var t = ev.target.closest("[data-a],[data-tab],[data-mission],[data-opt],[data-pnj],[data-eng]");
   if (!t) return;
   var d = t.dataset;
   if (d.tab) return go(d.tab);
-  if (d.zone) { UI.zoneVue = d.zone; return setSub("zone"); }
   if (d.pnj) return setSub("pnj:" + d.pnj);
   if (d.opt != null) { choisir(+d.opt); return render(); }
   if (d.eng != null) { if (!tenirEngagement(+d.eng)) toast("Pas assez d'énergie."); return render(); }
@@ -270,6 +269,10 @@ function onClick(ev) {
     case "okbilan": UI.bilan = null; return render();
     case "okabsence": G.absence = null; save(); return render();
     case "retour": SUB = null; return render();
+    case "ouvrirzone": if (UI.sel === G.protagoniste.zone_origine) return go("quartier"); UI.zoneVue = UI.sel; return setSub("zone");
+    case "fermersel": UI.sel = null; return render();
+    case "zplus": zoomer(1.25); return;
+    case "zmoins": zoomer(0.8); return;
     case "effacer":
       if (!UI.confirmeEffacer) { UI.confirmeEffacer = true; toast("Touche encore une fois pour effacer cette vie."); setTimeout(function () { UI.confirmeEffacer = false; }, 4000); return; }
       UI.confirmeEffacer = false; eraseSave(); UI.creation = null; return render();

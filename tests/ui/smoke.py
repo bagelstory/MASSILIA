@@ -62,21 +62,37 @@ with sync_playwright() as p:
         h = page.evaluate("document.body.scrollWidth")
         assert h <= 362, f"l'onglet {t} déborde en largeur ({h}px)"
     page.click("[data-tab=carte]")
-    page.locator("[data-zone=sud] polygon").click()
-    shot(page, "11-zone-inconnue")
-    page.click("[data-a=retour]")
+    page.wait_for_timeout(300)
+    shot(page, "11-vue-ville")
+
+    def toucher(zone):
+        """Touche le badge d'une zone sur la vue de la ville (comme un doigt)."""
+        h = page.evaluate(f"(PLAN.hits||[]).filter(h=>h.z==='{zone}')[0]")
+        assert h, f"pas de badge pour {zone}"
+        box = page.locator("#plan").bounding_box()
+        page.mouse.click(box["x"] + h["x"], box["y"] + h["y"])
+        page.wait_for_timeout(150)
+
     zo = page.evaluate("G.protagoniste.zone_origine")
-    page.locator(f"[data-zone={zo}] polygon").click()
+    toucher(zo)
+    assert page.locator(".hud-bas .hb-l1 b").count(), "le panneau de zone ne s'ouvre pas"
     shot(page, "12-zone-chez-soi")
+    toucher("sud")
+    shot(page, "13-zone-inconnue")
+    page.click("[data-a=zplus]")
+    page.mouse.move(180, 400); page.mouse.down(); page.mouse.move(80, 300, steps=5); page.mouse.up()
+    shot(page, "14-zoom-glisse")
+    page.click("[data-a=ouvrirzone]")
+    shot(page, "15-fiche-zone")
     page.click("[data-tab=gens]")
     page.locator("[data-pnj=mere]").click()
-    shot(page, "13-fiche-mere")
+    shot(page, "16-fiche-mere")
     # sauvegarde : recharger la page et continuer
     page.reload()
     page.click("[data-a=continuer]")
     cartes(page)
     assert page.locator(".entete").count() == 1, "la sauvegarde ne se recharge pas"
-    shot(page, "14-reprise")
+    shot(page, "17-reprise")
     b.close()
 
 if errs:

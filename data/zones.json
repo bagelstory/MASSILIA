@@ -47,7 +47,41 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "centre",
+    "pas": 6,
+    "hmin": 4,
+    "hmax": 10
+   },
+   "atout": "Passage, touristes, commerces : beaucoup d'argent qui circule, beaucoup de police.",
+   "plan": [
+    [
+     70,
+     120
+    ],
+    [
+     115,
+     100
+    ],
+    [
+     125,
+     165
+    ],
+    [
+     130,
+     200
+    ],
+    [
+     80,
+     205
+    ],
+    [
+     60,
+     165
+    ]
+   ],
+   "court": "Centre"
   },
   {
    "id": "centre_nord",
@@ -83,7 +117,37 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "centre",
+    "pas": 6,
+    "hmin": 3,
+    "hmax": 8
+   },
+   "atout": "Quartier populaire et serré : la main-d'œuvre est là, la tension aussi.",
+   "plan": [
+    [
+     115,
+     100
+    ],
+    [
+     195,
+     100
+    ],
+    [
+     250,
+     112
+    ],
+    [
+     200,
+     160
+    ],
+    [
+     125,
+     165
+    ]
+   ],
+   "court": "Centre nord"
   },
   {
    "id": "plaine",
@@ -120,7 +184,37 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "centre",
+    "pas": 6,
+    "hmin": 3,
+    "hmax": 7
+   },
+   "atout": "La nuit, les bars, les étudiants : une clientèle qui paie bien et qui parle.",
+   "plan": [
+    [
+     130,
+     200
+    ],
+    [
+     125,
+     165
+    ],
+    [
+     200,
+     160
+    ],
+    [
+     205,
+     210
+    ],
+    [
+     150,
+     225
+    ]
+   ],
+   "court": "La Plaine"
   },
   {
    "id": "prado",
@@ -167,7 +261,49 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "aise",
+    "pas": 8,
+    "hmin": 3,
+    "hmax": 9
+   },
+   "atout": "Quartiers aisés : clientèle discrète, mais chaque erreur fait la une.",
+   "plan": [
+    [
+     80,
+     205
+    ],
+    [
+     130,
+     200
+    ],
+    [
+     150,
+     225
+    ],
+    [
+     205,
+     210
+    ],
+    [
+     245,
+     255
+    ],
+    [
+     215,
+     280
+    ],
+    [
+     120,
+     300
+    ],
+    [
+     90,
+     260
+    ]
+   ],
+   "court": "Prado"
   },
   {
    "id": "nord_est",
@@ -207,7 +343,33 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "tours",
+    "pas": 11,
+    "hmin": 6,
+    "hmax": 22
+   },
+   "atout": "Grands ensembles et collines : des plans connus de toute la ville.",
+   "plan": [
+    [
+     255,
+     35
+    ],
+    [
+     335,
+     55
+    ],
+    [
+     330,
+     140
+    ],
+    [
+     250,
+     112
+    ]
+   ],
+   "court": "Nord-est"
   },
   {
    "id": "nord_central",
@@ -245,7 +407,33 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "mixte",
+    "pas": 9,
+    "hmin": 2,
+    "hmax": 14
+   },
+   "atout": "Maisons et barres mêlées : les familles se connaissent toutes.",
+   "plan": [
+    [
+     185,
+     22
+    ],
+    [
+     255,
+     35
+    ],
+    [
+     250,
+     112
+    ],
+    [
+     195,
+     100
+    ]
+   ],
+   "court": "Nord central"
   },
   {
    "id": "nord_ouest",
@@ -286,7 +474,33 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "tours",
+    "pas": 11,
+    "hmin": 7,
+    "hmax": 24
+   },
+   "atout": "Les tours au-dessus du port : la zone la plus disputée de Marseille.",
+   "plan": [
+    [
+     105,
+     30
+    ],
+    [
+     185,
+     22
+    ],
+    [
+     195,
+     100
+    ],
+    [
+     115,
+     100
+    ]
+   ],
+   "court": "Nord-ouest"
   },
   {
    "id": "littoral_nord",
@@ -322,7 +536,33 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "port",
+    "pas": 9,
+    "hmin": 2,
+    "hmax": 6
+   },
+   "atout": "Le port et le village : la mer, les quais, et ce qui y arrive.",
+   "plan": [
+    [
+     30,
+     40
+    ],
+    [
+     105,
+     30
+    ],
+    [
+     115,
+     100
+    ],
+    [
+     45,
+     115
+    ]
+   ],
+   "court": "Littoral nord"
   },
   {
    "id": "est",
@@ -362,7 +602,41 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "maisons",
+    "pas": 9,
+    "hmin": 2,
+    "hmax": 5
+   },
+   "atout": "Noyaux villageois et centres commerciaux : calme apparent, argent discret.",
+   "plan": [
+    [
+     200,
+     160
+    ],
+    [
+     250,
+     112
+    ],
+    [
+     330,
+     140
+    ],
+    [
+     325,
+     270
+    ],
+    [
+     245,
+     255
+    ],
+    [
+     205,
+     210
+    ]
+   ],
+   "court": "Est"
   },
   {
    "id": "sud",
@@ -405,7 +679,192 @@
     "mères de famille",
     "jeunes",
     "anciens"
-   ]
+   ],
+   "bati": {
+    "type": "maisons",
+    "pas": 10,
+    "hmin": 2,
+    "hmax": 6
+   },
+   "atout": "Plages, parcs et calanques ; au pied des collines, les Baumettes.",
+   "plan": [
+    [
+     90,
+     260
+    ],
+    [
+     120,
+     300
+    ],
+    [
+     215,
+     280
+    ],
+    [
+     245,
+     255
+    ],
+    [
+     325,
+     270
+    ],
+    [
+     310,
+     360
+    ],
+    [
+     200,
+     385
+    ],
+    [
+     110,
+     360
+    ],
+    [
+     70,
+     310
+    ]
+   ],
+   "court": "Sud"
   }
- ]
+ ],
+ "repere": {
+  "_doc": "Plan schématique 360×400 (mer à l'ouest et au sud).",
+  "terre": [
+   [
+    30,
+    40
+   ],
+   [
+    105,
+    30
+   ],
+   [
+    185,
+    22
+   ],
+   [
+    255,
+    35
+   ],
+   [
+    335,
+    55
+   ],
+   [
+    360,
+    60
+   ],
+   [
+    360,
+    400
+   ],
+   [
+    300,
+    400
+   ],
+   [
+    310,
+    360
+   ],
+   [
+    200,
+    385
+   ],
+   [
+    110,
+    360
+   ],
+   [
+    70,
+    310
+   ],
+   [
+    90,
+    260
+   ],
+   [
+    80,
+    205
+   ],
+   [
+    60,
+    165
+   ],
+   [
+    70,
+    120
+   ],
+   [
+    45,
+    115
+   ]
+  ],
+  "vieux_port": [
+   [
+    60,
+    150
+   ],
+   [
+    82,
+    148
+   ],
+   [
+    92,
+    170
+   ],
+   [
+    62,
+    178
+   ]
+  ],
+  "notre_dame": [
+   108,
+   232
+  ],
+  "velodrome": [
+   178,
+   262
+  ],
+  "grues": [
+   [
+    48,
+    70
+   ],
+   [
+    62,
+    88
+   ],
+   [
+    85,
+    96
+   ],
+   [
+    100,
+    62
+   ]
+  ],
+  "calanques": [
+   [
+    130,
+    372
+   ],
+   [
+    175,
+    380
+   ],
+   [
+    225,
+    378
+   ],
+   [
+    275,
+    366
+   ],
+   [
+    300,
+    350
+   ]
+  ]
+ }
 }
