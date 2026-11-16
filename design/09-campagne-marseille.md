@@ -1,5 +1,7 @@
 # CHOUF : la campagne, cinq ans à Marseille
 
+> **Campagne remplacée par « Cinq ans de dette », dans `11-bible-ombre.md` §2.** Restent valables ici : le tempo, la victoire à 60 % et les rangs du réseau.
+
 *17 novembre 2026. Remplace l'arc court de la story 007. Écrit en mots simples.*
 
 ## Comment ça marche, en clair

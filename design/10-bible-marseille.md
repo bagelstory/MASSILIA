@@ -1,5 +1,7 @@
 # CHOUF : la bible de Marseille
 
+> **Remplacé pour le ton et la campagne par `11-bible-ombre.md` (17 nov.).** Restent valables ici : les règles du §0, les zones (§1), les rangs (§3) et la simulation (§4).
+
 *17 novembre 2026. Réunion de la narration, du scénario, du consultant marseillais, du game design et des systèmes. Ce sont des idées : rien n'est encore codé. Les chiffres sont des points de départ, à vérifier en simulation sur 260 semaines.*
 
 ## 0. Les règles qui ne bougent pas
