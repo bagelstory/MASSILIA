@@ -35,7 +35,10 @@ namespace Marseille.UI
             EnsureCanvas(config);
             if (FindObjectOfType<EventSystem>() == null)
                 new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
-            UiKit.Panel("Background", transform, config.uiBackground).raycastTarget = false;
+            Image background = UiKit.Panel("Background", transform, config.uiBackground);
+            background.raycastTarget = false;
+            Sprite splash = ArtLibrary.Screen("splash");
+            if (splash != null) { background.sprite = splash; background.color = new Color(0.28f, 0.28f, 0.3f); background.preserveAspect = false; }
             float top = config.uiBarHeights.x, bottom = config.uiBarHeights.y;
 
             Image bar = UiFactory.CreateImage("TopBar", transform, config.uiPanel, true);

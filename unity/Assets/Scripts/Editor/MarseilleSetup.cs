@@ -66,6 +66,8 @@ namespace Marseille.EditorTools
             PlayerSettings.allowedAutorotateToLandscapeLeft = false;
             PlayerSettings.allowedAutorotateToLandscapeRight = false;
             PlayerSettings.productName = "CHOUF";
+            Texture2D icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Art/icon/icon_app.png");
+            if (icon != null) PlayerSettings.SetIconsForTargetGroup(BuildTargetGroup.Unknown, new[] { icon });
             QualitySettings.vSyncCount = 0;
             Debug.Log("Projet réglé en portrait.");
         }

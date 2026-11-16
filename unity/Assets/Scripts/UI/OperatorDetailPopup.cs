@@ -3,6 +3,7 @@
 // efficacité sur chaque tâche (spécialité, fatigue), raccourcis Affecter et Repos.
 
 using System.Text;
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
 using Marseille.Data;
@@ -46,6 +47,7 @@ namespace Marseille.UI
             Open();
             ClearContent();
             OperatorData op = data.operators[oi];
+            UiKit.Picture(Body, ArtLibrary.Portrait(op) ?? ArtLibrary.TypeIcon(op.type), c.uiButtonHeight * 3.2f);
             UiKit.Label(Body, UiText.OperatorName(op), c.uiFontSizes.x, c.uiText);
             Paragraph(Profile(op, data, c), 5, c.uiText);
             UiKit.Label(Body, "Efficacité par tâche", c.uiFontSizes.y, c.uiText);

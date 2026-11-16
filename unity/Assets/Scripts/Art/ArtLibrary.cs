@@ -97,6 +97,57 @@ namespace Marseille.Art
             return Get("shapes/" + name);
         }
 
+        /// <summary>Portrait d'un opérateur : son surnom s'il en a un (portrait_zepek), sinon un portrait de
+        /// recrue de son type, choisi par son identifiant (portrait_force_1 ou _2). Null si absent.</summary>
+        /// <param name="op">Opérateur.</param>
+        /// <returns>Le sprite, ou null.</returns>
+        public static Sprite Portrait(OperatorData op)
+        {
+            if (!string.IsNullOrEmpty(op.nickname))
+            {
+                Sprite named = Get("portraits/portrait_" + Plain(op.nickname));
+                if (named != null) return named;
+            }
+            string type;
+            if (!TypeIcons.TryGetValue(op.type, out type)) return null;
+            return Get("portraits/portrait_" + type.Substring("type_".Length) + "_" + (op.id % 2 == 0 ? 2 : 1));
+        }
+
+        /// <summary>Grande image : « splash », « map_fond », « end_victoire », « flux_sud »…</summary>
+        /// <param name="name">Nom du fichier.</param>
+        /// <returns>Le sprite, ou null.</returns>
+        public static Sprite Screen(string name)
+        {
+            return Get("screens/" + name);
+        }
+
+        /// <summary>Image d'un partenaire de flux (1 = sud, 2 = nord).</summary>
+        /// <param name="fluxId">Flux.</param>
+        /// <returns>Le sprite, ou null.</returns>
+        public static Sprite Flux(int fluxId)
+        {
+            return fluxId == 1 ? Screen("flux_sud") : fluxId == 2 ? Screen("flux_nord") : null;
+        }
+
+        /// <summary>Logo CHOUF sur fond transparent.</summary>
+        /// <returns>Le sprite, ou null.</returns>
+        public static Sprite Logo()
+        {
+            return Get("logo/logo_chouf");
+        }
+
+        /// <summary>Minuscules sans accents (« Zépek » → « zepek ») pour les noms de fichiers.</summary>
+        /// <param name="text">Texte.</param>
+        /// <returns>Texte simplifié.</returns>
+        public static string Plain(string text)
+        {
+            string d = text.ToLowerInvariant().Normalize(System.Text.NormalizationForm.FormD);
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            foreach (char ch in d)
+                if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(ch) != System.Globalization.UnicodeCategory.NonSpacingMark) sb.Append(ch);
+            return sb.ToString();
+        }
+
         /// <summary>Icône d'un symbole de carte : « charbon », « menace », « verrou ».</summary>
         /// <param name="name">Nom.</param>
         /// <returns>Le sprite, ou null.</returns>

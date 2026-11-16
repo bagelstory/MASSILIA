@@ -150,6 +150,21 @@ namespace Marseille.UI
             return col;
         }
 
+        /// <summary>Image pleine largeur dans une colonne (ne fait rien si le sprite manque).</summary>
+        /// <param name="parent">Colonne.</param>
+        /// <param name="sprite">Image.</param>
+        /// <param name="height">Hauteur réservée.</param>
+        /// <returns>L'image, ou null.</returns>
+        public static Image Picture(Transform parent, Sprite sprite, float height)
+        {
+            if (sprite == null) return null;
+            Image img = UiFactory.CreateImage("Picture", parent, Color.white, false);
+            img.sprite = sprite;
+            img.preserveAspect = true;
+            SetHeight(img.rectTransform, height);
+            return img;
+        }
+
         /// <summary>Détruit tous les enfants d'un élément (listes reconstruites).</summary>
         /// <param name="parent">Élément.</param>
         public static void ClearChildren(Transform parent)

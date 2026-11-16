@@ -43,7 +43,7 @@ namespace Marseille.UI
         private void AddOperatorCard(OperatorData op, GameData data, GameConfig config)
         {
             UiCard card = UiCard.Create(Column, 3, config);
-            card.SetIcon(ArtLibrary.TypeIcon(op.type), config.uiFontSizes.z * 3.4f);
+            card.SetIcon(ArtLibrary.Portrait(op) ?? ArtLibrary.TypeIcon(op.type), config.uiFontSizes.z * 3.4f);
             string where = op.status == OperatorStatus.InTransit
                 ? "vers " + UiText.QuarterName(data, op.destinationQuarter) + " (" + op.transitCycles + " cycle(s))"
                 : UiText.QuarterName(data, op.currentQuarter);

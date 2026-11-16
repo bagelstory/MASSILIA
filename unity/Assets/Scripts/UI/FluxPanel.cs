@@ -2,6 +2,7 @@
 // Écran « Flux » (spec §8) : offres de partenaires fictifs, chiffres abstraits (engagement, fiabilité,
 // exposition, instabilité, revenu attendu), activation et coupure (confirmation en deux touches).
 
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Data;
 using Marseille.Systems;
@@ -35,6 +36,7 @@ namespace Marseille.UI
         /// <param name="config">Configuration.</param>
         private void AddFluxCard(FluxData f, GameData data, GameConfig config)
         {
+            UiKit.Picture(Column, ArtLibrary.Flux(f.id), config.uiButtonHeight * 2.6f);
             UiCard card = UiCard.Create(Column, 5, config);
             string state = f.isActive
                 ? "Actif depuis " + f.activeCycles + " cycle(s)" + (f.activeCycles > 0 ? (f.lastCycleSucceeded ? " · dernier cycle réussi" : " · dernier cycle raté") : "")

@@ -2,6 +2,7 @@
 // Fin de partie (spec §11) : type de fin, bilan chiffré, score et note de A à E, nouvelle partie.
 
 using System.Text;
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
 using Marseille.Data;
@@ -45,6 +46,8 @@ namespace Marseille.UI
             Open();
             ClearContent();
             float score = EndRules.Score(d, c);
+            UiKit.Picture(Body, ArtLibrary.Logo(), c.uiButtonHeight * 1.4f);
+            UiKit.Picture(Body, ArtLibrary.Screen(EndImage(endType)), c.uiButtonHeight * 5f);
             UiKit.Label(Body, Title(endType), c.uiFontSizes.x, endType == EndType.Victory ? c.uiPositive : c.uiText);
             Paragraph(EndRules.Message(endType), 2, c.uiTextDim);
             UiKit.Label(Body, "Note " + EndRules.Grade(score, c) + " · score " + score.ToString("0"), c.uiFontSizes.x, c.uiAccent);
@@ -67,6 +70,21 @@ namespace Marseille.UI
                 case EndType.TimeOut: return "Fin du temps";
             }
             return "Fin de partie";
+        }
+
+        /// <summary>Illustration de la fin (Resources/Art/screens).</summary>
+        /// <param name="endType">Type de fin.</param>
+        /// <returns>Nom du fichier.</returns>
+        private static string EndImage(EndType endType)
+        {
+            switch (endType)
+            {
+                case EndType.Victory: return "end_victoire";
+                case EndType.Bankruptcy: return "end_faillite";
+                case EndType.Collapse: return "end_chute";
+                case EndType.Abandon: return "end_abandon";
+            }
+            return "end_temps";
         }
 
         /// <summary>Bilan chiffré.</summary>

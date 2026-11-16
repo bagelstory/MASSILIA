@@ -22,7 +22,8 @@ namespace Marseille.EditorTools
             importer.alphaIsTransparency = true;
             importer.mipmapEnabled = false;
             importer.filterMode = FilterMode.Bilinear;
-            importer.maxTextureSize = assetPath.Contains("/portraits/") || assetPath.Contains("/screens/") ? 1024 : 256;
+            importer.maxTextureSize = assetPath.Contains("/screens/") ? 2048
+                : assetPath.Contains("/portraits/") || assetPath.Contains("/icon/") || assetPath.Contains("/logo/") ? 1024 : 256;
             importer.textureCompression = TextureImporterCompression.Compressed;
             if (assetPath.EndsWith("/shapes/tile.png")) importer.spriteBorder = new Vector4(24f, 24f, 24f, 24f);
         }

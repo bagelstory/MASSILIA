@@ -2,6 +2,7 @@
 // Partie « pions et sélection » de MapController : placement des opérateurs, clics, mise en évidence.
 
 using System.Collections.Generic;
+using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
 using Marseille.Data;
@@ -107,6 +108,18 @@ namespace Marseille.Map
         public bool TryGetQuarterPosition(int quarterId, out Vector2 position)
         {
             return positions.TryGetValue(quarterId, out position);
+        }
+
+        /// <summary>Fond de carte en relief (Resources/Art/screens/map_fond), assombri, sous les cases.</summary>
+        private void EnsureBackground()
+        {
+            if (content.Find("MapBackground") != null) return;
+            Sprite bg = ArtLibrary.Screen("map_fond");
+            if (bg == null) return;
+            UnityEngine.UI.Image img = UiFactory.CreateImage("MapBackground", content, new Color(0.55f, 0.55f, 0.6f), false);
+            img.sprite = bg;
+            UiFactory.Stretch(img.rectTransform, Vector2.zero, Vector2.one);
+            img.transform.SetAsFirstSibling();
         }
     }
 }

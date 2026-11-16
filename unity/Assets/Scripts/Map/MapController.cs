@@ -174,6 +174,7 @@ namespace Marseille.Map
             }
             content.anchorMin = content.anchorMax = content.pivot = new Vector2(0.5f, 0.5f);
             content.sizeDelta = config.mapSize;
+            EnsureBackground();
             if (quarterLayer == null) { quarterLayer = UiFactory.CreateRect("Quarters", content); UiFactory.Stretch(quarterLayer, Vector2.zero, Vector2.one); }
             if (operatorLayer == null) { operatorLayer = UiFactory.CreateRect("Operators", content); UiFactory.Stretch(operatorLayer, Vector2.zero, Vector2.one); }
             labelsVisible = config.mapStartZoom >= config.mapLabelMinZoom;
