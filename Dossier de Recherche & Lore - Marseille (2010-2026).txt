@@ -1,0 +1,60 @@
+================================================================================
+DOSSIER DE RECHERCHE & WORLD-BUILDING : MARSEILLE (2010 - 2026)
+Document de référence pour le pitch et la narration du jeu
+================================================================================
+
+1. CONTEXTE GÉNÉRAL & TOPOGRAPHIE DU CONFLIT
+--------------------------------------------------------------------------------
+- Lieu : Marseille (principalement les Quartiers Nord : 13e, 14e, 15e, 16e arrondissements, ainsi que certains secteurs stratégiques du centre-ville comme la Belle de Mai ou Saint-Mauront).
+- Enjeu principal : Le contrôle des "plans" (points de deal), véritables PME générant entre 10 000 € et plus de 80 000 € de chiffre d'affaires quotidien.
+- Évolution des produits : Passage progressif d'un marché dominé par la résine de cannabis (shit) à une explosion de la cocaïne (plus rentable, clientèle plus large, livraisons à domicile).
+
+2. CHRONOLOGIE EN 4 ACTES (ÉVOLUTION DU GAMEPLAY / DE L'HISTOIRE)
+--------------------------------------------------------------------------------
+
+[ACTE I : 2010 - 2015] LA CHUTE DU "MILIEU" ET L'ÈRE DES CITÉS
+- Contexte : Effondrement du banditisme traditionnel (braquages, cercles de jeux, racket). Une nouvelle génération issue des cités prend le pouvoir par la force.
+- Factions notables de l'époque : Clans familiaux ou liés à des cités spécifiques (Les Lauriers, La Castellane, Le Clos La Rose, Font-Vert ; familles Tir, Berrebouh, Remadnia).
+- Changement de paradigme : Apparition massive des armes de guerre (fusils d'assaut Kalachnikov AK-47) importées des Balkans. Fin du "code d'honneur" de l'ancien Milieu.
+- Bilan humain : 15 à 25 homicides par an liés aux règlements de comptes.
+
+[ACTE II : 2016 - 2020] L'INDUSTRIALISATION ET LES "ENTREPRISES" DU CRIME
+- Contexte : Le trafic s'inspire du management moderne et du marketing.
+- Méthodes :
+  * Utilisation des réseaux sociaux (Snapchat, Telegram) pour la publicité, les menus, les promotions et les livraisons ("Uber Shit").
+  * Hiérarchie stricte sur le terrain : Chouf (guetteur), Charbonneur (vendeur), Approvisionneur, Gérant de plan, Nourrice (stockage).
+  * Délocalisation des "patrons" : Les commanditaires pilotent tout depuis Dubaï, l'Espagne ou le Maroc, ou depuis leur cellule de prison via des téléphones cryptés (EncroChat, Sky ECC).
+- Police : Coup de filet mondial contre EncroChat (2020) et Sky ECC (2021), faisant tomber des dizaines de têtes de réseaux mais créant un vide du pouvoir.
+
+[ACTE III : 2021 - 2023] LA GUERRE TOTALE : "YODA" CONTRE "DZ MAFIA"
+- Contexte : Deux super-structures cherchent à absorber ou détruire tous les plans indépendants pour obtenir le monopole sur Marseille.
+- Les Belligérants :
+  * Le Clan Yoda : Structuré autour de Félix Bingui (dit "Le Chat"), historiquement ancré dans plusieurs cités dont La Castellane ou Félix Pyat.
+  * La DZ Mafia : Organisation tentaculaire menée par des figures comme Mehdi Laribi ou Amine K., réputée pour sa puissance financière et sa capacité à fédérer/soumettre d'autres équipes.
+- L'étincelle : Un différend initial (notamment autour d'une boîte de nuit en Thaïlande / litiges financiers) dégénère en vendetta impitoyable à Marseille.
+- L'"Ubérisation" des tueurs : Recrutement sur les réseaux sociaux de très jeunes exécutants (15 à 20 ans), souvent venus d'autres villes de France, logés dans des Airbnb, équipés d'armes lourdes et payés à la tâche pour exécuter des cibles.
+- Paroxysme (2023) : Année record avec 49 morts et plus de 120 blessés par balle. Apparition de victimes collatérales (habitants touchés par erreur ou balles perdues), créant une psychose dans la ville.
+
+[ACTE IV : 2024 - 2026] REPRISE EN MAIN POLICIÈRE ET HÉGÉMONIE
+- Réaction de l'État : Lancement des opérations "Place Nette XXL" (déploiement massif de CRS, policiers, douanes pour harceler les points de deal et saisir les avoirs).
+- Chute d'un empire : Arrestation de Félix Bingui (chef présumé de Yoda) au Maroc en mars 2024, suivie de l'interpellation de nombreux lieutenants. Le clan Yoda s'effondre.
+- L'Hégémonie : La DZ Mafia profite du vide pour imposer sa domination sur la quasi-totalité de la ville.
+- Diversification : Au-delà de la drogue, extension vers le racket d'établissements de nuit, l'extorsion de commerçants, les menaces sur les agents publics/pénitentiaires et le blanchiment massif (immobilier, restauration, sociétés écrans).
+- État des lieux (2025-2026) : Baisse nette du nombre de règlements de comptes mortels à Marseille (retour sous les 25 morts/an) car la guerre ouverte est terminée. Cependant, la violence mute (enlèvements, séquestrations, intimidations) et les réseaux marseillais "franchisent" leur modèle en exportant leurs équipes vers des villes moyennes (Avignon, Nîmes, Toulon, Arles, Valence).
+
+3. LEXIQUE & CODES POUR L'IMMERSION (DIALOGUES / UI)
+--------------------------------------------------------------------------------
+- Plan / Four : Point de deal.
+- Chouf : Guetteur posté aux entrées de la cité (crie "Ara !" ou "Kéblo !" à l'arrivée de la police).
+- Charbonner / Charbonneur : Travailler / Vendeur sur le point de deal.
+- Nourrice : Habitant (souvent endetté ou contraint) qui garde la marchandise, l'argent ou les armes chez lui moyennant un loyer.
+- Carotte / Carotter : Voler de la marchandise ou de l'argent à un réseau (cause fréquente de règlement de comptes).
+- Barbecue : Technique consistant à brûler la voiture (souvent volée et faussement plaquée) avec les armes à l'intérieur juste après un assassinat pour effacer l'ADN.
+- Sous-traitant : Jeune tueur à gages recruté à distance via messagerie cryptée.
+
+4. PISTES DE MÉCANIQUES DE JEU (GAME DESIGN)
+--------------------------------------------------------------------------------
+- Gestion de territoire (Faction / Stratégie) : Contrôler les "plans", gérer la logistique (approvisionnement, nourrices), recruter des guetteurs et sécuriser les accès face aux descentes de police ("Place Nette") et aux raids ennemis.
+- Moralité & Répression : Plus la violence augmente (victimes collatérales, usage d'armes de guerre), plus la jauge d'intervention de l'État monte (blocage des quartiers, pertes financières massives).
+- Communication & Réseau : Utilisation d'un téléphone crypté en jeu pour gérer les livraisons, blanchir l'argent, ou délocaliser son QG à l'étranger (Dubaï / Espagne) pour éviter l'arrestation.
+================================================================================
