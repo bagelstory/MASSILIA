@@ -34,6 +34,8 @@ Interdits (déjà respectés dans les blocs) :
 
 ## Inventaire
 
+**Mise à jour :** les séries T, K, D, A et B (icônes, emblèmes, onglets) sont déjà dessinées en code par `tools/gen_icons.py` et branchées dans le jeu. Leurs prompts restent ici, seulement si tu veux une version plus « 3D ». **Il reste 29 images à générer** : L, O, N, G et X.
+
 | Série | Fichiers | Images à générer | Priorité |
 |---|---|---|---|
 | L — logo, icône, lancement | 3 | 3 | 1 |
