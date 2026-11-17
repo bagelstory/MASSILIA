@@ -1,0 +1,1265 @@
+DOSSIER DE CONCEPTION — MARSEILLE Version de référence : V6 — Synthèse
+consolidée pour GitHub Date de consolidation : 16 novembre 2026 Langue :
+français Statut : document de travail vivant — décisions validées et
+propositions clairement distinguées
+
+======================================================================
+0. OBJET DU DOCUMENT
+======================================================================
+
+Ce document rassemble les décisions de conception prises pour le projet
+de jeu MARSEILLE au fil des réunions de brainstorming AAA V3, V4 et V5,
+ainsi que les orientations consolidées pour la V6.
+
+Il sert de référence de projet à conserver dans GitHub. Il décrit : - la
+vision et la promesse du jeu ; - le rôle et l’évolution du protagoniste
+; - le cadre temporel 2021–2026 ; - la représentation de Marseille ; -
+l’accès progressif aux quartiers ; - la boucle de gestion ; - les
+systèmes de progression, de réputation et de relations ; - la gestion
+économique ; - le système abstrait des flux internationaux ; - les
+conséquences humaines, sociales et judiciaires ; - la campagne et les
+premières missions à 16 ans ; - les fins libres ; - l’interface mobile
+; - le périmètre du prototype ; - les rôles de l’équipe AAA ; - les
+décisions qui restent à prendre.
+
+IMPORTANT — STATUT DES INFORMATIONS Les décisions explicitement validées
+par l’utilisateur sont indiquées comme « VALIDÉ ». Les idées proposées
+pendant le brainstorming mais qui n’ont pas encore reçu de validation
+sont indiquées comme « PROPOSITION ». Les points non décidés sont
+indiqués comme « À DÉFINIR ».
+
+Le document ne doit pas transformer une proposition en décision
+officielle sans validation.
+
+====================================================================== 1.
+IDENTITÉ ET PROMESSE DU JEU
+======================================================================
+
+1.1. Concept général
+
+MARSEILLE est un jeu mobile de gestion stratégique et de narration
+interactive, ancré dans une représentation reconnaissable et documentée
+de Marseille.
+
+Le joueur suit le parcours d’un personnage qui commence à 16 ans en
+2021, dans un environnement où il découvre progressivement des
+relations, des responsabilités et un univers criminel fictif. Au fil des
+années, il peut gravir les échelons, prendre davantage de
+responsabilités, devenir une figure dirigeante, ou tenter de sortir de
+cet univers lorsque les conditions le permettent.
+
+Le jeu ne commence donc pas avec un chef déjà installé. Le joueur part
+du bas de l’échelle et construit sa trajectoire progressivement.
+
+Le jeu repose sur la gestion de ressources limitées, de relations
+humaines, de responsabilités, de pressions et de conséquences à court,
+moyen et long terme.
+
+La ville continue d’exister indépendamment du joueur. Marseille n’est
+pas une simple carte à conquérir : c’est un environnement vivant,
+composé d’habitants, de familles, de commerces, d’associations,
+d’institutions, de transports, de lieux culturels et d’événements.
+
+1.2. Promesse centrale
+
+« Marseille ne t’appartient pas. Mais tes décisions peuvent laisser des
+traces partout. »
+
+Le joueur ne contrôle jamais totalement la ville, les personnages ou les
+événements. Il doit prendre des décisions avec des informations
+incomplètes et accepter que les autres personnages aient leur propre
+volonté.
+
+La progression n’est pas une réussite automatique. Monter dans la
+hiérarchie peut apporter de l’influence et des responsabilités, mais
+aussi davantage de pression, de dépendance, de pertes et de conséquences
+humaines.
+
+1.3. Piliers de conception
+
+PILIER 1 — UNE VILLE RÉELLE ET VIVANTE Marseille est représentée à
+partir de sa géographie, de ses quartiers, de ses transports, de son
+littoral, de ses équipements et de ses rythmes locaux. La ville ne doit
+pas être réduite à la criminalité.
+
+PILIER 2 — UNE GESTION SOUS PRESSION Le joueur dispose de ressources
+limitées : temps, argent, attention, confiance et capacité d’action. Il
+ne peut pas régler tous les problèmes.
+
+PILIER 3 — DES PERSONNAGES AUTONOMES Les personnages ont leurs
+objectifs, leurs limites, leurs relations, leur mémoire et leur propre
+évolution. Ils peuvent refuser, partir, changer d’avis ou agir sans
+attendre le joueur.
+
+PILIER 4 — DES CONSÉQUENCES DURABLES Les choix peuvent produire des
+effets immédiats, différés ou irréversibles. Une décision qui semble
+avantageuse à court terme peut provoquer une crise plusieurs mois plus
+tard.
+
+PILIER 5 — UNE TRAJECTOIRE PERSONNELLE LIBRE Le joueur peut gravir les
+échelons, perdre sa place, changer de trajectoire ou chercher à quitter
+le monde criminel. La fin doit refléter le parcours réellement vécu.
+
+======================================================================
+2. DÉCISIONS OFFICIELLEMENT VALIDÉES
+======================================================================
+
+Les décisions suivantes ont été explicitement validées.
+
+2.1. Départ de campagne : 2021 — VALIDÉ
+
+Le jeu commence en 2021. À ce moment, le protagoniste a 16 ans.
+
+La campagne couvre la période 2021 à 2026. Le protagoniste peut donc
+évoluer de l’adolescence vers le début de l’âge adulte, en fonction de
+son anniversaire et du rythme de campagne.
+
+2.2. Accès aux territoires : progressif — VALIDÉ
+
+La carte de Marseille est visible dès le début, mais les possibilités
+d’interaction avec les quartiers se débloquent progressivement.
+
+Un quartier peut être : - visible sur la carte ; - connu par le
+protagoniste ; - documenté partiellement ; - accessible pour certaines
+interactions ; - pleinement exploitable dans le cadre des systèmes de
+jeu.
+
+La progression territoriale dépend de la narration, des personnages, des
+événements et de l’évolution du protagoniste. Elle ne doit pas être
+uniquement conditionnée par une jauge ou une accumulation de points.
+
+2.3. Fins : libres — VALIDÉ
+
+Le joueur ne choisit pas une fin prédéfinie dans un menu. La conclusion
+est construite à partir des décisions, des relations, de l’état de
+l’organisation, des conséquences et de la trajectoire personnelle.
+
+Les familles de fins évoquées précédemment (reconstruction, chute,
+retrait, héritage, survie, réparation) restent des exemples de
+trajectoires possibles, pas des fins imposées.
+
+2.4. Ambition géographique : toute la ville — VALIDÉ
+
+Marseille entière doit être représentée dès le départ. La carte globale
+ne sera pas limitée à un seul arrondissement ou à un seul secteur.
+
+La profondeur de contenu peut néanmoins être progressive : la ville
+entière existe sur la carte, tandis que les lieux détaillés, les
+personnages et les événements sont développés au fur et à mesure de la
+progression.
+
+2.5. Protagoniste : début à 16 ans — VALIDÉ
+
+Le joueur commence à 16 ans, au bas de l’échelle. Il ne dirige pas une
+organisation au départ. Il découvre cet univers et ses acteurs, puis
+peut obtenir progressivement des responsabilités.
+
+2.6. Progression : hybride — VALIDÉ
+
+La progression combine : - des grandes étapes scénarisées, qui
+structurent les années et les grands tournants ; - une progression libre
+à l’intérieur de ces étapes, influencée par les décisions, les
+relations, les compétences et les conséquences.
+
+2.7. Flux internationaux : gestion abstraite — VALIDÉ
+
+Le jeu comprend une dimension de gestion de flux internationaux fictifs,
+notamment avec des origines narratives telles que le Maroc et les
+Pays-Bas et une destination narrative à Marseille.
+
+La gestion est abstraite et porte sur les engagements, les finances, les
+relations, la fiabilité, l’exposition judiciaire, l’instabilité et les
+conséquences humaines.
+
+Le jeu ne fournit pas d’itinéraires réels de contrebande, de méthodes de
+dissimulation, de tactiques pour contourner les contrôles, ni de
+procédures opérationnelles permettant d’organiser un trafic réel.
+
+2.8. Possibilité de sortie : sous conditions — VALIDÉ
+
+Le joueur peut tenter de quitter le monde criminel, mais cette
+possibilité dépend de conditions construites au fil de la campagne.
+
+La sortie ne doit pas être un bouton magique. Elle dépend notamment des
+engagements en cours, des relations, des dettes, de la confiance, des
+pressions et des conséquences accumulées.
+
+======================================================================
+3. PROTAGONISTE ET CRÉATION DU PERSONNAGE
+======================================================================
+
+3.1. Situation initiale
+
+Le protagoniste a 16 ans en 2021. Il est mineur et ne possède ni pouvoir
+hiérarchique ni organisation à diriger.
+
+Il connaît son environnement quotidien, ses habitudes et certaines
+personnes de son quartier. Il cherche sa place et peut être motivé par
+des raisons différentes : - aider sa famille ; - gagner de l’argent ; -
+obtenir de la reconnaissance ; - rechercher une forme de respect ; -
+suivre l’influence d’une personne de son entourage ; - fuir une
+situation personnelle difficile ; - être attiré par une image de
+réussite ou de puissance ; - chercher simplement une place dans un
+groupe.
+
+Le jeu ne doit jamais considérer que le fait de grandir dans un quartier
+populaire conduit automatiquement à la criminalité.
+
+3.2. Création du personnage — PROPOSITION À CONFIRMER
+
+Options envisageables : - prénom ; - apparence ; - environnement
+familial ; - situation scolaire ; - quartier de départ ; - motivations
+; - tempérament ; - relations initiales.
+
+Le joueur devrait pouvoir choisir un personnage personnalisable, mais le
+degré de personnalisation et les origines narratives précises restent à
+définir.
+
+3.3. Adolescence et minorité
+
+Le fait de commencer à 16 ans doit avoir un effet réel sur les systèmes
+et la narration.
+
+Conséquences possibles : - la famille peut chercher à protéger le
+protagoniste ; - l’école et l’avenir professionnel constituent des
+enjeux ; - des adultes peuvent exercer une influence positive ou
+négative ; - le personnage peut être exploité ou manipulé ; - les
+responsabilités peuvent dépasser sa maturité ; - les décisions peuvent
+affecter sa scolarité, ses liens familiaux et sa santé ; - des
+possibilités de bifurcation vers une autre vie doivent exister.
+
+L’adolescence ne doit pas être un simple tutoriel pour devenir un
+dirigeant criminel. Elle doit être une période narrative à part entière,
+avec des choix, des limites et des possibilités de sortie.
+
+======================================================================
+4. PROGRESSION GÉNÉRALE : DU BAS DE L’ÉCHELLE À LA DIRECTION
+======================================================================
+
+4.1. Principe
+
+La progression est hybride : - les grandes étapes sont structurées par
+la campagne ; - les décisions à l’intérieur de chaque étape restent
+ouvertes ; - les personnages, les relations et les événements
+déterminent les opportunités ; - le joueur peut progresser rapidement,
+stagner, reculer ou changer de trajectoire.
+
+La progression ne doit pas se réduire à un niveau d’expérience ou à une
+quantité d’argent.
+
+4.2. Étapes proposées
+
+ÉTAPE 1 — 16 ANS : LE DÉBUT Période indicative : 2021.
+
+Le protagoniste n’a aucun statut. Il découvre les personnages et les
+tensions de son environnement. Il doit comprendre les conséquences
+possibles de ses décisions et apprendre à gérer ses relations.
+
+Fonctions de jeu : - découverte du quartier ; - présentation de la
+famille et des proches ; - premières rencontres ; - premiers événements
+narratifs ; - premières décisions morales et relationnelles ; -
+découverte du temps et des priorités.
+
+ÉTAPE 2 — 17 ANS : LA CONFIANCE Période indicative : 2022.
+
+Le protagoniste peut gagner la confiance de certains personnages. Il
+reçoit davantage de responsabilités, mais reste dépendant de personnes
+plus expérimentées.
+
+Fonctions de jeu : - développer des relations ; - tenir ou rompre des
+engagements ; - gérer des demandes contradictoires ; - faire face à des
+conflits interpersonnels ; - découvrir les premières conséquences
+différées.
+
+ÉTAPE 3 — 18 ANS : LES RESPONSABILITÉS Période indicative : 2023.
+
+Le protagoniste devient majeur. Ses décisions peuvent avoir des
+conséquences personnelles, financières et judiciaires plus importantes.
+
+Fonctions de jeu : - autonomie accrue ; - premières responsabilités de
+gestion ; - arbitrages financiers ; - gestion de conflits ; - exposition
+plus importante aux conséquences de ses choix.
+
+ÉTAPE 4 — 19 À 20 ANS : L’INTERMÉDIAIRE Période indicative : 2024–2025.
+
+Le protagoniste peut gérer des relations entre plusieurs personnages,
+des responsabilités économiques et des situations plus complexes.
+
+Fonctions de jeu : - gestion d’un petit réseau de personnages ; -
+délégation ; - gestion des ressources ; - négociation de responsabilités
+; - résolution ou aggravation de conflits ; - accès progressif à de
+nouvelles zones narratives.
+
+ÉTAPE 5 — 21 ANS : LA DIRECTION Période indicative : 2026.
+
+Le protagoniste peut devenir une figure centrale. Il n’est toutefois pas
+garanti qu’il atteigne ce niveau. Son influence dépend de la confiance,
+de la stabilité, des alliances et de sa capacité à assumer les
+conséquences.
+
+Fonctions de jeu : - décisions stratégiques ; - gestion de plusieurs
+personnages ; - arbitrages à long terme ; - crises majeures ; -
+possibilité de préparer une transition ou une sortie.
+
+ÉTAPE 6 — L’APRÈS Fin de campagne, date précise à définir.
+
+Le protagoniste fait face à ce qu’il a construit. Il peut continuer,
+perdre le contrôle, partir ou essayer de réparer une partie des dommages
+causés.
+
+Cette étape n’est pas une récompense automatique. Elle est construite à
+partir des conséquences de toute la campagne.
+
+4.3. Progression non linéaire
+
+Le joueur peut : - monter en responsabilité ; - rester bloqué ; - perdre
+la confiance de personnes importantes ; - être écarté ; - perdre des
+ressources ; - devoir reconstruire des relations ; - changer de
+trajectoire ; - chercher à sortir du système.
+
+Les étapes d’âge structurent la campagne, mais ne doivent pas garantir
+une promotion automatique.
+
+======================================================================
+5. RÉPUTATION, CONFIANCE ET INFLUENCE
+======================================================================
+
+La progression repose sur plusieurs dimensions distinctes.
+
+RESPECT Représente la place perçue du protagoniste auprès des autres
+personnages.
+
+CONFIANCE Représente la volonté des autres personnages de lui confier
+des responsabilités et de croire à ses engagements.
+
+INFLUENCE Représente sa capacité à peser sur des décisions et des
+relations.
+
+CRAINTE Représente l’intimidation et les effets négatifs de son
+comportement sur son entourage.
+
+Ces valeurs peuvent évoluer indépendamment. Un personnage peut être
+craint mais détesté. Il peut être respecté sans être puissant. Il peut
+avoir de l’influence mais ne plus avoir personne à qui faire confiance.
+
+La réputation ne doit pas être un score unique qui résume toute la
+personnalité du protagoniste.
+
+======================================================================
+6. PERSONNAGES AUTONOMES ET MÉMOIRE
+======================================================================
+
+6.1. Fiche de personnage
+
+Chaque personnage important devrait disposer de : - personnalité ; -
+objectifs personnels ; - besoins ; - limites ; - relations avec les
+autres personnages ; - opinion du protagoniste ; - niveau de confiance
+; - mémoire des décisions ; - évolution personnelle ; - état actuel et
+disponibilité narrative.
+
+6.2. Autonomie
+
+Les personnages peuvent : - refuser une demande ; - prendre une décision
+sans le joueur ; - changer d’avis ; - s’éloigner ; - demander de l’aide
+; - entrer en conflit ; - quitter définitivement l’histoire ; - revenir
+après une longue absence.
+
+6.3. Mémoire des choix
+
+Les personnages doivent se souvenir des promesses tenues et rompues, des
+personnes protégées ou abandonnées, des conflits, des humiliations, des
+sacrifices et des décisions importantes.
+
+Une décision du début de campagne peut être rappelée plusieurs années
+plus tard.
+
+6.4. Personnages civils
+
+Les habitants, commerçants, familles, associations et autres acteurs de
+la ville doivent avoir une véritable voix. Ils ne doivent pas être des
+figurants ou des caricatures.
+
+Les conséquences sur les habitants doivent être visibles : peur, deuil,
+départ, perte économique, solidarité, mobilisation, reconstruction ou
+refus de pardonner.
+
+======================================================================
+7. MARSEILLE : CARTE ET GÉOGRAPHIE
+======================================================================
+
+7.1. Ambition géographique — VALIDÉ
+
+La carte doit représenter Marseille dans son ensemble dès le début du
+jeu.
+
+La référence géographique de conception mentionne : - les 16
+arrondissements municipaux ; - les 111 quartiers officiels ; - le
+littoral ; - les grands axes ; - le relief ; - les espaces naturels ; -
+les équipements ; - les réseaux de transport.
+
+La carte globale est visible dès le début, mais les interactions
+détaillées sont débloquées progressivement.
+
+7.2. Trois niveaux de carte
+
+NIVEAU 1 — CARTE GLOBALE Vue de Marseille, des arrondissements, des
+principaux axes, du littoral, des grands équipements et des transports.
+
+NIVEAU 2 — CARTE DES QUARTIERS Affichage des quartiers officiels, des
+informations connues, des événements et de l’évolution locale.
+
+NIVEAU 3 — VUES DÉTAILLÉES Lieux narratifs, commerces fictifs,
+personnages, équipements, événements et scènes.
+
+7.3. Huit zones de gameplay proposées en V3
+
+ATTENTION : ces huit zones sont une proposition de découpage ludique.
+Elles ne sont pas les huit secteurs administratifs officiels de
+Marseille.
+
+1.  Centre historique : Vieux-Port, Noailles, Belsunce.
+2.  Centre nord : Belle de Mai, Saint-Mauront.
+3.  Nord-est : Malpassé, Frais Vallon, Saint-Jérôme.
+4.  Nord central : Saint-Barthélemy, Le Canet.
+5.  Nord-ouest : La Viste, Saint-Antoine, La Castellane.
+6.  Littoral nord : L’Estaque, Saint-Henri, Saint-André.
+7.  Est : La Valentine, Saint-Marcel.
+8.  Sud : secteurs autour de Bonneveine et Pointe-Rouge ; le découpage
+    exact reste à vérifier et à définir.
+
+Une ambiguïté relevée dans les discussions doit être conservée à
+l’esprit : « La Castellane » dans le 15e arrondissement et « Castellane
+» autour de la place centrale ne désignent pas le même lieu.
+
+7.4. Accès progressif
+
+Un quartier peut être visible mais non accessible. Il peut être connu
+sans être exploré. Il peut être accessible sans que le protagoniste y
+ait une influence.
+
+Le déblocage dépend de la narration, des personnages, des événements et
+des relations.
+
+7.5. Informations par quartier
+
+La fiche d’un quartier peut afficher : - nom et arrondissement ; -
+niveau de connaissance ; - événements récents ; - activité commerciale
+et vie locale ; - personnages connus ; - équipements publics ; -
+transports ; - évolution narrative ; - lieux détaillés accessibles.
+
+Ne pas réduire les quartiers à des jauges de criminalité ou à des
+territoires à conquérir.
+
+7.6. Transports et calendrier urbain
+
+La ville doit intégrer ses rythmes et infrastructures : - métro ; -
+tramway ; - bus ; - navettes maritimes ; - circulation ; - marchés ; -
+vie commerciale ; - matchs de l’OM ; - tourisme ; - météo et mistral ; -
+chaleur, pluie et autres événements saisonniers ; - festivals et
+événements culturels ; - vie associative et sportive ; - travaux et
+évolutions urbaines.
+
+Les données de réseau, horaires et infrastructures doivent être
+vérifiées au moment de leur intégration, car elles peuvent changer.
+
+======================================================================
+8. BOUCLE PRINCIPALE DE GAMEPLAY
+======================================================================
+
+La boucle principale est organisée autour de cinq phases.
+
+1.  OBSERVER Lire le bulletin, consulter les personnages, la carte, les
+    finances et les événements.
+
+2.  PRIORISER Choisir les problèmes qui méritent une intervention. Le
+    joueur ne peut pas tout traiter.
+
+3.  DÉCIDER Répartir le temps, le budget, les responsabilités et
+    l’attention.
+
+4.  LAISSER ÉVOLUER Le temps avance. Les personnages agissent, les
+    relations changent et les événements progressent.
+
+5.  ASSUMER Découvrir les conséquences, gérer les nouveaux problèmes et
+    adapter sa stratégie.
+
+La boucle recommence avec une situation qui a changé.
+
+8.1. Rythmes temporels proposés
+
+JOURNÉE Événements, conversations, décisions urgentes.
+
+SEMAINE Gestion des priorités, dépenses et conflits.
+
+MOIS Évolution des relations, des quartiers et des équilibres.
+
+TRIMESTRE Décisions stratégiques et conséquences différées.
+
+ANNÉE Bilan de campagne, changements durables et nouveaux chapitres.
+
+Le joueur ne doit pas être obligé de prendre une décision importante
+chaque jour. Les périodes calmes renforcent le contraste avec les
+périodes de crise.
+
+8.2. Points d’action
+
+Les points d’action représentent le temps et l’attention du
+protagoniste.
+
+Exemples d’utilisation : - recevoir un personnage ; - régler un problème
+familial ; - s’occuper d’une activité légale ; - organiser une rencontre
+; - répondre à une crise médiatique ; - soutenir une initiative locale
+; - préparer une transition ; - traiter un conflit relationnel.
+
+Règle de design : le joueur doit régulièrement renoncer à une décision
+valable pour pouvoir en prendre une autre.
+
+======================================================================
+9. INDICATEURS DE GESTION
+======================================================================
+
+Six indicateurs principaux ont été proposés.
+
+1.  STABILITÉ Capacité à fonctionner malgré les désaccords, les absences
+    et les crises.
+
+2.  TRÉSORERIE Argent disponible, charges, dettes et capacité à absorber
+    les imprévus.
+
+3.  CONFIANCE INTERNE Confiance des membres dans le protagoniste et dans
+    les décisions prises.
+
+4.  PRESSION Pression judiciaire, médiatique, sociale et
+    institutionnelle. Elle est représentée de façon abstraite.
+
+5.  ANCRAGE HUMAIN Qualité des relations avec les habitants, les
+    familles, les commerces et les associations.
+
+6.  RÉSILIENCE Capacité à continuer lorsque des personnes partent, que
+    les ressources diminuent ou que les équilibres changent.
+
+Ces indicateurs ne doivent pas être six barres à maximiser
+simultanément. Ils peuvent entrer en contradiction.
+
+Exemples : - une décision autoritaire peut améliorer temporairement la
+stabilité tout en réduisant la confiance ; - une décision coûteuse peut
+diminuer la trésorerie mais améliorer l’ancrage humain ; - une
+croissance rapide peut augmenter les ressources mais diminuer la
+résilience si le système devient dépendant de trop peu de personnes.
+
+======================================================================
+10. ÉCONOMIE
+======================================================================
+
+10.1. Trois économies interconnectées
+
+ÉCONOMIE PERSONNELLE Argent du protagoniste, dépenses privées, dettes,
+patrimoine.
+
+ÉCONOMIE DE L’ORGANISATION Charges, rémunérations abstraites, frais
+juridiques, entretien, pertes et dépenses exceptionnelles.
+
+ÉCONOMIE URBAINE Activité des commerces, emploi, tourisme, immobilier,
+équipements publics, culture et vie locale.
+
+Les flux criminels sont représentés uniquement de manière abstraite et
+narrative. Le jeu ne doit pas enseigner des méthodes de trafic, de
+blanchiment, de dissimulation financière ou d’évitement des contrôles.
+
+10.2. Richesse, liquidité et solidité
+
+RICHESSE Ce que le protagoniste ou l’organisation possède.
+
+LIQUIDITÉ Ce qui peut être mobilisé immédiatement.
+
+SOLIDITÉ Capacité à supporter une mauvaise période.
+
+Un système peut être riche sur le papier et manquer de liquidités. Il
+peut disposer d’argent mais dépendre de trop peu de personnes ou de
+ressources.
+
+10.3. Exemple budgétaire fictif
+
+Cet exemple est une démonstration d’équilibrage, pas une donnée réelle.
+
+Entrées abstraites : +42 000 € Charges récurrentes : -18 000 € Charges
+exceptionnelles : -11 500 € Solde du mois : +12 500 €
+
+La rentabilité ne doit jamais être la seule mesure du succès. Les coûts
+humains, les départs, les dettes relationnelles et la pression
+extérieure peuvent rendre une situation financièrement positive mais
+stratégiquement désastreuse.
+
+======================================================================
+11. SYSTÈME DES FLUX INTERNATIONAUX
+======================================================================
+
+11.1. Concept — GESTION ABSTRAITE VALIDÉE
+
+Le joueur souhaite une dimension de gestion des transports
+internationaux de drogue, avec notamment des origines narratives comme
+le Maroc ou les Pays-Bas et une destination à Marseille.
+
+Le jeu peut représenter ces relations sous la forme d’un système
+stratégique abstrait appelé « Réseaux internationaux ».
+
+Ce système doit se concentrer sur : - engagements fictifs ; - relations
+entre personnages ; - volumes abstraits ; - argent immobilisé ou exposé
+; - fiabilité des engagements ; - pression judiciaire ; - instabilité
+organisationnelle ; - conséquences humaines.
+
+11.2. Informations possibles dans l’interface
+
+ORIGINE NARRATIVE Pays ou zone fictive d’origine, par exemple Maroc ou
+Pays-Bas.
+
+RELATION État de confiance entre les personnages impliqués.
+
+VOLUME ABSTRAIT Importance du flux dans l’économie fictive, sans détail
+opérationnel.
+
+ENGAGEMENT FINANCIER Argent immobilisé, promis ou exposé.
+
+FIABILITÉ Régularité des résultats narratifs.
+
+EXPOSITION JUDICIAIRE Pression institutionnelle et judiciaire.
+
+INSTABILITÉ Risque de rupture, de conflit ou de défaillance.
+
+CONSÉQUENCES HUMAINES Personnes exposées, exploitées ou touchées par les
+événements.
+
+11.3. Cinq familles de risques
+
+RISQUE JUDICIAIRE Enquêtes, procédures, arrestations et conséquences
+pénales.
+
+RISQUE FINANCIER Pertes, dettes, argent immobilisé et engagements non
+tenus.
+
+RISQUE HUMAIN Exploitation, blessures, décès, familles touchées et
+traumatismes.
+
+RISQUE RELATIONNEL Trahisons, conflits entre responsables et perte de
+confiance.
+
+RISQUE ORGANISATIONNEL Dépendance à quelques individus, désorganisation
+et perte de stabilité.
+
+11.4. Exemple d’événement fictif
+
+Titre : « Un engagement qui tourne mal ».
+
+Un personnage annonce qu’un engagement international ne pourra pas être
+honoré comme prévu. Une somme importante est désormais exposée. Deux
+responsables donnent des versions contradictoires. Un proche du
+protagoniste découvre qu’il a été entraîné dans une situation qu’il ne
+comprenait pas.
+
+Choix possibles : - suspendre les engagements et accepter les pertes ; -
+soutenir le personnage qui a donné sa parole ; - protéger les personnes
+qui risquent de subir les conséquences ; - chercher à quitter cette
+activité.
+
+Les effets dépendent de la confiance, des finances, des relations et des
+décisions antérieures.
+
+11.5. Limites de conception et de sécurité
+
+Le système ne doit pas représenter : - de routes réelles de contrebande
+; - de points de passage opérationnels ; - de techniques de
+dissimulation ; - de méthodes pour éviter les contrôles ; - de
+procédures de recrutement ou de coordination criminelle ; - de tactiques
+concrètes de transport ; - de techniques de blanchiment ou de
+dissimulation financière.
+
+Les pays et les relations internationales servent de contexte narratif
+et économique fictif. Les mécaniques portent sur les arbitrages, les
+risques et les conséquences, pas sur l’exécution réelle d’un trafic.
+
+======================================================================
+12. POSSIBILITÉ DE SORTIE DU MONDE CRIMINEL
+======================================================================
+
+12.1. Principe — SORTIE SOUS CONDITIONS VALIDÉE
+
+Le joueur peut tenter de quitter le monde criminel, mais cette sortie
+dépend de conditions construites pendant la campagne.
+
+Elle ne doit pas être un bouton magique ni une option toujours
+disponible sans conséquence.
+
+12.2. Conditions possibles — PROPOSITION
+
+La possibilité de sortie pourrait dépendre de : - engagements encore en
+cours ; - dettes financières ; - dettes relationnelles ; - confiance de
+certains personnages ; - pression judiciaire ; - personnes dépendantes
+du protagoniste ; - capacité à transférer ou abandonner ses
+responsabilités ; - possibilité de reconstruire une vie légale ; -
+événements irréversibles déjà survenus.
+
+Ces conditions doivent être définies précisément pendant la conception
+des systèmes.
+
+12.3. Trajectoires possibles
+
+Le protagoniste peut : - préparer une sortie progressive ; - tenter une
+rupture brutale avec des conséquences importantes ; - échouer à quitter
+cet univers ; - réussir à partir mais perdre certaines relations ; -
+reconstruire une vie différente ; - continuer malgré le coût personnel.
+
+La sortie doit être une trajectoire de jeu complète, pas une simple
+cinématique finale.
+
+======================================================================
+13. CAMPAGNE 2021–2026
+======================================================================
+
+13.1. Découpage général proposé
+
+PROLOGUE — LE VIDE (2021) Le protagoniste a 16 ans. Il découvre les
+tensions de son environnement, sa famille, ses premiers contacts et les
+conséquences des décisions des adultes.
+
+ACTE I — LES ÉQUILIBRES (2021–2022) Développer les relations, comprendre
+les règles de son environnement, gérer les premières responsabilités et
+faire face aux premiers choix difficiles.
+
+ACTE II — LES CHOIX (2022–2023) Le protagoniste gagne en autonomie. Les
+décisions ont des conséquences financières, judiciaires et
+relationnelles plus importantes.
+
+ACTE III — LES FRACTURES (2023–2024) Les conséquences accumulées
+provoquent des ruptures. Les personnages changent, certains partent et
+les équilibres deviennent plus fragiles.
+
+ACTE IV — L’HÉRITAGE (2025–2026) Le protagoniste doit décider de ce
+qu’il veut préserver, transformer ou abandonner. Une trajectoire de
+direction ou de sortie peut se dessiner.
+
+Les dates sont des repères de structure. Les événements exacts, la durée
+de chaque acte et les transitions restent à détailler.
+
+13.2. Arcs narratifs parallèles
+
+ARC ORGANISATION Les membres, les responsabilités, les désaccords et la
+stabilité du groupe.
+
+ARC FAMILLE Les proches du protagoniste, les promesses, les tensions et
+les sacrifices.
+
+ARC HABITANTS Commerçants, voisins, associations, familles et
+conséquences locales.
+
+ARC INSTITUTIONS Enquêteurs, justice et services publics fictifs, avec
+une représentation non opérationnelle de la pression institutionnelle.
+
+ARC MÉDIAS Journalistes fictifs, témoins, rumeurs et versions
+contradictoires des événements.
+
+ARC VILLE Les quartiers, leurs transformations, leur vie quotidienne et
+les événements indépendants du protagoniste.
+
+13.3. Trois temporalités de conséquences
+
+IMMÉDIATE La réaction dans la scène ou la journée.
+
+DIFFÉRÉE Les effets qui apparaissent quelques semaines ou quelques mois
+plus tard.
+
+LONG TERME Les effets qui réapparaissent des années après, parfois dans
+l’épilogue.
+
+Les conséquences peuvent être visibles, cachées, incertaines ou
+irréversibles.
+
+======================================================================
+14. PREMIÈRES MISSIONS À 16 ANS
+======================================================================
+
+Le prologue doit installer le protagoniste comme adolescent, pas comme
+dirigeant.
+
+La première heure doit présenter sa vie, ses relations, son quartier,
+ses motivations et les premiers dilemmes. Elle doit montrer que les
+adultes et les événements ont leur propre dynamique.
+
+Les missions ci-dessous constituent une PROPOSITION de structure pour le
+premier chapitre.
+
+MISSION 1 — « LE QUOTIDIEN » Objectif narratif : Présenter le
+protagoniste à 16 ans, sa famille, son quartier et ses habitudes.
+
+Contenu : - scène d’ouverture dans son environnement quotidien ; -
+présentation de la famille ou des proches ; - présentation de l’école ou
+de la situation scolaire ; - premier contact avec quelques personnages
+; - découverte de la carte locale.
+
+Systèmes introduits : - fiche du protagoniste ; - calendrier ; - carte
+; - personnages ; - premières conversations.
+
+Résultat : Le joueur définit ses priorités personnelles et comprend que
+son quotidien existe indépendamment des événements criminels.
+
+MISSION 2 — « LES VISAGES » Objectif narratif : Présenter le petit
+réseau humain qui entoure le protagoniste.
+
+Contenu : - rencontre de plusieurs personnages ; - découverte de leurs
+personnalités et de leurs intérêts ; - présentation de leurs relations
+; - première demande contradictoire.
+
+Systèmes introduits : - confiance ; - relations ; - mémoire des choix
+; - journal des événements.
+
+Résultat : Le joueur comprend que les personnages ne sont pas des
+ressources interchangeables et qu’une même situation peut être racontée
+différemment par plusieurs personnes.
+
+MISSION 3 — « LA PROMESSE » Objectif narratif : Faire prendre au joueur
+un premier engagement personnel.
+
+Contenu : Un personnage demande au protagoniste de tenir une promesse.
+Une autre personne lui demande quelque chose d’incompatible avec cet
+engagement.
+
+Systèmes introduits : - choix à conséquences ; - promesses ; - temps
+limité ; - conséquences différées.
+
+Résultat : Le joueur découvre qu’il ne peut pas satisfaire tout le
+monde. Le choix sera mémorisé et pourra revenir plus tard.
+
+MISSION 4 — « LE BRUIT » Objectif narratif : Montrer comment une rumeur
+ou un événement local peut modifier les relations.
+
+Contenu : Plusieurs personnages donnent des versions différentes d’un
+même événement. Le protagoniste doit décider à qui parler, ce qu’il
+croit et s’il intervient.
+
+Systèmes introduits : - informations contradictoires ; - journal ; -
+réputation ; - incertitude.
+
+Résultat : Le joueur comprend que les informations sont partielles et
+que ses décisions peuvent être prises sur la base d’une version
+incomplète.
+
+MISSION 5 — « LES ABSENTS » Objectif narratif : Faire découvrir les
+conséquences humaines d’un événement qui dépasse le protagoniste.
+
+Contenu : Un personnage est absent, une famille attend des nouvelles et
+des proches ne partagent pas la même interprétation de la situation.
+
+Systèmes introduits : - événements différés ; - conséquences humaines
+; - mémoire des personnages ; - relations familiales.
+
+Résultat : Le jeu affirme son ton : les événements ne sont pas de
+simples occasions de gagner des ressources. Ils touchent des personnes
+et des familles.
+
+MISSION 6 — « LE PREMIER CHOIX » Objectif narratif : Conclure le
+prologue par une décision qui donne une direction au personnage.
+
+Contenu : Plusieurs problèmes se présentent simultanément. Le
+protagoniste doit choisir ce qu’il traite en premier et ce qu’il laisse
+de côté.
+
+Systèmes introduits : - priorités ; - points d’action ; - arbitrage ; -
+conséquences simultanées.
+
+Résultat : La première trajectoire du joueur se dessine. Il ne devient
+pas automatiquement un membre important ou un dirigeant. Il vient de
+faire un choix qui influencera les possibilités futures.
+
+14.1. Durée cible du prologue — PROPOSITION
+
+Le premier chapitre complet pourrait durer environ 45 à 60 minutes.
+
+Le premier prototype peut être plus court, autour de 30 à 45 minutes,
+pour tester les systèmes fondamentaux.
+
+14.2. Critères de réussite des premières missions
+
+Le joueur doit : - comprendre qu’il incarne un adolescent de 16 ans ; -
+s’attacher à au moins quelques personnages ; - percevoir la vie
+quotidienne de Marseille ; - comprendre que les personnages ont leur
+propre volonté ; - ressentir qu’il ne peut pas résoudre tous les
+problèmes ; - prendre au moins une décision dont les effets reviendront
+plus tard ; - comprendre que l’ascension n’est ni automatique ni
+nécessairement positive.
+
+======================================================================
+15. SYSTÈME DE FINS LIBRES
+======================================================================
+
+15.1. Principe — VALIDÉ
+
+Il n’y a pas de sélection obligatoire parmi six fins prédéfinies. Le
+système doit construire une conclusion à partir des éléments de la
+partie.
+
+15.2. Dimensions de conclusion
+
+ORGANISATION Existe-t-elle encore ? Sous quelle forme ? Est-elle stable,
+fragmentée ou disparue ?
+
+PROTAGONISTE Qui est-il devenu ? A-t-il changé de valeurs ? A-t-il
+conservé ses relations ?
+
+RELATIONS Qui lui parle encore ? Qui l’a quitté ? Qui lui pardonne ou
+refuse de le revoir ?
+
+VILLE Quelles conséquences ses décisions ont-elles laissées dans les
+quartiers et dans la vie des habitants ?
+
+HÉRITAGE Que reste-t-il après son départ ? Quelles promesses ont été
+tenues ou brisées ?
+
+15.3. Variables persistantes possibles
+
+-   promesses tenues et rompues ;
+-   personnages protégés ou abandonnés ;
+-   relations réconciliées ou brisées ;
+-   responsabilités assumées ou transférées ;
+-   conséquences locales réparées ou ignorées ;
+-   décisions irréversibles ;
+-   événements laissés sans réponse ;
+-   tentatives de sortie ;
+-   état de la famille ;
+-   stabilité et résilience ;
+-   évolution des quartiers connus.
+
+15.4. Exemples de trajectoires, non exhaustifs
+
+LE DÉPART Le protagoniste quitte son rôle. L’organisation continue sans
+lui, mais certaines relations personnelles sont abîmées.
+
+LA CHUTE L’organisation s’effondre. Les personnages doivent reconstruire
+leur vie et certains ne pardonneront jamais.
+
+LA RECONSTRUCTION Le protagoniste a réussi à transformer une partie de
+son environnement, mais pas sans sacrifices.
+
+LA SURVIE L’organisation reste debout, mais le protagoniste a perdu une
+grande partie de ce qui donnait du sens à sa vie.
+
+Ces exemples ne constituent pas une liste fermée de fins. Le système
+doit pouvoir produire des conclusions nuancées et combinées.
+
+======================================================================
+16. LA VILLE COMME PERSONNAGE
+======================================================================
+
+Marseille ne doit pas être un décor statique. Elle possède son
+calendrier, ses rythmes, ses événements et ses transformations.
+
+Éléments à intégrer progressivement : - matchs de l’OM et ambiance des
+jours de match ; - marchés et vie commerciale ; - saison touristique ; -
+mistral, chaleur, pluie et météo ; - travaux et évolutions des
+transports ; - festivals et événements culturels ; - manifestations ; -
+vie associative et sportive ; - vacances scolaires et rentrée ; -
+événements institutionnels et politiques locaux.
+
+Ces événements peuvent affecter : - fréquentation des quartiers ; -
+humeur des habitants ; - circulation ; - disponibilité des personnages
+; - activité commerciale ; - événements narratifs.
+
+16.1. Authenticité et sources
+
+Les lieux, quartiers, transports et éléments culturels de Marseille
+doivent être réels et vérifiés.
+
+Les événements publics historiques peuvent servir de contexte, mais les
+intrigues criminelles doivent être fictionnalisées.
+
+Le calendrier historique doit distinguer : - faits historiques publics
+et vérifiables ; - situations inspirées du réel et réécrites ; - fiction
+pure.
+
+======================================================================
+17. RÈGLES D’AUTHENTICITÉ, DE FICTION ET DE RESPONSABILITÉ
+======================================================================
+
+17.1. Marseille authentique
+
+Les lieux et éléments culturels doivent être réels : quartiers, rues,
+places, plages, stades, transports, commerces typiques, expressions,
+accent, OM, festivals, mistral, panisses, pastis et vie quotidienne.
+
+Les détails précis doivent être vérifiés avant intégration.
+
+17.2. Personnages fictifs
+
+Ne pas nommer de personnes réelles impliquées dans des affaires
+criminelles, policières, politiques ou judiciaires.
+
+Tous les personnages importants doivent être fictifs, avec des noms et
+biographies inventés. Ils peuvent être composites et inspirés de
+situations publiques, mais ne doivent pas permettre d’identifier une
+personne réelle.
+
+Même principe pour les équipes, responsables et organisations fictives.
+
+17.3. Événements inspirés du réel
+
+Les événements peuvent s’inspirer de types de situations publiques : -
+affaires judiciaires ; - opérations de police ; - tensions locales ; -
+scandales ; - saisies ; - drames de quartier ; - conséquences sur les
+familles ; - mobilisations des habitants.
+
+Ils doivent être réécrits et ne pas attribuer de faits réels à des
+personnes identifiables.
+
+17.4. Conséquences humaines obligatoires
+
+Le jeu doit montrer les conséquences : - prison ; - deuil ; - peur ; -
+familles abîmées ; - traumatismes ; - commerces touchés ; - habitants
+qui déménagent ; - relations détruites ; - personnes qui refusent de
+pardonner.
+
+Les habitants ordinaires doivent avoir une voix et ne jamais être
+réduits à des caricatures.
+
+17.5. Limites opérationnelles
+
+La fiction criminelle est possible, mais les systèmes doivent rester non
+opérationnels.
+
+Ne pas fournir de méthodes concrètes permettant : - d’organiser un
+trafic ; - d’acheminer réellement des stupéfiants ; - de dissimuler des
+marchandises ; - d’éviter les contrôles ; - de blanchir de l’argent ; -
+de recruter ou coordonner des activités criminelles ; - d’utiliser des
+armes ou de mener des violences de manière tactique.
+
+Le cœur du jeu est la gestion abstraite, la narration, les relations, la
+pression, les risques et les conséquences.
+
+======================================================================
+18. INTERFACE ET EXPÉRIENCE MOBILE
+======================================================================
+
+Cinq écrans principaux ont été proposés.
+
+1.  CARTE Marseille, quartiers, informations connues, accès débloqués,
+    lieux et événements.
+
+2.  TABLEAU DE BORD Indicateurs, finances, priorités, situation générale
+    et alertes.
+
+3.  PERSONNAGES Portraits, relations, conversations, demandes et
+    historique.
+
+4.  JOURNAL Événements, informations contradictoires, actualités locales
+    et conséquences.
+
+5.  GESTION Planning, priorités, décisions, affectation du temps et
+    bilan de période.
+
+Règles UX proposées : - une information importante doit être accessible
+en deux ou trois interactions maximum ; - les décisions expliquent leurs
+conséquences connues sans révéler tous les effets futurs ; - les alertes
+sont hiérarchisées ; - le joueur doit comprendre pourquoi un indicateur
+évolue ; - les événements non résolus restent consultables ; - les
+personnages importants sont accessibles depuis la carte, les événements
+et leur fiche ; - l’interface doit rester confortable sur smartphone ; -
+privilégier des onglets et panneaux de détail plutôt que des écrans
+surchargés.
+
+======================================================================
+19. PROTOTYPE / VERTICAL SLICE
+======================================================================
+
+19.1. Objectif
+
+Le premier prototype ne doit pas chercher à produire toute la campagne
+2021–2026. Il doit démontrer que la boucle de jeu fonctionne et que le
+joueur ressent l’autonomie des personnages et le poids des choix.
+
+Nom de travail : « LE VIDE — 2021 ».
+
+19.2. Contenu minimal proposé
+
+-   carte globale de Marseille ;
+-   représentation des 16 arrondissements ;
+-   référence aux 111 quartiers ;
+-   un secteur de départ détaillé ;
+-   cinq à huit personnages importants ;
+-   protagoniste de 16 ans ;
+-   système de temps ;
+-   système de relations et de mémoire ;
+-   premiers indicateurs de gestion ;
+-   économie simplifiée ;
+-   événements différés ;
+-   une dizaine d’événements narratifs ;
+-   plusieurs situations simultanées ;
+-   une première conséquence irréversible ;
+-   conclusion variable selon les décisions.
+
+19.3. Critères de validation
+
+Le prototype est réussi si : - le joueur comprend rapidement son rôle
+; - il ressent qu’il ne peut pas tout gérer ; - les personnages semblent
+avoir leur propre volonté ; - la carte aide à comprendre la situation
+; - une décision produit une conséquence cohérente mais pas forcément
+prévisible ; - le joueur veut continuer pour découvrir les effets
+différés.
+
+19.4. Principe de production
+
+La carte entière doit être présente et cohérente dès le départ, mais
+tous les quartiers n’ont pas besoin d’avoir la même densité de contenu.
+
+La production peut approfondir progressivement : - les lieux ; - les
+personnages ; - les événements ; - les interactions ; - les arcs
+narratifs.
+
+======================================================================
+20. ORGANISATION DE L’ÉQUIPE AAA
+======================================================================
+
+NARRATIVE DESIGNER - structure de la campagne ; - arcs narratifs ; -
+progression par âge ; - embranchements ; - cohérence des conséquences
+; - système de fins libres.
+
+SCRIPTWRITER - dialogues ; - scènes ; - événements ; - missions ; -
+variations de texte selon les décisions ; - voix des personnages.
+
+CONSULTANT CULTUREL / AUTEUR LOCAL - exactitude des lieux ; - usages et
+expressions ; - crédibilité des situations ; - diversité des voix
+habitantes ; - contrôle des stéréotypes ; - vérification du contexte
+marseillais.
+
+LEAD GAME DESIGNER - vision générale ; - règles de progression ; -
+boucle de jeu ; - arbitrages ; - cohérence des systèmes ; - priorités de
+production.
+
+SYSTEM DESIGNER - personnages autonomes ; - mémoire ; - variables
+persistantes ; - conséquences différées ; - progression ; - événements
+dynamiques.
+
+ÉCONOMISTE - ressources ; - charges ; - flux abstraits ; - risques ; -
+équilibrage ; - résilience financière.
+
+UI/UX DESIGNER - navigation mobile ; - carte ; - tableau de bord ; -
+fiches personnages ; - journal ; - gestion des priorités ; - lisibilité
+des conséquences.
+
+======================================================================
+21. POINTS ENCORE À DÉFINIR
+======================================================================
+
+Les points suivants ne sont pas encore validés et ne doivent pas être
+considérés comme décidés.
+
+21.1. Personnage - protagoniste entièrement personnalisable ou
+personnage préécrit ; - prénom et apparence ; - origine familiale ; -
+motivation initiale ; - situation scolaire ; - tempérament et
+caractéristiques de départ.
+
+21.2. Secteur de départ Le joueur n’a pas encore choisi le secteur de
+départ. Options évoquées : - quartiers nord ; - centre-ville ; -
+quartiers est ; - quartiers sud ; - choix du joueur.
+
+21.3. Progression temporelle Le rythme précis n’est pas encore décidé.
+Options évoquées : - journées et semaines avec validation du joueur ; -
+temps continu avec pause ; - système hybride, journées de gestion et
+accélération entre chapitres.
+
+21.4. Intensité de représentation Le ton exact reste à choisir : -
+réalisme social et psychologique très poussé ; - réalisme avec mise en
+scène cinématographique ; - style presque documentaire et très sobre.
+
+21.5. Système des flux internationaux Les catégories d’indicateurs sont
+proposées, mais les règles numériques, les fréquences d’événements, les
+coûts et les effets restent à équilibrer.
+
+21.6. Sortie du monde criminel Le principe de sortie sous conditions est
+validé, mais les conditions exactes, les étapes et les conséquences
+restent à définir.
+
+21.7. Économie Les indicateurs sont proposés. Les valeurs de départ, la
+progression économique, les coûts et l’équilibrage complet restent à
+construire.
+
+21.8. Carte La carte globale est validée comme ambition. Le secteur de
+départ, le découpage définitif des zones de gameplay et la densité des
+lieux détaillés restent à définir.
+
+======================================================================
+22. PROCHAINES ÉTAPES DE PRODUCTION RECOMMANDÉES
+======================================================================
+
+ÉTAPE 1 — VERROUILLER LE PROTAGONISTE Définir sa création, sa famille,
+ses motivations et son point de départ.
+
+ÉTAPE 2 — CHOISIR LE SECTEUR DE DÉPART Sélectionner une zone réelle de
+Marseille et établir une première carte de lieux.
+
+ÉTAPE 3 — CRÉER LES PERSONNAGES DU PROLOGUE Écrire cinq à huit
+personnages avec objectifs, relations, mémoire et évolutions possibles.
+
+ÉTAPE 4 — ÉCRIRE LES PREMIÈRES MISSIONS Développer « Le Quotidien », «
+Les Visages », « La Promesse », « Le Bruit », « Les Absents » et « Le
+Premier Choix ».
+
+ÉTAPE 5 — PROTOTYPER LA BOUCLE Construire le calendrier, les points
+d’action, les événements et les conséquences différées.
+
+ÉTAPE 6 — PROTOTYPER LES INDICATEURS Ajouter les premières variables de
+stabilité, trésorerie, confiance, pression, ancrage humain et
+résilience.
+
+ÉTAPE 7 — PROTOTYPER LA CARTE Afficher Marseille entière, puis détailler
+le secteur de départ.
+
+ÉTAPE 8 — TESTER LES TRAJECTOIRES Vérifier qu’un joueur peut progresser,
+stagner, perdre sa place ou préparer une sortie.
+
+ÉTAPE 9 — ÉTENDRE LA CAMPAGNE Une fois le prologue validé, développer
+les années suivantes et leurs embranchements.
+
+======================================================================
+23. RÉSUMÉ EXÉCUTIF
+======================================================================
+
+TITRE DE TRAVAIL MARSEILLE
+
+GENRE Jeu mobile de gestion stratégique et de narration interactive.
+
+CADRE Marseille réelle, représentée avec ses quartiers, ses transports,
+ses habitants, ses lieux et ses rythmes.
+
+PÉRIODE 2021–2026.
+
+DÉPART Le protagoniste a 16 ans en 2021.
+
+TRAJECTOIRE Départ au bas de l’échelle, progression graduelle,
+responsabilités croissantes, possibilité de stagnation, de chute ou de
+sortie.
+
+PROGRESSION Hybride : grandes étapes scénarisées et décisions libres à
+l’intérieur de chaque étape.
+
+CARTE Toute la ville représentée dès le départ ; accès et profondeur
+d’interaction progressifs.
+
+GESTION Temps, ressources, relations, responsabilités, stabilité,
+finances, pression, ancrage humain et résilience.
+
+PERSONNAGES Autonomes, avec mémoire, objectifs, relations et
+conséquences durables.
+
+FLUX INTERNATIONAUX Gestion abstraite d’engagements, de finances, de
+relations, de fiabilité, de risques et de conséquences. Aucun détail
+opérationnel de trafic réel.
+
+SORTIE Possible sous conditions, construites au fil de la campagne.
+
+FINS Libres et émergentes, calculées à partir du parcours du joueur.
+
+TON Réalisme social et psychologique, authenticité marseillaise,
+conséquences humaines, personnages fictifs et situations composites.
+
+PROMESSE Le joueur ne choisit pas simplement jusqu’où il monte. Il
+découvre ce qu’il est devenu, ce qu’il a perdu et ce qu’il laisse
+derrière lui.
+
+FIN DU DOCUMENT

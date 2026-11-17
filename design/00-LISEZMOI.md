@@ -25,6 +25,7 @@ Dépôt : `bagelstory/MASSILIA`, branche `j1`. Moteur : **Unity 2022.3 LTS, C#**
 | `12-bible-canaux.md` | Le téléphone dans le trafic : le Fil, Traces, événements, écran de fin de semaine. |
 | `13-facades.md` | Placer l'argent sale : 7 secteurs, plausibilité, Éveil, événements. |
 | `BRAINSTORM.txt` | Carnet vivant : directions, idées en vrac, questions ouvertes. À compléter à chaque séance. |
+| `14-fusion-v6.md` | Fusion avec le dossier V6 « MARSEILLE » (`ref/MARSEILLE_GDD_V6.txt`) : prologue à 16-17 ans sans gestion, puis campagne CHOUF dès 18 ans. |
 | `09-campagne-marseille.md` | Ancienne campagne (remplacée) : seuls le tempo et les rangs restent valables. |
 | `01` à `07` | Plan v1, modèle de données, prompts d'images/3D (utiles pour l'art). |
 
