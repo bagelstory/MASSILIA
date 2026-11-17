@@ -39,6 +39,8 @@ namespace Marseille.Systems
             }
             WorldStart.PlaceBase(ref data, config, rng, ref poiId);
             WorldStart.AddStartingOperators(ref data, config, rng);
+            CrewRules.BuildArrondissements(ref data);
+            CrewActions.AutoStaff(ref data, config);
             FluxActions.CreateOffers(ref data, config);
             QuestRules.CreateFixedQuests(ref data, config);
             QuestRules.EnsureZoneQuests(ref data, config);

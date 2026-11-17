@@ -32,6 +32,21 @@ namespace Marseille.Data
         /// <summary>Cycles restants de fermeture après une saisie (0 si actif).</summary>
         public int seizedCycles;
 
+        /// <summary>Premier guetteur (id d'opérateur, <see cref="CrewSlots.Empty"/> si vide).</summary>
+        public int slotGuetteur1;
+
+        /// <summary>Second guetteur.</summary>
+        public int slotGuetteur2;
+
+        /// <summary>Vendeur.</summary>
+        public int slotVendeur;
+
+        /// <summary>Gérant.</summary>
+        public int slotGerant;
+
+        /// <summary>Tête : id d'opérateur, <see cref="CrewSlots.Player"/> ou <see cref="CrewSlots.Empty"/>.</summary>
+        public int slotHead;
+
         /// <summary>Position sur la carte, normalisée de 0 à 1.</summary>
         public float mapX;
 
@@ -57,6 +72,11 @@ namespace Marseille.Data
                 ownerId = Owners.None,
                 isOpen = false,
                 seizedCycles = 0,
+                slotGuetteur1 = CrewSlots.Empty,
+                slotGuetteur2 = CrewSlots.Empty,
+                slotVendeur = CrewSlots.Empty,
+                slotGerant = CrewSlots.Empty,
+                slotHead = CrewSlots.Empty,
                 mapX = 0f,
                 mapY = 0f
             };

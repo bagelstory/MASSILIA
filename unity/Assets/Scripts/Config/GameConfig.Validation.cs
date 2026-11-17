@@ -32,6 +32,7 @@ namespace Marseille.Config
             CheckRange(problems, "mapZoomRange", mapZoomRange.x, mapZoomRange.y);
             CheckRange(problems, "jailCycles", jailCycles.x, jailCycles.y);
             if (ombreTiers.x > ombreTiers.y || ombreTiers.y > ombreTiers.z || ombreTiers.z > ombreTiers.w) problems.Add("ombreTiers doit être croissant.");
+            if (crewWeightVendeur + crewWeightGerant + 2f * crewWeightGuetteur + crewWeightHead <= 0f) problems.Add("Les poids des postes d'un charbon sont tous à zéro.");
             if (facades == null || facades.Length < 7) problems.Add("facades doit contenir 7 fiches (une par secteur).");
             if (facadeEveilControl > facadeEveilFall) problems.Add("facadeEveilControl devrait être ≤ facadeEveilFall.");
             if (contaminationThreshold > contaminationMax) problems.Add("contaminationThreshold devrait être ≤ contaminationMax.");

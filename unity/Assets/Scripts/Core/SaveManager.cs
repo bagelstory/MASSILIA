@@ -112,7 +112,7 @@ namespace Marseille.Core
             }
         }
 
-        /// <summary>Met une ancienne sauvegarde au format actuel (version 1 → 3 : ombre, peur, population, façades).</summary>
+        /// <summary>Met une ancienne sauvegarde au format actuel (version 1 → 4 : ombre, peur, population, façades, hiérarchie).</summary>
         /// <param name="data">État lu, modifié en place.</param>
         private static void Migrate(ref GameData data)
         {
@@ -125,6 +125,7 @@ namespace Marseille.Core
             }
             float treasury = data.indicators.treasury;
             if (data.shadow.debts == null || data.shadow.orders == null) data.shadow = ShadowData.Create(treasury);
+            if (data.saveVersion < 4) MigrateCrew(ref data);
             if (data.shadow.facades == null)
             {
                 ShadowData sh = data.shadow;
@@ -132,6 +133,36 @@ namespace Marseille.Core
                 data.shadow = sh;
             }
             data.saveVersion = GameData.CurrentVersion;
+        }
+
+        /// <summary>Version 3 → 4 : postes vides sur tous les charbons, opérateurs sans rattachement, arrondissements.</summary>
+        /// <param name="data">État lu, modifié en place.</param>
+        private static void MigrateCrew(ref GameData data)
+        {
+            for (int i = 0; i < data.quarters.Count; i++)
+            {
+                QuarterData q = data.quarters[i];
+                for (int p = 0; p < q.pois.Count; p++)
+                {
+                    PoiData poi = q.pois[p];
+                    poi.slotGuetteur1 = CrewSlots.Empty;
+                    poi.slotGuetteur2 = CrewSlots.Empty;
+                    poi.slotVendeur = CrewSlots.Empty;
+                    poi.slotGerant = CrewSlots.Empty;
+                    poi.slotHead = CrewSlots.Empty;
+                    q.pois[p] = poi;
+                }
+                data.quarters[i] = q;
+            }
+            for (int o = 0; o < data.operators.Count; o++)
+            {
+                OperatorData op = data.operators[o];
+                op.role = CrewRole.None;
+                op.poiId = -1;
+                data.operators[o] = op;
+            }
+            data.arrondissements = new System.Collections.Generic.List<ArrondissementData>();
+            Marseille.Systems.CrewRules.BuildArrondissements(ref data);
         }
 
         /// <summary>Vérifications minimales d'une sauvegarde lue.</summary>

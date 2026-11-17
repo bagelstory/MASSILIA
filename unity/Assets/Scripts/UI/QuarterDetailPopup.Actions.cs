@@ -38,6 +38,7 @@ namespace Marseille.UI
                     string label = check.ok ? verb + " (" + UiText.Money(EconomyActions.CharbonCost(poi, c)) + ")" : check.message;
                     card.AddButton(label, check.ok ? c.uiAccent : c.uiButton, () => Act((ref GameData d, GameConfig cfg) => EconomyActions.TakeCharbon(ref d, qid, pid, cfg))).interactable = check.ok;
                 }
+                if (poi.ownerId == Owners.Player) AddCrew(q, poi, data, c);
             }
         }
 

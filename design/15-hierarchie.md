@@ -76,6 +76,7 @@ Soit **5 postes par charbon**. Règle de rattachement :
 6. **Arrondissement chef :** peut-il y avoir une règle de partage (un chef par arrondissement, mais plusieurs bandes dessous) ?
 
 ## 9. À coder (ordre conseillé)
+*État : les points 1 à 3 et 5 sont codés en v1 (non compilé) : `Data/CrewData.cs`, `Systems/CrewRules.cs`, `Systems/CrewActions.cs`, `Systems/HierarchySystem.cs`, `UI/QuarterDetailPopup.Crew.cs`, `Config/GameConfig.Crew.cs`, sauvegarde v4. Le joueur est la tête (jusqu'à 4 charbons), il place ses équipiers aux autres postes ; un poste vide baisse le rendement et pèse sur la pression ; chaque arrondissement a un chef (journal quand il change). Reste : écran dédié arrondissement (point 4), parts de contrôle par personne, personnages nommés aux postes, têtes rivales.*
 1. `CrewRole`, `CrewSlot`, `ControlShare`, `ArrondissementData` (Data/), sauvegarde v4 et migration.
 2. Rattachement des opérateurs à un charbon avec un rôle ; une tête peut en avoir plusieurs, pas les autres (`OperatorRules.Assign`).
 3. `HierarchySystem` : postes vides, promotions, calcul du poids et du chef d'arrondissement.

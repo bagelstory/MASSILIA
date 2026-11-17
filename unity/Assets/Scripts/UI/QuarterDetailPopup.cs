@@ -61,6 +61,7 @@ namespace Marseille.UI
             if (q.knowledgeLevel <= 0 && q.control <= 0f) { Paragraph("Quartier inconnu. Envoie un Repérage depuis un quartier voisin.", 2, c.uiTextDim); return; }
             Paragraph(Presences(q, data), 1 + q.factionPresences.Count, c.uiText);
             Paragraph(Economy(q, data, c), 3, c.uiText);
+            AddArrondissement(q, data, c);
             AddCharbons(q, data, c);
             AddInvest(q, data, c);
             AddShadow(q, data, c);

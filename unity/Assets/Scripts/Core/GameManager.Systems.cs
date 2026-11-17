@@ -17,6 +17,7 @@ namespace Marseille.Core
             manager.Register(new TerritorySystem());
             manager.Register(new FactionAISystem());
             manager.Register(new FluxSystem());
+            manager.Register(new HierarchySystem());
             manager.Register(new EconomySystem());
             manager.Register(new IndicatorSystem());
             manager.Register(new ShadowSystem());

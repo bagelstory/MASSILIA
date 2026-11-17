@@ -56,6 +56,12 @@ namespace Marseille.Data
         /// <summary>Cycles déjà passés en détention : la fiabilité du parloir baisse avec.</summary>
         public int jailServed;
 
+        /// <summary>Rôle dans la hiérarchie (design/15-hierarchie.md).</summary>
+        public CrewRole role;
+
+        /// <summary>Charbon auquel il est attaché (guetteur, vendeur, gérant), ou -1.</summary>
+        public int poiId;
+
         /// <summary>Crée un opérateur disponible, sur place, au repos.</summary>
         /// <param name="id">Numéro.</param>
         /// <param name="type">Spécialité.</param>
@@ -80,7 +86,9 @@ namespace Marseille.Data
                 transitCycles = 0,
                 unavailableCycles = 0,
                 faceId = string.Empty,
-                nickname = string.Empty
+                nickname = string.Empty,
+                role = CrewRole.None,
+                poiId = -1
             };
         }
 

@@ -12,7 +12,7 @@ namespace Marseille.Data
     public struct GameData
     {
         /// <summary>Version actuelle du format (2 : ajout de l'ombre, de la peur et de la population).</summary>
-        public const int CurrentVersion = 3;
+        public const int CurrentVersion = 4;
 
         /// <summary>Version du format, pour les migrations de sauvegarde.</summary>
         public int saveVersion;
@@ -77,6 +77,9 @@ namespace Marseille.Data
         /// <summary>L'ombre : jauge Ombre, morts, dettes de sang, ordres en attente (version 2).</summary>
         public ShadowData shadow;
 
+        /// <summary>Arrondissements et leur chef (design/15-hierarchie.md).</summary>
+        public List<ArrondissementData> arrondissements;
+
         /// <summary>Crée une sauvegarde vide avec toutes ses listes initialisées.</summary>
         /// <param name="seed">Graine aléatoire.</param>
         /// <param name="treasury">Trésorerie de départ.</param>
@@ -106,7 +109,8 @@ namespace Marseille.Data
                 nextOperatorId = 1,
                 log = new List<string>(),
                 endType = EndType.None,
-                shadow = ShadowData.Create(treasury)
+                shadow = ShadowData.Create(treasury),
+                arrondissements = new List<ArrondissementData>()
             };
         }
 

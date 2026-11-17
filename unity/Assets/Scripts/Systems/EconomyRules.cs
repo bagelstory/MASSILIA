@@ -32,7 +32,8 @@ namespace Marseille.Systems
         {
             if (q.control <= 0f) return 0f;
             float producing = 0f;
-            for (int i = 0; i < q.pois.Count; i++) if (q.pois[i].IsProducingForPlayer()) producing += q.pois[i].revenue;
+            for (int i = 0; i < q.pois.Count; i++)
+                if (q.pois[i].IsProducingForPlayer()) producing += q.pois[i].revenue * CrewRules.Efficiency(q.pois[i], config);
             float efficiency = hasPressureOperator ? 1f : config.incomeWithoutPressure;
             float people = q.population > 0f ? q.population / 100f : 1f;
             return producing * (1f + q.investmentLevel * config.investIncomeGain) * (q.control / 100f) * efficiency * seasonMultiplier * people;
