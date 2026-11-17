@@ -95,6 +95,7 @@ Légende : A argent, P pression, C contrôle, L loyauté, Q quartier, F bande, P
 - **Locataire d'un immeuble racheté** : *« On nous a dit que c'était provisoire. Ça fait deux ans. »*
 
 ## 9. À coder (ordre conseillé)
+*État : les points 1 à 5 sont codés en v1 (non compilé) : `Data/FacadeData.cs`, `Config/GameConfig.Facade.cs`, `Systems/Facade*.cs`, `UI/QuarterDetailPopup.Facade.cs`, sauvegarde v3. Simplifications : liquidation immédiate (pas 4 semaines), pas encore de gérant, pas de champ Éveil par quartier (Éveil par façade). Le point 6 (15 événements) reste à faire.*
 1. `GameConfig.Facade.cs` : une fiche par secteur (absorption, délai, croissance, plafonds), validée dans `GameConfig.Validation`.
 2. `Data/FacadeData.cs` : `FacadeData{sector, quarterId, managerId, age, absorbed, eveil}` ; liste dans `ShadowData` ; **`CurrentVersion = 3`** + `SaveManager.Migrate`.
 3. Champ `eveil` dans `QuarterData`.

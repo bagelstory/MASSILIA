@@ -64,6 +64,7 @@ namespace Marseille.UI
             AddCharbons(q, data, c);
             AddInvest(q, data, c);
             AddShadow(q, data, c);
+            AddFacades(q, data, c);
         }
 
         /// <summary>Zone, statut, contrôle, connaissance, opérateurs présents.</summary>

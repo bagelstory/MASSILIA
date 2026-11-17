@@ -66,6 +66,9 @@ namespace Marseille.Data
         /// <summary>Ordres en attente de résolution.</summary>
         public List<PendingOrder> orders;
 
+        /// <summary>Façades ouvertes (design/13-facades.md).</summary>
+        public List<FacadeData> facades;
+
         /// <summary>Ombre vide, listes initialisées.</summary>
         /// <param name="treasury">Trésorerie de départ.</param>
         /// <returns>L'état initial.</returns>
@@ -80,7 +83,8 @@ namespace Marseille.Data
                 lastTreasury = treasury,
                 lastFear = 0f,
                 debts = new List<BloodDebt>(),
-                orders = new List<PendingOrder>()
+                orders = new List<PendingOrder>(),
+                facades = new List<FacadeData>()
             };
         }
 

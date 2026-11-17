@@ -12,7 +12,7 @@ namespace Marseille.Data
     public struct GameData
     {
         /// <summary>Version actuelle du format (2 : ajout de l'ombre, de la peur et de la population).</summary>
-        public const int CurrentVersion = 2;
+        public const int CurrentVersion = 3;
 
         /// <summary>Version du format, pour les migrations de sauvegarde.</summary>
         public int saveVersion;

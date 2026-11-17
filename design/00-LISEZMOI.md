@@ -33,9 +33,9 @@ Dépôt : `bagelstory/MASSILIA`, branche `j1`. Moteur : **Unity 2022.3 LTS, C#**
 - **Contraintes** : uGUI construit dans le code, pas de TextMeshPro, pas de coroutines, fichiers ≤ 200 lignes, sauvegarde `JsonUtility` (pas de dictionnaires), chiffres dans le `GameConfig` (ScriptableObject).
 - **Cycle** : 1 cycle = 1 semaine. Chaque système implémente `ICycleSystem`. Ordre : Operator, Territory, FactionAI, Flux, Economy, Indicator, **Shadow**, GameEvent, Quest, EndCondition (`GameManager.Systems.cs`).
 - **Structs avec listes** : copier, modifier, réaffecter. Enums sérialisés en entiers : **ajouter à la fin seulement**.
-- **Sauvegarde** : version courante 2 (`GameData.CurrentVersion`), migrations dans `SaveManager.Migrate`.
-- **Déjà codé (non compilé)** : Ordre et Dette de sang, Parloir (Baumettes, quartier 901), Terreur, argent sale et « Placer l'argent », jauge Ombre (voile noir), voir `Systems/Shadow*.cs`, `Config/GameConfig.Shadow.cs`, `UI/ShadowVeil.cs`.
-- **Pas encore codé** : fin de « sécuriser puis partir », pression de police par zone, écran de fin de semaine, campagne JSON, carrefours, nouvelles fins, Canaux (`12`), Façades (`13`).
+- **Sauvegarde** : version courante 3 (`GameData.CurrentVersion`), migrations dans `SaveManager.Migrate`.
+- **Déjà codé (non compilé)** : Ordre et Dette de sang, Parloir (Baumettes, quartier 901), Terreur, argent sale et « Placer l'argent », jauge Ombre (voile noir), **façades** (7 secteurs, plausibilité, Éveil, fermer ; v1 de `13`), voir `Systems/Shadow*.cs`, `Systems/Facade*.cs`, `Config/GameConfig.Shadow.cs`, `UI/ShadowVeil.cs`.
+- **Pas encore codé** : fin de « sécuriser puis partir », pression de police par zone, écran de fin de semaine, campagne JSON, carrefours, nouvelles fins, Canaux (`12`), événements de façade (15) et gérant de façade (`13`).
 
 ## Priorités
 1. **Compiler** (milestone J1) : ouvrir Unity, menu Marseille → 1. Créer la configuration par défaut / 2. Créer la scène principale, corriger les erreurs.
