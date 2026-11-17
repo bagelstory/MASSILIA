@@ -2,6 +2,8 @@
 
 *17 novembre 2026. Deuxième réunion, sur un ton très sombre : Marseille de 2010 à aujourd'hui. **Ce document remplace le ton de la bible 10 et sa campagne festive** (`09`, et le §6 de `10`). Gardés de ces documents : les règles, les zones, les rangs du réseau et la simulation (§3-4 de `10`). Ce sont des idées : rien n'est encore codé, et les chiffres sont à vérifier en simulation sur 260 semaines.*
 
+> **Ajout (17 nov., soir) :** `12-bible-canaux.md` couvre le téléphone dans le trafic (le Fil, traces, doxxing, message d'un gamin).
+
 ## 0. La noirceur, et ses limites
 - Le noir vient de **l'atmosphère, de la peur, des traces et du deuil**. Jamais d'un mode d'emploi.
 - **Tout est inventé** : personnes, bandes, affaires, policiers, élus, journal. Les **lieux sont réels**. Les phénomènes réels sont décrits **de façon générale**, sans aucune affaire identifiable.
