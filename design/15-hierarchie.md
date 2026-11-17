@@ -35,7 +35,7 @@ Soit **5 postes par charbon**. Règle de rattachement :
 - Au-dessus, la bande ou le sommet à distance (`11`, l'Armateur) ne se voit pas dans la hiérarchie du terrain.
 
 ## 4. Où est le joueur ?
-**À décider (voir §8).** Deux lectures possibles :
+**DÉCIDÉ (17 nov.) : lecture A, le joueur est une tête qui monte.** Capacité d'une tête : **4 charbons** (valeur de départ, à simuler). Les deux lectures étudiées :
 - **A. Le joueur est une tête**, qui monte jusqu'à chef d'arrondissement puis au-delà (la progression de `14` : équipier puis tête).
 - **B. Le joueur dirige depuis l'arrondissement** et nomme les têtes, gérants, vendeurs et guetteurs à chaque charbon.
 
@@ -68,8 +68,8 @@ Soit **5 postes par charbon**. Règle de rattachement :
 **Ordre de résolution :** un `HierarchySystem` juste avant `EconomySystem` (postes vides, promotions, chef), l'économie lit ensuite les postes.
 
 ## 8. Questions ouvertes
-1. **Rôle du joueur :** A (une tête qui monte) ou B (il dirige l'arrondissement et nomme) ? *Recommandation :* A, parce que ça rejoint le prologue puis la campagne de `14` (apprenti, tête, chef).
-2. **Capacité d'une tête :** 4 charbons (proposition) ?
+1. ~~Rôle du joueur~~ **DÉCIDÉ : une tête qui monte** (apprenti, tête, chef d'arrondissement).
+2. ~~Capacité d'une tête~~ **DÉCIDÉ : 4 charbons** (à simuler).
 3. **Personnes dans un quartier :** combien de têtes au maximum se partagent un quartier (2 ? 3 ?) ?
 4. **Un charbon sans tête :** autorisé (mais risqué), ou interdit ?
 5. **Les postes sont-ils tenus par des personnages nommés** (avec mémoire, loyauté) **ou par des anonymes** au-dessous du gérant ? *Recommandation :* gérants et têtes nommés, guetteurs et vendeurs semi-anonymes (prénoms qui changent, cf. `11` §1).
