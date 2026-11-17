@@ -24,6 +24,7 @@ Dépôt : `bagelstory/MASSILIA`, branche `j1`. Moteur : **Unity 2022.3 LTS, C#**
 | `11-bible-ombre.md` | **Référence du ton et de la campagne** (« Cinq ans de dette »), mécaniques noires, fins, événements. |
 | `12-bible-canaux.md` | Le téléphone dans le trafic : le Fil, Traces, événements, écran de fin de semaine. |
 | `13-facades.md` | Placer l'argent sale : 7 secteurs, plausibilité, Éveil, événements. |
+| `BRAINSTORM.txt` | Carnet vivant : directions, idées en vrac, questions ouvertes. À compléter à chaque séance. |
 | `09-campagne-marseille.md` | Ancienne campagne (remplacée) : seuls le tempo et les rangs restent valables. |
 | `01` à `07` | Plan v1, modèle de données, prompts d'images/3D (utiles pour l'art). |
 

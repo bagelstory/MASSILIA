@@ -1,0 +1,117 @@
+CHOUF : CARNET DE BRAINSTORMING (à compléter au fur et à mesure)
+=================================================================
+Dernière mise à jour : 17 novembre 2026
+Qui peut écrire ici : toi, GPT, un autre Claude. Ajoute à la suite, ne supprime rien :
+barre une idée avec [ABANDONNÉ] et dis pourquoi.
+
+COMMENT S'EN SERVIR
+- Une idée = une ligne : [STATUT] titre : en une phrase, ce que ça change pour le joueur.
+- Statuts : [IDÉE] pas encore étudiée / [À SIMULER] chiffres à tester / [DÉCIDÉ] retenu /
+  [CODÉ] dans le projet / [ABANDONNÉ] écarté (raison obligatoire).
+- Chaque idée doit répondre à : "qu'est-ce que le joueur ressent, et qu'est-ce que ça lui coûte ?"
+- Limite fixe (voir 00-LISEZMOI.md) : on montre les conséquences, jamais le mode d'emploi.
+
+-----------------------------------------------------------------
+1. LES GRANDES DIRECTIONS DU JEU (choisir, ou mélanger)
+-----------------------------------------------------------------
+A. GESTION PURE : le joueur dirige, la carte et les jauges parlent. Le plus proche du code actuel.
+   + Réalisable vite, lisible sur téléphone.   - Moins d'émotion si les textes sont pauvres.
+B. NARRATIF À CARREFOURS : 5 chapitres, choix sans bonne réponse, fins noires multiples.
+   + Le noir passe par l'histoire (campagne "Cinq ans de dette").   - Beaucoup de texte à écrire.
+C. SIMULATION SYSTÉMIQUE : villes vivantes, rivaux qui jouent, jauges de quartier, événements
+   en cascade. + Rejouable.   - Équilibrage lourd (260 semaines à simuler).
+D. MÉLANGE (état actuel) : gestion + carrefours + systèmes d'ombre. Risque : trop large.
+   >>> Question ouverte : quelle direction domine si on doit couper ?  [À TRANCHER]
+
+2. LE TON (déjà décidé, à rappeler)
+- [DÉCIDÉ] Très sombre, réaliste, Marseille de 2010 à aujourd'hui, personnages inventés.
+- [DÉCIDÉ] Plus tu montes, plus l'écran montre ce que ça coûte.
+- [IDÉE] Un mode "documentaire" : le jeu s'arrête de temps en temps sur un fait de société
+  (sans cas réel), comme un carton en fin de chapitre.
+- [IDÉE] Un mode "chronique" : tout est raconté par la Pigiste (journaliste inventée).
+
+-----------------------------------------------------------------
+3. LES SYSTÈMES (ce qui existe, ce qui manque)
+-----------------------------------------------------------------
+CODÉ (non compilé) : Ordre et Dette de sang / Parloir (Baumettes) / Terreur / argent sale /
+                     jauge Ombre (voile noir).
+DÉCIDÉ MAIS PAS CODÉ : Façades (13) / Canaux et le Fil (12) / "sécuriser puis partir" /
+                     pression de police par zone / écran de fin de semaine / campagne JSON.
+IDÉES NON ÉTUDIÉES :
+- [IDÉE] Quartier "mémoire" : un quartier garde les traces de tout ce qui s'y est passé.
+- [IDÉE] Héritage : la partie suivante hérite des dettes et des morts de la précédente.
+- [IDÉE] Saisons : l'été (monde dehors) et l'hiver (monde dedans) changent les risques.
+- [IDÉE] Rumeur : une jauge de bouche-à-oreille qui précède les événements.
+- [IDÉE] Fatigue du joueur : le jeu devient plus lent/silencieux quand l'Ombre monte.
+- [IDÉE] Le téléphone qui sonne pendant la partie (notification du Fil).
+- [IDÉE] Dossier de police : une pile de feuilles qui grossit, visible dans un menu.
+- [IDÉE] Procès : un événement long (plusieurs semaines) avec témoins, avocat, verdict.
+- [IDÉE] Vie privée du chef : famille, maison, enfant qui grandit. Le jeu coupe ou laisse.
+- [IDÉE] Les "autres" : le joueur incarne parfois un autre rôle (mère, policier, journaliste).
+
+-----------------------------------------------------------------
+4. LES MODES DE JEU POSSIBLES
+-----------------------------------------------------------------
+- [IDÉE] Campagne 5 ans (principale).
+- [IDÉE] Chapitre isolé : une seule année, pour jouer en 20 minutes.
+- [IDÉE] Mode "Survivant" : tu es un simple équipier, tu obéis, tu observes.
+- [IDÉE] Mode "Les autres côtés" : jouer la police, la mère, le journaliste, le maire.
+- [IDÉE] Mode "Bac à sable" : tous les paramètres modifiables.
+- [IDÉE] Mode "Hommage" : la partie se termine par un mur de portraits des morts.
+- [IDÉE] Partie quotidienne : une seule semaine à jouer par jour (rythme du téléphone).
+
+-----------------------------------------------------------------
+5. L'AMBIANCE (texte, image, son)
+-----------------------------------------------------------------
+- [IDÉE] Sons : scooters la nuit, vocaux, télé d'un salon, sirènes lointaines, ascenseur en panne.
+- [IDÉE] Musique : très peu. Silence plus fort que le beat.
+- [IDÉE] Écran : voile noir qui monte, grain, bords arrondis comme un vieux téléphone.
+- [IDÉE] Lexique marseillais enrichi : une page "dictionnaire de la rue" dans le jeu.
+- [IDÉE] Vraies phrases entendues dans les cages d'escalier (inventées, jamais copiées).
+- [IDÉE] Cartes postales vides : chaque quartier a une carte postale qu'on perd à chaque deuil.
+
+-----------------------------------------------------------------
+6. LES RISQUES (à regarder en premier)
+-----------------------------------------------------------------
+- COMPILER : le code n'a jamais été ouvert dans Unity. Risque n°1.
+- TROP LARGE : 12 documents d'idées pour 7 stories codées. Il faut couper.
+- ÉQUILIBRAGE : Ordre et Contamination pourraient dominer. À simuler.
+- BOUTIQUES D'APPLICATIONS : trafic + messagerie = refus ou classement 18+ possible.
+- RESSEMBLANCES : un nom inventé peut tomber sur un nom réel (journal, label, personne).
+- ENFANTS : toute scène avec un mineur doit être relue par quelqu'un d'extérieur.
+- RELECTURE LOCALE : le lexique doit être lu par un habitant de Marseille.
+
+-----------------------------------------------------------------
+7. QUESTIONS OUVERTES (une réponse par ligne)
+-----------------------------------------------------------------
+- D5 : les affectations persistent-elles d'une semaine à l'autre ? ______________
+- D6 : le calendrier suit le temps du jeu, ou celui du téléphone ? _____________
+- Plateforme visée : téléphone seul, ou PC aussi ? ______________________________
+- Public : 18+ strict, avec vérification d'âge ? ______________________________
+- Monétisation : aucune / achat unique / autre ? _______________________________
+- Langue : français seul au début, anglais plus tard ? ___________________________
+- Qui relit les textes (Marseille, mineurs, droit) ? ____________________________
+- Veut-on une musique originale (SYNDRØM) ou des sons seuls ? __________________
+- Combien de fins au minimum pour sortir un premier MVP ? _______________________
+
+-----------------------------------------------------------------
+8. CE QU'ON VEUT QUE LE JOUEUR RETIENNE
+-----------------------------------------------------------------
+(à compléter : une phrase par émotion visée)
+- Au bout d'une heure : ______________________________________________
+- À la fin de la campagne : ___________________________________________
+- Dans un an, en repensant au jeu : ___________________________________
+
+-----------------------------------------------------------------
+9. VRAC (une idée = une ligne, sans filtre, à trier plus tard)
+-----------------------------------------------------------------
+-
+-
+-
+
+-----------------------------------------------------------------
+10. JOURNAL DES SÉANCES
+-----------------------------------------------------------------
+17/11/2026 : brief, 7 stories, bible Marseille, bible noire, mécaniques d'ombre codées,
+             bible des Canaux, façades v2, guide de reprise, ce carnet.
+(ajoute une ligne à chaque séance : date, qui, ce qui a été décidé)
