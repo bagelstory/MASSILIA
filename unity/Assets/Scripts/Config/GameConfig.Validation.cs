@@ -30,6 +30,9 @@ namespace Marseille.Config
             CheckRange(problems, "factionAllianceDuration", factionAllianceDuration.x, factionAllianceDuration.y);
             CheckRange(problems, "factionActionRandom", factionActionRandom.x, factionActionRandom.y);
             CheckRange(problems, "mapZoomRange", mapZoomRange.x, mapZoomRange.y);
+            CheckRange(problems, "jailCycles", jailCycles.x, jailCycles.y);
+            if (ombreTiers.x > ombreTiers.y || ombreTiers.y > ombreTiers.z || ombreTiers.z > ombreTiers.w) problems.Add("ombreTiers doit être croissant.");
+            if (contaminationThreshold > contaminationMax) problems.Add("contaminationThreshold devrait être ≤ contaminationMax.");
             if (startingOperators.Count > startingCapacity) problems.Add("Plus d'opérateurs de départ que de capacité.");
             if (securedControl <= accessNeighbourControl) problems.Add("securedControl devrait dépasser accessNeighbourControl.");
             if (charbonTakeControl < charbonOpenControl) problems.Add("charbonTakeControl devrait être ≥ charbonOpenControl.");

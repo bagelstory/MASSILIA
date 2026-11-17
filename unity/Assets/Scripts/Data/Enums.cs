@@ -36,7 +36,9 @@ namespace Marseille.Data
         /// <summary>Épuisé (fatigue à 100) : ne peut rien faire ce cycle.</summary>
         Unavailable = 3,
         /// <summary>Perdu (arrêté, écarté, en fuite) : ne revient pas.</summary>
-        Lost = 4
+        Lost = 4,
+        /// <summary>Incarcéré aux Baumettes : agit seulement par le parloir (ordres en retard).</summary>
+        Jailed = 5
     }
 
     /// <summary>Tâche qu'un opérateur exécute dans un quartier (spec §4.5).</summary>
@@ -92,7 +94,7 @@ namespace Marseille.Data
     public enum JournalType
     {
         Info = 0, Gain = 1, Loss = 2, Attack = 3, OperatorLost = 4, Police = 5,
-        Flux = 6, Economy = 7, Quest = 8, Faction = 9, Season = 10, End = 11
+        Flux = 6, Economy = 7, Quest = 8, Faction = 9, Season = 10, End = 11, Shadow = 12
     }
 
     /// <summary>Type d'objectif à atteindre dans une quête chiffrée.</summary>

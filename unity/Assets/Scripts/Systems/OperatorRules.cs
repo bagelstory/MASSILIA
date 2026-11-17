@@ -124,6 +124,7 @@ namespace Marseille.Systems
             OperatorData op = data.operators[i];
             if (op.status == OperatorStatus.Lost) return ActionResult.Fail("Opérateur perdu.");
             if (op.status == OperatorStatus.Unavailable) return ActionResult.Fail("Épuisé : au repos ce cycle.");
+            if (op.status == OperatorStatus.Jailed) return ActionResult.Fail("Aux Baumettes : il ne parle que par le parloir.");
             if (quarterId != op.currentQuarter && !TerritoryRules.IsAccessible(data, quarterId, task, config))
                 return ActionResult.Fail("Quartier inaccessible.");
             op.SetTask(task);

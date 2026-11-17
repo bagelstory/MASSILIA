@@ -45,7 +45,7 @@ namespace Marseille.Systems
                 OperatorData op = data.operators[i];
                 if (op.status == OperatorStatus.Lost) continue;
                 total++;
-                if (op.status != OperatorStatus.Unavailable) available++;
+                if (op.status != OperatorStatus.Unavailable && op.status != OperatorStatus.Jailed) available++;
                 if (op.fatigue > c.stabilityFatigueThreshold) ind.stability -= c.stabilityFatiguePenalty;
             }
             int extraFlux = FluxActions.ActiveCount(data) - c.fluxComfortableCount;

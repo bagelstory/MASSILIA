@@ -71,7 +71,7 @@ namespace Marseille.UI
         {
             switch (filter)
             {
-                case Filter.Losses: return type == JournalType.Loss || type == JournalType.OperatorLost || type == JournalType.Attack;
+                case Filter.Losses: return type == JournalType.Loss || type == JournalType.OperatorLost || type == JournalType.Attack || type == JournalType.Shadow;
                 case Filter.Gains: return type == JournalType.Gain || type == JournalType.Quest || type == JournalType.Economy;
                 case Filter.Police: return type == JournalType.Police;
                 case Filter.Factions: return type == JournalType.Faction || type == JournalType.Attack;
@@ -88,6 +88,7 @@ namespace Marseille.UI
             switch (type)
             {
                 case JournalType.Loss: case JournalType.OperatorLost: case JournalType.Attack: return config.uiNegative;
+                case JournalType.Shadow: return config.uiTextDim;
                 case JournalType.Gain: case JournalType.Quest: return config.uiPositive;
                 case JournalType.Police: case JournalType.Flux: return config.uiWarning;
                 case JournalType.Info: case JournalType.Season: return config.uiTextDim;

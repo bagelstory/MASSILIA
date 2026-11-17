@@ -50,6 +50,12 @@ namespace Marseille.Data
         /// <summary>Surnom affiché à côté du numéro, vide si aucun.</summary>
         public string nickname;
 
+        /// <summary>Cycles de détention restants (statut Jailed).</summary>
+        public int jailCycles;
+
+        /// <summary>Cycles déjà passés en détention : la fiabilité du parloir baisse avec.</summary>
+        public int jailServed;
+
         /// <summary>Crée un opérateur disponible, sur place, au repos.</summary>
         /// <param name="id">Numéro.</param>
         /// <param name="type">Spécialité.</param>

@@ -38,7 +38,7 @@ namespace Marseille.Systems
         private static void ExecuteOne(ref OperatorData op, ref GameData data, CycleContext context)
         {
             GameConfig c = context.Config;
-            if (op.status == OperatorStatus.Lost) return;
+            if (op.status == OperatorStatus.Lost || op.status == OperatorStatus.Jailed) return;
             if (op.status == OperatorStatus.Unavailable)
             {
                 op.unavailableCycles--;

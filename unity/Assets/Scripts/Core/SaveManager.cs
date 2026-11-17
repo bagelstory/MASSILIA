@@ -101,13 +101,31 @@ namespace Marseille.Core
             try
             {
                 data = JsonUtility.FromJson<GameData>(File.ReadAllText(path));
-                return IsValid(data);
+                if (!IsValid(data)) return false;
+                Migrate(ref data);
+                return true;
             }
             catch (Exception e)
             {
                 Debug.LogWarning("Lecture de " + path + " impossible : " + e.Message);
                 return false;
             }
+        }
+
+        /// <summary>Met une ancienne sauvegarde au format actuel (version 1 → 2 : ombre, peur, population).</summary>
+        /// <param name="data">État lu, modifié en place.</param>
+        private static void Migrate(ref GameData data)
+        {
+            if (data.saveVersion >= GameData.CurrentVersion) return;
+            for (int i = 0; i < data.quarters.Count; i++)
+            {
+                QuarterData q = data.quarters[i];
+                if (q.population <= 0f) q.population = 100f;
+                data.quarters[i] = q;
+            }
+            float treasury = data.indicators.treasury;
+            if (data.shadow.debts == null || data.shadow.orders == null) data.shadow = ShadowData.Create(treasury);
+            data.saveVersion = GameData.CurrentVersion;
         }
 
         /// <summary>Vérifications minimales d'une sauvegarde lue.</summary>

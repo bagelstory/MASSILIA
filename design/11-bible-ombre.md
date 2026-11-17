@@ -316,6 +316,8 @@
 4. **La jauge Ombre** : le garde-fou « plus tu gagnes, plus ça se voit », inscrit dans le code.
 5. **Le Parloir** : il s'appuie sur la zone des Baumettes.
 
+**Codé le 17 nov. (non compilé)** : `Systems/ShadowRules.cs`, `ShadowActions.cs`, `ShadowSystem.cs` + `.City.cs`, `Data/ShadowData.cs`, `Config/GameConfig.Shadow.cs`, `UI/ShadowVeil.cs`, `UI/QuarterDetailPopup.Shadow.cs`. Les arrestations envoient désormais aux Baumettes (quartier 901) au lieu de perdre l'équipier. Sauvegarde passée en version 2 (migration automatique).
+
 **À tester en simulation :** l'Ordre ne doit pas devenir le choix qui gagne à tous les coups. La Dette doit rendre le jeu le plus brutal perdant après environ 30 semaines. La Contamination doit avoir un plafond.
 
 ## Corrections faites à la relecture (Claude)

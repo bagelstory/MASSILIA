@@ -11,6 +11,9 @@ namespace Marseille.Data
     [System.Serializable]
     public struct GameData
     {
+        /// <summary>Version actuelle du format (2 : ajout de l'ombre, de la peur et de la population).</summary>
+        public const int CurrentVersion = 2;
+
         /// <summary>Version du format, pour les migrations de sauvegarde.</summary>
         public int saveVersion;
 
@@ -71,6 +74,9 @@ namespace Marseille.Data
         /// <summary>Fin de partie (None tant que la partie continue).</summary>
         public EndType endType;
 
+        /// <summary>L'ombre : jauge Ombre, morts, dettes de sang, ordres en attente (version 2).</summary>
+        public ShadowData shadow;
+
         /// <summary>Crée une sauvegarde vide avec toutes ses listes initialisées.</summary>
         /// <param name="seed">Graine aléatoire.</param>
         /// <param name="treasury">Trésorerie de départ.</param>
@@ -80,7 +86,7 @@ namespace Marseille.Data
         {
             return new GameData
             {
-                saveVersion = 1,
+                saveVersion = CurrentVersion,
                 randomSeed = seed,
                 currentCycle = 1,
                 gameState = 0,
@@ -99,7 +105,8 @@ namespace Marseille.Data
                 baseQuarterId = Owners.None,
                 nextOperatorId = 1,
                 log = new List<string>(),
-                endType = EndType.None
+                endType = EndType.None,
+                shadow = ShadowData.Create(treasury)
             };
         }
 

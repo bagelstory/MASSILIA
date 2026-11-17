@@ -51,7 +51,7 @@ namespace Marseille.UI
                              + UiText.OperatorState(op.status) + " · " + UiText.Task(op.GetTask(), config) + " · " + where + "\n"
                              + "Fatigue " + op.fatigue.ToString("0") + " · entretien " + UiText.Money(op.upkeepCost);
             int id = op.id;
-            bool canAct = op.status != OperatorStatus.Unavailable;
+            bool canAct = op.status != OperatorStatus.Unavailable && op.status != OperatorStatus.Jailed;
             card.AddButton("Affecter", config.uiAccent, () => BeginAssign(id)).interactable = canAct;
             card.AddButton("Repos", config.uiButton, () => Rest(id)).interactable = canAct;
             card.AddButton("Détails", config.uiButton, () => { if (Manager != null) Manager.RequestOperatorDetail(id); });

@@ -66,6 +66,21 @@ namespace Marseille.Data
         /// <summary>Identifiants des événements actifs dans le quartier.</summary>
         public List<string> activeEvents;
 
+        /// <summary>Peur dans le quartier (0-100) : monte avec les ordres et les morts, baisse chaque cycle.</summary>
+        public float fear;
+
+        /// <summary>Habitants restants (0-100 % de la population de départ). Le revenu suit la population.</summary>
+        public float population;
+
+        /// <summary>Argent sale placé dans le quartier (0-100). Au-dessus du seuil, les commerces honnêtes ferment.</summary>
+        public float contamination;
+
+        /// <summary>Cycles consécutifs avec une peur au-dessus du seuil de la terreur.</summary>
+        public int highFearCycles;
+
+        /// <summary>Commerces honnêtes fermés (rideaux gris), pour l'affichage.</summary>
+        public int closedShops;
+
         /// <summary>Crée un quartier vide avec ses listes initialisées.</summary>
         /// <param name="id">Identifiant.</param>
         /// <param name="name">Nom officiel.</param>
@@ -83,7 +98,8 @@ namespace Marseille.Data
                 adjacentQuarters = new List<int>(),
                 factionPresences = new List<FactionPresence>(),
                 pois = new List<PoiData>(),
-                activeEvents = new List<string>()
+                activeEvents = new List<string>(),
+                population = 100f
             };
         }
 

@@ -22,7 +22,7 @@ namespace Marseille.Systems
             return total * (1f + q.investmentLevel * config.investIncomeGain);
         }
 
-        /// <summary>Revenu du joueur dans un quartier pour ce cycle.</summary>
+        /// <summary>Revenu du joueur dans un quartier pour ce cycle (il suit la population restante).</summary>
         /// <param name="q">Quartier.</param>
         /// <param name="hasPressureOperator">Un opérateur Pression est sur place.</param>
         /// <param name="seasonMultiplier">Multiplicateur des saisons pour la zone du quartier.</param>
@@ -34,7 +34,8 @@ namespace Marseille.Systems
             float producing = 0f;
             for (int i = 0; i < q.pois.Count; i++) if (q.pois[i].IsProducingForPlayer()) producing += q.pois[i].revenue;
             float efficiency = hasPressureOperator ? 1f : config.incomeWithoutPressure;
-            return producing * (1f + q.investmentLevel * config.investIncomeGain) * (q.control / 100f) * efficiency * seasonMultiplier;
+            float people = q.population > 0f ? q.population / 100f : 1f;
+            return producing * (1f + q.investmentLevel * config.investIncomeGain) * (q.control / 100f) * efficiency * seasonMultiplier * people;
         }
 
         /// <summary>Coût de maintien d'un quartier tenu, après réductions des opérateurs.</summary>

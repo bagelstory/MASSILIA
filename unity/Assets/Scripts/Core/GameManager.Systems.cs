@@ -1,6 +1,6 @@
 // MARSEILLE — Core/GameManager.Systems.cs
 // Implémentation de RegisterSystems (déclarée dans GameManager.cs) : ordre de résolution d'un cycle.
-// Ordre de la spécification, plus les objectifs (ouverture des zones) juste avant la fin de partie.
+// Ordre de la spécification, plus l'ombre après les indicateurs et les objectifs juste avant la fin de partie.
 
 using Marseille.Systems;
 
@@ -19,6 +19,7 @@ namespace Marseille.Core
             manager.Register(new FluxSystem());
             manager.Register(new EconomySystem());
             manager.Register(new IndicatorSystem());
+            manager.Register(new ShadowSystem());
             manager.Register(new GameEventSystem());
             manager.Register(new QuestSystem());
             manager.Register(new EndConditionSystem());

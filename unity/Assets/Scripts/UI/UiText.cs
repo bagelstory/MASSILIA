@@ -36,6 +36,7 @@ namespace Marseille.UI
                 case OperatorStatus.Occupied: return "Occupé";
                 case OperatorStatus.Unavailable: return "Épuisé";
                 case OperatorStatus.Lost: return "Perdu";
+                case OperatorStatus.Jailed: return "Aux Baumettes";
             }
             return "Disponible";
         }

@@ -52,7 +52,7 @@ namespace Marseille.UI
             Paragraph(Profile(op, data, c), 5, c.uiText);
             UiKit.Label(Body, "Efficacité par tâche", c.uiFontSizes.y, c.uiText);
             Paragraph(Efficiencies(op, c), Tasks.Length, c.uiText);
-            bool canAct = op.status != OperatorStatus.Lost && op.status != OperatorStatus.Unavailable;
+            bool canAct = op.status != OperatorStatus.Lost && op.status != OperatorStatus.Unavailable && op.status != OperatorStatus.Jailed;
             FooterButton("Affecter", c.uiAccent, Assign).interactable = canAct;
             FooterButton("Repos", c.uiButton, Rest).interactable = canAct;
             FooterButton("Fermer", c.uiButton, Close);

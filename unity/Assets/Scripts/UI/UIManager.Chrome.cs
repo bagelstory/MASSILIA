@@ -55,6 +55,7 @@ namespace Marseille.UI
             UiFactory.Stretch(contentArea, Vector2.zero, Vector2.one);
             contentArea.offsetMin = new Vector2(0f, bottom);
             contentArea.offsetMax = new Vector2(0f, -top);
+            ShadowVeil.Create(transform).Fit(bottom, top);
 
             Image tabs = UiFactory.CreateImage("TabBar", transform, config.uiPanel, true);
             UiFactory.Stretch(tabs.rectTransform, Vector2.zero, new Vector2(1f, 0f));
@@ -156,7 +157,8 @@ namespace Marseille.UI
             GameManager gm = GameManager.Instance;
             if (topLeft == null || gm == null || !gm.HasGame) return;
             GameData d = gm.Data;
-            topLeft.text = "Cycle " + d.currentCycle + "  ·  " + SeasonRules.Label(d.currentCycle, gm.Config);
+            int tier = ShadowRules.Tier(d.shadow.ombre, gm.Config);
+            topLeft.text = "Cycle " + d.currentCycle + "  ·  " + SeasonRules.Label(d.currentCycle, gm.Config) + (tier > 0 ? "  ·  " + ShadowRules.TierName(tier) : "");
             topRight.text = d.indicators.treasury.ToString("N0") + " €" + (d.debt > 0f ? " (dette " + d.debt.ToString("N0") + ")" : "")
                             + "\nTerritoire " + d.indicators.territory.ToString("0.0") + " %  ·  Pression " + d.indicators.pressure.ToString("0")
                             + "  ·  " + OperatorRules.ActiveCount(d) + "/" + d.capacity;

@@ -72,7 +72,7 @@ namespace Marseille.Systems
                            * (operation ? c.outsideOperationArrestFactor : 1f) * (op.GetTask() == OperatorTask.Rest ? c.arrestRestFactor : 1f);
             if (context.Chance(chance))
             {
-                OperatorRules.Lose(ref data, index, "arrêté", context);
+                ShadowRules.Jail(ref data, index, "arrêté", context);
                 return;
             }
             int dominant = q.DominantFaction();

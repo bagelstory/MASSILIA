@@ -80,7 +80,7 @@ namespace Marseille.Systems
             {
                 OperatorData op = data.operators[i];
                 if (op.type != OperatorType.Logistics || !OperatorRules.IsOnSite(op)) continue;
-                if (context.Chance(c.fluxRuptureOperatorLoss)) OperatorRules.Lose(ref data, i, "arrêté après la rupture du flux", context);
+                if (context.Chance(c.fluxRuptureOperatorLoss)) ShadowRules.Jail(ref data, i, "arrêté après la rupture du flux", context);
                 break;
             }
         }

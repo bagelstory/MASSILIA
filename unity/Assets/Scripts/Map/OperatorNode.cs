@@ -71,6 +71,7 @@ namespace Marseille.Map
             Color c = MapStyle.OperatorColor(op.type, config);
             if (op.status == OperatorStatus.InTransit) c.a = 0.55f;
             if (op.status == OperatorStatus.Unavailable) c = MapStyle.Dim(c, 0.5f);
+            if (op.status == OperatorStatus.Jailed) c = MapStyle.Dim(c, 0.3f);
             if (body != null) body.color = c;
             if (letter != null) letter.text = s != null ? s.letter : "?";
             if (outline != null)

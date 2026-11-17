@@ -21,6 +21,7 @@ namespace Marseille.UI
         private IndicatorBar pressure;
         private IndicatorBar stability;
         private IndicatorBar exposure;
+        private IndicatorBar ombre;
         private Text forecast;
         private Text network;
         private Text quests;
@@ -47,6 +48,7 @@ namespace Marseille.UI
             pressure = IndicatorBar.Create(col, "Pression", config, ArtLibrary.Indicator("pression"));
             stability = IndicatorBar.Create(col, "Stabilité", config, ArtLibrary.Indicator("stabilite"));
             exposure = IndicatorBar.Create(col, "Exposition", config, ArtLibrary.Indicator("exposition"));
+            ombre = IndicatorBar.Create(col, "Ombre", config, ArtLibrary.Indicator("ombre"));
             UiKit.Label(col, "Prochain cycle", config.uiFontSizes.x, config.uiText);
             forecast = MultiLine(col, 7, config);
             network = MultiLine(col, 3, config);
@@ -71,6 +73,7 @@ namespace Marseille.UI
             pressure.Set(ind.pressure / 100f, ind.pressure.ToString("0"), true, c);
             stability.Set(ind.stability / 100f, ind.stability.ToString("0"), false, c);
             exposure.Set(ind.exposure / 100f, ind.exposure.ToString("0"), true, c);
+            ombre.Set(d.shadow.ombre / 100f, ShadowRules.TierName(ShadowRules.Tier(d.shadow.ombre, c)) + " · " + d.shadow.ombre.ToString("0") + " · " + d.shadow.deaths + " mort(s)", true, c);
             forecast.text = ForecastText(d, c);
             network.text = NetworkText(d, c);
             quests.text = QuestsText(d, c);
