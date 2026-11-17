@@ -119,3 +119,13 @@ Format : portrait 1080×1920, tailles ramenées à 340 px dans la maquette.
 
 ## 11. Garde-fous respectés
 Aucun fichier supprimé, aucun système modifié, aucun changement de règles de jeu. Les textes des maquettes sont inventés, sans personne réelle, sans violence montrée, sans mineurs, sans technique opérationnelle.
+
+## 12. Arbitrages du joueur (17 novembre 2026)
+| # | Décision | Choix |
+|---|---|---|
+| 1 | Journal | **Attendre l'étape 4** de la refonte (pas de correctif rapide) |
+| 2 | Durée du jeu | **Simulation de vie de 25 à 40 ans** (remplace la campagne de 5 ans comme cible) |
+| 3 | Plateforme | **Portrait mobile seul** (pas de paysage PC) |
+| 4 | Police | **Fournir une police** (libre de droits, à choisir) |
+
+**Conséquences :** l'âge, les priorités personnelles et la fin de partie devront être revus (`11`, `14`, `15`) ; l'étape 7 du plan se limite aux résolutions de téléphone et tablette en portrait ; l'étape 1 inclut l'import de la police. Reste à trancher : décisions 5 à 9 (§10).
