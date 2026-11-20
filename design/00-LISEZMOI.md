@@ -25,6 +25,11 @@ Dépôt : `bagelstory/MASSILIA`, branche `j1`. Moteur : **Unity 2022.3 LTS, C#**
 | `12-bible-canaux.md` | Le téléphone dans le trafic : le Fil, Traces, événements, écran de fin de semaine. |
 | `13-facades.md` | Placer l'argent sale : 7 secteurs, plausibilité, Éveil, événements. |
 | `15-hierarchie.md` | **Hiérarchie du terrain** : arrondissement (chef) > quartier (plusieurs têtes) > charbon (2 guetteurs, 1 vendeur, 1 gérant, 1 tête qui peut en tenir plusieurs). |
+| `16-audit-refonte-ui.md` | Audit de l'interface, maquettes, plan en 8 étapes, **arbitrages du joueur** (§12). Étapes 1 à 4 codées (jamais compilées). |
+| `17-ecriture-marseille.md` | Écriture poussée sur Marseille : arrondissements, saisons, lexique, 30 textes de journal. |
+| `17b-revue-equipe.md` | **Revue d'équipe** : 18 incohérences et 6 décisions à trancher (dont Aubagne, mineurs, durée de vie). |
+| `18-personnages-et-vie.md` | 24 personnages adultes fictifs, cinq priorités, structure de la vie sur 25 à 40 ans. |
+| `19-prompts-3d-blender.md` | Prompts d'images et de 3D, guide Blender et export Unity. |
 | `BRAINSTORM.txt` | Carnet vivant : directions, idées en vrac, questions ouvertes. À compléter à chaque séance. |
 | `14-fusion-v6.md` | Fusion avec le dossier V6 « MARSEILLE » (`ref/MARSEILLE_GDD_V6.txt`) : prologue à 16-17 ans sans gestion, puis campagne CHOUF dès 18 ans. |
 | `09-campagne-marseille.md` | Ancienne campagne (remplacée) : seuls le tempo et les rangs restent valables. |

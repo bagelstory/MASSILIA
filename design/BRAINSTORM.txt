@@ -117,3 +117,10 @@ IDÉES NON ÉTUDIÉES :
 17/11/2026 (soir) : dossier V6 MARSEILLE reçu ; décision : fusion prologue V6 puis campagne CHOUF dès 18 ans (voir 14).
 17/11/2026 (soir) : hiérarchie décidée par l'utilisateur : arrondissement (chef) > quartier > charbon (2 guetteurs, vendeur, gérant, tête multi-charbons) ; voir 15.
 (ajoute une ligne à chaque séance : date, qui, ce qui a été décidé)
+
+--- Séance du 20 novembre 2026 ---
+- Décisions UI (16 §12) : vie de 25 à 40 ans, portrait mobile seul, police fournie (Resources/Fonts/Chouf.ttf), journal refait à l'étape 4.
+- Code : refonte UI étapes 1 à 4 écrite (palette, coins arrondis générés, barre du haut à puces, onglets, journal en cartes). JAMAIS COMPILÉ : à tester dans Unity.
+- Docs ajoutés : 17 (écriture Marseille), 18 (personnages et vie 25-40 ans), 19 (prompts 3D et Blender).
+- À faire : l'asset GameConfig existant garde l'ancienne palette → clic droit sur l'asset > « Réinitialiser la palette CHOUF ».
+- À faire : adapter la durée du jeu (260 semaines → 25-40 ans) dans GameConfig, EndConditionSystem et la fin de partie.
