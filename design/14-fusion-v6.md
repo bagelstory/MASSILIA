@@ -6,7 +6,7 @@
 | Phase | Âge | Durée | Ce que fait le joueur |
 |---|---|---|---|
 | **Prologue « Le Vide »** | 16-17 ans | 6 scènes, 45-60 min, **pas de boucle de gestion** | Vit, choisit, promet, subit. Aucune tâche criminelle, aucun gain criminel. |
-| **Campagne « Cinq ans de dette »** (`11`) | 18-23 ans | 260 semaines | Gestion, ombre, façades, Fil. Le prologue pèse sur toute la partie. |
+| **Campagne « Cinq ans de dette »** (`11`) | 18-23 ans (Acte I ; la suite : `18` §4, jusqu'à 43-58 ans) | 260 semaines pour l'Acte I | Gestion, ombre, façades, Fil. Le prologue pèse sur toute la partie. |
 | **L'après** (`11` §6 + V6 §15) | fin de campagne | épilogue | Fins construites à partir du parcours. |
 
 **Règle d'or :** le joueur n'est un « chef » qu'à partir de 18 ans et d'une dette dont il hérite. Avant, il est un adolescent que des adultes essaient d'utiliser, et le jeu le montre comme tel.

@@ -12,7 +12,7 @@
 4. Lire les conséquences dans le journal.
 
 ## But et échec
-- **But :** tenir 60 % des quartiers à la fin des 5 ans (260 semaines), sans être à découvert.
+- **But :** tenir 60 % des quartiers à la fin de l'Acte I (5 ans, 260 semaines ; la partie entière dure 25 à 40 ans, voir `design/18-personnages-et-vie.md` §4), sans être à découvert.
 - **Échec :** faillite, chute, abandon ou temps écoulé. Fin « Sortie » possible, jusqu'à la note A. Chaque fin a son écran et sa note de A à E.
 
 ## MVP (7 éléments)
@@ -20,7 +20,7 @@
 2. Opérateurs et tâches.
 3. Économie et flux.
 4. Factions pilotées par l'IA.
-5. Campagne de 5 ans à carrefours (voir `design/09-campagne-marseille.md`).
+5. Campagne à carrefours (Acte I de 5 ans ; durée totale : voir `18` §4) (voir `design/09-campagne-marseille.md`).
 6. Fins et score.
 7. Interface portrait et sauvegarde JSON lisible.
 
@@ -34,7 +34,7 @@
 ## Ordre de construction
 1. Compiler dans Unity 2022.3 et corriger les erreurs (le code n'a jamais été compilé : risque n°1).
 2. Test sur un vrai téléphone (60 fps visés sur Snapdragon 720, build sous 50 Mo).
-3. Campagne de 5 ans.
+3. Campagne (Acte I de 5 ans).
 
 ## Public, direction et référence
 - **Public et sensation :** adultes 18+, fans de gestion. « Je gagne, mais à quel prix. »

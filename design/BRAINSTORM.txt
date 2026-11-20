@@ -19,7 +19,7 @@ A. GESTION PURE : le joueur dirige, la carte et les jauges parlent. Le plus proc
 B. NARRATIF À CARREFOURS : 5 chapitres, choix sans bonne réponse, fins noires multiples.
    + Le noir passe par l'histoire (campagne "Cinq ans de dette").   - Beaucoup de texte à écrire.
 C. SIMULATION SYSTÉMIQUE : villes vivantes, rivaux qui jouent, jauges de quartier, événements
-   en cascade. + Rejouable.   - Équilibrage lourd (260 semaines à simuler).
+   en cascade. + Rejouable.   - Équilibrage lourd (260 semaines à simuler par acte, voir 18 §4).
 D. MÉLANGE (état actuel) : gestion + carrefours + systèmes d'ombre. Risque : trop large.
    >>> Question ouverte : quelle direction domine si on doit couper ?  [À TRANCHER]
 
@@ -52,7 +52,7 @@ IDÉES NON ÉTUDIÉES :
 -----------------------------------------------------------------
 4. LES MODES DE JEU POSSIBLES
 -----------------------------------------------------------------
-- [IDÉE] Campagne 5 ans (principale).
+- [DÉCIDÉ 20/11] Une vie de 25 à 40 ans (18 + semaines ÷ 52), actes de 5 ans ; « Cinq ans de dette » = Acte I (voir 18 §4).
 - [IDÉE] Chapitre isolé : une seule année, pour jouer en 20 minutes.
 - [IDÉE] Mode "Survivant" : tu es un simple équipier, tu obéis, tu observes.
 - [IDÉE] Mode "Les autres côtés" : jouer la police, la mère, le journaliste, le maire.
@@ -123,4 +123,4 @@ IDÉES NON ÉTUDIÉES :
 - Code : refonte UI étapes 1 à 4 écrite (palette, coins arrondis générés, barre du haut à puces, onglets, journal en cartes). JAMAIS COMPILÉ : à tester dans Unity.
 - Docs ajoutés : 17 (écriture Marseille), 18 (personnages et vie 25-40 ans), 19 (prompts 3D et Blender).
 - À faire : l'asset GameConfig existant garde l'ancienne palette → clic droit sur l'asset > « Réinitialiser la palette CHOUF ».
-- À faire : adapter la durée du jeu (260 semaines → 25-40 ans) dans GameConfig, EndConditionSystem et la fin de partie.
+- À faire : adapter la durée du jeu (260 semaines = Acte I → 25-40 ans de jeu, voir 18 §4) dans GameConfig, EndConditionSystem et la fin de partie.

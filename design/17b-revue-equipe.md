@@ -1,6 +1,18 @@
 # CHOUF : revue d'équipe des documents 00, 08 à 16 (incohérences et corrections)
 
-*20 novembre 2026. Relecture croisée par la fonction « équipe narrative » (direction narrative, écriture, univers). **Aucun document existant n'a été modifié** : ce fichier liste ce qui se contredit et propose un correctif. Les décisions marquées « à trancher » reviennent au joueur. Les correctifs de texte ne touchent pas au code.*
+*20 novembre 2026. Relecture croisée par la fonction « équipe narrative » (direction narrative, écriture, univers). **Mise à jour du 20 nov. : les décisions ci-dessous ont été appliquées aux documents** ; ce fichier liste ce qui se contredit et propose un correctif. Les décisions marquées « à trancher » reviennent au joueur. Les correctifs de texte ne touchent pas au code.*
+
+## 0. Décisions du 20/11/2026
+| Point | Décision | État |
+|---|---|---|
+| Durée (§1, 5 de §5) | Partie de **18 ans** jusqu'à une fin entre **25 et 40 ans de jeu** (âge = 18 + semaines ÷ 52, soit 43 à 58 ans) ; « Cinq ans de dette » = Acte I | **Résolu** dans 00, 11, 14, 16, BRAINSTORM, game-brief ; code à adapter plus tard |
+| Départ du joueur (n° 5) | Un charbon + la dette (lecture A de `15`) | **Résolu** (arbitrage du joueur) |
+| Aubagne (n° 2) | **Hors du jeu à 100 %**, y compris la phrase de Ferrand | **Résolu** dans 10 (date et phrase retirées, §6 marqué obsolète) ; mention d'interdit gardée dans 00/11/13 |
+| Mineurs (n° 8) | Retirer les âges précis (journaux, événements, scènes) | **Résolu** dans 11 et 12 ; relecture externe toujours requise (`12` §10) |
+| OM (n° 9) | **Gardé** (club réel nommé comme simple décor de quartier, jamais lié à un acte) | **Résolu : rien à corriger** |
+| Années (n° 1) | **Années non datées** (« Année N », « la décennie qui précède ») | **Résolu** dans 10 et 11 ; `01` reste archive |
+| « Gabians » (n° 15) | Renommer la bande en **« les Marteaux »** | **Résolu** : le nom n'est écrit que dans la maquette rendue de la conversation, pas dans le fichier `16` ; à utiliser si la maquette est reprise |
+| Temps élastique, noms à vérifier (2 et 6 de §5) | Pas encore tranchés | **Ouvert** |
 
 ## 1. Point central : « 5 ans » contre « 25 à 40 ans »
 **Ce que dit le dépôt aujourd'hui :** campagne de **5 ans, 260 semaines** (`00` pitch ; `game-brief` but et MVP ; `08` D1/D3 ; `11` §2 « Cinq ans de dette » ; `14` §1 tableau ; `16` §5). Le code porte `maxCycles = 260`.
@@ -32,7 +44,7 @@
 | 6 | `15` §1, `18` | 16 arrondissements, mais **seuls 3 chefs** sont écrits (Rosalie, Tigran + Cadet) | Banque de 16 chefs : mêmes champs que `18` (priorités, arc) ; les autres sont **vacants** jusqu'à ce que le poids d'une tête dépasse un seuil | Moyenne |
 | 7 | `14` §5, `18` | Âges des personnages du prologue (grand frère 22, prof 40, voisine 65) valent pour **16-17 ans** ; à l'Année 1 ils ont **+2 ans** | Déjà corrigé dans `18` (24, 42, 67) ; ajouter la phrase dans `14` §5 | Basse |
 | 8 | `11` §2 (année 4), `12` E12, `12` §7 | **Mineurs** : un garçon « de 15 ans » meurt, un « gamin » écrit au Fil, une une dit « un jeune de 15 ans » : conforme à la règle (victimes seulement) mais **précision d'âge** inutile et sensible | Remplacer les âges par « un adolescent », « un jeune » ; relecture externe obligatoire (`12` §10) ; option de contenu pour atténuer | **Haute** |
-| 9 | `12` §3 (lexique), `00` règle 5 | « **L'OM a perdu, les nerfs sont là** » : un club réel nommé dans un jeu sur le crime, alors que `00` interdit « club identifiable » | Écrire « le match » ou « les soirs de match » ; ne **jamais lier** un club réel à un acte ; idem « Vélodrome » comme décor seulement | Moyenne |
+| 9 | ~~`12` §3 (lexique), `00` règle 5~~ **RÉSOLU : l'OM est gardé** | « **L'OM a perdu, les nerfs sont là** » : un club réel nommé dans un jeu sur le crime, alors que `00` interdit « club identifiable » | Écrire « le match » ou « les soirs de match » ; ne **jamais lier** un club réel à un acte ; idem « Vélodrome » comme décor seulement | Moyenne |
 | 10 | `00` (priorités) | `00` dit **Unity 2022.3 LTS** ; le brief du joueur dit **Unity 6.6** ; `game-brief` dit 2022.3 | Voir `16` §5, décision 8 ; ne rien changer avant la réponse | Moyenne |
 | 11 | `00`, `16` | Version de sauvegarde **4** (`00`) contre **2** (brief) | Confirmer 4 ; migration inchangée | Basse |
 | 12 | `10` §6 (calendrier des fêtes), `10` voix | `10` garde un **ton festif** et des voix légères, remplacés par `11` | Marquer `10` §6 « obsolète » dans l'en-tête, déplacer les voix légères dans le BRAINSTORM (si utiles) | Basse |
@@ -65,6 +77,6 @@
 ## 6. Ordre de correction conseillé (sans code)
 1. `10` : retirer la date et la phrase sur la rue d'Aubagne ; marquer §6 obsolète.
 2. `00`, `game-brief`, `11`, `14` : durée et actes (sous réserve de l'arbitrage 1).
-3. `12` : retirer « OM » et les âges de mineurs ; vérifier les noms.
+3. `12` : ~~retirer « OM »~~ (gardé) ; âges de mineurs retirés ; vérifier les noms.
 4. `15` : table de correspondance des rôles et phrase « adultes seulement ».
 5. `16` : renommer « Gabians ».

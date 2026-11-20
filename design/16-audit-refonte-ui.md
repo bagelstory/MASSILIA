@@ -41,7 +41,7 @@
 |---|---|---|
 | Unity **6.6** | Les outils d'éditeur et les conventions ont été écrits pour Unity 2022.3 LTS ; `ProjectSettings` n'est **pas** dans le dépôt | Voir risques §9 (entrée, `FindObjectOfType`) |
 | Sauvegarde **version 2** | Version **4** | Garder les migrations ; ne pas toucher à la version pour l'UI |
-| Simulation de vie **25 à 40 ans**, trajectoires émergentes, cinq priorités personnelles | Campagne de **5 ans / 260 semaines** (D2, D3, `11`), prologue puis gestion (`14`), hiérarchie de charbons (`15`) | **À arbitrer** (§10, décision 2). Pendant la refonte, l'UI ne fige aucune durée |
+| Simulation de vie **25 à 40 ans**, trajectoires émergentes, cinq priorités personnelles | Campagne de **5 ans / 260 semaines** (D2, D3, `11`) = Acte I ; **décidé le 20/11 : une vie de 25 à 40 ans de jeu, voir `18` §4**, prologue puis gestion (`14`), hiérarchie de charbons (`15`) | **Tranché** (§12, décision 2). Pendant la refonte, l'UI ne fige aucune durée |
 | Cinq priorités (ambition, famille, liberté, loyauté, stabilité) | Absentes du code (un opérateur a compétence, fatigue, spécialité) | La fiche personnage les affiche **seulement quand les données existent** |
 | Relations, historique, personnage nommé | Non modélisés (journal global seulement) | Même règle : emplacements prévus, remplis plus tard |
 | Cycle hebdomadaire, `ICycleSystem`, `JsonUtility` | Respectés | Rien à changer |
@@ -108,7 +108,7 @@ Format : portrait 1080×1920, tailles ramenées à 340 px dans la maquette.
 
 ## 10. Décisions à arbitrer
 1. **Journal :** correctif rapide maintenant, ou attendre l'étape 4 ?
-2. **Durée du jeu :** campagne de 5 ans (état actuel) ou simulation de vie de 25 à 40 ans (brief) ? L'interface sera neutre dans les deux cas, mais la fin de partie et la progression de l'âge en dépendent.
+2. **Durée du jeu :** campagne de 5 ans (état actuel) ou simulation de vie de 25 à 40 ans (brief) ? → **tranché : vie de 25 à 40 ans** L'interface sera neutre dans les deux cas, mais la fin de partie et la progression de l'âge en dépendent.
 3. **Plateforme :** portrait mobile seul, ou aussi une fenêtre PC en paysage ?
 4. **Police :** garder `LegacyRuntime`, ou fournir une police libre de droits pour l'identité visuelle (laquelle ?).
 5. **Priorités, relations, historique :** les afficher seulement quand les données existent (ma proposition), ou créer d'abord les données ?
@@ -124,7 +124,7 @@ Aucun fichier supprimé, aucun système modifié, aucun changement de règles de
 | # | Décision | Choix |
 |---|---|---|
 | 1 | Journal | **Attendre l'étape 4** de la refonte (pas de correctif rapide) |
-| 2 | Durée du jeu | **Simulation de vie de 25 à 40 ans** (remplace la campagne de 5 ans comme cible) |
+| 2 | Durée du jeu | **Simulation de vie de 25 à 40 ans** (la campagne de 5 ans devient l'Acte I ; voir `18` §4) |
 | 3 | Plateforme | **Portrait mobile seul** (pas de paysage PC) |
 | 4 | Police | **Fournir une police** (libre de droits, à choisir) |
 

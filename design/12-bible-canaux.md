@@ -79,7 +79,7 @@
 9. **Le faux profil.** Un infiltré a gagné la confiance de ton Fil. *Le soupçonner* : paranoïa +, L−. *Ne rien voir* : P++.
 10. **Concurrence en ligne.** Un Fil rival te copie ton nom. *Riposter* : F+, Pe+. *Ignorer* : A−.
 11. **Les avis.** Une cliente laisse un message en pleurs. *La contacter* : T+. *Supprimer son message* : le jeu note que tu l'as fait.
-12. **Le message d'un gamin.** Un adolescent écrit au Fil pour « travailler ». **Les seules réponses :** *le supprimer sans répondre* (le Fil d'un rival le recevra : Enfance perdue +) ou *prévenir sa mère* (P+, L−, mais Enfance perdue −). Aucune réponse n'aide le trafic.
+12. **Le message d'un jeune.** Un adolescent écrit au Fil pour « travailler ». **Les seules réponses :** *le supprimer sans répondre* (le Fil d'un rival le recevra : Enfance perdue +) ou *prévenir sa mère* (P+, L−, mais Enfance perdue −). Aucune réponse n'aide le trafic.
 13. **La Mère qui lit** vient frapper à ta porte. Elle ne demande rien. Elle te regarde. *(Aucun choix : le jeu avance d'une semaine.)*
 14. **L'Influenceur** rembourse un abonné en public. Le Fil devient une affaire de réputation. Q+, T++.
 15. **Panne générale.** Plus de réseau pendant deux jours. La ville vit sans, et personne ne meurt de ça. *Remarque du jeu :* « Le quartier a respiré. »
@@ -102,7 +102,7 @@
 - *« Livraisons à domicile : la préfecture parle d'une "économie parallèle" »*
 - *« Des collectifs de mères réclament la fermeture des fils »*
 - *« Un clip, une enquête : la Brigade numérique s'intéresse à un rappeur »*
-- *« Un jeune de 15 ans retrouvé : sa mère avait lu ses messages »* (jamais plus de détails)
+- *« Un jeune retrouvé : sa mère avait lu ses messages »* (jamais plus de détails)
 - *« L'influenceur de la Joliette : "Je vendais des baskets" »*
 - *« Une panne géante prive la ville de réseau, pas de recrudescence »*
 - *« Des mineurs au centre d'une procédure : le procureur veut "briser la chaîne" »*
@@ -140,4 +140,4 @@
 1. **Traces** (champ `traces` sur une case Fil, `GameConfig.Canal`) + événement « Capture ».
 2. **L'écran de fin de semaine « Le Fil »** (3 à 5 lignes, avis, une de journal).
 3. **Compte grillé** (fermeture d'un Fil, perte d'audience).
-4. Puis : doxxing, vitrine, et l'événement 12 (le message d'un gamin), à écrire avec une relecture externe.
+4. Puis : doxxing, vitrine, et l'événement 12 (le message d'un jeune), à écrire avec une relecture externe.

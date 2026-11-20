@@ -1,6 +1,6 @@
 # CHOUF : la bible noire
 
-*17 novembre 2026. Deuxième réunion, sur un ton très sombre : Marseille de 2010 à aujourd'hui. **Ce document remplace le ton de la bible 10 et sa campagne festive** (`09`, et le §6 de `10`). Gardés de ces documents : les règles, les zones, les rangs du réseau et la simulation (§3-4 de `10`). Ce sont des idées : rien n'est encore codé, et les chiffres sont à vérifier en simulation sur 260 semaines.*
+*17 novembre 2026. Deuxième réunion, sur un ton très sombre : Marseille d'aujourd'hui et de la décennie qui précède (années jamais datées). **Ce document remplace le ton de la bible 10 et sa campagne festive** (`09`, et le §6 de `10`). Gardés de ces documents : les règles, les zones, les rangs du réseau et la simulation (§3-4 de `10`). Ce sont des idées : rien n'est encore codé, et les chiffres sont à vérifier en simulation sur la durée d'une partie (voir `18` §4 : 25 à 40 ans de jeu, âge = 18 + semaines ÷ 52).*
 
 > **Ajout (17 nov., soir) :** `12-bible-canaux.md` couvre le téléphone dans le trafic (le Fil, traces, doxxing, message d'un gamin).
 
@@ -45,7 +45,7 @@
 
 ---
 
-## 2. La campagne noire : « Cinq ans de dette »
+## 2. La campagne noire : « Cinq ans de dette » (= **Acte I** d'une vie de 25 à 40 ans, voir `18` §4)
 **Pitch :** tu as porté le cercueil de ton patron, et tu hérites de son réseau et de sa dette. Cinq ans plus tard, tu tiens la ville. Au générique, tous les visages sont des absents.
 
 **L'antagoniste : l'Armateur.** La rue l'appelle aussi **le Consul**. Personne ne l'a vu. Il vit loin, finance des associations, possède des immeubles, et ne parle que par l'avocat **le Velours** et par **le Notaire**. Il finance les deux camps depuis le début. *« Je ne vends rien. Je loue le temps des autres. »*
@@ -57,7 +57,7 @@
 | 1 | **Le cercueil** (Panier, Joliette) | On enterre le **Vieux Lucien**. Le Velours t'annonce sa dette. | **Payer** : revenu −25 % jusqu'à l'année 4. **Contester** : un équipier disparaît en année 2. **Revendre la dette à Vespa** : la guerre commence au niveau 2. |
 | 2 | **Les murs parlent** (centre) | Les portraits peints se multiplient, et la Pigiste les compte. Zepek tombe sur une information précise. | **Qui a parlé ?** Tu accuses quelqu'un, et sa loyauté reste bloquée sous 40. S'il était innocent, le vrai traître continue. |
 | 3 | **Les mains propres** (Castellane, Prado) | Le Ruban et le Notaire proposent de rendre l'argent respectable. | **La pierre** : moins de saisies, mais des familles partent chaque semaine. **Garder le liquide** : saisies ×1,5. |
-| 4 | **La ville pleine, la ville vide** (toute la carte) | Les nouveaux du port arrivent, et la guerre ne descend plus sous le niveau 3. Un garçon de 15 ans meurt dans un accrochage : une ligne dans le journal, une chaise vide en classe. | **La marche blanche** de Ferrand. **Y aller** : attitude +, pression +20 partout. **Rester caché** : la peur ne baisse plus dans ta zone. |
+| 4 | **La ville pleine, la ville vide** (toute la carte) | Les nouveaux du port arrivent, et la guerre ne descend plus sous le niveau 3. Un adolescent meurt dans un accrochage : une ligne dans le journal, une chaise vide à la table d'une famille. | **La marche blanche** de Ferrand. **Y aller** : attitude +, pression +20 partout. **Rester caché** : la peur ne baisse plus dans ta zone. |
 | 5 | **L'Armateur** | Tu découvres qu'il finançait les deux camps. | **Le livrer**, **prendre sa place**, ou **partir**. |
 
 ### L'année noire (elle remplace le calendrier des fêtes)
@@ -66,7 +66,7 @@
 | Janvier | L'anniversaire de Lucien | La dette tombe. |
 | Avril | Fin de la trêve hivernale | Les expulsions reprennent, et les nourrices sont plus fragiles. |
 | Mai | Les assises à Monthyon | Témoins, rétractations, verdicts dans l'équipe. |
-| Juin | Fin de l'école | Des ados désœuvrés traînent près des charbons. Le choix n° 3 revient. |
+| Juin | Fin de l'école | Des jeunes désœuvrés traînent près des charbons. Le choix n° 3 revient. |
 | Juillet-août | Les nuits chaudes | Les familles sont parties, et la guerre monte d'un cran. |
 | Septembre | La rentrée | Le journal compte les chaises vides dans les classes. |
 | Novembre | La Toussaint à Saint-Pierre | Les tombes de tes morts : tu les paies, ou pas. |
@@ -165,7 +165,7 @@
 ## 5. Douze choix sans bonne réponse
 1. **Le Gabian a vu le tireur.** S'il témoigne, le rival tombe, mais le Repérage ferme pour toujours. S'il se tait, la loyauté de toute l'équipe reste bloquée sous 70.
 2. **Une nourrice est arrêtée, son fils de 9 ans est seul.** Payer le Velours : exposition +15. Rien : attitude du quartier −30, pour toujours.
-3. **Un ado du quartier traîne près d'un charbon.** Fermer le point : un charbon en moins. Le garder : chaque semaine, un risque de deuil, et la fin « Le Trône » devient impossible.
+3. **Un jeune du quartier traîne près d'un charbon.** Fermer le point : un charbon en moins. Le garder : chaque semaine, un risque de deuil, et la fin « Le Trône » devient impossible.
 4. **Sab a pris dans la caisse pour soigner sa mère.** Pardonner : tout le monde trahit 1,5 fois plus. La renvoyer : Finances −2.
 5. **Orsini libère Zepek contre un nom.** Tu portes le drapeau « balance », ou Zepek ne sort jamais.
 6. **L'Armateur propose de « régler » Vespa.** Vespa disparaît sans explication, et ta dette double.
@@ -193,12 +193,12 @@
 ## 7. Vingt-cinq événements (A argent, P pression, C contrôle, L loyauté, Q quartier, F bande, **Pe peur**)
 1. **La voiture des collines.** Une carcasse calcinée sans plaque fume à l'aube. *Prévenir : P+2 Pe−1.* *Te taire : Pe+2 L−1.*
 2. **La voix du parloir.** Un appel venu de prison exige un nom. *Refuser : F−3 Pe+2.* *Gagner du temps : A−2 P+1.* *Donner un nom : C+2 L−4.*
-3. **Le neveu.** Le neveu de Rascasse, 16 ans, rôde près de ta frontière. *Le ramener chez sa mère : C−1 L+2.* *Lui payer un internat loin d'ici : A−3 Q+1.*
+3. **Le neveu.** Le neveu de Rascasse rôde près de ta frontière. *Le ramener chez sa mère : C−1 L+2.* *Lui payer un internat loin d'ici : A−3 Q+1.*
 4. **La marche blanche.** Une mère t'interdit de venir. *Respecter : Q+1 L−1.* *Venir quand même : Q−3 P+2.*
 5. **Le Notaire** propose de placer la caisse dans un immeuble de Noailles. *Accepter : A+3 Q−2 F+2.* *Refuser : A−1 F−1.*
 6. **Le témoin.** Une voisine a tout vu. *La faire reloger loin : A−2 P+2.* *Lui faire savoir qu'on sait : Pe+3 Q−3 L−1.*
 7. **Le dossier égaré.** La Rouille propose d'en perdre un. *Payer : A−3 P−3, et un drapeau caché « acheté ».* *Refuser : P+2.*
-8. **Quatorze ans.** Un adolescent est tué dans un hall, de l'autre côté de la ville. *Tout fermer une semaine : A−3 P−2 Q+1.* *Continuer : P+4 Q−3.*
+8. **Un adolescent.** Un adolescent est tué dans un hall, de l'autre côté de la ville. *Tout fermer une semaine : A−3 P−2 Q+1.* *Continuer : P+4 Q−3.*
 9. **Le parloir annulé.** Cendre n'a pas vu sa fille depuis trois mois. *Payer l'avocat de la famille : A−1 L+2.* *Rien : L−2.*
 10. **Les inconnus du meublé.** Des hommes que personne ne connaît dorment à Belsunce. *Les faire suivre : C+1 P+1.* *Demander au Consul : F+1 L−1.* *Ignorer : C−2.*
 11. **La vitre étoilée.** Une balle est entrée chez une retraitée, à hauteur de lit. *Payer en silence : A−1 Q−1.* *Aller t'excuser : Q+1 P+1 Pe−1.*
@@ -327,5 +327,5 @@
 - « Vous êtes bien chez Karim » devient « chez Jo », pour ne pas associer les victimes à une origine.
 - La « nuit de 2016 » du Banc n'a plus de date, et aucune année n'est datée.
 - « Blanchiment présumé » à la une devient « enquête financière » : même sens, aucun procédé.
-- Le choix n° 3 est reformulé : l'ado n'est jamais recruté. Il est un risque de deuil, pas un équipier.
+- Le choix n° 3 est reformulé : le jeune n'est jamais recruté. Il est un risque de deuil, pas un équipier.
 - **Noms à vérifier** avant de les garder : l'Armateur, le Vieux Lucien, le Consul et *Courrier des Docks* ne doivent correspondre à aucun surnom ni à aucun titre réel.

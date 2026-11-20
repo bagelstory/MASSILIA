@@ -1,6 +1,6 @@
 # CHOUF : la bible de Marseille
 
-> **Remplacé pour le ton et la campagne par `11-bible-ombre.md` (17 nov.).** Restent valables ici : les règles du §0, les zones (§1), les rangs (§3) et la simulation (§4).
+> **Remplacé pour le ton et la campagne par `11-bible-ombre.md` (17 nov.).** Restent valables ici : les règles du §0, les zones (§1), les rangs (§3) et la simulation (§4). **§6 (calendrier festif) et §15 (voix légères) : OBSOLÈTES** (revue du 20 nov., `17b` n° 12). Rôles : voir la table de correspondance avec `15` dans `17b` n° 3.
 
 *17 novembre 2026. Réunion de la narration, du scénario, du consultant marseillais, du game design et des systèmes. Ce sont des idées : rien n'est encore codé. Les chiffres sont des points de départ, à vérifier en simulation sur 260 semaines.*
 
@@ -11,7 +11,7 @@
 - **On montre ce que ça coûte, jamais comment on fait.** Ni prix, ni quantités, ni procédés, ni armes, ni recrutement : seulement des jauges et des conséquences.
 - **Aucune glorification.** Même la note A montre ce que la ville a perdu. Un mort n'est jamais un score.
 - **Pas de stigmatisation.** On ne situe jamais un charbon dans une cité nommée. Chaque quartier garde une vie normale visible, et les drames touchent toutes les zones.
-- **La rue d'Aubagne** (les effondrements de 2018) n'est **jamais** un lieu de jeu ni un événement. Au plus, une seule phrase de Madame Ferrand, une seule fois, sans aucun effet sur les chiffres.
+- **La rue d'Aubagne** est **hors du jeu à 100 %** : ni lieu, ni événement, ni date, ni allusion, pas même dans la bouche d'un personnage (décision du 20 nov. 2026).
 
 ---
 
@@ -163,7 +163,7 @@
 
 ---
 
-## 6. L'année marseillaise (semaine de jeu)
+## 6. L'année marseillaise (semaine de jeu) — OBSOLÈTE (ton festif remplacé par `11`)
 | Semaine | Moment | Effet |
 |---|---|---|
 | S5 | Chandeleur, navettes à Saint-Victor | foule, pression + |
@@ -266,7 +266,7 @@
 - **1950-70** : Marseille, plaque tournante de l'héroïne vers l'Amérique.
 - **1970-80** : guerres de clans autour des nuits, des jeux et du racket.
 - **1990-2000** : déclin du vieux milieu, montée du cannabis dans les quartiers appauvris.
-- **2010-2020** : les morts liées aux points de vente deviennent une chronique ordinaire, avec des victimes de plus en plus jeunes.
+- **La décennie qui précède** : les morts liées aux points de vente deviennent une chronique ordinaire, avec des victimes de plus en plus jeunes.
 
 **Dans le jeu :** des coupures de presse jaunies dans un bar, sans un seul nom lisible. Zepek répète « à l'époque, il y avait des règles », et le jeu montre que c'est un mythe. Les plaques de mémoire sont respectées, jamais un décor de combat.
 
