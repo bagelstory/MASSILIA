@@ -21,6 +21,7 @@ namespace Marseille.Core
             manager.Register(new EconomySystem());
             manager.Register(new IndicatorSystem());
             manager.Register(new ShadowSystem());
+            manager.Register(new ConsequenceSystem());
             manager.Register(new FacadeSystem());
             manager.Register(new GameEventSystem());
             manager.Register(new QuestSystem());

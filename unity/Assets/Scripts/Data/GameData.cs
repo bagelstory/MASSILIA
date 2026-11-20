@@ -11,8 +11,8 @@ namespace Marseille.Data
     [System.Serializable]
     public struct GameData
     {
-        /// <summary>Version actuelle du format (2 : ajout de l'ombre, de la peur et de la population).</summary>
-        public const int CurrentVersion = 4;
+        /// <summary>Version actuelle du format (2 : ombre, peur, population ; 3 : façades ; 4 : hiérarchie ; 5 : conséquences de la vie).</summary>
+        public const int CurrentVersion = 5;
 
         /// <summary>Version du format, pour les migrations de sauvegarde.</summary>
         public int saveVersion;
@@ -80,6 +80,9 @@ namespace Marseille.Data
         /// <summary>Arrondissements et leur chef (design/15-hierarchie.md).</summary>
         public List<ArrondissementData> arrondissements;
 
+        /// <summary>Conséquences de la vie : casier, usure, foyer, justice, réputation (version 5).</summary>
+        public ConsequenceData life;
+
         /// <summary>Crée une sauvegarde vide avec toutes ses listes initialisées.</summary>
         /// <param name="seed">Graine aléatoire.</param>
         /// <param name="treasury">Trésorerie de départ.</param>
@@ -110,7 +113,8 @@ namespace Marseille.Data
                 log = new List<string>(),
                 endType = EndType.None,
                 shadow = ShadowData.Create(treasury),
-                arrondissements = new List<ArrondissementData>()
+                arrondissements = new List<ArrondissementData>(),
+                life = ConsequenceData.Create()
             };
         }
 

@@ -112,7 +112,7 @@ namespace Marseille.Core
             }
         }
 
-        /// <summary>Met une ancienne sauvegarde au format actuel (version 1 → 4 : ombre, peur, population, façades, hiérarchie).</summary>
+        /// <summary>Met une ancienne sauvegarde au format actuel (version 1 → 5 : ombre, peur, population, façades, hiérarchie, conséquences).</summary>
         /// <param name="data">État lu, modifié en place.</param>
         private static void Migrate(ref GameData data)
         {
@@ -132,6 +132,7 @@ namespace Marseille.Core
                 sh.facades = new System.Collections.Generic.List<FacadeData>();
                 data.shadow = sh;
             }
+            if (data.saveVersion < 5 || data.life.standings == null) data.life = ConsequenceData.Create();
             data.saveVersion = GameData.CurrentVersion;
         }
 

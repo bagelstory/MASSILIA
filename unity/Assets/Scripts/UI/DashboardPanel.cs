@@ -54,6 +54,7 @@ namespace Marseille.UI
             UiKit.Label(col, "Prochain cycle", config.uiFontSizes.x, config.uiText);
             forecast = MultiLine(col, 7, config);
             network = MultiLine(col, 3, config);
+            BuildLife(col, config);
             UiKit.Label(col, "Objectifs", config.uiFontSizes.x, config.uiText);
             quests = MultiLine(col, 7, config);
             validate = UiKit.MakeButton(col, "Valider le cycle", config.uiAccent, OnValidate, config);
@@ -80,6 +81,7 @@ namespace Marseille.UI
             forecast.text = ForecastText(d, c);
             network.text = NetworkText(d, c);
             quests.text = QuestsText(d, c);
+            RefreshLife(d, c, gm.State == GameState.Planning);
             if (validate != null) validate.interactable = gm.State == GameState.Planning;
             if (retire != null)
             {

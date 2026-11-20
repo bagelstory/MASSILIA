@@ -214,3 +214,8 @@ Chaque choix du joueur laisse une **trace** qui ne disparaît pas quand la parti
 3. Le poids de `Foy` contre celui d'Ombre : le joueur peut-il « tout garder » ? (il ne devrait pas).
 4. La fréquence des événements familiaux (une scène par an maximum au départ).
 5. Compatibilité avec le temps élastique : les jauges avancent par semaine en arrière-plan.
+
+## 12. Statut codé (20 novembre 2026, sauvegarde v5) — jamais compilé
+**Codé (version 1) :** `Data/ConsequenceData.cs` (Casier, Usure, Foyer, Double vie, exposition moyenne des proches, dette personnelle, étapes de justice, réputation et voisinage par quartier), `Config/GameConfig.Consequence.cs` (les boutons de §1 à §8), `Systems/ConsequenceRules.cs`, `ConsequenceSystem.cs` (+ `.Justice.cs`, `.Money.cs`, enregistré après Shadow et avant Facade), `ConsequenceActions.cs` (se soigner, un repas), carte « Vie » dans le Bilan (`DashboardPanel.Life.cs`). Migration v4 → v5 dans `SaveManager`.
+**Simplifications :** l'exposition est une moyenne (pas une valeur par proche) ; la détention du joueur ne retire pas le joueur de la partie : elle coûte des revenus, de l'usure, et ouvre le parloir ; l'usure ne touche pas encore la précision de la prévision ; les gains de réputation (aide, enterrements) et les réparations de voisinage ne sont pas encore des actions ; les textes de journal sont ceux du doc, sans événements à choix (voir `22`).
+**Pas codé :** familles d'événements `22`, Priorités personnelles, enfants, emploi normal, créancier, `Dette` liée à Lucien (la dette personnelle part de 0).
