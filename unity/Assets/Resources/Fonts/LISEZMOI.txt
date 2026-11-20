@@ -1,0 +1,3 @@
+Police de CHOUF : dépose ici un fichier de police nommé Chouf.ttf (ou Chouf.otf).
+Le jeu la charge tout seul (Resources/Fonts/Chouf). Sans fichier, il garde la police intégrée de Unity.
+Choisis une police libre de droits (licence OFL) et note son nom et sa licence dans design/16 §12.

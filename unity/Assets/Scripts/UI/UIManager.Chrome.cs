@@ -2,7 +2,6 @@
 // Partie « habillage » de UIManager : Canvas portrait, barre du haut (date, trésorerie, territoire,
 // pression), zone centrale, barre d'onglets, message court. Construit par code au lancement.
 
-using System.Collections.Generic;
 using Marseille.Art;
 using Marseille.Config;
 using Marseille.Core;
@@ -19,11 +18,8 @@ namespace Marseille.UI
     {
         private RectTransform contentArea;
         private RectTransform tabBar;
-        private Text topLeft;
-        private Text topRight;
         private Text toast;
         private Image toastBackground;
-        private readonly List<Button> tabButtons = new List<Button>();
 
         /// <summary>Zone centrale où vivent les écrans et les fenêtres.</summary>
         public RectTransform ContentArea { get { return contentArea; } }
@@ -41,15 +37,7 @@ namespace Marseille.UI
             if (splash != null) { background.sprite = splash; background.color = new Color(0.28f, 0.28f, 0.3f); background.preserveAspect = false; }
             float top = config.uiBarHeights.x, bottom = config.uiBarHeights.y;
 
-            Image bar = UiFactory.CreateImage("TopBar", transform, config.uiPanel, true);
-            UiFactory.Stretch(bar.rectTransform, new Vector2(0f, 1f), Vector2.one);
-            bar.rectTransform.offsetMin = new Vector2(0f, -top);
-            topLeft = UiFactory.CreateText("Left", bar.transform, UiKit.Font, config.uiFontSizes.y, config.uiText);
-            topLeft.alignment = TextAnchor.MiddleLeft;
-            UiFactory.Stretch(topLeft.rectTransform, new Vector2(0.03f, 0f), new Vector2(0.5f, 1f));
-            topRight = UiFactory.CreateText("Right", bar.transform, UiKit.Font, config.uiFontSizes.z, config.uiText);
-            topRight.alignment = TextAnchor.MiddleRight;
-            UiFactory.Stretch(topRight.rectTransform, new Vector2(0.45f, 0f), new Vector2(0.97f, 1f));
+            BuildTopBar(config);
 
             contentArea = UiFactory.CreateRect("Content", transform);
             UiFactory.Stretch(contentArea, Vector2.zero, Vector2.one);
@@ -63,9 +51,10 @@ namespace Marseille.UI
             tabBar = tabs.rectTransform;
             HorizontalLayoutGroup h = tabs.gameObject.AddComponent<HorizontalLayoutGroup>();
             h.childControlWidth = h.childControlHeight = h.childForceExpandWidth = h.childForceExpandHeight = true;
-            h.spacing = 4f;
+            h.spacing = 2f;
 
-            toastBackground = UiFactory.CreateImage("Toast", transform, new Color(0f, 0f, 0f, 0.85f), false);
+            toastBackground = UiFactory.CreateImage("Toast", transform, new Color(0.04f, 0.05f, 0.06f, 0.92f), false);
+            UiSprites.Round(toastBackground);
             UiFactory.Stretch(toastBackground.rectTransform, new Vector2(0.05f, 0f), new Vector2(0.95f, 0f));
             toastBackground.rectTransform.offsetMin = new Vector2(0f, bottom + 20f);
             toastBackground.rectTransform.offsetMax = new Vector2(0f, bottom + 20f + config.uiButtonHeight * 1.2f);
@@ -112,56 +101,6 @@ namespace Marseille.UI
             RectTransform rt = UiFactory.CreateRect(name, contentArea);
             UiFactory.Stretch(rt, Vector2.zero, Vector2.one);
             return rt.gameObject.AddComponent<T>();
-        }
-
-        /// <summary>Crée un bouton d'onglet par écran.</summary>
-        /// <param name="config">Configuration.</param>
-        private void BuildTabs(GameConfig config)
-        {
-            for (int i = 0; i < panels.Count; i++)
-            {
-                int index = i;
-                Button b = UiKit.MakeButton(tabBar, panels[i].TabLabel, config.uiPanel, () => ShowPanel(index), config);
-                Text label = b.GetComponentInChildren<Text>();
-                label.fontSize = config.uiFontSizes.z;
-                Sprite icon = ArtLibrary.Tab(panels[i].TabIcon);
-                if (icon != null)
-                {
-                    Image img = UiFactory.CreateImage("Icon", b.transform, Color.white, false);
-                    img.sprite = icon;
-                    img.preserveAspect = true;
-                    UiFactory.Stretch(img.rectTransform, new Vector2(0.2f, 0.42f), new Vector2(0.8f, 0.92f));
-                    UiFactory.Stretch(label.rectTransform, new Vector2(0f, 0f), new Vector2(1f, 0.42f));
-                }
-                tabButtons.Add(b);
-            }
-        }
-
-        /// <summary>Met en évidence l'onglet courant.</summary>
-        private void RefreshTabs()
-        {
-            GameConfig config = Config;
-            if (config == null) return;
-            for (int i = 0; i < tabButtons.Count; i++)
-            {
-                tabButtons[i].targetGraphic.color = i == current ? config.uiButton : config.uiPanel;
-                tabButtons[i].GetComponentInChildren<Text>().color = i == current ? config.uiAccent : config.uiTextDim;
-                Transform icon = tabButtons[i].transform.Find("Icon");
-                if (icon != null) icon.GetComponent<Image>().color = i == current ? config.uiAccent : config.uiTextDim;
-            }
-        }
-
-        /// <summary>Barre du haut : date du cycle, trésorerie, territoire, pression, capacité.</summary>
-        public void RefreshTopBar()
-        {
-            GameManager gm = GameManager.Instance;
-            if (topLeft == null || gm == null || !gm.HasGame) return;
-            GameData d = gm.Data;
-            int tier = ShadowRules.Tier(d.shadow.ombre, gm.Config);
-            topLeft.text = "Cycle " + d.currentCycle + "  ·  " + SeasonRules.Label(d.currentCycle, gm.Config) + (tier > 0 ? "  ·  " + ShadowRules.TierName(tier) : "");
-            topRight.text = d.indicators.treasury.ToString("N0") + " €" + (d.debt > 0f ? " (dette " + d.debt.ToString("N0") + ")" : "")
-                            + "\nTerritoire " + d.indicators.territory.ToString("0.0") + " %  ·  Pression " + d.indicators.pressure.ToString("0")
-                            + "  ·  " + OperatorRules.ActiveCount(d) + "/" + d.capacity;
         }
 
         /// <summary>Affiche un message court au-dessus des onglets.</summary>

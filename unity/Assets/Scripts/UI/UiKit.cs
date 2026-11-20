@@ -11,10 +11,10 @@ using UnityEngine.UI;
 namespace Marseille.UI
 {
     /// <summary>Fabriques d'éléments d'interface.</summary>
-    public static class UiKit
+    public static partial class UiKit
     {
-        /// <summary>Police partagée (police intégrée de Unity).</summary>
-        public static Font Font { get { return font != null ? font : (font = MapStyle.BuiltinFont()); } set { font = value; } }
+        /// <summary>Police partagée : Resources/Fonts/Chouf si elle existe, sinon la police intégrée de Unity.</summary>
+        public static Font Font { get { return font != null ? font : (font = Resources.Load<Font>("Fonts/Chouf") ?? MapStyle.BuiltinFont()); } set { font = value; } }
         private static Font font;
 
         /// <summary>Fond uni étiré sur tout le parent.</summary>
@@ -91,13 +91,14 @@ namespace Marseille.UI
         public static Button MakeButton(Transform parent, string text, Color color, UnityAction onClick, GameConfig config)
         {
             Image bg = UiFactory.CreateImage("Button", parent, color, true);
+            UiSprites.Round(bg);
             Button b = bg.gameObject.AddComponent<Button>();
             b.targetGraphic = bg;
             if (onClick != null) b.onClick.AddListener(onClick);
             Text t = UiFactory.CreateText("Text", bg.transform, Font, config.uiFontSizes.y, config.uiText);
             UiFactory.Stretch(t.rectTransform, Vector2.zero, Vector2.one);
             t.text = text;
-            SetHeight(bg.rectTransform, config.uiButtonHeight);
+            SetHeight(bg.rectTransform, HeightFor(parent, config.uiButtonHeight));
             return b;
         }
 

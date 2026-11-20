@@ -32,7 +32,8 @@ namespace Marseille.UI
         public static UiCard Create(Transform parent, int lines, GameConfig config)
         {
             UiCard card = new UiCard { config = config };
-            Image bg = UiFactory.CreateImage("Card", parent, config.uiPanel, false);
+            Image bg = UiFactory.CreateImage("Card", parent, config.uiCard, false);
+            UiSprites.Round(bg);
             card.Root = bg.rectTransform;
             VerticalLayoutGroup v = bg.gameObject.AddComponent<VerticalLayoutGroup>();
             int pad = Mathf.RoundToInt(config.uiPadding * 0.6f);
