@@ -11,15 +11,13 @@ namespace Marseille.Systems
     /// <summary>Règles du calendrier.</summary>
     public static class SeasonRules
     {
-        private const int WeeksPerYear = 52;
-
         /// <summary>Semaine de l'année (1-52) d'un cycle.</summary>
         /// <param name="cycle">Cycle (1 = premier).</param>
         /// <param name="config">Configuration.</param>
         /// <returns>Semaine.</returns>
         public static int Week(int cycle, GameConfig config)
         {
-            return ((config.startWeek - 1 + cycle - 1) % WeeksPerYear) + 1;
+            return ((config.startWeek - 1 + cycle - 1) % config.weeksPerYear) + 1;
         }
 
         /// <summary>Année d'un cycle.</summary>
@@ -28,7 +26,7 @@ namespace Marseille.Systems
         /// <returns>Année.</returns>
         public static int Year(int cycle, GameConfig config)
         {
-            return config.startYear + (config.startWeek - 1 + cycle - 1) / WeeksPerYear;
+            return config.startYear + (config.startWeek - 1 + cycle - 1) / config.weeksPerYear;
         }
 
         /// <summary>Libellé court « S37 · 2021 ».</summary>

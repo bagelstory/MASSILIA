@@ -61,8 +61,8 @@ namespace Marseille.UI
             GameData d = gm.Data;
             GameConfig c = gm.Config;
             int tier = ShadowRules.Tier(d.shadow.ombre, c);
-            int year = (d.currentCycle - 1) / Mathf.Max(1, c.uiWeeksPerYear) + 1;
-            topDate.text = "Semaine " + d.currentCycle + "  ·  Année " + year;
+            int year = (d.currentCycle - 1) / Mathf.Max(1, c.weeksPerYear) + 1;
+            topDate.text = "Semaine " + d.currentCycle + "  ·  Année " + year + "  ·  " + c.AgeAt(d.currentCycle) + " ans";
             topCycle.text = SeasonRules.Label(d.currentCycle, c);
             topMoney.text = d.indicators.treasury.ToString("N0") + " €" + (d.debt > 0f ? "  (dette " + d.debt.ToString("N0") + ")" : string.Empty);
             topShadow.text = tier > 0 ? ShadowRules.TierName(tier) : string.Empty;

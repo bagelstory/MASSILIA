@@ -7,6 +7,7 @@
 using System;
 using Marseille.Config;
 using Marseille.Data;
+using Marseille.Systems;
 using UnityEngine;
 
 namespace Marseille.Core
@@ -149,6 +150,19 @@ namespace Marseille.Core
             SetState(GameState.GameOver);
             Save();
             EventBus.RaiseGameOver(EndType.Abandon);
+        }
+
+        /// <summary>Retraite volontaire : possible dès la durée minimale de jeu (config.lifeMinYears).</summary>
+        /// <returns>Vrai si la partie s'est terminée.</returns>
+        public bool Retire()
+        {
+            if (!hasGame || State != GameState.Planning || !EndRules.CanRetire(data.currentCycle, config)) return false;
+            data.endType = EndType.Retirement;
+            AddJournal(EndRules.Message(EndType.Retirement), JournalType.End, Owners.None);
+            SetState(GameState.GameOver);
+            Save();
+            EventBus.RaiseGameOver(EndType.Retirement);
+            return true;
         }
 
         /// <summary>Efface la sauvegarde et la partie en mémoire.</summary>

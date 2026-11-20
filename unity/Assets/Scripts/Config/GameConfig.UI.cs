@@ -42,8 +42,6 @@ namespace Marseille.Config
         [Min(30f)] public float uiChipHeight = 64f;
         [Tooltip("Pression à partir de laquelle la puce passe en couleur d'alerte.")]
         [Min(0f)] public float uiPressureWarn = 30f;
-        [Tooltip("Nombre de semaines par année affichée dans la barre du haut.")]
-        [Min(1)] public int uiWeeksPerYear = 52;
 
         /// <summary>Remet la palette aux valeurs par défaut (utile quand l'asset garde d'anciennes couleurs).</summary>
         [ContextMenu("Réinitialiser la palette CHOUF")]

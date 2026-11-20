@@ -27,7 +27,9 @@ namespace Marseille.UI
         private Text quests;
         private Button validate;
         private Button abandon;
+        private Button retire;
         private bool confirmAbandon;
+        private bool confirmRetire;
 
         /// <inheritdoc />
         public override string TabLabel { get { return "Bilan"; } }
@@ -55,6 +57,7 @@ namespace Marseille.UI
             UiKit.Label(col, "Objectifs", config.uiFontSizes.x, config.uiText);
             quests = MultiLine(col, 7, config);
             validate = UiKit.MakeButton(col, "Valider le cycle", config.uiAccent, OnValidate, config);
+            retire = UiKit.MakeButton(col, "Se retirer", config.uiButton, OnRetire, config);
             abandon = UiKit.MakeButton(col, "Abandonner la partie", config.uiButton, OnAbandon, config);
         }
 
@@ -78,6 +81,13 @@ namespace Marseille.UI
             network.text = NetworkText(d, c);
             quests.text = QuestsText(d, c);
             if (validate != null) validate.interactable = gm.State == GameState.Planning;
+            if (retire != null)
+            {
+                bool can = EndRules.CanRetire(d.currentCycle, c);
+                retire.interactable = can && gm.State == GameState.Planning;
+                UiKit.SetButtonText(retire, !can ? "Retraite possible à " + (c.lifeStartAge + c.lifeMinYears) + " ans" : confirmRetire ? "Confirmer la retraite" : "Se retirer à " + c.AgeAt(d.currentCycle) + " ans");
+                retire.targetGraphic.color = confirmRetire ? c.uiAccent : c.uiButton;
+            }
             if (abandon != null)
             {
                 abandon.interactable = gm.State == GameState.Planning;
@@ -102,15 +112,24 @@ namespace Marseille.UI
         /// <summary>Bouton « Abandonner » : il faut toucher deux fois.</summary>
         private void OnAbandon()
         {
-            if (!confirmAbandon) { confirmAbandon = true; Refresh(); return; }
+            if (!confirmAbandon) { confirmAbandon = true; confirmRetire = false; Refresh(); return; }
             confirmAbandon = false;
             if (GameManager.Instance != null) GameManager.Instance.Abandon();
+        }
+
+        /// <summary>Bouton « Se retirer » : il faut toucher deux fois.</summary>
+        private void OnRetire()
+        {
+            if (!confirmRetire) { confirmRetire = true; confirmAbandon = false; Refresh(); return; }
+            confirmRetire = false;
+            if (GameManager.Instance != null) GameManager.Instance.Retire();
         }
 
         /// <summary>Bouton « Valider le cycle ».</summary>
         private void OnValidate()
         {
             confirmAbandon = false;
+            confirmRetire = false;
             if (Manager != null) Manager.ValidateCycle();
         }
     }

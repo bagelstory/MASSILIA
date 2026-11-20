@@ -20,8 +20,17 @@ namespace Marseille.Systems
             if (data.zeroTreasuryCycles >= config.bankruptcyCycles) return EndType.Bankruptcy;
             if (data.indicators.territory >= config.victoryTerritory && data.indicators.treasury > 0f) return EndType.Victory;
             if (OperatorRules.ActiveCount(data) == 0 && data.indicators.treasury < CheapestRecruit(config)) return EndType.Bankruptcy;
-            if (cycle >= config.maxCycles) return EndType.TimeOut;
+            if (cycle >= config.MaxCycles) return EndType.TimeOut;
             return EndType.None;
+        }
+
+        /// <summary>Le joueur peut-il se retirer maintenant ?</summary>
+        /// <param name="cycle">Cycle courant.</param>
+        /// <param name="config">Configuration.</param>
+        /// <returns>Vrai si la durée minimale de jeu est atteinte.</returns>
+        public static bool CanRetire(int cycle, GameConfig config)
+        {
+            return cycle >= config.MinRetireCycles;
         }
 
         /// <summary>Coût du recrutement le moins cher.</summary>
@@ -49,7 +58,7 @@ namespace Marseille.Systems
                           - data.indicators.pressure / config.scorePressureDivisor
                           - data.debt / config.scoreMoneyDivisor;
             if (data.endType == EndType.Victory) score += config.scoreEndBonus.x;
-            else if (data.endType != EndType.TimeOut) score += config.scoreEndBonus.y;
+            else if (data.endType != EndType.TimeOut && data.endType != EndType.Retirement) score += config.scoreEndBonus.y;
             return score;
         }
 
@@ -75,7 +84,8 @@ namespace Marseille.Systems
                 case EndType.Bankruptcy: return "Faillite : le réseau ne peut plus payer.";
                 case EndType.Collapse: return "Chute : la pression a fait tomber le réseau.";
                 case EndType.Abandon: return "Partie abandonnée.";
-                case EndType.TimeOut: return "Cinq ans ont passé. Fin de partie.";
+                case EndType.TimeOut: return "Les années ont passé. Il est temps de faire le bilan d'une vie.";
+                case EndType.Retirement: return "Tu te retires. Ce que tu laisses derrière toi ne dépend plus de toi.";
             }
             return string.Empty;
         }

@@ -131,6 +131,8 @@ namespace Marseille.Data
         Bankruptcy = 2,
         Collapse = 3,
         Abandon = 4,
-        TimeOut = 5
+        TimeOut = 5,
+        /// <summary>Retraite choisie par le joueur après la durée minimale (ajouté en dernier : enum sérialisée en entier).</summary>
+        Retirement = 6
     }
 }

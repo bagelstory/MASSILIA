@@ -1,5 +1,5 @@
 // MARSEILLE — Config/GameConfig.End.cs
-// Section « fin de partie et objectifs » de GameConfig (spec §11) : victoire, limite de durée, note finale,
+// Section « fin de partie et objectifs » de GameConfig (spec §11) : victoire, durée (voir GameConfig.Life.cs), note finale,
 // objectifs chiffrés et ouverture des zones.
 
 using System.Collections.Generic;
@@ -33,8 +33,6 @@ namespace Marseille.Config
         [Header("Fin de partie")]
         [Tooltip("Territoire (%) qui donne la victoire, trésorerie positive.")]
         [Range(0f, 100f)] public float victoryTerritory = 60f;
-        [Tooltip("Nombre maximal de cycles (fin par le temps). 260 = 5 ans.")]
-        [Min(1)] public int maxCycles = 260;
         [Tooltip("Note finale : seuils A, B, C, D (score).")]
         public List<float> gradeThresholds = new List<float> { 85f, 65f, 45f, 25f };
         [Tooltip("Score : bonus de victoire, malus de défaite.")]

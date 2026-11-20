@@ -67,7 +67,8 @@ namespace Marseille.UI
                 case EndType.Bankruptcy: return "Faillite";
                 case EndType.Collapse: return "Chute";
                 case EndType.Abandon: return "Abandon";
-                case EndType.TimeOut: return "Fin du temps";
+                case EndType.TimeOut: return "Bilan d'une vie";
+                case EndType.Retirement: return "Retraite";
             }
             return "Fin de partie";
         }
@@ -96,7 +97,7 @@ namespace Marseille.UI
             int alive = 0;
             for (int i = 0; i < d.factions.Count; i++) if (d.factions[i].isAlive) alive++;
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Cycles joués : " + d.currentCycle + " (" + SeasonRules.Label(d.currentCycle, c) + ")");
+            sb.AppendLine("Cycles joués : " + d.currentCycle + " (" + SeasonRules.Label(d.currentCycle, c) + ") · " + c.AgeAt(d.currentCycle) + " ans");
             sb.AppendLine("Territoire : " + d.indicators.territory.ToString("0.0") + " %");
             sb.AppendLine("Trésorerie : " + UiText.Money(d.indicators.treasury) + (d.debt > 0f ? " · dette " + UiText.Money(d.debt) : ""));
             sb.AppendLine("Opérateurs : " + OperatorRules.ActiveCount(d) + " · flux actifs : " + FluxActions.ActiveCount(d));
