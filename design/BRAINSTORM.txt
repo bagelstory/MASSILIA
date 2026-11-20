@@ -124,3 +124,4 @@ IDÉES NON ÉTUDIÉES :
 - Docs ajoutés : 17 (écriture Marseille), 18 (personnages et vie 25-40 ans), 19 (prompts 3D et Blender).
 - À faire : l'asset GameConfig existant garde l'ancienne palette → clic droit sur l'asset > « Réinitialiser la palette CHOUF ».
 - À faire : adapter la durée du jeu (260 semaines = Acte I → 25-40 ans de jeu, voir 18 §4) dans GameConfig, EndConditionSystem et la fin de partie.
+20/11/2026 (matin) : arbitrages (Aubagne hors jeu, âges de mineurs retirés, vie 18 → 43-58 ans, OM gardé). Docs 17-23 écrits ; durée de vie codée (retraite dès 25 ans, fin à 40) ; refonte UI étapes 1-4 codée. Rien n'est compilé.

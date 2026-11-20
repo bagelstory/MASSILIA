@@ -30,6 +30,10 @@ Dépôt : `bagelstory/MASSILIA`, branche `j1`. Moteur : **Unity 2022.3 LTS, C#**
 | `17b-revue-equipe.md` | **Revue d'équipe** : 18 incohérences et 6 décisions à trancher (dont Aubagne, mineurs, durée de vie). |
 | `18-personnages-et-vie.md` | 24 personnages adultes fictifs, cinq priorités, structure de la vie sur 25 à 40 ans. |
 | `19-prompts-3d-blender.md` | Prompts d'images et de 3D, guide Blender et export Unity. |
+| `20-consequences.md` | Conséquences sur 25 à 40 ans : justice, santé, famille, réputation, dettes, voisinage, proches (valeurs de réglage). Jauges non codées : demandent la sauvegarde v5. |
+| `21-personnages-2.md` | 20 personnages adultes de plus, dont des civils. |
+| `22-scenes-evenements.md` | 40 scènes à choix en trois actes (E01 à E40). |
+| `23-brainstorming-3.md` | Brainstorming 3 : 25 idées, risques, questions ouvertes, ordre de travail. |
 | `BRAINSTORM.txt` | Carnet vivant : directions, idées en vrac, questions ouvertes. À compléter à chaque séance. |
 | `14-fusion-v6.md` | Fusion avec le dossier V6 « MARSEILLE » (`ref/MARSEILLE_GDD_V6.txt`) : prologue à 16-17 ans sans gestion, puis campagne CHOUF dès 18 ans. |
 | `09-campagne-marseille.md` | Ancienne campagne (remplacée) : seuls le tempo et les rangs restent valables. |
