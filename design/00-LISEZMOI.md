@@ -34,6 +34,9 @@ Dépôt : `bagelstory/MASSILIA`, branche `j1`. Moteur : **Unity 2022.3 LTS, C#**
 | `21-personnages-2.md` | 20 personnages adultes de plus, dont des civils. |
 | `22-scenes-evenements.md` | 40 scènes à choix en trois actes (E01 à E40). |
 | `23-brainstorming-3.md` | Brainstorming 3 : 25 idées, risques, questions ouvertes, ordre de travail. |
+| `24-scenes-personnages-manquants.md` | Scènes E41+ : tous les personnages de 18 et 21 apparaissent dans au moins 2 scènes. |
+| `25-evenements-inspires-du-reel.md` | 30 événements de ville inspirés de faits réels, anonymisés (R01-R30), effets chiffrés. |
+| `26-entites-connues.md` | 24 lieux et institutions connus de Marseille comme décor + registre de réalisme (15 règles). |
 | `BRAINSTORM.txt` | Carnet vivant : directions, idées en vrac, questions ouvertes. À compléter à chaque séance. |
 | `14-fusion-v6.md` | Fusion avec le dossier V6 « MARSEILLE » (`ref/MARSEILLE_GDD_V6.txt`) : prologue à 16-17 ans sans gestion, puis campagne CHOUF dès 18 ans. |
 | `09-campagne-marseille.md` | Ancienne campagne (remplacée) : seuls le tempo et les rangs restent valables. |

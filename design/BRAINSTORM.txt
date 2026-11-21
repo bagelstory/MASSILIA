@@ -125,3 +125,4 @@ IDÉES NON ÉTUDIÉES :
 - À faire : l'asset GameConfig existant garde l'ancienne palette → clic droit sur l'asset > « Réinitialiser la palette CHOUF ».
 - À faire : adapter la durée du jeu (260 semaines = Acte I → 25-40 ans de jeu, voir 18 §4) dans GameConfig, EndConditionSystem et la fin de partie.
 20/11/2026 (matin) : arbitrages (Aubagne hors jeu, âges de mineurs retirés, vie 18 → 43-58 ans, OM gardé). Docs 17-23 écrits ; durée de vie codée (retraite dès 25 ans, fin à 40) ; refonte UI étapes 1-4 codée. Rien n'est compilé.
+21/11/2026 : v5 codée (jauges de conséquence, carte Vie) ; docs 24-26 écrits (personnages manquants, événements inspirés du réel, entités connues, registre de réalisme).
